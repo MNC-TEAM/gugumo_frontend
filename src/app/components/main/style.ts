@@ -1,4 +1,60 @@
+import Link from "next/link";
 import styled from "styled-components";
+
+export const SearchFlex = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const RecruitStyle = styled.div`
+  display: flex;
+  gap: 20px;
+  flex: 0.6;
+  button {
+    all: unset;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 28px;
+    font-weight: 500;
+    color: #A4A4A4;
+
+    &.active {
+      color: #000;
+      font-weight: 600;
+    }
+
+  }
+`;
+
+export const Search = styled.form`
+  flex: 1;
+  height: 49px;
+  position: relative;
+  background: #F4F5F8;
+  border-radius: 1000px;
+  display: block;
+
+  input {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0 2em;
+    border: 0;
+    background: none;
+    outline: 0;
+    font-family: "Pretendard";
+  }
+
+  button {
+    all: unset;
+    cursor: pointer;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+`;
 
 export const Tag = styled.div`
   margin-top: 16px;
@@ -55,4 +111,38 @@ export const Grid = styled.div`
   grid-template-columns: repeat(4,1fr);
   gap: 31.98px;
   margin-top: 31px;
+`;
+
+
+export const Order = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  div {
+    align-items: center;
+    display: inline-flex;
+    gap: 4px;
+    cursor: pointer;
+  }
+`;
+
+
+export const WriteLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color : #4FAAFF;
+  font-size: 18px;
+  font-weight: 500;
+  border: 1px solid #4FAAFF;
+  background: #FFFFFF;
+  border-radius: 4px;
+  width: 127px;
+  height: 52px;
+  justify-content: center;
+  margin-left: auto;
+  margin-top: 24px;
+  img {
+    margin-right: 4px;
+  }
 `;

@@ -1,14 +1,33 @@
 'use client'
 
-import Card from "../components/common/Card";
-import Paging from "../components/common/Paging";
-import { Button, Flex, Grid, Layout, SmallText, Tag, Wrap } from "../components/main/style";
+import Link from "next/link";
+import Card from "../components/main/Card";
+import Paging from "../components/main/Paging";
+import { Button, Flex, Grid, Layout, Order, RecruitStyle, Search, SearchFlex, SmallText, Tag, Wrap, WriteLink } from "../components/main/style";
+import styled from "styled-components";
 
 export default function Home() {
   return (
     <main>
       <Wrap>
-        <Tag>
+
+        <SearchFlex>
+
+          <RecruitStyle>
+            <button className="active">모집중</button>
+            <button>모집완료</button>
+            <button>전체</button>
+          </RecruitStyle>
+
+          <Search>
+            <input type="text" />
+            <button>
+              <img src="/asset/icon/search.svg" alt="검색버튼" />
+            </button>
+          </Search>
+        </SearchFlex>
+
+        <Tag style={{marginTop : 51}}>
           <SmallText>지역</SmallText>
           <Flex>
             {
@@ -29,7 +48,11 @@ export default function Home() {
         </Tag>
 
         <Layout>
-          <button>최신순 (아래)</button>
+          
+          <Order>
+            <div>최신순 <img src="/asset/icon/down.svg" alt="순서" /></div>
+          </Order>
+          
           <Grid>
             <Card/>
             <Card/>
@@ -38,6 +61,12 @@ export default function Home() {
             <Card/>
             <Card/>
           </Grid>
+
+          <WriteLink href={"/write"}>
+            <img src="/asset/icon/write.svg" alt="글쓰기" />
+            새글 작성
+          </WriteLink>
+
           <Paging/>
         </Layout>
 
@@ -45,4 +74,5 @@ export default function Home() {
     </main>
   );
 }
+
 
