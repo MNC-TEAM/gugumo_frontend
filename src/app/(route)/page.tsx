@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link";
-import Card from "../components/main/Card";
+import Card from "../components/common/Card";
 import Paging from "../components/main/Paging";
 import { Button, Flex, Grid, Layout, Order, RecruitStyle, Search, SearchFlex, SmallText, Tag, Wrap, WriteLink } from "../components/main/style";
 import styled from "styled-components";
