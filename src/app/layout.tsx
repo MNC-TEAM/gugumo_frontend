@@ -1,3 +1,4 @@
+import StoreProvider from "@/store/Providers";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
@@ -20,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={pretendard.className}>
-        {children}
+        <StoreProvider>
+          {children}
+        </StoreProvider>
       </body>
     </html>
   );
