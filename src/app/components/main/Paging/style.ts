@@ -1,16 +1,22 @@
+import Link from "next/link";
 import styled from "styled-components";
 
+// 따로 구분하기
 export const Flex = styled.div`
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin-top: 20px;
+`;
 
-    a {
-        text-decoration: none;
-        color: inherit;
-        font-size: 13px;
-        font-weight: 500;
-    }
-
+export const LinkStyle = styled(Link)<{active? : boolean}>`
+    text-decoration: none;
+    color: ${({active,theme})=>{
+        if(active){
+            return theme.color.Primary;
+        }else{
+            return theme.color.OnBackground;
+        }
+    }};
+    font-size: ${({theme})=>theme.fontSize.captionRegular};
+    font-weight: ${({theme})=>theme.fontWeight.captionRegular};
 `;

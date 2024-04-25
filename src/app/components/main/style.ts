@@ -1,25 +1,42 @@
 import Link from "next/link";
 import styled from "styled-components";
 
+export const MainStyle = styled.main`
+  padding: 32px 0 85px;
+`;
+
+export const Wrap = styled.div`
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
 export const SearchFlex = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
+  h4 {
+    font-size: ${({theme})=>theme.fontSize.titleMedium};
+    font-weight: ${({theme})=>theme.fontWeight.titleMedium};
+    color: ${({theme})=>theme.color.OnBackground};
+  }
+
 `;
 
 export const RecruitStyle = styled.div`
   display: flex;
-  gap: 20px;
-  flex: 0.6;
+  gap: 21px;
   button {
     all: unset;
     cursor: pointer;
     white-space: nowrap;
-    font-size: 28px;
-    font-weight: 500;
-    color: #A4A4A4;
+    font-size: ${({theme})=>theme.fontSize.titleMedium};
+    font-weight: ${({theme})=>theme.fontWeight.titleMedium};
+    color: ${({theme})=>theme.color.OnSurface};
 
     &.active {
-      color: #000;
+      color: ${({theme})=>theme.color.OnBackground};
       font-weight: 600;
     }
 
@@ -27,10 +44,10 @@ export const RecruitStyle = styled.div`
 `;
 
 export const Search = styled.form`
-  flex: 1;
+  width: 498px;
   height: 49px;
   position: relative;
-  background: #F4F5F8;
+  background: ${({theme})=>theme.color.Surface};
   border-radius: 1000px;
   display: block;
 
@@ -63,7 +80,8 @@ export const Tag = styled.div`
 export const SmallText = styled.p`
   font-size: 18px;
   font-family: "Pretendard";
-  color : #A4A4A4;
+  font-weight: 600;
+  color : ${({theme})=>theme.color.OnSurface};
 `;
 
 export const Flex = styled.div`
@@ -73,31 +91,36 @@ export const Flex = styled.div`
   margin-top: 11px;
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<{active : boolean}>` // 나중에 리팩토링
   all: unset;
   cursor: pointer;
-  font-size: 18px;
-  font-weight: 600;
-  padding: 8px 28px;
+  font-size: ${({theme})=>theme.fontSize.buttonMedium};
+  font-weight: ${({theme})=>theme.fontWeight.buttonMedium};
+  padding: ${8/18}em ${28/18}em;
   border-radius: 100px;
-  border: 1px solid #4FAAFF;
+  border: 1px solid ${({theme})=>theme.color.Primary};
   white-space: nowrap;
-  color: #4FAAFF;
+  color: ${({active,theme})=>{
+    if(active){
+      return "#fff"
+    }else{
+      return theme.color.Primary
+    }
+  }};
+  background : ${({active,theme})=>{
+    if(active){
+      return theme.color.Primary;
+    }else{
+      return "#fff";
+    }
+  }};
   transition: .4s;
   transition-property: background,color;
   &:hover {
-    background: #4FAAFF;
+    background: ${({theme})=>theme.color.Primary};
     color: #fff;
   }
 `;
-
-
-export const Wrap = styled.div`
-  width: 95%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
 
 export const Layout = styled.div`
   background : #F4F5F8;
@@ -126,6 +149,7 @@ export const Order = styled.div`
 `;
 
 
+// margin-bottom 페이징 마다 가져올수 있게 수정해야함
 export const WriteLink = styled(Link)`
   color: inherit;
   text-decoration: none;
@@ -142,6 +166,7 @@ export const WriteLink = styled(Link)`
   justify-content: center;
   margin-left: auto;
   margin-top: 24px;
+  margin-bottom: 28px;
   img {
     margin-right: 4px;
   }

@@ -1,14 +1,11 @@
 'use client'
-
-import Link from "next/link";
 import Card from "../components/common/Card";
 import Paging from "../components/main/Paging";
-import { Button, Flex, Grid, Layout, Order, RecruitStyle, Search, SearchFlex, SmallText, Tag, Wrap, WriteLink } from "../components/main/style";
-import styled from "styled-components";
+import { Button, Flex, Grid, Layout, MainStyle, Order, RecruitStyle, Search, SearchFlex, SmallText, Tag, Wrap, WriteLink } from "../components/main/style";
 
 export default function Home() {
   return (
-    <main>
+    <MainStyle>
       <Wrap>
 
         <SearchFlex>
@@ -32,7 +29,7 @@ export default function Home() {
           <Flex>
             {
               ["전체","서울","경기","인천","대구","부산","경남","경북","강원","전남","전북","그 외"]
-              .map((e,i)=><Button key={i}>{e}</Button>)
+              .map((e,i)=><Button key={i} active={e==="전체" ? true : false}>{e}</Button>)
             }
           </Flex>
         </Tag>
@@ -42,7 +39,7 @@ export default function Home() {
           <Flex>
             {
               ["전체","배드민턴","농구","풋발","테니스","탁구","야구"]
-              .map((e,i)=><Button key={i}>{e}</Button>)
+              .map((e,i)=><Button active={e==="전체" ? true : false} key={i}>{e}</Button>)
             }
           </Flex>
         </Tag>
@@ -54,12 +51,9 @@ export default function Home() {
           </Order>
           
           <Grid>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
+            {
+              new Array(12).fill(0).map((_,i)=><Card key={i}/>)
+            }
           </Grid>
 
           <WriteLink href={"/write"}>
@@ -68,10 +62,11 @@ export default function Home() {
           </WriteLink>
 
           <Paging/>
+          
         </Layout>
 
       </Wrap>
-    </main>
+    </MainStyle>
   );
 }
 
