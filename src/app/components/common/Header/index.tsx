@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <HeaderStyle>
       <Wrapper>
-        <Link href={'/'}>로고</Link>
+        <Link href={'/'}><img src='/asset/logo.svg'/></Link>
         <LoginStyle href={"/login"}>로그인</LoginStyle>
       </Wrapper>
     </HeaderStyle>

@@ -2,8 +2,7 @@ import Link from "next/link";
 import styled from "styled-components";
 
 export const HeaderStyle = styled.header`
-    height: 80px;
-    margin-top: 45px;
+    margin-top: 40px;
 `;
 
 export const Wrapper = styled.div`
