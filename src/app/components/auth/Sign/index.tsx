@@ -6,7 +6,7 @@ import { ButtonStyle, CloseStyle, Flex, InputBox, SignButton, SnsBox, TitleStyle
 import { ThemeProvider } from 'styled-components'
 import { theme } from '@/styles/theme'
 
-export default function Login() {
+export default function Sign() {
 
   const [isOpen,setIsOpen] = useState(false)
 
@@ -24,24 +24,24 @@ export default function Login() {
         >
           <img src="/asset/icon/close.svg" alt="취소버튼" />
         </CloseStyle>
-
-        <img src="/asset/image/icon.png" alt="아이콘" />
-
-        <TitleStyle>로그인</TitleStyle>
+        
+        <TitleStyle>회원가입</TitleStyle>
 
         <form>
           <InputBox>
+            <input type="text" placeholder='닉네임' />
             <input type="email" placeholder='이메일을 입력하세요.' />
-            <input type="password" placeholder='비밀번호를 입력하세요.' />
+            <input type="password" placeholder='비밀번호' />
+            <input type="password" placeholder='비밀번호 확인' />
           </InputBox>
 
           <ButtonStyle type="submit">
-            로그인 하기
+            회원가입 하기
           </ButtonStyle>
         </form>
         
         <SnsBox>
-          <p>간편 로그인</p>
+          <p>간편 회원가입</p>
           <Flex>
             <button></button>
             <button></button>
@@ -49,7 +49,7 @@ export default function Login() {
           </Flex>
         </SnsBox>
         
-        <SignButton>회원가입 하기</SignButton>
+        <SignButton>로그인 하기</SignButton>
       </ThemeProvider>
     </ReactModal>
     
