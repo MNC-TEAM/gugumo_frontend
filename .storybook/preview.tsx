@@ -20,7 +20,6 @@ const GlobalStyle = createGlobalStyle`
 
 `;
 
-
 const preview: Preview = {
   parameters: {
     controls: {

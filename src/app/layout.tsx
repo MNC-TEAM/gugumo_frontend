@@ -1,3 +1,4 @@
+import StyledComponentsRegistry from "@/lib/registry";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
@@ -20,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={pretendard.className}>
-        {children}
+        <StyledComponentsRegistry>
+          {children}
+        </StyledComponentsRegistry>
       </body>
     </html>
   );

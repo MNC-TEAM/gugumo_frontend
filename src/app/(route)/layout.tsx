@@ -1,22 +1,20 @@
 "use client";
 
-import React from 'react'
-import { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
 import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
-
-const GlobalStyle = createGlobalStyle`
-  ${reset}
-`;
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyle } from '@/styles/global';
+import { theme } from '@/styles/theme';
 
 export default function layout({children} : {children : React.ReactNode}) {
+
   return (
-    <>
-        <GlobalStyle/>
-        <Header/>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle/>
+      <Header/>
         {children}
-        <Footer/>
-    </>
+      <Footer/>
+    </ThemeProvider>
   )
+
 }
