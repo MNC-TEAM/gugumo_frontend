@@ -20,7 +20,7 @@ export const modalStyle: ReactModal.Styles = {
       left: "50%",
       transform: "translate(-50%, -50%)",
       background : "#fff",
-      padding : "35px 62px 33px",
+      padding : "61px 65px 30px 58px",
       boxSizing : "border-box",
       borderRadius : 12,
       border : 0,
@@ -28,6 +28,7 @@ export const modalStyle: ReactModal.Styles = {
     },
 };
 
+// 끄는버튼은 스타일이 동일
 export const CloseStyle = styled.button`
     all: unset;
     position: absolute;
@@ -36,26 +37,27 @@ export const CloseStyle = styled.button`
     cursor: pointer;
 `;
 
+// 버튼 스타일 동일 width값 제외
 export const ButtonStyle = styled.button`
     all: unset;
     font-size: ${({theme})=>theme.fontSize.buttonSemibold};
     font-weight: ${({theme})=>theme.fontWeight.buttonSemibold};
     background: ${({theme})=>theme.color.Primary};
     color : #fff;
-    width: ${115/18*1}em;
+    width: ${142/18*1}em;
     height: ${37/18*1}em;
     border-radius: 4px;
     margin-top: 25px;
     cursor: pointer;
 `;
 
+// 타이틀스타일은 로그인과 동일 margin값 빼고 수정필요
 export const TitleStyle = styled.h5`
 
     font-family: "Pretendard";
     color: #4FAAFF;
     font-weight: 600;
     font-size: 18px;
-    margin-top: 41px;
 
 `;
 
@@ -69,6 +71,7 @@ export const SignButton = styled.button`
     cursor: pointer;
 `;
 
+// Input 스타일 동일
 export const InputBox = styled.div`
 
     margin-top: 23px;
@@ -91,13 +94,16 @@ export const InputBox = styled.div`
         }
 
         + input {
-            margin-top: 7px;
+            margin-top: 20px;
         }
 
     }
 
 `;
 
+
+
+// 간편가입 스타일 동일
 export const SnsBox = styled.div`
     margin-top: 18px;
     color: #A5A5A5;
