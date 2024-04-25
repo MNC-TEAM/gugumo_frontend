@@ -5,6 +5,7 @@ import Footer from '../components/common/Footer';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from '@/styles/global';
 import { theme } from '@/styles/theme';
+import Login from '../components/auth/Login';
 
 export default function layout({children} : {children : React.ReactNode}) {
 
@@ -12,9 +13,10 @@ export default function layout({children} : {children : React.ReactNode}) {
     <ThemeProvider theme={theme}>
       <GlobalStyle/>
       <Header/>
+      <Login/>
         {children}
       <Footer/>
     </ThemeProvider>
   )
-
+  
 }
