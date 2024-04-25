@@ -1,14 +1,13 @@
-import Link from "next/link";
-import { Flex } from "./style";
+import { Flex,LinkStyle } from "./style";
 
 export default function Paging() {
   return (
     <Flex>
-        <Link href={"1"}>1</Link>
-        <Link href={"2"}>2</Link>
-        <Link href={"3"}>3</Link>
-        <Link href={"4"}>4</Link>
-        <Link href={"5"}>5</Link>
+        <LinkStyle href={"1"} active={true} >1</LinkStyle>
+        <LinkStyle href={"2"}>2</LinkStyle>
+        <LinkStyle href={"3"}>3</LinkStyle>
+        <LinkStyle href={"4"}>4</LinkStyle>
+        <LinkStyle href={"5"}>5</LinkStyle>
     </Flex>
   )
 }
