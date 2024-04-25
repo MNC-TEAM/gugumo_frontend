@@ -1,4 +1,3 @@
-import Link from "next/link";
 import styled from "styled-components";
 
 export const HeaderStyle = styled.header`
@@ -14,16 +13,37 @@ export const Wrapper = styled.div`
 `;
 
 
-export const LoginStyle = styled(Link)`
+export const LoginStyle = styled.button`
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 79px;
-    height: 33px;
+    height: 37px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    background: #4FAAFF;
+    background: ${({theme})=>theme.color.Primary};
     color: #fff;
-    font-size: 18px;
-    font-weight: 500;
+    font-size: ${({theme})=>theme.fontSize.buttonSemibold};
+    font-weight: ${({theme})=>theme.fontWeight.buttonSemibold};
     border-radius: 4px;
+    cursor: pointer;
+`;
+
+
+export const Flex = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    img {
+        cursor: pointer;
+    }
+
+    button {
+        all: unset;
+        cursor: pointer;
+    }
+
 `;

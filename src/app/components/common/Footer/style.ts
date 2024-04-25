@@ -10,13 +10,14 @@ export const Wrapper = styled.div`
 `;
 
 export const FooterStyle = styled.footer`
-    background: #DDEFFF;
+    background: ${({theme})=>theme.color.Surface};
     height: 180px;
 `;
 
 
 export const Flex = styled.div`
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
     margin-top: 10px;
 `;
@@ -35,6 +36,9 @@ export const Copy = styled.div`
 export const Service = styled.div`
    display: flex;
    gap: 72px;
+   font-size: ${({theme})=>theme.fontSize.captionMedium};
+   font-weight: ${({theme})=>theme.fontWeight.captionMedium};
+   color: ${({theme})=>theme.color.OnSurface};
    button {
     all: unset;
     font-weight: 500;
