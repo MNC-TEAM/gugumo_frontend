@@ -1,9 +1,13 @@
 import React from 'react'
 import { CardStyle,Date,Detail,Flex, Tag } from './style'
+import { useRouter } from 'next/navigation'
 
 export default function Card() {
+
+  const router = useRouter();
+
   return (
-    <CardStyle>
+    <CardStyle onClick={()=>router.push('/detail')}>
       <Flex>
         <Tag color="recruit">모집중</Tag>
         <Tag color="ball">배드민턴</Tag>
@@ -33,7 +37,6 @@ export default function Card() {
           <img src="/asset/icon/bookmark.svg" alt="" />
         </button>
       </Date>
-
     </CardStyle>
   )
 }
