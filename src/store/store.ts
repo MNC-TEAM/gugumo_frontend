@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import modal from './features/modal/modal'
+import user from './features/auth/user'
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      modal
+      modal,
+      user
     }
   })
 }

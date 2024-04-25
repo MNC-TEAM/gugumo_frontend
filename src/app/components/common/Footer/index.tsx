@@ -6,10 +6,12 @@ export default function Footer() {
   return (
     <FooterStyle>
         <Wrapper>
-            <Link href={'/'}>로고</Link>
+            <Link href={'/'}>
+                <img src="/asset/logo.svg" alt="로고" width={70}/>
+            </Link>
             <Flex>
                 <Copy>
-                    <p>Contact@gmail.com</p>
+                    <p>Contact<br/>@gmail.com</p>
                     <p>Copyright 구구모. All rights reserved</p>
                 </Copy>
                 <Service>
