@@ -1,55 +1,57 @@
-import React from 'react'
-import ReactModal from 'react-modal'
+'use client'
 
-const modalStyle: ReactModal.Styles = {
-  overlay: { // 바깥
-    backgroundColor: " rgba(0, 0, 0, 0.38)",
-    width: "100%",
-    height: "100%",
-    zIndex: "50",
-    position: "fixed",
-    top: "0",
-    left: "0",
-  },
-  content: { // 안쪽
-    zIndex: "100",
-    width: "339px",
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    background : "#fff",
-    padding : "37px 40px 21px",
-    boxSizing : "border-box",
-    borderRadius : 12,
-    border : 0,
-    textAlign : "center",
-  },
-};
+import React, { useState } from 'react'
+import ReactModal from 'react-modal'
+import { ButtonStyle, CloseStyle, Flex, InputBox, SignButton, SnsBox, TitleStyle, modalStyle } from './style'
+import { ThemeProvider } from 'styled-components'
+import { theme } from '@/styles/theme'
 
 export default function Login() {
+
+  const [isOpen,setIsOpen] = useState(true)
+
   return (
+    
     <ReactModal
-      isOpen={true}
+      isOpen={isOpen}
       style={modalStyle}
     >
-      <div>
+      <ThemeProvider 
+        theme={theme}
+      >
+        <CloseStyle
+          onClick={()=>setIsOpen(false)}
+        >
+          <img src="/asset/icon/close.svg" alt="취소버튼" />
+        </CloseStyle>
+
         <img src="/asset/image/icon.png" alt="아이콘" />
-      </div>
-      <h5>이메일로 로그인</h5>
-      <div>
-        <input type="text" placeholder='아이디를 입력하세요.' />
-        <input type="text" placeholder='비밀번호를 입력하세요.' />
-      </div>
-      <div>
-        <p>간편 로그인</p>
-        <div>
-          <button>네이버</button>
-          <button>카카오</button>
-          <button>구글</button>
-        </div>
-      </div>
-      <button>회원가입 하기</button>
+
+        <TitleStyle>로그인</TitleStyle>
+
+        <form>
+          <InputBox>
+            <input type="email" placeholder='이메일을 입력하세요.' />
+            <input type="password" placeholder='비밀번호를 입력하세요.' />
+          </InputBox>
+
+          <ButtonStyle type="submit">
+            로그인 하기
+          </ButtonStyle>
+        </form>
+        
+        <SnsBox>
+          <p>간편 로그인</p>
+          <Flex>
+            <button></button>
+            <button></button>
+            <button></button>
+          </Flex>
+        </SnsBox>
+        
+        <SignButton>회원가입 하기</SignButton>
+      </ThemeProvider>
     </ReactModal>
+    
   )
 }
