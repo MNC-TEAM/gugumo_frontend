@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { BookmarkStyle } from './style'
+import BookMarkSvg from "@asset/icon/bookmark.svg";
 
-import BookMarkSvg from "../../../../../../public/asset/icon/bookmark.svg";
+export default function Bookmark({status} : {status : boolean}) {
 
-export default function Bookmark() {
+  const [click,setClick] = useState(status);
 
-  const [click,setClick] = useState(false);
-
-  const clickHandler = ()=>{
+  const clickHandler :React.MouseEventHandler<HTMLButtonElement> = (e)=>{
+    e.stopPropagation();
     setClick(!click);
   }
 

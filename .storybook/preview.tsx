@@ -1,7 +1,9 @@
 import React from 'react';
 import type { Preview } from "@storybook/react";
 import {reset} from "styled-reset";
-import {createGlobalStyle} from "styled-components";
+import {ThemeProvider, createGlobalStyle} from "styled-components";
+import {theme} from "../src/styles/theme";
+import StoreProvider from "../src/store/Providers";
 
 const GlobalStyle = createGlobalStyle`
   
@@ -31,10 +33,12 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <>
+      <StoreProvider>
+        <ThemeProvider theme={theme}>
         <GlobalStyle/>
-        <Story />
-      </>
+          <Story />
+        </ThemeProvider>
+      </StoreProvider>
     ),
   ],
 };

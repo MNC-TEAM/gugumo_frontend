@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import ReactModal from 'react-modal'
 import { ButtonStyle, CloseStyle, Flex, InputBox, SignButton, SnsBox, TitleStyle, modalStyle } from './style'
 import { ThemeProvider } from 'styled-components'
-import { theme } from '@/styles/theme'
+import { theme } from '../../../../styles/theme'
 
 export default function Sign() {
 

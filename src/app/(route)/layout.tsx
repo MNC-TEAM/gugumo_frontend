@@ -3,8 +3,8 @@
 import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
 import { ThemeProvider } from 'styled-components';
-import { GlobalStyle } from '@/styles/global';
-import { theme } from '@/styles/theme';
+import { GlobalStyle } from '../../styles/global';
+import { theme } from '../../styles/theme';
 import Login from '../components/auth/Login';
 import Sign from '../components/auth/Sign';
 

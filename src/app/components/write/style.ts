@@ -1,4 +1,3 @@
-import { warnOptionHasBeenMovedOutOfExperimental } from "next/dist/server/config";
 import styled from "styled-components";
 
 export const WrtieStyle = styled.main`
