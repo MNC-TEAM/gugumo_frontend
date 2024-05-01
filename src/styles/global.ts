@@ -21,23 +21,23 @@ export const GlobalStyle = createGlobalStyle`
     --SubColor3 : #FDC9AF;
     --OnSubcolor3 : #FF7127;
 
-    --titleMediumBSize : "24px";
-    --titleSemiboldSize : "24px";
-    --titleMediumSize : "24px";
-    --buttonSemiboldSize : "16px";
-    --buttonMediumSize : "18px";
-    --bodyMediumSize : "16px";
-    --captionMediumSize : "13px";
-    --captionRegularSize : "13px";
+    --titleMediumBSize : 24px;
+    --titleSemiboldSize : 24px;
+    --titleMediumSize : 24px;
+    --buttonSemiboldSize : 16px;
+    --buttonMediumSize : 18px;
+    --bodyMediumSize : 16px;
+    --captionMediumSize : 13px;
+    --captionRegularSize : 13px;
 
-    --titleMediumBWeight : "500";
-    --titleSemiboldWeight : "600";
-    --titleMediumWeight : "500";
-    --buttonSemiboldWeight : "600";
-    --buttonMediumWeight : "500";
-    --bodyMediumWeight : "500";
-    --captionMediumWeight : "500";
-    --captionRegularWeight : "400";
+    --titleMediumBWeight : 500;
+    --titleSemiboldWeight : 600;
+    --titleMediumWeight : 500;
+    --buttonSemiboldWeight : 600;
+    --buttonMediumWeight : 500;
+    --bodyMediumWeight : 500;
+    --captionMediumWeight : 500;
+    --captionRegularWeight : 400;
 
   }
   ${reset};

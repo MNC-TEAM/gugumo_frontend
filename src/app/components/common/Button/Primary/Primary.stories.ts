@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Primary from './Primary';
 
 export interface PrimaryType {
+  type?: "button" | "submit" | "reset",
   children : React.ReactNode
 }
 

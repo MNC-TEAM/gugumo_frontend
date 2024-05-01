@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 export const modalStyle: ReactModal.Styles = {
     overlay: { // 바깥
       backgroundColor: " rgba(0, 0, 0, 0.38)",
@@ -37,28 +38,12 @@ export const CloseStyle = styled.button`
     cursor: pointer;
 `;
 
-// 버튼 스타일 동일 width값 제외
-export const ButtonStyle = styled.button`
-    all: unset;
-    font-size: ${({theme})=>theme.fontSize.buttonSemibold};
-    font-weight: ${({theme})=>theme.fontWeight.buttonSemibold};
-    background: ${({theme})=>theme.color.Primary};
-    color : #fff;
-    width: ${142/18*1}em;
-    height: ${37/18*1}em;
-    border-radius: 4px;
-    margin-top: 25px;
-    cursor: pointer;
-`;
-
 // 타이틀스타일은 로그인과 동일 margin값 빼고 수정필요
 export const TitleStyle = styled.h5`
-
     font-family: "Pretendard";
     color: #4FAAFF;
     font-weight: 600;
     font-size: 18px;
-
 `;
 
 export const SignButton = styled.button`
@@ -101,6 +86,11 @@ export const InputBox = styled.div`
 
 `;
 
+export const Form = styled.form`
+    button {
+        margin-top: 25px;
+    }
+`;
 
 
 // 간편가입 스타일 동일
