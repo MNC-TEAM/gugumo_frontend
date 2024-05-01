@@ -53,7 +53,8 @@ export default function Home() {
           <Grid>
             {
               new Array(12).fill(0).map((_,i)=>
-                <Card 
+                <Card
+                  bookmarkStatus={false}
                   key={i}
                   postId={1}
                   status={"모집중"}

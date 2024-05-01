@@ -22,11 +22,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={pretendard.className}>
-        <StoreProvider>
-          <StyledComponentsRegistry>
+        <StyledComponentsRegistry>
+          <StoreProvider>
             {children}
-          </StyledComponentsRegistry>
-        </StoreProvider>
+          </StoreProvider>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
