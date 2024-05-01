@@ -7,7 +7,7 @@ export default function Footer() {
     <S.FooterStyle>
         <S.Wrapper>
             <Link href={'/'}>
-                <img src="/asset/logo.svg" alt="로고" width={70}/>
+                <img src="/asset/simbol.svg" alt="로고" width={100}/>
             </Link>
             <S.Flex>
                 <S.Copy>
