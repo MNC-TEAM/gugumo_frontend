@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     compiler : {
-        styledComponents: true,
+        styledComponents: true, // styledComponent를 컴파일할때 사용
     },
-    webpack(config) {
+    webpack(config) { // SVG을 사용하기 위함
         config.module.rules.push({
           test: /\.svg$/,
           use: ['@svgr/webpack'],

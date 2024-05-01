@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     height: 100%;
+    width: 95%;
 `;
 
 export const FooterStyle = styled.footer`
@@ -43,5 +44,6 @@ export const Service = styled.div`
     all: unset;
     font-weight: 500;
     font-size: 13px;
+    cursor: pointer;
    }
 `;

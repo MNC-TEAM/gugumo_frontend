@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { InputBox, InputStyle } from './style'
 import { ThemeProvider } from 'styled-components'
-import { theme } from '@/styles/theme'
+import { theme } from '../../../../styles/theme'
 
 interface InputType {
   placeholder? : string,
