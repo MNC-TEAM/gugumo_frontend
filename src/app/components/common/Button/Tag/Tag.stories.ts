@@ -18,7 +18,7 @@ export interface TagTypes {
 }
 
 const meta : Meta<typeof Tag> = {
-  title: 'Button/Tag',
+  title: 'Core/Button/Tag',
   component: Tag,
   parameters : {
     layout : "centered"

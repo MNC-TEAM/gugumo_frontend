@@ -1,56 +1,65 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import ReactModal from 'react-modal'
-import { ButtonStyle, CloseStyle, Flex, InputBox, SignButton, SnsBox, TitleStyle, modalStyle } from './style'
-import { ThemeProvider } from 'styled-components'
-import { theme } from '@/styles/theme'
+import * as S from './style'
+import { useAppDispatch, useAppSelector } from '@/store/hook'
+import { onClose, onSignup } from '@/store/features/modal/modal'
+import { useForm } from 'react-hook-form'
+import Primary from '../../common/Button/Primary/Primary'
+import { loginAction } from '@/store/features/auth/user'
 
 export default function Login() {
 
-  const [isOpen,setIsOpen] = useState(false)
+  const {login} = useAppSelector((state)=>state.modal);
+  const dispatch = useAppDispatch();
+  const {register,handleSubmit} = useForm();
+
+  const onSubmit = (event : any)=>{
+    console.log(event);
+    dispatch(loginAction());
+    dispatch(onClose());
+  }
 
   return (
     
     <ReactModal
-      isOpen={isOpen}
-      style={modalStyle}
+      isOpen={login}
+      style={S.modalStyle}
+      ariaHideApp={false}
+      onRequestClose={()=>dispatch(onClose())}
     >
-      <ThemeProvider 
-        theme={theme}
+      <S.CloseStyle
+        onClick={()=>dispatch(onClose())}
       >
-        <CloseStyle
-          onClick={()=>setIsOpen(false)}
-        >
-          <img src="/asset/icon/close.svg" alt="취소버튼" />
-        </CloseStyle>
+        <img src="/asset/icon/close.svg" alt="취소버튼" />
+      </S.CloseStyle>
 
-        <img src="/asset/image/icon.png" alt="아이콘" />
+      <img src="/asset/image/icon.png" alt="아이콘" />
 
-        <TitleStyle>로그인</TitleStyle>
+      <S.TitleStyle>로그인</S.TitleStyle>
 
-        <form>
-          <InputBox>
-            <input type="email" placeholder='이메일을 입력하세요.' />
-            <input type="password" placeholder='비밀번호를 입력하세요.' />
-          </InputBox>
+      <S.Form onSubmit={handleSubmit(onSubmit)}>
+        <S.InputBox>
+          <input type="email" placeholder='이메일을 입력하세요.' {...register('email',{required : true})} />
+          <input type="password" placeholder='비밀번호를 입력하세요.' {...register('password',{required : true})}/>
+        </S.InputBox>
 
-          <ButtonStyle type="submit">
-            로그인 하기
-          </ButtonStyle>
-        </form>
+        <Primary type="submit">
+          로그인 하기
+        </Primary>
+      </S.Form>
+      
+      {/* <SnsBox>
+        <p>간편 로그인</p>
+        <Flex>
+          <button></button>
+          <button></button>
+          <button></button>
+        </Flex>
+      </SnsBox> */}
         
-        <SnsBox>
-          <p>간편 로그인</p>
-          <Flex>
-            <button></button>
-            <button></button>
-            <button></button>
-          </Flex>
-        </SnsBox>
-        
-        <SignButton>회원가입 하기</SignButton>
-      </ThemeProvider>
+      <S.SignButton onClick={()=>dispatch(onSignup())}>회원가입 하기</S.SignButton>
     </ReactModal>
     
   )

@@ -12,7 +12,8 @@ export const modalStyle: ReactModal.Styles = {
     },
     content: { // 안쪽
       zIndex: "100",
-      width: "422px",
+      width : "90%",
+      maxWidth: "422px",
       position: "absolute",
       height : "max-content",
       overflow : "visible",
@@ -36,17 +37,10 @@ export const CloseStyle = styled.button`
     cursor: pointer;
 `;
 
-export const ButtonStyle = styled.button`
-    all: unset;
-    font-size: ${({theme})=>theme.fontSize.buttonSemibold};
-    font-weight: ${({theme})=>theme.fontWeight.buttonSemibold};
-    background: ${({theme})=>theme.color.Primary};
-    color : #fff;
-    width: ${115/18*1}em;
-    height: ${37/18*1}em;
-    border-radius: 4px;
-    margin-top: 25px;
-    cursor: pointer;
+export const Form = styled.form`
+    button {
+        margin-top: 25px;
+    }
 `;
 
 export const TitleStyle = styled.h5`

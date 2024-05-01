@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/store/hook'
 import { Flex, HeaderStyle, LoginStyle, Wrapper } from './style'
 import Link from 'next/link'
-import { login, logout } from '@/store/features/auth/user';
+import { onLogin } from '@/store/features/modal/modal';
 
 export default function Header() {
 
@@ -11,15 +11,15 @@ export default function Header() {
   return (
     <HeaderStyle>
       <Wrapper>
-        <Link href={'/'}><img src='/asset/logo.svg'/></Link>
+        <Link href={'/'}><img src='/asset/logo.svg' width={172}/></Link>
         {
           !user ?
-            <LoginStyle onClick={()=>dispatch(login())}>로그인</LoginStyle>
+            <LoginStyle onClick={()=>dispatch(onLogin())}>로그인</LoginStyle>
           :
             <Flex>
               {/* <img src="/asset/icon/bell.svg" alt="알림창" /> */}
-              <Link href={"/bookmark"}><img src="/asset/icon/bookmark.svg" alt="북마크" width={24}/></Link>
-              <button onClick={()=>dispatch(logout())}><img src="/asset/icon/user.svg" alt="유저" /></button>
+              <Link href={"/bookmark"}><img src="/asset/icon/bookmark.svg" alt="북마크" width={36}/></Link>
+              <Link href={"/mypage"}><img src="/asset/icon/user.svg" alt="유저" width={36} /></Link>
             </Flex>
         }
       </Wrapper>

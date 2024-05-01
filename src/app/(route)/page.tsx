@@ -54,7 +54,20 @@ export default function Home() {
           
           <S.Grid>
             {
-              new Array(12).fill(0).map((_,i)=><Card key={i}/>)
+              new Array(12).fill(0).map((_,i)=>
+                <Card
+                  bookmarkStatus={false}
+                  key={i}
+                  postId={1}
+                  status={"모집중"}
+                  gameType={"배드민턴"}
+                  location={"인천"}
+                  title={"배트민턴 같이 치실분 구합니다."}
+                  meetingDateTime={"09"}
+                  meetingMemberNum={2}
+                  meetingDeadline={Date.now()}
+                />
+              )
             }
           </S.Grid>
 

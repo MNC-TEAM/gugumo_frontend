@@ -10,7 +10,7 @@ export const ButtonStyle = styled.button<ButtonStyleType>`
   font-weight: 600;
   padding: 8px 28px;
   border-radius: 100px;
-  border: 1px solid #4FAAFF;
+  border: 1px solid var(--Primary);
   white-space: nowrap;
   color: ${(props)=>{
     if(!props.$active) {
@@ -27,7 +27,7 @@ export const ButtonStyle = styled.button<ButtonStyleType>`
   transition: .4s;
   transition-property: background,color;
   &:hover {
-    background: #4FAAFF;
+    background: var(--Primary);
     color: #fff;
   }
 `;

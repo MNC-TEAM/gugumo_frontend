@@ -4,15 +4,15 @@ const userSlice = createSlice({
     name : "userSlice",
     initialState : false,
     reducers : {
-        login : ()=>{
+        loginAction : ()=>{
             return true;
         },
-        logout : ()=>{
+        logoutAction : ()=>{
             return false;
         }
     }
 });
 
-export const {login,logout} = userSlice.actions;
+export const {loginAction,logoutAction} = userSlice.actions;
 
 export default userSlice.reducer;
