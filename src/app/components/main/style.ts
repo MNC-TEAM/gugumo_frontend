@@ -1,4 +1,3 @@
-import Link from "next/link";
 import styled from "styled-components";
 
 export const MainStyle = styled.main`
@@ -91,37 +90,6 @@ export const Flex = styled.div`
   margin-top: 11px;
 `;
 
-export const Button = styled.button<{active : boolean}>` // 나중에 리팩토링
-  all: unset;
-  cursor: pointer;
-  font-size: ${({theme})=>theme.fontSize.buttonMedium};
-  font-weight: ${({theme})=>theme.fontWeight.buttonMedium};
-  padding: ${8/18}em ${28/18}em;
-  border-radius: 100px;
-  border: 1px solid ${({theme})=>theme.color.Primary};
-  white-space: nowrap;
-  color: ${({active,theme})=>{
-    if(active){
-      return "#fff"
-    }else{
-      return theme.color.Primary
-    }
-  }};
-  background : ${({active,theme})=>{
-    if(active){
-      return theme.color.Primary;
-    }else{
-      return "#fff";
-    }
-  }};
-  transition: .4s;
-  transition-property: background,color;
-  &:hover {
-    background: ${({theme})=>theme.color.Primary};
-    color: #fff;
-  }
-`;
-
 export const Layout = styled.div`
   background : #F4F5F8;
   margin-top: 58px;
@@ -136,7 +104,6 @@ export const Grid = styled.div`
   margin-top: 31px;
 `;
 
-
 export const Order = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -145,29 +112,5 @@ export const Order = styled.div`
     display: inline-flex;
     gap: 4px;
     cursor: pointer;
-  }
-`;
-
-
-// margin-bottom 페이징 마다 가져올수 있게 수정해야함
-export const WriteLink = styled(Link)`
-  color: inherit;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  color : #4FAAFF;
-  font-size: 18px;
-  font-weight: 500;
-  border: 1px solid #4FAAFF;
-  background: #FFFFFF;
-  border-radius: 4px;
-  width: 127px;
-  height: 52px;
-  justify-content: center;
-  margin-left: auto;
-  margin-top: 24px;
-  margin-bottom: 28px;
-  img {
-    margin-right: 4px;
   }
 `;

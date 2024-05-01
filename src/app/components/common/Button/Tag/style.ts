@@ -1,6 +1,9 @@
 import styled from "styled-components";
+interface ButtonStyleType{
+  $active : boolean
+}
 
-export const ButtonStyle = styled.button`
+export const ButtonStyle = styled.button<ButtonStyleType>`
   all: unset;
   cursor: pointer;
   font-size: 18px;
@@ -9,7 +12,18 @@ export const ButtonStyle = styled.button`
   border-radius: 100px;
   border: 1px solid #4FAAFF;
   white-space: nowrap;
-  color: #4FAAFF;
+  color: ${(props)=>{
+    if(!props.$active) {
+      return "var(--Primary)";
+    }else{
+      return "var(--OnPrimary)";
+    }
+  }};
+  background: ${(props)=>{
+    if(props.$active) {
+      return 'var(--Primary)';
+    }
+  }};
   transition: .4s;
   transition-property: background,color;
   &:hover {
