@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <HeaderStyle>
       <Wrapper>
-        <Link href={'/'}><img src='/asset/logo.svg'/></Link>
+        <Link href={'/'}><img src='/asset/logo.svg' width={172}/></Link>
         {
           !user ?
             <LoginStyle onClick={()=>dispatch(login())}>로그인</LoginStyle>

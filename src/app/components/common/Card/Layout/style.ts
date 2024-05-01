@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface TagProps {
+  color? : "recruit" | "ball" | "region"
+}
+
 export const CardStyle = styled.div`
   padding: 23px;
   background: #FFFFFF;
@@ -20,10 +24,6 @@ export const Flex = styled.div`
   display: flex;
   gap: 5px;
 `;
-
-interface TagProps {
-  color? : "recruit" | "ball" | "region"
-}
 
 export const Tag = styled.div<TagProps>`
   background: ${({color})=>{
@@ -56,7 +56,6 @@ export const Tag = styled.div<TagProps>`
   font-size: 13px;
 `;
 
-
 export const Detail = styled.ul`
   margin-top: 35px;
   li {
@@ -75,7 +74,6 @@ export const Detail = styled.ul`
     }
   }
 `;
-
 
 export const Date = styled.div`
   display: flex;

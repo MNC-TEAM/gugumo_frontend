@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Write from '.';
+import OpenTalk from './OpenTalk';
 
-const meta : Meta<typeof Write> = {
-  title: 'Button/Write',
-  component: Write,
+const meta : Meta<typeof OpenTalk> = {
+  title: 'Core/Button/OpenTalk',
+  component: OpenTalk,
   parameters : {
     layout : "centered",
   }

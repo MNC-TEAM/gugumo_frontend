@@ -1,5 +1,5 @@
 "use client"
-import Card from "@/app/components/common/Card";
+import Card from "@/app/components/common/Card/Layout";
 import Paging from "@/app/components/main/Paging";
 import { Grid, Layout, MainStyle, Order, Search, SearchFlex, Wrap } from "@/app/components/main/style";
 

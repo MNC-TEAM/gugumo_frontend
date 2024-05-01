@@ -1,5 +1,5 @@
 'use client'
-import Card from "../components/common/Card";
+import Card from "../components/common/Card/Layout";
 import Paging from "../components/main/Paging";
 import { Button, Flex, Grid, Layout, MainStyle, Order, RecruitStyle, Search, SearchFlex, SmallText, Tag, Wrap, WriteLink } from "../components/main/style";
 
@@ -52,7 +52,19 @@ export default function Home() {
           
           <Grid>
             {
-              new Array(12).fill(0).map((_,i)=><Card key={i}/>)
+              new Array(12).fill(0).map((_,i)=>
+                <Card 
+                  key={i}
+                  postId={1}
+                  status={"모집중"}
+                  gameType={"배드민턴"}
+                  location={"인천"}
+                  title={"배트민턴 같이 치실분 구합니다."}
+                  meetingDateTime={"09"}
+                  meetingMemberNum={2}
+                  meetingDeadline={Date.now()}
+                />
+              )
             }
           </Grid>
 
