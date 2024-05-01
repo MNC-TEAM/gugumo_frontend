@@ -8,10 +8,10 @@ export const Flex = styled.div`
     gap: 20px;
 `;
 
-export const LinkStyle = styled(Link)<{active? : boolean}>`
+export const LinkStyle = styled(Link)<{$active? : boolean}>`
     text-decoration: none;
-    color: ${({active,theme})=>{
-        if(active){
+    color: ${({$active,theme})=>{
+        if($active){
             return theme.color.Primary;
         }else{
             return theme.color.OnBackground;

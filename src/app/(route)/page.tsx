@@ -48,9 +48,9 @@ export default function Home() {
 
         <S.Layout>
           
-          <S.Order>
+          {/* <S.Order>
             <div>최신순 <img src="/asset/icon/down.svg" alt="순서" /></div>
-          </S.Order>
+          </S.Order> */}
           
           <S.Grid>
             {
