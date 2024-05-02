@@ -1,7 +1,8 @@
 import StyledComponentsRegistry from "@/lib/registry";
 import StoreProvider from "@/store/Providers";
-import type { Metadata } from "next";
 import localFont from "next/font/local";
+import type { Metadata } from "next";
+import 'swiper/css';
 
 const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',

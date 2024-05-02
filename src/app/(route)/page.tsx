@@ -1,21 +1,49 @@
 'use client'
+
+import { useState } from "react";
+import BallTag from "../components/common/Button/BallTag/BallTag";
 import Tag from "../components/common/Button/Tag";
 import WhiteBtn from "../components/common/Button/WhiteBtn";
 import Card from "../components/common/Card/Layout";
 import Paging from "../components/main/Paging";
 import * as S from "../components/main/style";
+import {Swiper,SwiperSlide} from 'swiper/react';
 
 export default function Home() {
+  
+  const [recruit,setRecruit] = useState('모집중');
+
+  const recruitClickHandler = (event : string)=>{
+    setRecruit(event);
+  }
+
   return (
     <S.MainStyle>
       <S.Wrap>
 
+        <Swiper
+          spaceBetween={10}
+        >
+          <SwiperSlide>
+            <img src="/asset/image/banner.jpg" alt="배너" />
+          </SwiperSlide>
+        </Swiper>
+
         <S.SearchFlex>
 
           <S.RecruitStyle>
-            <button className="active">모집중</button>
-            <button>모집완료</button>
-            <button>전체</button>
+            <S.RecruitButton 
+              $active={recruit==="모집중"} 
+              onClick={()=>recruitClickHandler('모집중')}
+            >모집중</S.RecruitButton >
+            <S.RecruitButton  
+              $active={recruit==="모집완료"} 
+              onClick={()=>recruitClickHandler('모집완료')}
+            >모집완료</S.RecruitButton >
+            <S.RecruitButton  
+              $active={recruit==="전체"} 
+              onClick={()=>recruitClickHandler('전체')}
+            >전체</S.RecruitButton >
           </S.RecruitStyle>
 
           <S.Search>
@@ -39,10 +67,13 @@ export default function Home() {
         <S.Tag>
           <S.SmallText>종목</S.SmallText>
           <S.Flex>
-            {
-              ["전체","배드민턴","농구","풋발","테니스","탁구","야구"]
-              .map((e,i)=><Tag key={i} active={e==="전체" ? true : false} label={e}/>)
-            }
+            <BallTag/>
+            <BallTag gametype="ball01"/>
+            <BallTag gametype="ball02"/>
+            <BallTag gametype="ball03"/>
+            <BallTag gametype="ball04"/>
+            <BallTag gametype="ball05"/>
+            <BallTag gametype="ball06"/>
           </S.Flex>
         </S.Tag>
 
@@ -85,6 +116,7 @@ export default function Home() {
       </S.Wrap>
     </S.MainStyle>
   );
+
 }
 
 

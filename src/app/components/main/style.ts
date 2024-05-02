@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MainStyle = styled.main`
-  padding: 32px 0 85px;
+  padding: 80px 0 85px;
 `;
 
 export const Wrap = styled.div`
@@ -14,6 +14,7 @@ export const SearchFlex = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 44px;
 
   h4 {
     font-size: ${({theme})=>theme.fontSize.titleMedium};
@@ -26,21 +27,33 @@ export const SearchFlex = styled.div`
 export const RecruitStyle = styled.div`
   display: flex;
   gap: 21px;
-  button {
-    all: unset;
-    cursor: pointer;
-    white-space: nowrap;
-    font-size: ${({theme})=>theme.fontSize.titleMedium};
-    font-weight: ${({theme})=>theme.fontWeight.titleMedium};
-    color: ${({theme})=>theme.color.OnSurface};
+`;
 
-    &.active {
-      color: ${({theme})=>theme.color.OnBackground};
-      font-weight: 600;
+export const RecruitButton = styled.button<{$active : boolean}>`
+  all: unset;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: ${({theme})=>theme.fontSize.titleMedium};
+  font-weight: ${(props)=>{
+    const {theme,$active} = props;
+    if($active){
+      return theme.fontWeight.titleSemibold;
+    }else{
+      return theme.fontWeight.titleMedium;
+    }
+  }};
+  color: ${(props)=>{
+    const {theme,$active} = props;
+
+    if($active){
+      return theme.color.OnBackground;
+    }else{
+      return theme.color.OnSurface;
     }
 
-  }
+  }};
 `;
+
 
 export const Search = styled.form`
   width: 498px;
@@ -73,7 +86,7 @@ export const Search = styled.form`
 `;
 
 export const Tag = styled.div`
-  margin-top: 16px;
+  margin-top: 18px;
 `;
 
 export const SmallText = styled.p`
