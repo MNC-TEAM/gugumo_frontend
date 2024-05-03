@@ -2,7 +2,6 @@ import Link from "next/link";
 import styled from "styled-components";
 
 export const WriteStyle = styled(Link)`
-  color: inherit;
   text-decoration: none;
   display: flex;
   align-items: center;

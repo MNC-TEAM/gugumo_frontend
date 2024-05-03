@@ -13,8 +13,8 @@ export interface TagTypes {
   onClick? : React.MouseEventHandler<HTMLButtonElement>
   /**
    * 버튼 활성화
-   */
-  onHover? : boolean
+  */
+  active : boolean
 }
 
 const meta : Meta<typeof Tag> = {
@@ -26,7 +26,7 @@ const meta : Meta<typeof Tag> = {
   tags : ['autodocs'],
   argTypes : {
     onClick : { control: 'none' },
-    onHover : { control : "none"}
+    active : { control : "none"}
   },
   args : {
     onClick : fn()
@@ -44,7 +44,7 @@ export const Default: Story = {
 
 export const Hover: Story = {
   args : {
-    onHover : true,
+    active : true,
     label : "버튼"
   }
 }

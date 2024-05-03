@@ -5,14 +5,6 @@ export const DetailStyle = styled.main`
     padding: 80px 0 160px;
 `;
 
-export const BackRouter = styled.button`
-    all: unset;
-    img {
-        width: 33px;
-    }
-    cursor: pointer;
-`;
-
 export const Flex = styled.div`
     display: flex;
     justify-content: space-between;

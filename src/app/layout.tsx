@@ -1,7 +1,10 @@
 import StyledComponentsRegistry from "@/lib/registry";
 import StoreProvider from "@/store/Providers";
-import type { Metadata } from "next";
 import localFont from "next/font/local";
+import type { Metadata } from "next";
+import 'swiper/css';
+import ThemeClient from "@/lib/ThemeClient";
+import ModalProvider from "@/lib/ModalProvider";
 
 const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -22,11 +25,15 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={pretendard.className}>
-        <StyledComponentsRegistry>
-          <StoreProvider>
-            {children}
-          </StoreProvider>
-        </StyledComponentsRegistry>
+        <ThemeClient>
+          <StyledComponentsRegistry>
+            <StoreProvider>
+              <ModalProvider>
+                {children}
+              </ModalProvider>
+            </StoreProvider>
+          </StyledComponentsRegistry>
+        </ThemeClient>
       </body>
     </html>
   );

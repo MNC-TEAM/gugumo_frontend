@@ -35,7 +35,8 @@ export default function Card({postId,status,gameType,location,title,meetingDateT
 
       <Date>
         <span>모집 마감일 {moment(meetingDeadline).format("YYYY.MM.DD")}</span>
-        <Bookmark status={bookmarkStatus}/>
+        <Bookmark postid={"1"} status={bookmarkStatus}
+        />
       </Date>
     </CardStyle>
   )

@@ -1,7 +1,7 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 interface ButtonStyleType{
-  onHover? : boolean
+  $active : boolean
 }
 
 export const ButtonStyle = styled.button<ButtonStyleType>`
@@ -13,15 +13,15 @@ export const ButtonStyle = styled.button<ButtonStyleType>`
   border-radius: 100px;
   border: 1px solid var(--Primary);
   white-space: nowrap;
-  color: ${({onHover})=>{
-    if(!onHover) {
+  color: ${(props)=>{
+    if(!props.$active) {
       return "var(--Primary)";
     }else{
       return "var(--OnPrimary)";
     }
   }};
-  background: ${({onHover})=>{
-    if(onHover) {
+  background: ${(props)=>{
+    if(props.$active) {
       return 'var(--Primary)';
     }
   }};

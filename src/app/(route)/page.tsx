@@ -1,56 +1,97 @@
 'use client'
+
+import { useState } from "react";
+import BallTag from "../components/common/Button/BallTag/BallTag";
+import Tag from "../components/common/Button/Tag";
+import WhiteBtn from "../components/common/Button/WhiteBtn";
 import Card from "../components/common/Card/Layout";
 import Paging from "../components/main/Paging";
-import { Button, Flex, Grid, Layout, MainStyle, Order, RecruitStyle, Search, SearchFlex, SmallText, Tag, Wrap, WriteLink } from "../components/main/style";
+import * as S from "../components/main/style";
+import {Swiper,SwiperSlide} from 'swiper/react';
 
 export default function Home() {
+  
+  const [recruit,setRecruit] = useState('모집중');
+  const recruitClickHandler = (event : string)=>{
+    setRecruit(event);
+  }
+  const [location,setLocation] = useState('전체');
+  const locationClickHandler = (event : string)=>{
+    setLocation(event);
+  }
+
   return (
-    <MainStyle>
-      <Wrap>
+    <S.MainStyle>
+      <S.Wrap>
 
-        <SearchFlex>
+        <Swiper
+          spaceBetween={10}
+        >
+          <SwiperSlide>
+            <img src="/asset/image/banner.jpg" alt="배너" />
+          </SwiperSlide>
+        </Swiper>
 
-          <RecruitStyle>
-            <button className="active">모집중</button>
-            <button>모집완료</button>
-            <button>전체</button>
-          </RecruitStyle>
+        <S.SearchFlex>
+          <S.RecruitStyle>
+            <S.RecruitButton 
+              $active={recruit==="모집중"} 
+              onClick={()=>recruitClickHandler('모집중')}
+            >모집중</S.RecruitButton >
+            <S.RecruitButton  
+              $active={recruit==="모집완료"} 
+              onClick={()=>recruitClickHandler('모집완료')}
+            >모집완료</S.RecruitButton >
+            <S.RecruitButton  
+              $active={recruit==="전체"} 
+              onClick={()=>recruitClickHandler('전체')}
+            >전체</S.RecruitButton >
+          </S.RecruitStyle>
 
-          <Search>
+          <S.Search>
             <input type="text" />
             <button>
               <img src="/asset/icon/search.svg" alt="검색버튼" />
             </button>
-          </Search>
-        </SearchFlex>
+          </S.Search>
+        </S.SearchFlex>
 
-        <Tag style={{marginTop : 51}}>
-          <SmallText>지역</SmallText>
-          <Flex>
+        <S.Tag style={{marginTop : 51}}>
+          <S.SmallText>지역</S.SmallText>
+          <S.Flex>
             {
               ["전체","서울","경기","인천","대구","부산","경남","경북","강원","전남","전북","그 외"]
-              .map((e,i)=><Button key={i} active={e==="전체" ? true : false}>{e}</Button>)
+              .map((e,i)=>
+              <Tag 
+                onClick={()=>locationClickHandler(e)} 
+                key={i} 
+                active={e===location ? true : false} 
+                label={e}
+              />)
             }
-          </Flex>
-        </Tag>
+          </S.Flex>
+        </S.Tag>
 
-        <Tag>
-          <SmallText>종목</SmallText>
-          <Flex>
-            {
-              ["전체","배드민턴","농구","풋발","테니스","탁구","야구"]
-              .map((e,i)=><Button active={e==="전체" ? true : false} key={i}>{e}</Button>)
-            }
-          </Flex>
-        </Tag>
+        <S.Tag>
+          <S.SmallText>종목</S.SmallText>
+          <S.Flex>
+            <BallTag/>
+            <BallTag gametype="ball01"/>
+            <BallTag gametype="ball02"/>
+            <BallTag gametype="ball03"/>
+            <BallTag gametype="ball04"/>
+            <BallTag gametype="ball05"/>
+            <BallTag gametype="ball06"/>
+          </S.Flex>
+        </S.Tag>
 
-        <Layout>
+        <S.Layout>
           
-          <Order>
+          {/* <S.Order>
             <div>최신순 <img src="/asset/icon/down.svg" alt="순서" /></div>
-          </Order>
+          </S.Order> */}
           
-          <Grid>
+          <S.Grid>
             {
               new Array(12).fill(0).map((_,i)=>
                 <Card
@@ -67,20 +108,23 @@ export default function Home() {
                 />
               )
             }
-          </Grid>
+          </S.Grid>
 
-          <WriteLink href={"/write"}>
-            <img src="/asset/icon/write.svg" alt="글쓰기" />
+          <WhiteBtn 
+            href={"/write"}
+            edit={true}
+          >
             새글 작성
-          </WriteLink>
+          </WhiteBtn>
 
           <Paging/>
           
-        </Layout>
+        </S.Layout>
 
-      </Wrap>
-    </MainStyle>
+      </S.Wrap>
+    </S.MainStyle>
   );
+
 }
 
 

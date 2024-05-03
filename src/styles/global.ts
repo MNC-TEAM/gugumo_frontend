@@ -41,6 +41,12 @@ export const GlobalStyle = createGlobalStyle`
 
   }
   ${reset};
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
   button {
     all: unset;
   }
