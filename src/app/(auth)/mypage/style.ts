@@ -1,17 +1,26 @@
 import styled from "styled-components";
 
 export const MypageStyle = styled.main`
-    padding: 120px 0 117px;
+    padding: 155px 0 93px;
+`;
+
+export const HTitle = styled.h1`
+    color: ${({theme})=>theme.color.OnBackground};
+    font-size: ${({theme})=>theme.fontSize.titleMedium};
+    font-weight: ${({theme})=>theme.fontWeight.titleMedium};
 `;
 
 export const UserFlex = styled.div`
     display: flex;
     align-items: center;
     gap: 42px;
+    margin-top: 105px;
 `;
 
 export const User = styled.div`
     text-align: center;
+    display: flex;
+    flex-direction: column;
     div {
         border-radius: 1000px;
         background: ${({theme})=>theme.color.Surface};
@@ -23,7 +32,9 @@ export const User = styled.div`
         }
     }
     button {
-        all: unset;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         margin-top: 13px;
         font-size: ${({theme})=>theme.fontSize.buttonMedium};
         font-weight: ${({theme})=>theme.fontWeight.buttonMedium};
@@ -42,7 +53,7 @@ export const UserName = styled.div`
         font-weight: ${({theme})=>theme.fontWeight.captionMedium};
         color: ${({theme})=>theme.color.OnSurface};
         border: 1px solid ${({theme})=>theme.color.OnSurface};
-        padding: 8px 5px;
+        padding: 5px 8px;
         border-radius: 1000px;
     }
 `;

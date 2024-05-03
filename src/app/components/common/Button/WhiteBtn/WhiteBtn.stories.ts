@@ -2,9 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 import WhiteBtn from '.';
 
 export interface WhiteBtnType {
-  edit? : boolean,
-  href? : string,
-  children? : React.ReactNode
+  edit? : boolean;
+  href? : string;
+  type? : "button" | "submit" | "reset";
+  children? : React.ReactNode;
+  align : "left" | "center" | "right";
 }
 
 const meta : Meta<typeof WhiteBtn> = {
