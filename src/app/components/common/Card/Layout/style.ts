@@ -18,6 +18,10 @@ export const CardStyle = styled.div`
     margin-top: 14px;
   }
 
+  @media screen and (max-width:820px) {
+    background: ${({theme})=>theme.color.Surface};
+  }
+
 `;
 
 export const Flex = styled.div`

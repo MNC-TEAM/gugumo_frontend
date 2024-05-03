@@ -108,6 +108,13 @@ export const Layout = styled.div`
   margin-top: 58px;
   padding: 40px 50px 50px;
   border-radius: 12px;
+
+  @media screen and (max-width:820px) {
+    border-radius: 0;
+    padding: 0;
+    background: none;
+  }
+
 `;
 
 export const Grid = styled.div`
@@ -115,6 +122,19 @@ export const Grid = styled.div`
   grid-template-columns: repeat(4,1fr);
   gap: 31.98px;
   margin-top: 31px;
+
+  @media screen and (max-width:1280px) {
+    grid-template-columns: repeat(3,1fr);
+  }
+
+  @media screen and (max-width:1024px) {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  @media screen and (max-width:820px) {
+    grid-template-columns: repeat(1,1fr);
+  }
+
 `;
 
 export const Order = styled.div`

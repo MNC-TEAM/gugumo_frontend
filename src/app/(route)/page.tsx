@@ -12,9 +12,12 @@ import {Swiper,SwiperSlide} from 'swiper/react';
 export default function Home() {
   
   const [recruit,setRecruit] = useState('모집중');
-
   const recruitClickHandler = (event : string)=>{
     setRecruit(event);
+  }
+  const [location,setLocation] = useState('전체');
+  const locationClickHandler = (event : string)=>{
+    setLocation(event);
   }
 
   return (
@@ -30,7 +33,6 @@ export default function Home() {
         </Swiper>
 
         <S.SearchFlex>
-
           <S.RecruitStyle>
             <S.RecruitButton 
               $active={recruit==="모집중"} 
@@ -59,7 +61,13 @@ export default function Home() {
           <S.Flex>
             {
               ["전체","서울","경기","인천","대구","부산","경남","경북","강원","전남","전북","그 외"]
-              .map((e,i)=><Tag key={i} active={e==="전체" ? true : false} label={e}/>)
+              .map((e,i)=>
+              <Tag 
+                onClick={()=>locationClickHandler(e)} 
+                key={i} 
+                active={e===location ? true : false} 
+                label={e}
+              />)
             }
           </S.Flex>
         </S.Tag>
