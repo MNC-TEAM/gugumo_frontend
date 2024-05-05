@@ -2,144 +2,32 @@ import styled from "styled-components";
 
 export const MypageStyle = styled.main`
     padding: 155px 0 93px;
+
+    @media screen and (max-width: 820px) {
+        padding: 23px 0 107px;
+    }
 `;
 
-export const HTitle = styled.h1`
+export const Title = styled.h1`
     color: ${({theme})=>theme.color.OnBackground};
     font-size: ${({theme})=>theme.fontSize.titleMedium};
     font-weight: ${({theme})=>theme.fontWeight.titleMedium};
-`;
-
-export const UserFlex = styled.div`
     display: flex;
     align-items: center;
-    gap: 42px;
-    margin-top: 105px;
-`;
-
-export const User = styled.div`
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    div {
-        border-radius: 1000px;
-        background: ${({theme})=>theme.color.Surface};
-        width: 156px;
-        &::after {
-            content: '';
-            display: block;
-            padding-bottom: 100%;
-        }
-    }
+    gap: 15px;
     button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 13px;
-        font-size: ${({theme})=>theme.fontSize.buttonMedium};
-        font-weight: ${({theme})=>theme.fontWeight.buttonMedium};
-        color: ${({theme})=>theme.color.OnBackgroundGray};
+        display: none;
+        cursor: pointer;
     }
-`;
 
-export const UserName = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 19px;
-    font-size: ${({theme})=>theme.fontSize.buttonMedium};
-    font-weight: ${({theme})=>theme.fontWeight.buttonMedium};
-    p {
-        font-size: ${({theme})=>theme.fontSize.captionMedium};
-        font-weight: ${({theme})=>theme.fontWeight.captionMedium};
-        color: ${({theme})=>theme.color.OnSurface};
-        border: 1px solid ${({theme})=>theme.color.OnSurface};
-        padding: 5px 8px;
-        border-radius: 1000px;
-    }
-`;
-
-
-export const Layout = styled.div`
-    display: flex;
-    align-items: center;
-    margin-top: 62px;
-    gap: 142px;
-    border-radius: 8px;
-    background: ${({theme})=>theme.color.Surface};
-    padding: 59px 194px 59px 137px;
-    h4 {
-        font-size: ${({theme})=>theme.fontSize.buttonSemibold};
-        font-weight: ${({theme})=>theme.fontWeight.buttonSemibold};
-        white-space: nowrap;
-    }
-`;
-
-export const InputLayout = styled.div`
-    p {
-        font-size: ${({theme})=>theme.fontSize.buttonMedium};
-        font-weight: ${({theme})=>theme.fontWeight.buttonMedium};
-    }
-    div {
-        display: flex;
-        gap: 18px;
-        margin-top: 12px;
-        input {
-            height: 69px;
-            border-radius: 8px;
-            background: ${({theme})=>theme.color.Background};
-            padding: 0 28px;
-            box-sizing: border-box;
-            border: 0;
-            outline: 0;
-            width: 493px;
-            font-family: "Pretendard";
-            font-size: ${({theme})=>theme.fontSize.buttonMedium};
-            font-weight: ${({theme})=>theme.fontWeight.buttonMedium};
-        }
+    @media screen and (max-width : 820px) {
+        font-size: 18px;
         button {
-            all: unset;
-            width: 119px;
-            border-radius: 8px;
-            background: ${({theme})=>theme.color.Primary};
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            cursor: pointer;
+            display: block;
         }
     }
+
 `;
-
-
-export const InputFlex = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 42px;
-
-    > div {
-        input {
-            width: 630px;
-        }
-    }
-`;
-
-
-export const Button = styled.button`
-    all: unset;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 44px auto 0;
-    width: 105px;
-    height: 47px;
-    border: 1px solid ${({theme})=>theme.color.Primary};
-    color: ${({theme})=>theme.color.Primary};
-    font-size: ${({theme})=>theme.fontSize.buttonSemibold};
-    font-weight: ${({theme})=>theme.fontWeight.buttonSemibold};
-    border-radius: 4px;
-    cursor: pointer;
-`;
-
 
 export const UserDelete = styled.div`
     text-align: center;
@@ -152,6 +40,11 @@ export const UserDelete = styled.div`
         font-size: ${({theme})=>theme.fontSize.buttonMedium};
         font-weight: ${({theme})=>theme.fontWeight.buttonMedium};
         border-bottom: 1px solid ${({theme})=>theme.color.OnBackgroundGray};
-        padding-bottom: 2px;
+        padding: 0 5px 2px;
     }
+
+    @media screen and (max-width : 820px) {
+        margin-top: 88px;
+    }
+
 `;

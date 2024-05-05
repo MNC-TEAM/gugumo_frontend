@@ -18,8 +18,8 @@ const fontSize = {
     titleMediumB : "24px",
     titleSemibold : "24px",
     titleMedium : "24px",
-    buttonSemibold : "18px",
-    buttonMedium : "18px",
+    buttonSemibold : "16px",
+    buttonMedium : "16px",
     bodyMedium : "16px",
     captionMedium : "13px",
     captionRegular : "13px"

@@ -8,12 +8,17 @@ import Card from "../components/common/Card/Layout";
 import Paging from "../components/main/Paging";
 import * as S from "../components/main/style";
 import {Swiper,SwiperSlide} from 'swiper/react';
+import { Wrap } from "@/styles/global";
 
 export default function Home() {
   
   const [recruit,setRecruit] = useState('모집중');
   const recruitClickHandler = (event : string)=>{
     setRecruit(event);
+  }
+  const [gameType,setGameType] = useState('ball01');
+  const gameTypeClickHandler = (event : string)=>{
+    setGameType(event);
   }
   const [location,setLocation] = useState('전체');
   const locationClickHandler = (event : string)=>{
@@ -22,7 +27,7 @@ export default function Home() {
 
   return (
     <S.MainStyle>
-      <S.Wrap>
+      <Wrap>
 
         <Swiper
           spaceBetween={10}
@@ -75,13 +80,20 @@ export default function Home() {
         <S.Tag>
           <S.SmallText>종목</S.SmallText>
           <S.Flex>
-            <BallTag/>
-            <BallTag gametype="ball01"/>
-            <BallTag gametype="ball02"/>
-            <BallTag gametype="ball03"/>
-            <BallTag gametype="ball04"/>
-            <BallTag gametype="ball05"/>
-            <BallTag gametype="ball06"/>
+            <BallTag
+              onClick={()=>gameTypeClickHandler('All')}
+              active={gameType === "All" ? true : false} 
+            />
+            {
+              ["ball01","ball02","ball03","ball04","ball05","ball06"].map((e,index)=>
+                <BallTag
+                  onClick={()=>gameTypeClickHandler(e)}
+                  key={index} 
+                  gametype={e}
+                  active={gameType === e ? true : false} 
+                />
+              )
+            }
           </S.Flex>
         </S.Tag>
 
@@ -121,7 +133,7 @@ export default function Home() {
           
         </S.Layout>
 
-      </S.Wrap>
+      </Wrap>
     </S.MainStyle>
   );
 

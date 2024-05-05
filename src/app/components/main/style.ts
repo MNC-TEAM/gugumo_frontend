@@ -4,12 +4,6 @@ export const MainStyle = styled.main`
   padding: 80px 0 85px;
 `;
 
-export const Wrap = styled.div`
-  width: 95%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
 export const SearchFlex = styled.div`
   display: flex;
   justify-content: space-between;

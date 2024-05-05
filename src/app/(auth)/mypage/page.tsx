@@ -1,34 +1,28 @@
 "use client"
 import * as S from "@/app/(auth)/mypage/style";
-import { Wrap } from "@/app/components/main/style";
-import Nickname from "@/app/components/mypage/nickname";
-import Password from "@/app/components/mypage/password";
+import Nickname from "@/app/components/mypage/Form/NickName/Nickname";
+import Password from "@/app/components/mypage/Form/Password/Password";
+import UserInfo from "@/app/components/mypage/UserInfo/UserInfo";
+import { Wrap } from "@/styles/global";
+import { useRouter } from "next/navigation";
 
 export default function Mypage() {
+
+  const router = useRouter();
+
   return (
     <S.MypageStyle>
         <Wrap>
-            <S.HTitle>마이페이지</S.HTitle>
-
-            <S.UserFlex>
-                <S.User>
-                    <div></div>
-                    <button><img src="/asset/icon/edit.svg" alt="편집하기" /> 편집하기</button>
-                </S.User>
-                <S.UserName>
-                    닉네임
-                    <p>abc1234@naver.com</p>
-                </S.UserName>
-            </S.UserFlex>
-
+            <S.Title>
+                <button onClick={()=>router.back()}><img src="/asset/icon/prev_arrow.svg" alt="뒤로가기" /></button>
+                마이페이지
+            </S.Title>
+            <UserInfo/>
             <Nickname/>
-
             <Password/>
-
             <S.UserDelete>
                 <button>회원탈퇴하기</button>
             </S.UserDelete>
-
         </Wrap>
     </S.MypageStyle>
   )

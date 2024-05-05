@@ -36,13 +36,13 @@ export const WhiteButton = styled.button<{$align : "left" | "center" | "right"}>
   display: flex;
   align-items: center;
   color : #4FAAFF;
-  font-size: 18px;
-  font-weight: 500;
+  font-size: ${({theme})=>theme.fontSize.buttonMedium};
+  font-weight: ${({theme})=>theme.fontWeight.buttonMedium};
   border: 1px solid #4FAAFF;
   background: #FFFFFF;
   border-radius: 4px;
-  width: 127px;
-  height: 52px;
+  width: ${127/18}em;
+  height: ${52/18}em;
   justify-content: center;
   cursor: pointer;
   margin: ${(props)=>{
@@ -60,4 +60,11 @@ export const WhiteButton = styled.button<{$align : "left" | "center" | "right"}>
   img {
     margin-right: 4px;
   }
+
+  @media screen and (max-width : 820px) {
+    
+    font-size: 14px;
+
+  }
+
 `;

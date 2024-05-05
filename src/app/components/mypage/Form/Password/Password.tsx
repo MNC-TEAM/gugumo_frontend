@@ -1,9 +1,9 @@
-import * as S from "@/app/(auth)/mypage/style";
-import WhiteBtn from "../common/Button/WhiteBtn";
+import * as S from "../style";
+import WhiteBtn from "../../../common/Button/WhiteBtn";
 
 export default function Password() {
   return (
-    <form>
+    <S.Form>
         <S.Layout>
             <h4>비밀번호 설정</h4>
             <S.InputFlex>
@@ -21,10 +21,7 @@ export default function Password() {
                 </S.InputLayout>
             </S.InputFlex>
         </S.Layout>
-
-        <div style={{marginTop : 24}}>
-            <WhiteBtn type="submit" align="center">비밀번호 수정</WhiteBtn>
-        </div>
-    </form>
+        <WhiteBtn type="submit" align="center">비밀번호 수정</WhiteBtn>
+    </S.Form>
   )
 }
