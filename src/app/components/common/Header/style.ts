@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HeaderStyle = styled.header`
     margin-top: 40px;
     position: relative;
-    z-index: 222;
+    z-index: 22;
 `;
 
 export const Wrapper = styled.div`
@@ -29,7 +29,7 @@ export const LoginStyle = styled.button`
     background: ${({theme})=>theme.color.Primary};
     color: #fff;
     font-size: ${({theme})=>theme.fontSize.buttonSemibold};
-    font-weight: ${({theme})=>theme.fontWeight.buttonSemibold};
+    font-weight: ${({theme})=>theme.fontWeight.semibold};
     border-radius: 4px;
     cursor: pointer;
 `;
@@ -61,7 +61,7 @@ export const UserMenu = styled.div`
         padding: 20px 30px;
         border: 1px solid ${({theme})=>theme.color.Primary};
         font-size: ${({theme})=>theme.fontSize.captionMedium};
-        font-weight: ${({theme})=>theme.fontWeight.captionMedium};
+        font-weight: ${({theme})=>theme.fontWeight.medium};
         border-radius: 4px;
         white-space: nowrap;
         text-align: center;

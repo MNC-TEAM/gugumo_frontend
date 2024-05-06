@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import Login from '@/app/components/auth/Login';
+import Login from '@/app/components/auth/Modal/Login';
 import modal, { onLogin } from '@/store/features/modal/modal';
 import { theme } from '@/styles/theme';
 import { configureStore } from '@reduxjs/toolkit';

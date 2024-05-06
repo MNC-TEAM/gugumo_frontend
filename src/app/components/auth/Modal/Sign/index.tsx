@@ -1,11 +1,11 @@
 'use client'
 
 import React, { useState } from 'react'
-import ReactModal from 'react-modal'
 import * as S from './style'
+import * as M from '../Modal.style';
 import { useAppDispatch, useAppSelector } from '@/store/hook'
 import { onClose, onLogin } from '@/store/features/modal/modal'
-import Primary from '../../common/Button/Primary/Primary'
+import Primary from '../../../common/Button/Primary/Primary'
 import { useForm } from 'react-hook-form'
 
 export default function Sign() {
@@ -27,22 +27,19 @@ export default function Sign() {
 
   return (
     
-    <ReactModal
+    <S.StyledModal
       isOpen={signup}
-      style={S.modalStyle}
-      ariaHideApp={false}
-      onRequestClose={()=>dispatch(onClose())}
     >
-      <S.CloseStyle
+      <M.CloseStyle
         onClick={()=>dispatch(onClose())}
       >
         <img src="/asset/icon/close.svg" alt="취소버튼" />
-      </S.CloseStyle>
+      </M.CloseStyle>
       
-      <S.TitleStyle>회원가입</S.TitleStyle>
+      <M.TitleStyle>회원가입</M.TitleStyle>
 
-      <S.Form onSubmit={handleSubmit(onSubmit)}>
-        <S.InputBox>
+      <M.Form onSubmit={handleSubmit(onSubmit)}>
+        <M.InputBox>
           <input type="text" placeholder='닉네임을 입력하세요' {...register('name',{required : true})} />
           <input type="email" placeholder='이메일을 입력하세요.' {...register('email',{required : true})} />
           <input type="password" placeholder='비밀번호' {...register('password',{required : true})} />
@@ -50,24 +47,16 @@ export default function Sign() {
           {
             isError && <p data-testid="error-message">{isError}</p>
           }
-        </S.InputBox>
+        </M.InputBox>
 
         <Primary type="submit">
           회원가입 하기
         </Primary>
-      </S.Form>
+        
+      </M.Form>
       
-      {/* <SnsBox>
-        <p>간편 회원가입</p>
-        <Flex>
-          <button></button>
-          <button></button>
-          <button></button>
-        </Flex>
-      </SnsBox> */}
-      
-      <S.SignButton onClick={()=>dispatch(onLogin())}>로그인 하기</S.SignButton>
-    </ReactModal>
+      <M.SignButton onClick={()=>dispatch(onLogin())}>로그인 하기</M.SignButton>
+    </S.StyledModal>
     
   )
 }

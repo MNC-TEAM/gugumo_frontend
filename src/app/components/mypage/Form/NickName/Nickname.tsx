@@ -10,7 +10,7 @@ export default function Nickname() {
                 <p>닉네임</p>
                 <div>
                     <input type="text" placeholder="내용을 입력하세요" />
-                    <button>중복확인</button>
+                    <button type="submit">중복확인</button>
                 </div>
             </S.InputLayout>
         </S.Layout>

@@ -37,7 +37,7 @@ export const WhiteButton = styled.button<{$align : "left" | "center" | "right"}>
   align-items: center;
   color : #4FAAFF;
   font-size: ${({theme})=>theme.fontSize.buttonMedium};
-  font-weight: ${({theme})=>theme.fontWeight.buttonMedium};
+  font-weight: ${({theme})=>theme.fontWeight.medium};
   border: 1px solid #4FAAFF;
   background: #FFFFFF;
   border-radius: 4px;

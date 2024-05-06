@@ -11,7 +11,7 @@ export const MypageStyle = styled.main`
 export const Title = styled.h1`
     color: ${({theme})=>theme.color.OnBackground};
     font-size: ${({theme})=>theme.fontSize.titleMedium};
-    font-weight: ${({theme})=>theme.fontWeight.titleMedium};
+    font-weight: ${({theme})=>theme.fontWeight.medium};
     display: flex;
     align-items: center;
     gap: 15px;
@@ -38,7 +38,7 @@ export const UserDelete = styled.div`
         cursor: pointer;
         color: ${({theme})=>theme.color.OnBackgroundGray};
         font-size: ${({theme})=>theme.fontSize.buttonMedium};
-        font-weight: ${({theme})=>theme.fontWeight.buttonMedium};
+        font-weight: ${({theme})=>theme.fontWeight.medium};
         border-bottom: 1px solid ${({theme})=>theme.color.OnBackgroundGray};
         padding: 0 5px 2px;
     }

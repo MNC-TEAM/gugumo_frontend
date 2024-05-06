@@ -37,7 +37,7 @@ export const Layout = styled.div`
 
     h4 {
         font-size: ${({theme})=>theme.fontSize.buttonSemibold};
-        font-weight: ${({theme})=>theme.fontWeight.buttonSemibold};
+        font-weight: ${({theme})=>theme.fontWeight.semibold};
         white-space: nowrap;
     }
 
@@ -63,7 +63,7 @@ export const InputLayout = styled.div`
     flex: 1;
     p {
         font-size: ${({theme})=>theme.fontSize.buttonMedium};
-        font-weight: ${({theme})=>theme.fontWeight.buttonMedium};
+        font-weight: ${({theme})=>theme.fontWeight.medium};
         color: #000;
     }
     div {
@@ -75,8 +75,8 @@ export const InputLayout = styled.div`
             border-radius: 8px;
             background: ${({theme})=>theme.color.Background};
             font-size: ${({theme})=>theme.fontSize.buttonMedium};
-            font-weight: ${({theme})=>theme.fontWeight.buttonMedium};
-            padding: 0 28px;
+            font-weight: ${({theme})=>theme.fontWeight.medium};
+            padding: 0 ${28/16}em;
             box-sizing: border-box;
             border: 0;
             outline: 0;
@@ -114,6 +114,7 @@ export const InputLayout = styled.div`
             input {
                 background: ${({theme})=>theme.color.Surface};
                 height: 50px;
+                font-size: 14px;
             }
             button {
                 font-size: 16px;
@@ -129,6 +130,7 @@ export const InputFlex = styled.div`
     display: flex;
     flex-direction: column;
     gap: 42px;
+    flex: 1;
 
     /* > div {
         input {

@@ -26,14 +26,9 @@ const fontSize = {
 }
 
 const fontWeight = {
-    titleMediumB : "500",
-    titleSemibold : "600",
-    titleMedium : "500",
-    buttonSemibold : "600",
-    buttonMedium : "500",
-    bodyMedium : "500",
-    captionMedium : "500",
-    captionRegular : "400"
+    regular : "400",
+    medium : "500",
+    semibold : "600"
 }
 
 export const theme = {

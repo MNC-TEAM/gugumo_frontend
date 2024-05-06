@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import type { Metadata } from "next";
 import 'swiper/css';
 import ThemeClient from "@/lib/ThemeClient";
-import ModalProvider from "@/lib/ModalProvider";
+import ModalContext from "@/lib/ModalProvider";
 
 const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -28,9 +28,9 @@ export default function RootLayout({
         <ThemeClient>
           <StyledComponentsRegistry>
             <StoreProvider>
-              <ModalProvider>
+              <ModalContext>
                 {children}
-              </ModalProvider>
+              </ModalContext>
             </StoreProvider>
           </StyledComponentsRegistry>
         </ThemeClient>
