@@ -1,4 +1,4 @@
-import Sign from '@/app/components/auth/Sign';
+import Sign from '@/app/components/auth/Modal/Sign';
 import modal, { onSignup } from '@/store/features/modal/modal';
 import { theme } from '@/styles/theme';
 import { configureStore } from '@reduxjs/toolkit';

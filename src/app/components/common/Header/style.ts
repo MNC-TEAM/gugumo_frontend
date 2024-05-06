@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const HeaderStyle = styled.header`
     margin-top: 40px;
+    position: relative;
+    z-index: 22;
 `;
 
 export const Wrapper = styled.div`
@@ -27,7 +29,7 @@ export const LoginStyle = styled.button`
     background: ${({theme})=>theme.color.Primary};
     color: #fff;
     font-size: ${({theme})=>theme.fontSize.buttonSemibold};
-    font-weight: ${({theme})=>theme.fontWeight.buttonSemibold};
+    font-weight: ${({theme})=>theme.fontWeight.semibold};
     border-radius: 4px;
     cursor: pointer;
 `;
@@ -44,6 +46,34 @@ export const Flex = styled.div`
     button {
         all: unset;
         cursor: pointer;
+    }
+
+`;
+
+
+export const UserMenu = styled.div`
+    position: relative;
+    ul {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 100%;
+        padding: 20px 30px;
+        border: 1px solid ${({theme})=>theme.color.Primary};
+        font-size: ${({theme})=>theme.fontSize.captionMedium};
+        font-weight: ${({theme})=>theme.fontWeight.medium};
+        border-radius: 4px;
+        white-space: nowrap;
+        text-align: center;
+        background: ${({theme})=>theme.color.Background};
+        li {
+            + li {
+                margin-top: 12px;
+            }
+            a,button {
+                color : ${({theme})=>theme.color.OnSurface};
+            }
+        }
     }
 
 `;

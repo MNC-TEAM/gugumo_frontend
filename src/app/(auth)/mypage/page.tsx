@@ -1,61 +1,29 @@
 "use client"
-
-import { Wrap } from "@/app/components/main/style";
-import { MypageStyle, User, UserFlex, UserName, Layout, InputLayout, InputFlex, Button, UserDelete } from "@/app/components/mypage/style";
+import * as S from "@/app/(auth)/mypage/style";
+import Nickname from "@/app/components/mypage/Form/NickName/Nickname";
+import Password from "@/app/components/mypage/Form/Password/Password";
+import UserInfo from "@/app/components/mypage/UserInfo/UserInfo";
+import { Wrap } from "@/styles/global";
+import { useRouter } from "next/navigation";
 
 export default function Mypage() {
+
+  const router = useRouter();
+
   return (
-    <MypageStyle>
+    <S.MypageStyle>
         <Wrap>
-            <h1>마이페이지</h1>
-
-            <UserFlex>
-                <User>
-                    <div></div>
-                    <button>편집하기</button>
-                </User>
-                <UserName>
-                    닉네임
-                    <p>abc1234@naver.com</p>
-                </UserName>
-            </UserFlex>
-
-            <Layout>
-                <h4>개인정보 변경</h4>
-                <InputLayout>
-                    <p>닉네임변경</p>
-                    <div>
-                        <input type="text" placeholder="내용을 입력하세요" />
-                        <button>중복확인</button>
-                    </div>
-                </InputLayout>
-            </Layout>
-
-            <Layout>
-                <h4>비밀번호 설정</h4>
-                <InputFlex>
-                    <InputLayout>
-                        <p>새 비밀번호</p>
-                        <div>
-                            <input type="text" placeholder="내용을 입력하세요" />
-                        </div>
-                    </InputLayout>
-                    <InputLayout>
-                        <p>새 비밀번호 확인</p>
-                        <div>
-                            <input type="text" placeholder="내용을 입력하세요" />
-                        </div>
-                    </InputLayout>
-                </InputFlex>
-            </Layout>
-
-            <Button type="submit">프로필 수정</Button>
-
-            <UserDelete>
+            <S.Title>
+                <button onClick={()=>router.back()}><img src="/asset/icon/prev_arrow.svg" alt="뒤로가기" /></button>
+                마이페이지
+            </S.Title>
+            <UserInfo/>
+            <Nickname/>
+            <Password/>
+            <S.UserDelete>
                 <button>회원탈퇴하기</button>
-            </UserDelete>
-
+            </S.UserDelete>
         </Wrap>
-    </MypageStyle>
+    </S.MypageStyle>
   )
 }

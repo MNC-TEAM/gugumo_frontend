@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
 export const GlobalStyle = createGlobalStyle`
@@ -40,7 +40,13 @@ export const GlobalStyle = createGlobalStyle`
     --captionRegularWeight : 400;
 
   }
+
   ${reset};
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 
   img {
     max-width: 100%;
@@ -50,4 +56,11 @@ export const GlobalStyle = createGlobalStyle`
   button {
     all: unset;
   }
+`;
+
+
+export const Wrap = styled.div`
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
 `;

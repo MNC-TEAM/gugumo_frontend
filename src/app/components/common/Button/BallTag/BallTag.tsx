@@ -1,10 +1,13 @@
+import { MouseEventHandler } from "react";
 import * as S from "./BallTag.style";
 
 interface BallTagType {
-    gametype? : "ball01" | "ball02" | "ball03" | "ball04" | "ball05" | "ball06"
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+    active : boolean;
+    gametype? : string;
 }
 
-export default function BallTag({gametype} : BallTagType) {
+export default function BallTag({onClick,active,gametype} : BallTagType) {
 
     let imageUrl, text;
 
@@ -35,9 +38,11 @@ export default function BallTag({gametype} : BallTagType) {
             break;
     }
 
-
   return (
-    <S.Button>
+    <S.Button 
+        $active={active}
+        onClick={onClick}
+    >
         <div>
             {!gametype && "전체"}
             {

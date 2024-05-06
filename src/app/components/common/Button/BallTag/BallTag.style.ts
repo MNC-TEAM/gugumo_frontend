@@ -1,12 +1,18 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
+export const Button = styled.button<{$active : boolean}>`
     width: 77px;
     border : 1px solid var(--Primary);
     box-sizing: border-box;
     border-radius: 1000px;
     position: relative;
     cursor: pointer;
+
+    background: ${({theme,$active})=>{
+        if($active){
+            return theme.color.Primary;
+        }
+    }};
 
     &::after {
         content: '';
@@ -25,7 +31,13 @@ export const Button = styled.button`
         align-items: center;
         justify-content: center;
         gap: 2px;
-        color: var(--Primary);
+        color: ${({theme,$active})=>{
+            if($active){
+                return theme.color.OnPrimary;
+            }else{
+                return theme.color.Primary;
+            }
+        }};
         font-size: 14px;
         font-weight: var(--buttonMediumWeight);
     }
