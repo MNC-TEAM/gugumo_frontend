@@ -1,29 +1,40 @@
 "use client"
 import { Wrap } from "@/styles/global";
 import * as S from "./detail.style";
-import PrevBtn from "@/app/components/detail/PrevBtn/PrevBtn";
+import Prev from "@/app/components/common/Button/Prev/Prev";
+import Bookmark from "@/app/components/common/Button/Bookmark";
+import ViewIcon from "@asset/icon/view.svg";
 
 export default function Detail() {
 
   return (
     <S.DetailStyle>
       <Wrap>
-        <PrevBtn/>
+        <Prev/>
+
         <S.Flex>
           <h1>인천에서 배드민턴 같이 치실 분 구합니다!</h1>
           <S.BookFlex>
-            <img src="/asset/icon/bookmark.svg" alt="북마크" />
+            <Bookmark postid={'1'} status={false} />
             <p>20</p>
           </S.BookFlex>
         </S.Flex>
+
         <S.Top>
-          <p>야옹</p>
-          <p>2024.05.01</p>
-          <S.View>
-            <img src="/asset/icon/view.svg" alt="" />
-            540
-          </S.View>
+          <S.TopFlex>
+            <p>야옹</p>
+            <p>2024.05.01</p>
+            <S.View>
+              <ViewIcon stroke="#A5A5A5"/>
+              540
+            </S.View>
+          </S.TopFlex>
+          <S.BookFlex>
+            <Bookmark postid={'1'} status={false} />
+            <p>20</p>
+          </S.BookFlex>
         </S.Top>
+
         <S.Grid>
           <S.Col>
             <h4>모집형식</h4>
@@ -64,7 +75,6 @@ export default function Detail() {
           내용입니다내용입니다내용입니다<br/>
           내용입니다내용입니다내용입니다<br/>
         </S.Desc>
-        <S.LinkStyle href={'/'}>목록으로</S.LinkStyle>
       </Wrap>
     </S.DetailStyle>
   )

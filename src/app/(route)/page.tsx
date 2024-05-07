@@ -7,6 +7,7 @@ import Card from "../components/common/Card/Layout";
 import * as S from "../components/main/style";
 import {Swiper,SwiperSlide} from 'swiper/react';
 import { Wrap } from "@/styles/global";
+import Link from "next/link";
 
 export default function Home() {
   
@@ -125,6 +126,8 @@ export default function Home() {
               )
             }
           </S.Grid>
+
+          <Link href={'/write'}>글쓰기</Link>
           
         </S.Layout>
 

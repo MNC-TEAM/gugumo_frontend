@@ -1,13 +1,38 @@
-import styled from "styled-components";
+import {Button as PrevStyle} from "@/app/components/common/Button/Prev/Prev.style";
+import styled, { css } from "styled-components";
+
+const InputCss = css`
+    outline: none;
+    border: 0;
+    background: none;
+    width: 100%;
+    height: 100%;
+    font-size: ${({theme})=>theme.fontSize.bodyMedium};
+    font-weight: ${({theme})=>theme.fontWeight.medium};
+    padding: 0 ${14/16}em;
+    font-family: "Pretendard";
+    color: ${({theme})=>theme.color.OnBackground};
+    box-sizing: border-box;
+
+    @media screen and (max-width:820px) {
+        font-size: 14px;
+    }
+
+`;
 
 export const WrtieStyle = styled.main`
     padding: 89px 0 144px;
-`;
 
-export const Wrap = styled.div`
-  width: 95%;
-  max-width: 1200px;
-  margin: 0 auto;
+    @media screen and (min-width:821px) {
+        ${PrevStyle} {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width:820px) {
+        padding: 32.83px 0 59px;
+    }
+
 `;
 
 export const Flex = styled.div`
@@ -17,10 +42,13 @@ export const Flex = styled.div`
 
     p {
         display: flex;
+        flex: 0 0 auto;
         width : 34px;
         height: 34px;
         border-radius: 1000px;
         background: ${({theme})=>theme.color.Primary};
+        font-size: ${({theme})=>theme.fontSize.titleSemibold};
+        font-weight: ${({theme})=>theme.fontWeight.semibold};
         color: #fff;
         align-items: center;
         justify-content: center;
@@ -31,6 +59,22 @@ export const Flex = styled.div`
         font-weight: ${({theme})=>theme.fontWeight.medium};
     }
 
+    @media screen and (max-width:820px) {
+        margin-top: 9.35px;
+        gap: 8px;
+
+        p {
+            width: 23px;
+            height: 23px;
+            font-size: 18px;
+        }
+
+        h3 {
+            font-size: 18px;
+        }
+
+    }
+
 `;
 
 export const Gird = styled.div`
@@ -38,6 +82,13 @@ export const Gird = styled.div`
     grid-template-columns: repeat(2,1fr);
     gap: 30px;
     margin-top: 34px;
+
+    @media screen and (max-width: 820px) {
+        grid-template-columns: repeat(1,1fr);
+        gap: 11px;
+        margin-top: 22px;
+    }
+
 `;
 
 export const InputStyle = styled.div`
@@ -45,9 +96,13 @@ export const InputStyle = styled.div`
         font-size: ${({theme})=>theme.fontSize.buttonMedium};
         font-weight: ${({theme})=>theme.fontWeight.medium};
         padding: 0 ${6/18}em;
+
+        @media screen and (max-width:820px) {
+            font-size: 14px;
+        }
+
     }
 `;
-
 
 export const InputBox = styled.div`
     margin-top: 10px;
@@ -55,23 +110,9 @@ export const InputBox = styled.div`
     height: 64px;
     position: relative;
     background: ${({theme})=>theme.color.Surface};
-    img {
-        position: absolute;
-        right: 16.5px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
+
     select,input {
-        outline: none;
-        border: 0;
-        background: none;
-        width: 100%;
-        height: 100%;
-        font-size: ${({theme})=>theme.fontSize.bodyMedium};
-        font-weight: ${({theme})=>theme.fontWeight.medium};
-        padding: 0 ${14/16}em;
-        font-family: "Pretendard";
-        color: ${({theme})=>theme.color.OnBackground};
+       ${InputCss}
     }
 
     select {
@@ -79,6 +120,31 @@ export const InputBox = styled.div`
         cursor: pointer;
     }
 
+    svg,img {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+
+    .react-calendar {
+        position: absolute;
+        top: 100%;
+        z-index: 5;
+    }
+
+    @media screen and (max-width:820px) {
+        height: 45.25px;
+    }
+
+`;
+
+
+export const CalendarBox = styled.div`
+    ${InputCss}
+    display: flex;
+    align-items: center;
 `;
 
 
@@ -87,6 +153,11 @@ export const DescBox = styled.div`
     > div:nth-of-type(1) {
         margin-bottom: 34px;
     }
+
+    @media screen and (max-width:820px) {
+        margin-top: 58px;
+    }
+
 `;
 
 export const DescInputStyle = styled.div`
@@ -113,6 +184,7 @@ export const DescInputStyle = styled.div`
         font-family: "Pretendard";
         font-size: ${({theme})=>theme.fontSize.bodyMedium};
         font-weight: ${({theme})=>theme.fontWeight.medium};
+        box-sizing: border-box;
     }
 
     input {
@@ -123,6 +195,26 @@ export const DescInputStyle = styled.div`
     textarea {
         height: 485px;
         padding: ${14/16}em;
+        resize: none;
+    }
+
+    @media screen and (max-width:820px) {
+        label {
+            font-size: 14px;
+        }
+
+        input,textarea {
+            font-size: 14px;
+        }
+
+        input {
+            height: 45.25px;
+        }
+
+        textarea {
+            height: 194px;
+        }
+
     }
 
 `;

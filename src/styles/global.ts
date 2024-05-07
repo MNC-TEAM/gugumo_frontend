@@ -54,8 +54,14 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   button {
-    all: unset;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: none;
+    font-family: inherit;
+    /* all: unset; */
   }
+
 `;
 
 

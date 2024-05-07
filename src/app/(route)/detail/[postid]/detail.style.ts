@@ -1,20 +1,10 @@
-import Link from "next/link";
 import styled from "styled-components";
 
 export const DetailStyle = styled.main`
     padding: 80px 0 160px;
-`;
-
-export const Flex = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-
-    h1 {
-        font-size: ${({theme})=>theme.fontSize.titleSemibold};
-        font-weight: ${({theme})=>theme.fontWeight.semibold};
+    @media screen and (max-width:820px) {
+        padding: 39px 0 191px;
     }
-    
 `;
 
 export const BookFlex = styled.div`
@@ -26,19 +16,63 @@ export const BookFlex = styled.div`
         font-size: ${({theme})=>theme.fontSize.titleMedium};
         font-weight: ${({theme})=>theme.fontWeight.medium};
     }
+    @media screen and (max-width:820px) {
+        p {
+            font-size: 14px;
+        }
+    }
 `;
 
+export const Flex = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    h1 {
+        font-size: ${({theme})=>theme.fontSize.titleSemibold};
+        font-weight: ${({theme})=>theme.fontWeight.semibold};
+    }
+
+    @media screen and (max-width:820px) {
+        h1 {
+            font-size: 18px;
+        }
+        ${BookFlex} {
+            display: none;
+        }
+    }
+
+`;
 
 export const Top = styled.div`
     display: flex;
     align-items: center;
-    gap: 21px;
     margin-top: 25px;
     font-size: ${({theme})=>theme.fontSize.titleMedium};
     font-weight: ${({theme})=>theme.fontWeight.medium};
     color: ${({theme})=>theme.color.OnBackgroundGray};
     padding-bottom: 21px;
     border-bottom: 1px solid ${({theme})=>theme.color.Outline};
+    justify-content: space-between;
+
+    @media screen and (min-width:821px) {
+        ${BookFlex} {
+            display: none;
+        }
+    }
+    
+    @media screen and (max-width:820px) {
+        font-size: 14px;
+        margin-top: 9px;
+    }
+`;
+
+export const TopFlex = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 21px;
+    @media screen and (max-width:820px) {
+        gap: 10.77px;
+    }
 `;
 
 export const View = styled.div`
@@ -50,12 +84,20 @@ export const View = styled.div`
     }
 `;
 
-
 export const Grid = styled.div`
     display: grid;
     grid-template-columns: repeat(2,1fr);
     margin-top: 67px;
     gap: 26px 0px;
+
+    @media screen and (max-width: 820px) {
+        margin-top: 17px;
+        gap: 16px 0;
+    }
+    @media screen and (max-width: 480px) {
+        grid-template-columns: repeat(1,1fr);
+    }
+
 `;
 
 export const Col = styled.div`
@@ -71,6 +113,7 @@ export const Col = styled.div`
         min-width: ${127/24}em;
         text-align: center;
         box-sizing: border-box;
+        white-space: nowrap;
     }
 
     a {
@@ -85,22 +128,46 @@ export const Col = styled.div`
         border-radius: 4px;
     }
 
+    @media screen and (max-width: 1280px) {
+        
+        font-size: 20px;
+
+    }
+
+    @media screen and (max-width: 820px) {
+        
+        font-size: 14px;
+
+        a {
+            width: 9em;
+        }
+
+    }
+
 `;
 
 
 export const Desc = styled.div`
     margin-top: 82px;
-    height: 911px;
+    min-height: 911px;
     width: 100%;
     padding: 57px;
     box-sizing: border-box;
     font-size: ${({theme})=>theme.fontSize.titleMedium};
     font-weight: ${({theme})=>theme.fontWeight.medium};
     line-height: ${53/24};
+
+    @media screen and (max-width:820px) {
+        margin-top: 33px;
+        padding: 11px 17px;
+        font-size: 14px;
+        min-height: 317px;
+    }
+
 `;
 
 
-export const LinkStyle = styled(Link)`
+/* export const LinkStyle = styled(Link)`
     all: unset;
     font-size: ${({theme})=>theme.fontSize.buttonSemibold};
     font-weight: ${({theme})=>theme.fontWeight.semibold};
@@ -121,4 +188,4 @@ export const LinkStyle = styled(Link)`
         background: ${({theme})=>theme.color.Primary};
         color: #fff;
     }
-`;
+`; */

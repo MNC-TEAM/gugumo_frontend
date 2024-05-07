@@ -1,33 +1,68 @@
 "use client"
-import { DescBox, DescInputStyle, Flex, Gird, InputBox, InputStyle, WrtieStyle, Button } from "@/app/components/write/style";
+import * as S from "./style";
 import { Wrap } from "@/styles/global";
+import DownIcon from "@asset/icon/down.svg";
+import CalenderIcon from "@asset/icon/calender.svg";
+import { useState } from "react";
+import Calendar from "react-calendar";
+import moment from "moment";
+import Prev from "@/app/components/common/Button/Prev/Prev";
+
+type ValuePiece = Date | null;
+type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export default function Wrtie() {
+
+  const [start, onStart] = useState<Value>(new Date());
+  const [startOpen, setStartOpen] = useState(false);
+  const [end, onEnd] = useState<Value>(new Date());
+  const [endOpen, setEndOpen] = useState(false);
+
+  const startChangeHandler = (value: Value)=>{
+    onStart(value);
+    setStartOpen(!startOpen);
+  }
+  const startClickHandler = ()=>{
+    setStartOpen(!startOpen);
+  }
+
+  const endChangeHandler = (value: Value)=>{
+    onEnd(value);
+    setEndOpen(!endOpen);
+  }
+  const endClickHandler = ()=>{
+    setEndOpen(!endOpen);
+  }
+
   return (
-    <WrtieStyle>
+    <S.WrtieStyle>
       <Wrap>
         
+        <Prev/>
+
         <form>
-          <Flex>
+          <S.Flex>
             <p>1</p>
             <h3>모임 정보를 입력해주세요</h3>
-          </Flex>
+          </S.Flex>
 
-          <Gird>
-            <InputStyle>
+          <S.Gird>
+
+            <S.InputStyle>
               <label htmlFor="">모집형식</label>
-              <InputBox>
+              <S.InputBox>
                 <select name="" id="">
                   <option value="">모집형식을 선택해주세요.</option>
                   <option value="단기모집">단기모집</option>
                   <option value="장기모집">장기모집</option>
                 </select>
-                <img src="/asset/icon/down.svg" alt="" />
-              </InputBox>
-            </InputStyle>
-            <InputStyle>
+                <DownIcon stroke={'#878787'} />
+              </S.InputBox>
+            </S.InputStyle>
+
+            <S.InputStyle>
               <label htmlFor="">지역 선택</label>
-              <InputBox>
+              <S.InputBox>
                 <select name="" id="">
                   <option value="">지역 선택을 선택해주세요.</option>
                   <option value="단기모집">서울</option>
@@ -42,12 +77,13 @@ export default function Wrtie() {
                   <option value="장기모집">전북</option>
                   <option value="장기모집">그외</option>
                 </select>
-                <img src="/asset/icon/down.svg" alt="" />
-              </InputBox>
-            </InputStyle>
-            <InputStyle>
+                <DownIcon stroke={'#878787'} />
+              </S.InputBox>
+            </S.InputStyle>
+
+            <S.InputStyle>
               <label htmlFor="">구기종목</label>
-              <InputBox>
+              <S.InputBox>
                 <select name="" id="">
                   <option value="">구기종목을 선택해주세요.</option>
                   <option value="단기모집">배드민턴</option>
@@ -57,12 +93,13 @@ export default function Wrtie() {
                   <option value="장기모집">탁구</option>
                   <option value="장기모집">야구</option>
                 </select>
-                <img src="/asset/icon/down.svg" alt="" />
-              </InputBox>
-            </InputStyle>
-            <InputStyle>
+                <DownIcon stroke={'#878787'} />
+              </S.InputBox>
+            </S.InputStyle>
+
+            <S.InputStyle>
               <label htmlFor="">시간대</label>
-              <InputBox>
+              <S.InputBox>
                 <select name="" id="">
                   <option value="">시간대을 선택해주세요.</option>
                   <option value="단기모집">01~02시</option>
@@ -73,12 +110,13 @@ export default function Wrtie() {
                   <option value="장기모집">07~08시</option>
                   <option value="장기모집">09~10시</option>
                 </select>
-                <img src="/asset/icon/down.svg" alt="" />
-              </InputBox>
-            </InputStyle>
-            <InputStyle>
+                <DownIcon stroke={'#878787'} />
+              </S.InputBox>
+            </S.InputStyle>
+
+            <S.InputStyle>
               <label htmlFor="">모집인원</label>
-              <InputBox>
+              <S.InputBox>
                 <select name="" id="">
                   <option value="">모집인원을 선택해주세요.</option>
                   <option value="단기모집">1명</option>
@@ -87,52 +125,69 @@ export default function Wrtie() {
                   <option value="장기모집">4명</option>
                   <option value="장기모집">5명 이상</option>
                 </select>
-                <img src="/asset/icon/down.svg" alt="" />
-              </InputBox>
-            </InputStyle>
-            <InputStyle>
-              <label htmlFor="">모집 날짜</label>
-              <InputBox>
-                <input type="text" />
-              </InputBox>
-            </InputStyle>
-            <InputStyle>
-              <label htmlFor="">모집 마감</label>
-              <InputBox>
-                <input type="text" />
-              </InputBox>
-            </InputStyle>
-            <InputStyle>
-              <label htmlFor="">오픈카톡 주소</label>
-              <InputBox>
-                <input type="text" placeholder="오픈카톡 주소를 입력해주세요."/>
-              </InputBox>
-            </InputStyle>
-          </Gird>
+                <DownIcon stroke={'#878787'} />
+              </S.InputBox>
+            </S.InputStyle>
 
-          <DescBox>
+            <S.InputStyle>
+              <label htmlFor="start">모집 날짜</label>
+              <S.InputBox>
+                <S.CalendarBox onClick={startClickHandler}>
+                  {moment(start as Date).format("YYYY.MM.DD")}
+                </S.CalendarBox>
+                {
+                  startOpen && <Calendar onChange={startChangeHandler} value={start} />
+                }
+                <CalenderIcon stroke="#878787"/>
+              </S.InputBox>
+            </S.InputStyle>
 
-            <Flex>
+            <S.InputStyle>
+              <label htmlFor="end">모집 마감</label>
+              <S.InputBox>
+                <S.CalendarBox onClick={endClickHandler}>
+                  {moment(end as Date).format("YYYY.MM.DD")}
+                </S.CalendarBox>
+                {
+                  endOpen && <Calendar onChange={endChangeHandler} value={end} />
+                }
+                <CalenderIcon stroke="#878787"/>
+              </S.InputBox>
+            </S.InputStyle>
+
+            <S.InputStyle>
+              <label htmlFor="openkakao">오픈카톡 주소</label>
+              <S.InputBox>
+                <input type="text" id="openkakao" placeholder="오픈카톡 주소를 입력해주세요."/>
+              </S.InputBox>
+            </S.InputStyle>
+
+          </S.Gird>
+
+          <S.DescBox>
+
+            <S.Flex>
               <p>2</p>
               <h3>모임에 대해 소개해주세요</h3>
-            </Flex>
+            </S.Flex>
 
-            <DescInputStyle>
+            <S.DescInputStyle>
               <label htmlFor="">제목</label>
               <input type="text" placeholder="제목을 입력해주세요"/>
-            </DescInputStyle>
+            </S.DescInputStyle>
 
-            <DescInputStyle>
+            <S.DescInputStyle>
               <label htmlFor="">내용</label>
               <textarea name="" id="" placeholder="내용을 입력해주세요"></textarea>
-            </DescInputStyle>
+            </S.DescInputStyle>
 
-          </DescBox>
-
-          <Button type="submit">작성하기</Button>
+          </S.DescBox>
+          
+          <S.Button type="submit">작성하기</S.Button>
+          
         </form>
 
       </Wrap>
-    </WrtieStyle>
+    </S.WrtieStyle>
   )
 }
