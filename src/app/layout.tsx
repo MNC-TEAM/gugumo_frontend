@@ -3,6 +3,7 @@ import StoreProvider from "@/store/Providers";
 import localFont from "next/font/local";
 import type { Metadata, Viewport } from "next";
 import 'swiper/css';
+import 'react-calendar/dist/Calendar.css';
 import ThemeClient from "@/lib/ThemeClient";
 import ModalContext from "@/lib/ModalProvider";
 
