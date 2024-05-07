@@ -5,23 +5,24 @@ interface TagProps {
 }
 
 export const CardStyle = styled.div`
-  padding: 23px;
+  padding: 19px 16px;
   background: #FFFFFF;
   border: 1px solid #D9D9D9;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-
-  h4 {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: ${21/16};
-    margin-top: 14px;
-  }
 
   @media screen and (max-width:820px) {
     background: ${({theme})=>theme.color.Surface};
   }
 
+`;
+
+export const Title = styled.h4`
+  font-weight: ${({theme})=>theme.fontWeight.medium};
+  font-size: ${({theme})=>theme.fontSize.bodyMedium};
+  line-height: ${21/16};
+  margin-top: 11px;
+  word-break: keep-all;
 `;
 
 export const Flex = styled.div`
@@ -61,18 +62,19 @@ export const Tag = styled.div<TagProps>`
 `;
 
 export const Detail = styled.ul`
-  margin-top: 35px;
+  margin-top: 32px;
+  font-size: ${({theme})=>theme.fontSize.captionRegular};
   li {
     display: flex;
-    color: #878787;
+    color: ${({theme})=>theme.color.OnBackgroundGray};
     + li {
-      margin-top: 5px;
+      margin-top: 4px;
     }
     p {
-      padding-right: 10px;
+      padding-right: 9px;
       + p {
-        border-left: 1px solid #878787;
-        padding-left: 10px;
+        border-left: 1px solid ${({theme})=>theme.color.OnBackgroundGray};
+        padding-left: 9px;
         padding-right: 0;
       }
     }
@@ -83,19 +85,17 @@ export const Date = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 10px;
-  margin-top: 10px;
+  padding-top: 9.5px;
+  margin-top: 9.5px;
   border-top: 1px solid #D9D9D9;
-  gap: 10px;
+  gap: 7px;
   span {
     white-space: nowrap;
-    font-size: 13px;
-    font-weight: 500;
-    color: #878787;
+    font-size: ${({theme})=>theme.fontSize.captionMedium};
+    font-weight: ${({theme})=>theme.fontWeight.medium};
+    color: ${({theme})=>theme.color.OnBackgroundGray};
   }
-
   button {
     all: unset;
   }
-
 `;

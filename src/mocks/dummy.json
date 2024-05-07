@@ -1,0 +1,68 @@
+{
+    "content": [
+        {
+            "postId": 4,
+            "status": "RECRUIT",
+            "gameType": "BASKETBALL",
+            "location": "SEOUL",
+            "title": "test1",
+            "meetingDateTime": "1970-01-01T15:00:00",
+            "meetingDays": "MON;WED;FRI",
+            "meetingMemberNum": 3,
+            "meetingDeadline": "2024-12-11",
+            "bookmarked": false
+        },
+        {
+            "postId": 3,
+            "status": "RECRUIT",
+            "gameType": "BASKETBALL",
+            "location": "SEOUL",
+            "title": "test1",
+            "meetingDateTime": "1970-01-01T15:00:00",
+            "meetingDays": "MON;WED;FRI",
+            "meetingMemberNum": 3,
+            "meetingDeadline": "2024-12-11",
+            "bookmarked": false
+        },
+        {
+            "postId": 2,
+            "status": "RECRUIT",
+            "gameType": "BASKETBALL",
+            "location": "SEOUL",
+            "title": "test1",
+            "meetingDateTime": "1970-01-01T15:00:00",
+            "meetingDays": "MON;WED;FRI",
+            "meetingMemberNum": 3,
+            "meetingDeadline": "2024-12-11",
+            "bookmarked": false
+        },
+        {
+            "postId": 1,
+            "status": "RECRUIT",
+            "gameType": "BASKETBALL",
+            "location": "SEOUL",
+            "title": "test1",
+            "meetingDateTime": "1970-01-01T15:00:00",
+            "meetingDays": "MON;WED;FRI",
+            "meetingMemberNum": 3,
+            "meetingDeadline": "2024-12-11",
+            "bookmarked": false
+        }
+    ],
+    "pageableCustom": {
+        "number": 1,
+        "size": 12,
+        "sort": {
+            "empty": true,
+            "sorted": false,
+            "unsorted": true
+        },
+        "first": true,
+        "last": true,
+        "hasNext": false,
+        "totalPages": 1,
+        "totalElements": 4,
+        "numberOfElements": 4,
+        "empty": false
+    }
+}

@@ -10,7 +10,7 @@ export const InputStyle = styled.div<InputStyleType>`
     p {
         color: ${({theme})=>theme.color.Error};
         font-size: ${({theme})=>theme.fontSize.captionRegular};
-        font-weight: ${({theme})=>theme.fontWeight.captionRegular};
+        font-weight: ${({theme})=>theme.fontWeight.regular};
         margin-top: 2px;
     }
 
@@ -38,7 +38,7 @@ export const InputBox = styled.div<InputStyleType>`
 
     input {
         font-size: ${({theme})=>theme.fontSize.bodyMedium};
-        font-weight: ${({theme})=>theme.fontWeight.bodyMedium};
+        font-weight: ${({theme})=>theme.fontWeight.medium};
         outline: none;
         padding: 0 1em;
         box-sizing: border-box;

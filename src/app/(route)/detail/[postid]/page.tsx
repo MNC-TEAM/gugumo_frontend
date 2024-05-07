@@ -1,7 +1,7 @@
 "use client"
-import * as S from "./style";
+import { Wrap } from "@/styles/global";
+import * as S from "./detail.style";
 import PrevBtn from "@/app/components/detail/PrevBtn/PrevBtn";
-import { Wrap } from "@/app/components/main/style";
 
 export default function Detail() {
 
