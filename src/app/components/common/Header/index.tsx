@@ -1,3 +1,4 @@
+"use client"
 import { useAppDispatch, useAppSelector } from '@/store/hook'
 import * as S from "./style";
 import Link from 'next/link'
@@ -14,7 +15,9 @@ export default function Header() {
   return (
     <S.HeaderStyle>
       <S.Wrapper>
-        <Link href={'/'}><img src='/asset/logo.svg' width={172}/></Link>
+        <S.Logo>
+          <Link href={'/'}><img src='/asset/logo.svg' alt='로고'/></Link>
+        </S.Logo>
         {
           !user ?
             <S.LoginStyle onClick={()=>dispatch(onLogin())}>로그인</S.LoginStyle>

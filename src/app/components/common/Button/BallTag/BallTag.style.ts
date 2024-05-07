@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Button = styled.button<{$active : boolean}>`
     width: 77px;
+    flex: 0 0 auto;
     border : 1px solid var(--Primary);
     box-sizing: border-box;
     border-radius: 1000px;

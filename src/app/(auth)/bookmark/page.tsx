@@ -1,13 +1,13 @@
 "use client"
 import Card from "@/app/components/common/Card/Layout";
-import Paging from "@/app/components/main/Paging";
 import * as S from "@/app/components/main/style";
+import * as B from "./bookmark.style";
+import { Wrap } from "@/styles/global";
 
 export default function Home() {
   return (
     <S.MainStyle>
-      <S.Wrap>
-
+      <Wrap>
         <S.SearchFlex>
 
             <h4>북마크</h4>
@@ -20,13 +20,8 @@ export default function Home() {
             </S.Search>
 
         </S.SearchFlex>
+        <B.BookMakrLayout>
 
-        <S.Layout>
-          
-          <S.Order>
-            <div>최신순 <img src="/asset/icon/down.svg" alt="순서" /></div>
-          </S.Order>
-          
           <S.Grid>
             {
               new Array(12).fill(0).map((_,i)=>
@@ -44,13 +39,9 @@ export default function Home() {
                 />
               )
             }
-          </S.Grid>
-
-          <Paging/>
-          
-        </S.Layout>
-
-      </S.Wrap>
+          </S.Grid>          
+        </B.BookMakrLayout>
+      </Wrap>
     </S.MainStyle>
   );
 }

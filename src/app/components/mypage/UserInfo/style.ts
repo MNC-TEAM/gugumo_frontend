@@ -42,7 +42,7 @@ export const User = styled.div`
         justify-content: center;
         margin-top: 13px;
         font-size: ${({theme})=>theme.fontSize.buttonMedium};
-        font-weight: ${({theme})=>theme.fontWeight.buttonMedium};
+        font-weight: ${({theme})=>theme.fontWeight.medium};
         color: ${({theme})=>theme.color.OnBackgroundGray};
     }
 
@@ -53,7 +53,7 @@ export const User = styled.div`
         }
         button {
             font-size: ${({theme})=>theme.fontSize.captionMedium};
-            font-weight: ${({theme})=>theme.fontWeight.captionMedium};
+            font-weight: ${({theme})=>theme.fontWeight.medium};
         }
 
     }
@@ -65,11 +65,11 @@ export const UserName = styled.div`
     align-items: center;
     gap: 19px;
     font-size: ${({theme})=>theme.fontSize.buttonMedium};
-    font-weight: ${({theme})=>theme.fontWeight.buttonMedium};
+    font-weight: ${({theme})=>theme.fontWeight.medium};
     transform: translateY(-12px);
     p {
         font-size: ${({theme})=>theme.fontSize.captionMedium};
-        font-weight: ${({theme})=>theme.fontWeight.captionMedium};
+        font-weight: ${({theme})=>theme.fontWeight.medium};
         color: ${({theme})=>theme.color.OnSurface};
         border: 1px solid ${({theme})=>theme.color.OnSurface};
         padding: 5px 8px;

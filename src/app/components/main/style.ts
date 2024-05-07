@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 export const MainStyle = styled.main`
   padding: 80px 0 85px;
+  @media screen and (max-width:820px) {
+    padding: 28px 0 92px;
+  }
 `;
 
 export const SearchFlex = styled.div`
@@ -9,11 +12,23 @@ export const SearchFlex = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 44px;
+  gap: 20px;
 
   h4 {
     font-size: ${({theme})=>theme.fontSize.titleMedium};
-    font-weight: ${({theme})=>theme.fontWeight.titleMedium};
+    font-weight: ${({theme})=>theme.fontWeight.medium};
     color: ${({theme})=>theme.color.OnBackground};
+  }
+
+  @media screen and (max-width:820px) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 25px;
+
+    h4 {
+      font-size: 18px;
+    }
+
   }
 
 `;
@@ -31,9 +46,9 @@ export const RecruitButton = styled.button<{$active : boolean}>`
   font-weight: ${(props)=>{
     const {theme,$active} = props;
     if($active){
-      return theme.fontWeight.titleSemibold;
+      return theme.fontWeight.semibold;
     }else{
-      return theme.fontWeight.titleMedium;
+      return theme.fontWeight.medium;
     }
   }};
   color: ${(props)=>{
@@ -46,6 +61,11 @@ export const RecruitButton = styled.button<{$active : boolean}>`
     }
 
   }};
+
+  @media screen and (max-width:820px) {
+    font-size: 18px;
+  }
+
 `;
 
 
@@ -77,14 +97,27 @@ export const Search = styled.form`
     transform: translateY(-50%);
   }
 
+  @media screen and (max-width:820px) {
+    width: 100%;
+    order: -1;
+    height: 38px;
+  }
+
 `;
 
 export const Tag = styled.div`
-  margin-top: 18px;
+  margin-top: 51px;
+  & + & {margin-top: 18px;}
+
+  @media screen and (max-width:820px) {
+    margin-top: 30px;
+    & + & {margin-top: 15px;}
+  }
+
 `;
 
 export const SmallText = styled.p`
-  font-size: 18px;
+  font-size: ${({theme})=>theme.fontSize.buttonMedium};
   font-family: "Pretendard";
   font-weight: 600;
   color : ${({theme})=>theme.color.OnSurface};
@@ -92,14 +125,20 @@ export const SmallText = styled.p`
 
 export const Flex = styled.div`
   display: flex;
-  flex-wrap: wrap ;
+  flex-wrap: wrap;
   gap: 10px;
   margin-top: 11px;
+
+  @media screen and (max-width : 820px) {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
 `;
 
 export const Layout = styled.div`
   background : #F4F5F8;
-  margin-top: 58px;
+  margin-top: 60px;
   padding: 40px 50px 50px;
   border-radius: 12px;
 
@@ -115,7 +154,6 @@ export const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(4,1fr);
   gap: 31.98px;
-  margin-top: 31px;
 
   @media screen and (max-width:1280px) {
     grid-template-columns: repeat(3,1fr);

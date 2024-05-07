@@ -18,5 +18,5 @@ export const LinkStyle = styled(Link)<{$active? : boolean}>`
         }
     }};
     font-size: ${({theme})=>theme.fontSize.captionRegular};
-    font-weight: ${({theme})=>theme.fontWeight.captionRegular};
+    font-weight: ${({theme})=>theme.fontWeight.regular};
 `;

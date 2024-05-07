@@ -1,6 +1,6 @@
 "use client"
-import { Wrap } from "@/app/components/main/style";
 import { DescBox, DescInputStyle, Flex, Gird, InputBox, InputStyle, WrtieStyle, Button } from "@/app/components/write/style";
+import { Wrap } from "@/styles/global";
 
 export default function Wrtie() {
   return (

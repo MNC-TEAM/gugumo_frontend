@@ -3,9 +3,7 @@
 import { useState } from "react";
 import BallTag from "../components/common/Button/BallTag/BallTag";
 import Tag from "../components/common/Button/Tag";
-import WhiteBtn from "../components/common/Button/WhiteBtn";
 import Card from "../components/common/Card/Layout";
-import Paging from "../components/main/Paging";
 import * as S from "../components/main/style";
 import {Swiper,SwiperSlide} from 'swiper/react';
 import { Wrap } from "@/styles/global";
@@ -16,7 +14,7 @@ export default function Home() {
   const recruitClickHandler = (event : string)=>{
     setRecruit(event);
   }
-  const [gameType,setGameType] = useState('ball01');
+  const [gameType,setGameType] = useState('All');
   const gameTypeClickHandler = (event : string)=>{
     setGameType(event);
   }
@@ -31,13 +29,19 @@ export default function Home() {
 
         <Swiper
           spaceBetween={10}
+          loop={true}
+          speed={600}
         >
+          <SwiperSlide>
+            <img src="/asset/image/banner.jpg" alt="배너" />
+          </SwiperSlide>
           <SwiperSlide>
             <img src="/asset/image/banner.jpg" alt="배너" />
           </SwiperSlide>
         </Swiper>
 
         <S.SearchFlex>
+
           <S.RecruitStyle>
             <S.RecruitButton 
               $active={recruit==="모집중"} 
@@ -61,7 +65,7 @@ export default function Home() {
           </S.Search>
         </S.SearchFlex>
 
-        <S.Tag style={{marginTop : 51}}>
+        <S.Tag>
           <S.SmallText>지역</S.SmallText>
           <S.Flex>
             {
@@ -113,7 +117,7 @@ export default function Home() {
                   status={"모집중"}
                   gameType={"배드민턴"}
                   location={"인천"}
-                  title={"배트민턴 같이 치실분 구합니다."}
+                  title={"인천에서 배드민턴 같이 치실 분 구합니다!"}
                   meetingDateTime={"09"}
                   meetingMemberNum={2}
                   meetingDeadline={Date.now()}
@@ -121,15 +125,6 @@ export default function Home() {
               )
             }
           </S.Grid>
-
-          <WhiteBtn 
-            href={"/write"}
-            edit={true}
-          >
-            새글 작성
-          </WhiteBtn>
-
-          <Paging/>
           
         </S.Layout>
 
@@ -138,5 +133,3 @@ export default function Home() {
   );
 
 }
-
-

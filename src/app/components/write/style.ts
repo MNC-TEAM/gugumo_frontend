@@ -28,7 +28,7 @@ export const Flex = styled.div`
 
     h3 {
         font-size: ${({theme})=>theme.fontSize.titleMedium};
-        font-weight: ${({theme})=>theme.fontWeight.titleMedium};
+        font-weight: ${({theme})=>theme.fontWeight.medium};
     }
 
 `;
@@ -43,7 +43,7 @@ export const Gird = styled.div`
 export const InputStyle = styled.div`
     label {
         font-size: ${({theme})=>theme.fontSize.buttonMedium};
-        font-weight: ${({theme})=>theme.fontWeight.buttonMedium};
+        font-weight: ${({theme})=>theme.fontWeight.medium};
         padding: 0 ${6/18}em;
     }
 `;
@@ -68,7 +68,7 @@ export const InputBox = styled.div`
         width: 100%;
         height: 100%;
         font-size: ${({theme})=>theme.fontSize.bodyMedium};
-        font-weight: ${({theme})=>theme.fontWeight.bodyMedium};
+        font-weight: ${({theme})=>theme.fontWeight.medium};
         padding: 0 ${14/16}em;
         font-family: "Pretendard";
         color: ${({theme})=>theme.color.OnBackground};
@@ -112,7 +112,7 @@ export const DescInputStyle = styled.div`
         margin-top: 12px;
         font-family: "Pretendard";
         font-size: ${({theme})=>theme.fontSize.bodyMedium};
-        font-weight: ${({theme})=>theme.fontWeight.bodyMedium};
+        font-weight: ${({theme})=>theme.fontWeight.medium};
     }
 
     input {
@@ -131,7 +131,7 @@ export const DescInputStyle = styled.div`
 export const Button = styled.button`
     all: unset;
     font-size: ${({theme})=>theme.fontSize.buttonSemibold};
-    font-weight: ${({theme})=>theme.fontWeight.buttonSemibold};
+    font-weight: ${({theme})=>theme.fontWeight.semibold};
     display: flex;
     align-items: center;
     justify-content: center;

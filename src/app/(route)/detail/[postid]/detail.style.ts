@@ -12,7 +12,7 @@ export const Flex = styled.div`
 
     h1 {
         font-size: ${({theme})=>theme.fontSize.titleSemibold};
-        font-weight: ${({theme})=>theme.fontWeight.titleSemibold};
+        font-weight: ${({theme})=>theme.fontWeight.semibold};
     }
     
 `;
@@ -24,7 +24,7 @@ export const BookFlex = styled.div`
     color: ${({theme})=>theme.color.Primary};
     p {
         font-size: ${({theme})=>theme.fontSize.titleMedium};
-        font-weight: ${({theme})=>theme.fontWeight.titleMedium};
+        font-weight: ${({theme})=>theme.fontWeight.medium};
     }
 `;
 
@@ -35,7 +35,7 @@ export const Top = styled.div`
     gap: 21px;
     margin-top: 25px;
     font-size: ${({theme})=>theme.fontSize.titleMedium};
-    font-weight: ${({theme})=>theme.fontWeight.titleMedium};
+    font-weight: ${({theme})=>theme.fontWeight.medium};
     color: ${({theme})=>theme.color.OnBackgroundGray};
     padding-bottom: 21px;
     border-bottom: 1px solid ${({theme})=>theme.color.Outline};
@@ -63,7 +63,7 @@ export const Col = styled.div`
     align-items: center;
     color: ${({theme})=>theme.color.OnSurface};
     font-size: ${({theme})=>theme.fontSize.titleMedium};
-    font-weight: ${({theme})=>theme.fontWeight.titleMedium};
+    font-weight: ${({theme})=>theme.fontWeight.medium};
     gap: ${23/24}em;
     h4 {
         padding: ${12/24}em ${22/24}em;
@@ -95,7 +95,7 @@ export const Desc = styled.div`
     padding: 57px;
     box-sizing: border-box;
     font-size: ${({theme})=>theme.fontSize.titleMedium};
-    font-weight: ${({theme})=>theme.fontWeight.titleMedium};
+    font-weight: ${({theme})=>theme.fontWeight.medium};
     line-height: ${53/24};
 `;
 
@@ -103,7 +103,7 @@ export const Desc = styled.div`
 export const LinkStyle = styled(Link)`
     all: unset;
     font-size: ${({theme})=>theme.fontSize.buttonSemibold};
-    font-weight: ${({theme})=>theme.fontWeight.buttonSemibold};
+    font-weight: ${({theme})=>theme.fontWeight.semibold};
     display: flex;
     align-items: center;
     justify-content: center;

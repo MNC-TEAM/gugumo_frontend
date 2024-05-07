@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardStyle,Date,Detail,Flex, Tag } from './style'
+import * as S from './style';
 import { useRouter } from 'next/navigation'
 import moment from 'moment'
 import Bookmark from '../../Button/Bookmark'
@@ -8,17 +8,17 @@ import { CardType } from './Card.stories'
 export default function Card({postId,status,gameType,location,title,meetingDateTime,meetingMemberNum,meetingDeadline,bookmarkStatus}: CardType) {
   const router = useRouter();
   return (
-    <CardStyle onClick={()=>router.push(`/detail/${postId}`)}>
+    <S.CardStyle onClick={()=>router.push(`/detail/${postId}`)}>
 
-      <Flex>
-        <Tag color="recruit">{status}</Tag>
-        <Tag color="ball">{gameType}</Tag>
-        <Tag color="region">{location}</Tag>
-      </Flex>
+      <S.Flex>
+        <S.Tag color="recruit">{status}</S.Tag>
+        <S.Tag color="ball">{gameType}</S.Tag>
+        <S.Tag color="region">{location}</S.Tag>
+      </S.Flex>
       
-      <h4>{title}</h4>
+      <S.Title>{title}</S.Title>
 
-      <Detail>
+      <S.Detail>
         <li>
           <p>시간</p>
           <p>{meetingDateTime}시</p>
@@ -31,13 +31,15 @@ export default function Card({postId,status,gameType,location,title,meetingDateT
           <p>인원</p>
           <p>{meetingMemberNum}명</p>
         </li>
-      </Detail>
+      </S.Detail>
 
-      <Date>
+      <S.Date>
         <span>모집 마감일 {moment(meetingDeadline).format("YYYY.MM.DD")}</span>
-        <Bookmark postid={"1"} status={bookmarkStatus}
+        <Bookmark 
+          postid={"1"} 
+          status={bookmarkStatus}
         />
-      </Date>
-    </CardStyle>
+      </S.Date>
+    </S.CardStyle>
   )
 }
