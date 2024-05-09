@@ -1,9 +1,43 @@
 import styled from "styled-components";
 
 export const MainStyle = styled.main`
-  padding: 80px 0 85px;
+  padding: 0 0 85px;
   @media screen and (max-width:820px) {
     padding: 28px 0 92px;
+  }
+`;
+
+export const DesktopBanner = styled.div`
+  display: block;
+  @media screen and (max-width:820px) {
+    display: none;
+  }
+`;
+export const MobBanner = styled.div`
+  
+  display: none;
+  position: relative;
+  box-sizing: border-box;
+  width: 95%;
+  margin: 0 auto;
+
+  &::after {
+    content: '';
+    display: block;
+    padding-bottom: calc(121/342*100%);
+  }
+
+  img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media screen and (max-width:820px) {
+    display: block;
   }
 `;
 

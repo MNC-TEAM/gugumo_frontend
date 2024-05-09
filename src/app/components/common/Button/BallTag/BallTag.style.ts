@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Button = styled.button<{$active : boolean}>`
     width: 77px;
     flex: 0 0 auto;
-    border : 1px solid var(--Primary);
+    border : 1px solid ${({theme})=>theme.color.Primary};
     box-sizing: border-box;
     border-radius: 1000px;
     position: relative;
@@ -40,7 +40,7 @@ export const Button = styled.button<{$active : boolean}>`
             }
         }};
         font-size: 14px;
-        font-weight: var(--buttonMediumWeight);
+        font-weight: ${({theme})=>theme.fontWeight.medium};
     }
 
 `;

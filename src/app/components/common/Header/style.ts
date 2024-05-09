@@ -1,21 +1,35 @@
 import { Wrap } from "@/styles/global";
 import styled from "styled-components";
 
-export const HeaderStyle = styled.header`
+interface HeaderType {
+    $postion? : boolean
+}
+
+export const HeaderStyle = styled.header<HeaderType>`
     margin-top: 40px;
-    position: relative;
+    width: 100%;
+    position: ${({$postion})=>{
+        if($postion) {
+            return "absolute"
+        }else{
+            return "relative";
+        }
+    }};
     z-index: 22;
 
     @media screen and (max-width : 820px) {
+        position: relative;
         margin-top: 47px;
     }
 
 `;
 
-export const Logo = styled.div`
+export const Logo = styled.div<HeaderType>`
     width: 172px;
+    filter: ${({$postion})=> $postion ? "brightness(0) invert(1)" : ""};
     @media screen and (max-width : 820px) {
         width: 91px;
+        filter : none;
     }
 `;
 

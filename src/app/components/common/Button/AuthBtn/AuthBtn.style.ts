@@ -2,30 +2,30 @@ import styled from "styled-components";
 import { AuthBtnProps } from "./AuthBtn.stories";
 
 export const Button = styled.button<AuthBtnProps>`
-    font-size: var(--captionRegularSize);
-    font-weight: var(--captionMediumWeight);
-    border: 1px solid var(--Primary);
+    font-size: ${({theme})=>theme.fontSize.captionRegular};
+    font-weight: ${({theme})=>theme.fontWeight.medium};
+    border: 1px solid ${({theme})=>theme.color.Primary};
     padding: 7px 11px;
     border-radius: 6px;
-    color: ${({active})=>{
+    color: ${({active,theme})=>{
         if(!active){
-            return "var(--Primary)";
+            return theme.color.Primary;
         }else{
-            return "var(--OnPrimary)";
+            return theme.color.OnPrimary;
         }
     }};
-    background: ${({active})=>{
+    background: ${({active,theme})=>{
         if(!active){
-            return "var(--OnPrimary)";
+            return theme.color.OnPrimary;
         }else{
-            return "var(--Primary)";
+            return theme.color.Primary;
         }
     }};
     transition: .4s;
     transition-property: color,background;
     cursor: pointer;
     &:hover {
-        color: var(--OnPrimary);
-        background: var(--Primary);
+        color: ${({theme})=>theme.color.OnPrimary};
+        background: ${({theme})=>theme.color.Primary};
     }
 `;
