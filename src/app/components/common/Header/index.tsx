@@ -6,16 +6,20 @@ import { onLogin } from '@/store/features/modal/modal';
 import { useState } from 'react';
 import { logoutAction } from '@/store/features/auth/user';
 
-export default function Header() {
+interface HeaderType {
+  postion? : boolean
+}
+
+export default function Header( {postion} : HeaderType ) {
 
   const user = useAppSelector(state=>state.user);
   const [userMenuHidden,setUserMenuHidden] = useState(true);
   const dispatch = useAppDispatch();
 
   return (
-    <S.HeaderStyle>
+    <S.HeaderStyle $postion={postion}>
       <S.Wrapper>
-        <S.Logo>
+        <S.Logo $postion={postion}>
           <Link href={'/'}><img src='/asset/logo.svg' alt='로고'/></Link>
         </S.Logo>
         {

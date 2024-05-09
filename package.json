@@ -53,5 +53,10 @@
     "msw": "^2.2.14",
     "storybook": "^8.0.8",
     "typescript": "^5"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
