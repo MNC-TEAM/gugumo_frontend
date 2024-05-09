@@ -1,29 +1,18 @@
-import React, { useState } from 'react'
-import { InputBox, InputStyle } from './style'
-import { ThemeProvider } from 'styled-components'
-import { theme } from '../../../../styles/theme'
+import React, { InputHTMLAttributes } from 'react'
+import * as S from "./style";
 
-interface InputType {
-  placeholder? : string,
-  errorMessage? : string
+interface InputType extends InputHTMLAttributes<HTMLInputElement>{
+  error? : string;
+  register: any;
 }
 
-export default function Input({placeholder,errorMessage} : InputType) {
-
+export function Input({type,placeholder,error,register} : InputType){
   return (
-    <ThemeProvider 
-      theme={theme}
-    >
-      <InputStyle>
-        <InputBox>
-          <input type="text" 
-            placeholder={placeholder} 
-          />
-        </InputBox>
-        {
-          <p>{errorMessage}</p>
-        }
-      </InputStyle>
-    </ThemeProvider>
+    <S.InputStyle>
+      <input type={type} placeholder={placeholder} {...register} />
+      {
+        error && <p>{error}</p>
+      }
+    </S.InputStyle>
   )
 }
