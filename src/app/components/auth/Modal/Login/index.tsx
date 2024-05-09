@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import * as S from './style'
 import * as M from '../Modal.style'
 import { useAppDispatch, useAppSelector } from '@/store/hook'
@@ -7,17 +7,44 @@ import { onClose, onSignup } from '@/store/features/modal/modal'
 import { useForm } from 'react-hook-form'
 import Primary from '../../../common/Button/Primary/Primary'
 import { loginAction } from '@/store/features/auth/user'
+import { Input } from '@/app/components/common/Input'
+import axios from 'axios'
 
 export default function Login() {
 
   const {login} = useAppSelector((state)=>state.modal);
   const dispatch = useAppDispatch();
+  const [isEmailError,setIsEmailError] = useState('');
+  const [isPasswordError,setIsPasswordError] = useState('');
   const {register,handleSubmit} = useForm();
 
   const onSubmit = (event : any)=>{
-    console.log(event);
-    dispatch(loginAction());
-    dispatch(onClose());
+
+    const {username,password} = event;
+
+    if(username === ""){
+      return setIsEmailError('이메일을 입력해주세요.');
+    }
+
+    if(password === ""){
+      return setIsPasswordError('비밀번호을 입력해주세요.');
+    }
+
+    axios.post('/api/member/login',{
+      username,
+      password
+    })
+    .then(({data})=>{
+      console.log(data);
+      // dispatch(onClose());
+    })
+    .catch(err=>{
+      console.log(err);
+      alert('에러가 발생했습니다.');
+    });
+
+    // dispatch(loginAction());
+
   }
 
   return (
@@ -39,8 +66,18 @@ export default function Login() {
 
       <M.Form onSubmit={handleSubmit(onSubmit)}>
         <M.InputBox>
-          <input type="email" placeholder='이메일을 입력하세요.' {...register('email',{required : true})} />
-          <input type="password" placeholder='비밀번호를 입력하세요.' {...register('password',{required : true})}/>
+          <Input
+            type="email"
+            placeholder='이메일을 입력해주세요.'
+            register={register('username',{required : false,onChange:()=>setIsEmailError('')})}
+            error={isEmailError}
+          />
+          <Input
+            type="password" 
+            placeholder='비밀번호를 입력하세요.' 
+            register={register('password',{required : false,onChange:()=>setIsPasswordError('')})}
+            error={isPasswordError}
+          />
         </M.InputBox>
 
         <Primary type="submit">
