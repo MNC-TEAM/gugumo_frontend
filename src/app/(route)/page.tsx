@@ -24,21 +24,8 @@ export default function Home() {
   const locationClickHandler = (event : string)=>{
     setLocation(event);
   }
-
+  
   const [list,setList] = useState([]);
-
-  useEffect(()=>{
-
-    axios.get('/people')
-    .then(({data})=>{
-      setList(data);
-    })
-    .catch(err=>{
-      console.log(err);
-    })
-
-  },[]);
-
 
   return (
     <>
