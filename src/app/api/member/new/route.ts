@@ -11,9 +11,9 @@ export const POST = async(request : NextRequest)=>{
         const response = await axios.post(`${process.env.API_URL}/api/v1/member`,body)
         return new NextResponse(JSON.stringify(response.data));
     }
-    catch(err){
+    catch(err : any){
         console.log(err);
-        return new NextResponse("server error");
+        return new NextResponse("서버 에러");
     }
 
 }
