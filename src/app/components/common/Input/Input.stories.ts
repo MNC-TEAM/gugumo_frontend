@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Input from '.';
+import { Input } from './Input';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta : Meta<typeof Input> = {
@@ -10,7 +10,7 @@ const meta : Meta<typeof Input> = {
   },
   args : {
     placeholder : "내용을 입력하세요",
-    errorMessage : "에러 메세지 입니다."
+    error : "에러 메세지 입니다."
   }
 };
 

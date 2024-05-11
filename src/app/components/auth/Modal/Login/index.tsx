@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hook'
 import { onClose, onSignup } from '@/store/features/modal/modal'
 import { useForm } from 'react-hook-form'
 import Primary from '../../../common/Button/Primary/Primary'
-import { Input } from '@/app/components/common/Input'
+import { Input } from '@/app/components/common/Input/Input'
 import axios from 'axios'
 import { loginAction } from '@/store/features/auth/user'
 

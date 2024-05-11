@@ -8,7 +8,7 @@ import { onClose, onLogin } from '@/store/features/modal/modal'
 import Primary from '../../../common/Button/Primary/Primary'
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
-import { Input } from '@/app/components/common/Input';
+import { Input } from '@/app/components/common/Input/Input';
 
 export default function Sign() {
 
