@@ -6,9 +6,9 @@ import { useAppDispatch, useAppSelector } from '@/store/hook'
 import { onClose, onSignup } from '@/store/features/modal/modal'
 import { useForm } from 'react-hook-form'
 import Primary from '../../../common/Button/Primary/Primary'
-import { loginAction } from '@/store/features/auth/user'
 import { Input } from '@/app/components/common/Input'
 import axios from 'axios'
+import { loginAction } from '@/store/features/auth/user'
 
 export default function Login() {
 
@@ -35,15 +35,15 @@ export default function Login() {
       password
     })
     .then(({data})=>{
-      console.log(data);
-      // dispatch(onClose());
+      const {status,token} = data;
+      if(status === "success"){
+        dispatch(loginAction(token));
+        return dispatch(onClose());
+      }
     })
     .catch(err=>{
-      console.log(err);
       alert('에러가 발생했습니다.');
     });
-
-    // dispatch(loginAction());
 
   }
 

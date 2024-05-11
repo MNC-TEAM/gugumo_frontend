@@ -8,12 +8,15 @@ export const POST = async (request : NextRequest)=>{
     const body = await request.json();
 
     try {
-        const response = await axios.post(`${process.env.API_URL}/api/v1/login`,body)
-        return new NextResponse(JSON.stringify(response.data));
+        const response = await axios.post(`${process.env.API_URL}/api/v1/login`,body);
+        return new NextResponse(JSON.stringify({
+            status: "success",
+            token : response.headers.authorization
+        }));
     }
-    catch(err){
+    catch(err : any){
         console.log(err);
-        return new NextResponse("server error");
+        return new NextResponse("서버 에러");
     }
 
 }
