@@ -41,18 +41,19 @@ export default function Sign() {
       password
     })
     .then(({data})=>{
+      console.log(data);
       const {status,message} = data;
       
       if(status === "success"){
         alert('회원가입에 성공하였습니다.');
         return dispatch(onClose());
       }else if(status === "fail"){
-        alert(message);
+        return alert(message);
       }
 
     })
     .catch(err=>{
-      alert('에러가 발생했습니다.');
+      console.log('서버 에러');
     });
 
   }
