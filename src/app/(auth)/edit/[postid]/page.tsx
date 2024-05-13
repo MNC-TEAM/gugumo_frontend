@@ -1,9 +1,9 @@
 "use client"
-import * as S from "./style";
+import * as S from "../../write/style";
 import { Wrap } from "@/styles/global";
 import DownIcon from "@asset/icon/down.svg";
 import CalenderIcon from "@asset/icon/calender.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import moment from "moment";
 import Prev from "@/app/components/common/Button/Prev/Prev";
@@ -15,20 +15,22 @@ import { useRouter } from "next/navigation";
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-export default function Edit() {
+export default function Edit({param} : {param : {postid : string}}) {
 
   const router = useRouter();
 
+  const edit = useAppSelector(state=>state.edit);
   const user = useAppSelector(state=>state.user);
 
-  const {register,handleSubmit,watch} = useForm();
+  const {register,handleSubmit,watch} = useForm({
+    defaultValues : {
+      meetingType : edit.
+    }
+  });
   const meetingTypeWatch = watch('meetingType','SHORT');
 
   const [meetingDate, onMeetingDate] = useState<Value>(new Date());
   const [meetingDateOpen, setMeetingDateOpen] = useState(false);
-  const [meetingDeadline, onMeetingDeadline] = useState<Value>(new Date());
-  const [meetingDeadlineOpen, setMeetingDeadlineOpen] = useState(false);
-
   const meetingDateChangeHandler = (value: Value)=>{
     onMeetingDate(value);
     setMeetingDateOpen(!meetingDateOpen);
@@ -37,12 +39,24 @@ export default function Edit() {
     setMeetingDateOpen(!meetingDateOpen);
   }
 
+  const [meetingDeadline, onMeetingDeadline] = useState<Value>(new Date());
+  const [meetingDeadlineOpen, setMeetingDeadlineOpen] = useState(false);
   const meetingDeadlineChangeHandler = (value: Value)=>{
     onMeetingDeadline(value);
     setMeetingDeadlineOpen(!meetingDeadlineOpen);
   }
   const meetingDeadlineClickHandler = ()=>{
     setMeetingDeadlineOpen(!meetingDeadlineOpen);
+  }
+
+  const [meetingDays,setMeetingDays] = useState<string[]>([]);
+  const meetingDaysClickHanlder = (event : string)=>{
+    
+    if(meetingDays.includes(event)){
+      setMeetingDays(meetingDays.filter(e=>e !== event));
+    }else{
+      setMeetingDays([...meetingDays, event]);
+    }
   }
 
   const onSubmitHanlder = (event : any)=>{
@@ -87,7 +101,8 @@ export default function Edit() {
       title,
       content,
       meetingDate : moment(meetingDate as Date).format("YYYY-MM-DD"),
-      meetingDeadline : moment(meetingDeadline as Date).format("YYYY-MM-DD")
+      meetingDeadline : moment(meetingDeadline as Date).format("YYYY-MM-DD"),
+      meetingDays : meetingDays.join(';')
     },{
       headers : {
         Authorization : user
@@ -232,7 +247,20 @@ export default function Edit() {
                 </S.InputBox>
               </S.InputStyle>
               :
-              <p>모임 요일</p>
+              <S.InputStyle>
+                <p>모임 요일</p>
+                <S.DaysGrid>
+                  {
+                    ['월','화','수','목','금','토','일'].map((el,index)=>
+                      <S.DaysCheckbox 
+                        onClick={()=>meetingDaysClickHanlder(el)} 
+                        key={index}
+                        $active={meetingDays.includes(el)}
+                      >{el}</S.DaysCheckbox>
+                    )
+                  }
+                </S.DaysGrid>
+              </S.InputStyle>
             }
             
             <S.InputStyle>
@@ -276,8 +304,7 @@ export default function Edit() {
 
           </S.DescBox>
           
-          <S.Button type="submit">작성하기</S.Button>
-          
+          <S.Button type="submit">수정하기</S.Button>
         </form>
 
       </Wrap>

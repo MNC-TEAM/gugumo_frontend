@@ -4,7 +4,7 @@ import * as S from "./detail.style";
 import Prev from "@/app/components/common/Button/Prev/Prev";
 import Bookmark from "@/app/components/common/Button/Bookmark";
 import ViewIcon from "@asset/icon/view.svg";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { DetailType } from "@/app/types/detail";
 import moment from "moment";
@@ -12,11 +12,14 @@ import { MoonLoader } from "react-spinners";
 import { useAppSelector } from "@/store/hook";
 import { useRouter } from "next/navigation";
 import { GAMETYPE, LOCATION, MEETINGTYPE } from "@/app/constant/meetingQuery";
+import { useDispatch } from "react-redux";
+import { onChange } from "@/store/features/edit/edit";
 
 export default function Detail({ params }: { params: { postid: string } }) {
 
   const user = useAppSelector(state=>state.user);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const [meeting,setMeeting] = useState<DetailType | null>(null);
   const [isLoading,setIsLoading] = useState(true);
@@ -44,6 +47,11 @@ export default function Detail({ params }: { params: { postid: string } }) {
     .catch(()=>{
       console.error('서버 에러');
     })
+  }
+
+  const editClickHandler = ()=>{
+    dispatch(onChange(meeting));
+    return router.push(`/edit/${params.postid}`);
   }
 
   useEffect(()=>{
@@ -161,7 +169,7 @@ export default function Detail({ params }: { params: { postid: string } }) {
                 }
                 <button onClick={()=>router.push('/')}>목록</button>
                 {
-                  meeting?.yours && <button onClick={()=>router.push(`/edit/${params.postid}`)}>수정</button>
+                  meeting?.yours && <button onClick={editClickHandler}>수정</button>
                 }
               </div>
 
