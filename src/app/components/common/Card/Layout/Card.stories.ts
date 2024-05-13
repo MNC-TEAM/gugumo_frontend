@@ -33,7 +33,7 @@ export interface CardType {
   /**
    * 날짜를 밀리초형식으로 입력합니다.
   */
-  meetingDeadline : number
+  meetingDeadline : string
   /**
    * 북마크상태를 가져옵니다. 
   */
@@ -71,7 +71,7 @@ export const BookMarkOff: Story = {
     title : "배트민턴 같이 치실분 구합니다.",
     meetingDateTime : "09",
     meetingMemberNum : 2,
-    meetingDeadline : Date.now(),
+    meetingDeadline : "2024-05-11",
     bookmarkStatus : false
   }
 }
@@ -85,7 +85,7 @@ export const BookMarkOn: Story = {
     title : "배트민턴 같이 치실분 구합니다.",
     meetingDateTime : "09",
     meetingMemberNum : 2,
-    meetingDeadline : Date.now(),
+    meetingDeadline : "2024-05-11",
     bookmarkStatus : true
   }
 }

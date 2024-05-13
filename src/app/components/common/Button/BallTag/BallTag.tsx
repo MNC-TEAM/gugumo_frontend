@@ -12,27 +12,27 @@ export default function BallTag({onClick,active,gametype} : BallTagType) {
     let imageUrl, text;
 
     switch(gametype){
-        case "ball01" :
+        case "BADMINTON" :
             imageUrl = '/asset/balltype/ball01.png';
             text = "배드민턴";
             break;
-        case "ball02" :
+        case "BASKETBALL" :
             imageUrl = '/asset/balltype/ball02.png';
             text = "농구";
             break;
-        case "ball03" :
+        case "FUTSAL" :
             imageUrl = '/asset/balltype/ball03.png';
             text = "풋살";
             break;
-        case "ball04" :
+        case "TENNIS" :
             imageUrl = '/asset/balltype/ball04.png';
             text = "테니스";
             break;
-        case "ball05" :
+        case "TABLETENNIS" :
             imageUrl = '/asset/balltype/ball05.png';
             text = "탁구";
             break;
-        case "ball06" :
+        case "BASEBALL" :
             imageUrl = '/asset/balltype/ball06.png';
             text = "야구";
             break;

@@ -9,23 +9,68 @@ import { Wrap } from "@/styles/global";
 import Link from "next/link";
 import axios from "axios";
 import Header from "../components/common/Header";
+import { useForm } from "react-hook-form";
+import { GAMETYPE, LOCATION, MEETINGSTATUS } from "../constant/meeting";
+import { meetingType } from "../types/meeting";
+import { useAppSelector } from "@/store/hook";
 
 export default function Home() {
   
-  const [recruit,setRecruit] = useState('모집중');
-  const recruitClickHandler = (event : string)=>{
-    setRecruit(event);
+  const user = useAppSelector(state=>state.user);
+
+  const {register,handleSubmit} = useForm();
+
+  const [meetingstatus,setMeetingstatus] = useState('RECRUIT');
+  const meetingstatusClickHandler = (event : string)=>{
+    setMeetingstatus(event);
   }
-  const [gameType,setGameType] = useState('All');
-  const gameTypeClickHandler = (event : string)=>{
-    setGameType(event);
-  }
-  const [location,setLocation] = useState('전체');
+
+  const [location,setLocation] = useState("");
   const locationClickHandler = (event : string)=>{
     setLocation(event);
   }
+
+  const [gametype,setGametype] = useState("");
+  const gametypeClickHandler = (event : string)=>{
+    setGametype(event);
+  }
   
-  const [list,setList] = useState([]);
+  const [q,setQ] = useState('');
+  const [content,setContent] = useState<meetingType[]>([]);
+
+  const searchSubmitHanlder = (event : any)=>{
+    const {q} = event;
+    setQ(q);
+  }
+
+  useEffect(()=>{
+
+    axios.get('/api/post/get',{
+      params : {
+        meetingstatus,
+        q
+        // location,
+        // gametype
+      }
+    })
+    .then((res)=>{
+      
+      const {status,message,data} = res.data;
+
+      if(status === "success"){
+        const {content,pageable} = data;
+        console.log(content);
+        setContent(content);
+      }else{
+        setContent([]);
+      }
+
+    })
+    .catch(()=>{
+      console.log('서버 에러');
+    });
+
+  },[meetingstatus,location,gametype,q,user]);
 
   return (
     <>
@@ -57,23 +102,20 @@ export default function Home() {
           <S.SearchFlex>
 
             <S.RecruitStyle>
-              <S.RecruitButton 
-                $active={recruit==="모집중"} 
-                onClick={()=>recruitClickHandler('모집중')}
-              >모집중</S.RecruitButton >
-              <S.RecruitButton  
-                $active={recruit==="모집완료"} 
-                onClick={()=>recruitClickHandler('모집완료')}
-              >모집완료</S.RecruitButton >
-              <S.RecruitButton  
-                $active={recruit==="전체"} 
-                onClick={()=>recruitClickHandler('전체')}
-              >전체</S.RecruitButton >
+              {
+                MEETINGSTATUS.map((el,index)=>
+                  <S.RecruitButton
+                    key={index}
+                    $active={meetingstatus===el.get} 
+                    onClick={()=>meetingstatusClickHandler(el.get)}
+                  >{el.name}</S.RecruitButton >
+                )
+              }
             </S.RecruitStyle>
 
-            <S.Search>
-              <input type="text" />
-              <button>
+            <S.Search onSubmit={handleSubmit(searchSubmitHanlder)}>
+              <input type="text" {...register("q")} />
+              <button type="submit">
                 <img src="/asset/icon/search.svg" alt="검색버튼" />
               </button>
             </S.Search>
@@ -82,14 +124,18 @@ export default function Home() {
           <S.Tag>
             <S.SmallText>지역</S.SmallText>
             <S.Flex>
+              <Tag
+                onClick={()=>locationClickHandler("")} 
+                active={"" === location ? true : false} 
+                label={"전체"}
+              />
               {
-                ["전체","서울","경기","인천","대구","부산","경남","경북","강원","전남","전북","그 외"]
-                .map((e,i)=>
+                LOCATION.map((e,i)=>
                 <Tag 
-                  onClick={()=>locationClickHandler(e)} 
+                  onClick={()=>locationClickHandler(e.get)} 
                   key={i} 
-                  active={e===location ? true : false} 
-                  label={e}
+                  active={e.get === location ? true : false} 
+                  label={e.name}
                 />)
               }
             </S.Flex>
@@ -99,16 +145,16 @@ export default function Home() {
             <S.SmallText>종목</S.SmallText>
             <S.Flex>
               <BallTag
-                onClick={()=>gameTypeClickHandler('All')}
-                active={gameType === "All" ? true : false} 
+                onClick={()=>gametypeClickHandler("")}
+                active={gametype === "" ? true : false} 
               />
               {
-                ["ball01","ball02","ball03","ball04","ball05","ball06"].map((e,index)=>
+                GAMETYPE.map((e,index)=>
                   <BallTag
-                    onClick={()=>gameTypeClickHandler(e)}
+                    onClick={()=>gametypeClickHandler(e.get)}
                     key={index} 
-                    gametype={e}
-                    active={gameType === e ? true : false} 
+                    gametype={e.get}
+                    active={gametype === e.get ? true : false} 
                   />
                 )
               }
@@ -117,24 +163,24 @@ export default function Home() {
 
           <S.Layout>
             
-            {/* <S.Order>
+            <S.Order>
               <div>최신순 <img src="/asset/icon/down.svg" alt="순서" /></div>
-            </S.Order> */}
+            </S.Order>
             
             <S.Grid>
               {
-                new Array(12).fill(0).map((_,i)=>
+                content.map((el)=>
                   <Card
-                    bookmarkStatus={false}
-                    key={i}
-                    postId={1}
-                    status={"모집중"}
-                    gameType={"배드민턴"}
-                    location={"인천"}
-                    title={"인천에서 배드민턴 같이 치실 분 구합니다!"}
-                    meetingDateTime={"09"}
-                    meetingMemberNum={2}
-                    meetingDeadline={Date.now()}
+                    bookmarkStatus={el.bookmarked}
+                    key={el.postId}
+                    postId={el.postId}
+                    status={el.meetingStatus}
+                    gameType={el.gameType}
+                    location={el.location}
+                    title={el.title}
+                    meetingDateTime={el.meetingDateTime}
+                    meetingMemberNum={el.meetingMemberNum}
+                    meetingDeadline={el.meetingDeadline}
                   />
                 )
               }
@@ -148,5 +194,5 @@ export default function Home() {
       </S.MainStyle>
     </>
   );
-
+  
 }

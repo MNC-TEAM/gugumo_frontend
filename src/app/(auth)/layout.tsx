@@ -9,7 +9,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     const user = useAppSelector(state=>state.user);
 
     if(!user){
-        redirect('/');
+        alert('로그인을 하셔야합니다.');
+        return redirect('/');
     } 
    
     return (
