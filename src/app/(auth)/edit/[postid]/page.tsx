@@ -3,7 +3,7 @@ import * as S from "./style";
 import { Wrap } from "@/styles/global";
 import DownIcon from "@asset/icon/down.svg";
 import CalenderIcon from "@asset/icon/calender.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Calendar from "react-calendar";
 import moment from "moment";
 import Prev from "@/app/components/common/Button/Prev/Prev";
@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-export default function Wrtie() {
+export default function Edit() {
 
   const router = useRouter();
 
@@ -26,6 +26,9 @@ export default function Wrtie() {
 
   const [meetingDate, onMeetingDate] = useState<Value>(new Date());
   const [meetingDateOpen, setMeetingDateOpen] = useState(false);
+  const [meetingDeadline, onMeetingDeadline] = useState<Value>(new Date());
+  const [meetingDeadlineOpen, setMeetingDeadlineOpen] = useState(false);
+
   const meetingDateChangeHandler = (value: Value)=>{
     onMeetingDate(value);
     setMeetingDateOpen(!meetingDateOpen);
@@ -34,24 +37,12 @@ export default function Wrtie() {
     setMeetingDateOpen(!meetingDateOpen);
   }
 
-  const [meetingDeadline, onMeetingDeadline] = useState<Value>(new Date());
-  const [meetingDeadlineOpen, setMeetingDeadlineOpen] = useState(false);
   const meetingDeadlineChangeHandler = (value: Value)=>{
     onMeetingDeadline(value);
     setMeetingDeadlineOpen(!meetingDeadlineOpen);
   }
   const meetingDeadlineClickHandler = ()=>{
     setMeetingDeadlineOpen(!meetingDeadlineOpen);
-  }
-
-  const [meetingDays,setMeetingDays] = useState<string[]>([]);
-  const meetingDaysClickHanlder = (event : string)=>{
-    
-    if(meetingDays.includes(event)){
-      setMeetingDays(meetingDays.filter(e=>e !== event));
-    }else{
-      setMeetingDays([...meetingDays, event]);
-    }
   }
 
   const onSubmitHanlder = (event : any)=>{
@@ -96,8 +87,7 @@ export default function Wrtie() {
       title,
       content,
       meetingDate : moment(meetingDate as Date).format("YYYY-MM-DD"),
-      meetingDeadline : moment(meetingDeadline as Date).format("YYYY-MM-DD"),
-      meetingDays : meetingDays.join(';')
+      meetingDeadline : moment(meetingDeadline as Date).format("YYYY-MM-DD")
     },{
       headers : {
         Authorization : user
@@ -242,20 +232,7 @@ export default function Wrtie() {
                 </S.InputBox>
               </S.InputStyle>
               :
-              <S.InputStyle>
-                <p>모임 요일</p>
-                <S.DaysGrid>
-                  {
-                    ['월','화','수','목','금','토','일'].map((el,index)=>
-                      <S.DaysCheckbox 
-                        onClick={()=>meetingDaysClickHanlder(el)} 
-                        key={index}
-                        $active={meetingDays.includes(el)}
-                      >{el}</S.DaysCheckbox>
-                    )
-                  }
-                </S.DaysGrid>
-              </S.InputStyle>
+              <p>모임 요일</p>
             }
             
             <S.InputStyle>
@@ -300,6 +277,7 @@ export default function Wrtie() {
           </S.DescBox>
           
           <S.Button type="submit">작성하기</S.Button>
+          
         </form>
 
       </Wrap>

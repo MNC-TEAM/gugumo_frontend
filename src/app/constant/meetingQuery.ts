@@ -3,6 +3,11 @@ export const STATUS : {[key : string] : string } = {
     "END" : "모집완료",
     "ALL" : "전체",
 };
+
+export const MEETINGTYPE : {[key : string] : string } = {
+    "SHORT" : "단기모임",
+    "LONG" : "정기모임"
+}
   
 export const GAMETYPE : {[key : string] : string } = {
     "BADMINTON" : "배드민턴",

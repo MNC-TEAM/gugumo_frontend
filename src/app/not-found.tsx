@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { NotFoundStyle,Flex } from "./components/notfound/style";
 import { ThemeProvider } from "styled-components";
 import { theme } from "@/styles/theme";
-import Image from "next/image";
 
 export default function NotFound() {
 
@@ -15,7 +14,7 @@ export default function NotFound() {
     <ThemeProvider theme={theme}>
       <GlobalStyle/>
       <NotFoundStyle>
-        <Image src={'/asset/image/notfound.png'} alt="에러로고"></Image>
+        <img src="/asset/image/notfound.png" alt="에러로고" />
         <h1>404 ERROR</h1>
         <dl>
           <dt>

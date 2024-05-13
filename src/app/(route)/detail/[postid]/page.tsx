@@ -9,16 +9,50 @@ import axios from "axios";
 import { DetailType } from "@/app/types/detail";
 import moment from "moment";
 import { MoonLoader } from "react-spinners";
-import Loading from "./loading";
+import { useAppSelector } from "@/store/hook";
+import { useRouter } from "next/navigation";
+import { GAMETYPE, LOCATION, MEETINGTYPE } from "@/app/constant/meetingQuery";
 
 export default function Detail({ params }: { params: { postid: string } }) {
+
+  const user = useAppSelector(state=>state.user);
+  const router = useRouter();
 
   const [meeting,setMeeting] = useState<DetailType | null>(null);
   const [isLoading,setIsLoading] = useState(true);
 
+  const removeHanlder = (postid : string)=>{
+    axios.delete('/api/post/write',{
+      params : {
+        post_id : postid
+      },
+      headers : {
+        Authorization : user
+      }
+    })
+    .then(res=>{
+      const {status,message} = res.data;
+
+      if(status === "success"){
+        alert('삭제가 완료되었습니다.');
+        return router.push('/');
+      } else if(status === "fail"){
+        return alert(message);
+      }
+
+    })
+    .catch(()=>{
+      console.error('서버 에러');
+    })
+  }
+
   useEffect(()=>{
 
-    axios.get(`/api/post/detail/${params.postid}`)
+    axios.get(`/api/post/detail/${params.postid}`,{
+      headers : {
+        Authorization : user
+      }
+    })
     .then(res=>{
 
       const {status,data,message} = res.data;
@@ -35,14 +69,14 @@ export default function Detail({ params }: { params: { postid: string } }) {
       console.log('서버 에러');
     });
 
-  },[params]);
+  },[params,user]);
 
   return (
     <>
       {
         isLoading ?
           <div style={{top : 0, left : 0, width : "100%", height : "100%", position : "fixed", display : "flex", alignItems : "center", justifyContent : "center", background : "rgba(255,255,255,0.2)", backdropFilter : "blur(10px)"}}>
-            <MoonLoader color="#4f64ff"></MoonLoader>
+            <MoonLoader color="#574fff"></MoonLoader>
           </div>
         :
           <S.DetailStyle>
@@ -75,27 +109,38 @@ export default function Detail({ params }: { params: { postid: string } }) {
               <S.Grid>
                 <S.Col>
                   <h4>모집형식</h4>
-                  <p>{meeting?.meetingType}</p>
+                  <p>{ meeting ? MEETINGTYPE[meeting.meetingType] : ""}</p>
                 </S.Col>
                 <S.Col>
                   <h4>지역</h4>
-                  <p>{meeting?.location}</p>
+                  <p>{ meeting ? LOCATION[meeting.location] : "" }</p>
                 </S.Col>
                 <S.Col>
                   <h4>구기종목</h4>
-                  <p>{meeting?.gameType}</p>
+                  <p>{ meeting ? GAMETYPE[meeting.gameType] : "" }</p>
                 </S.Col>
-                <S.Col>
-                  <h4>시간대</h4>
-                  <p>{meeting?.meetingTime}</p>
-                </S.Col>
+                {
+                  meeting?.meetingType === "LONG" 
+                  ?
+                    <>
+                      <S.Col>
+                        <h4>시간대</h4>
+                        <p>{meeting?.meetingTime}</p>
+                      </S.Col>
+                      <S.Col>
+                        <h4>모임 요일</h4>
+                        <p>{meeting?.meetingDays.split(';')}</p>
+                      </S.Col>
+                    </>
+                  :
+                    <S.Col>
+                      <h4>모임 날짜</h4>
+                      <p>{moment(meeting?.meetingDateTime).format('YYYY-MM-DD')}</p>
+                    </S.Col>
+                }
                 <S.Col>
                   <h4>모집인원</h4>
                   <p>{meeting?.meetingMemberNum} 명</p>
-                </S.Col>
-                <S.Col>
-                  <h4>모집날짜</h4>
-                  <p>{moment(meeting?.meetingDateTime).format('YYYY-MM-DD')}</p>
                 </S.Col>
                 <S.Col>
                   <h4>모집마감</h4>
@@ -109,6 +154,17 @@ export default function Detail({ params }: { params: { postid: string } }) {
               <S.Desc>
                 {meeting?.content}
               </S.Desc>
+
+              <div style={{display : "grid", gridTemplateColumns : "repeat(3,1fr)"}}>
+                {
+                  meeting?.yours && <button onClick={()=>removeHanlder(params.postid)}>삭제</button>
+                }
+                <button onClick={()=>router.push('/')}>목록</button>
+                {
+                  meeting?.yours && <button onClick={()=>router.push(`/edit/${params.postid}`)}>수정</button>
+                }
+              </div>
+
             </Wrap>
           </S.DetailStyle>
       }
