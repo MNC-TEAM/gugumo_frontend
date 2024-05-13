@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'react-calendar/dist/Calendar.css';
 import ThemeClient from "@/lib/ThemeClient";
 import ModalContext from "@/lib/ModalProvider";
+import QueryProvider from "@/lib/QueryProvider";
 
 const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -32,15 +33,17 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={pretendard.className}>
-        <ThemeClient>
-          <StyledComponentsRegistry>
-            <StoreProvider>
-              <ModalContext>
-                {children}
-              </ModalContext>
-            </StoreProvider>
-          </StyledComponentsRegistry>
-        </ThemeClient>
+        <QueryProvider>
+          <ThemeClient>
+            <StyledComponentsRegistry>
+              <StoreProvider>
+                <ModalContext>
+                  {children}
+                </ModalContext>
+              </StoreProvider>
+            </StyledComponentsRegistry>
+          </ThemeClient>
+        </QueryProvider>
       </body>
     </html>
   );
