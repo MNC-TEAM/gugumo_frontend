@@ -92,7 +92,9 @@ export const Gird = styled.div`
 `;
 
 export const InputStyle = styled.div`
-    label {
+    min-width: 0;
+    > label,
+    > p {
         font-size: ${({theme})=>theme.fontSize.buttonMedium};
         font-weight: ${({theme})=>theme.fontWeight.medium};
         padding: 0 ${6/18}em;
@@ -146,7 +148,6 @@ export const CalendarBox = styled.div`
     display: flex;
     align-items: center;
 `;
-
 
 export const DescBox = styled.div`
     margin-top: 87px;
@@ -219,7 +220,6 @@ export const DescInputStyle = styled.div`
 
 `;
 
-
 export const Button = styled.button`
     all: unset;
     font-size: ${({theme})=>theme.fontSize.buttonSemibold};
@@ -241,4 +241,57 @@ export const Button = styled.button`
         background: ${({theme})=>theme.color.Primary};
         color: #fff;
     }
+`;
+
+
+// 모임 요일
+export const DaysGrid = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 0;
+    margin-top: 10px;
+    gap: 10px;
+    justify-content: flex-start;
+`;
+export const DaysCheckbox = styled.div<{$active : boolean}>`
+    
+    flex: none;
+    width: calc(70/16*1em);
+    height: calc(59/16*1em);
+    border-radius: calc(8/16*1em);
+    font-size: ${({theme})=>theme.fontSize.buttonMedium};
+    font-weight: ${({theme})=>theme.fontWeight.medium};
+    color : ${({theme,$active})=>{
+        if($active){
+            return theme.color.OnPrimary;
+        }else{
+            return theme.color.OnSurface;
+        }
+    }};
+    background : ${({theme,$active})=>{
+        if($active){
+            return theme.color.Primary;
+        }else{
+            return theme.color.Surface;
+        }
+    }};
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    transition: all.4s;
+    transition-property: color,background;
+
+    &:hover {
+        color : ${({theme})=>theme.color.OnPrimary};
+        background : ${({theme})=>theme.color.Primary};
+    }
+
+
+    @media screen and (max-width:820px) {
+        font-size: 14px;
+    }
+
 `;

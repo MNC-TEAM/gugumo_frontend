@@ -1,23 +1,14 @@
-"use client"
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
-import { useAppSelector } from "@/store/hook";
-import { redirect } from "next/navigation";
+import PrivateRoute from "../components/auth/PrivateRoute/PrivateRoute";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-    
-    const user = useAppSelector(state=>state.user);
 
-    if(!user){
-        alert('로그인을 하셔야합니다.');
-        return redirect('/');
-    } 
-   
     return (
-        <>
+        <PrivateRoute>
             <Header/>
                 {children}
             <Footer/>
-        </>
+        </PrivateRoute>
     )
 }
