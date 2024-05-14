@@ -87,7 +87,7 @@ export default function Post({params} : {params : {postid : string}}) {
       console.log('서버 에러');
     });
 
-  },[params.postid]);
+  },[params.postid,setValue,user]);
 
   const onSubmitHanlder = (event : any)=>{
 

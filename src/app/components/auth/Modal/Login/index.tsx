@@ -9,6 +9,7 @@ import Primary from '../../../common/Button/Primary/Primary'
 import { Input } from '@/app/components/common/Input/Input'
 import axios from 'axios'
 import { loginAction } from '@/store/features/auth/user'
+import { BaseModalBackground } from 'styled-react-modal'
 
 export default function Login() {
 
@@ -55,44 +56,46 @@ export default function Login() {
 
   return (
     
-    <S.StyledModal
-      isOpen={login}
-    >
-      <M.CloseStyle
-        onClick={()=>dispatch(onClose())}
+    <BaseModalBackground>
+      <S.StyledModal
+        isOpen={login}
       >
-        <img src="/asset/icon/close.svg" alt="취소버튼" />
-      </M.CloseStyle>
+        <M.CloseStyle
+          onClick={()=>dispatch(onClose())}
+        >
+          <img src="/asset/icon/close.svg" alt="취소버튼" />
+        </M.CloseStyle>
 
-      <S.Logo>
-        <img src="/asset/image/icon.png" alt="아이콘" />
-      </S.Logo>
+        <S.Logo>
+          <img src="/asset/image/icon.png" alt="아이콘" />
+        </S.Logo>
 
-      <M.TitleStyle>로그인</M.TitleStyle>
+        <M.TitleStyle>로그인</M.TitleStyle>
 
-      <M.Form onSubmit={handleSubmit(onSubmit)}>
-        <M.InputBox>
-          <Input
-            type="email"
-            placeholder='이메일을 입력해주세요.'
-            register={register('username',{required : false,onChange:()=>setIsEmailError('')})}
-            error={isEmailError}
-          />
-          <Input
-            type="password" 
-            placeholder='비밀번호를 입력하세요.' 
-            register={register('password',{required : false,onChange:()=>setIsPasswordError('')})}
-            error={isPasswordError}
-          />
-        </M.InputBox>
+        <M.Form onSubmit={handleSubmit(onSubmit)}>
+          <M.InputBox>
+            <Input
+              type="email"
+              placeholder='이메일을 입력해주세요.'
+              register={register('username',{required : false,onChange:()=>setIsEmailError('')})}
+              error={isEmailError}
+            />
+            <Input
+              type="password" 
+              placeholder='비밀번호를 입력하세요.' 
+              register={register('password',{required : false,onChange:()=>setIsPasswordError('')})}
+              error={isPasswordError}
+            />
+          </M.InputBox>
 
-        <Primary type="submit">
-          로그인 하기
-        </Primary>
-      </M.Form>
-        
-      <M.SignButton onClick={()=>dispatch(onSignup())}>회원가입 하기</M.SignButton>
-    </S.StyledModal>
+          <Primary type="submit">
+            로그인 하기
+          </Primary>
+        </M.Form>
+          
+        <M.SignButton onClick={()=>dispatch(onSignup())}>회원가입 하기</M.SignButton>
+      </S.StyledModal>
+    </BaseModalBackground>
     
   )
 }
