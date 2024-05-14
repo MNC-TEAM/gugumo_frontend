@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Primary from './Primary';
+import { MouseEventHandler } from 'react';
 
 export interface PrimaryType {
   type?: "button" | "submit" | "reset",
+  onClick? : MouseEventHandler<HTMLButtonElement>,
   children : React.ReactNode
 }
 

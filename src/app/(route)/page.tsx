@@ -66,6 +66,7 @@ export default function Home() {
 
       if(status === "success"){
         const {content,pageable} = data;
+        console.log(content);
         setContent(content);
         setPageable(pageable);
       }else if(status === "fail"){
@@ -195,7 +196,7 @@ export default function Home() {
             </S.Grid>
 
             <S.White>
-              <WhiteBtn align="right" href={'/write'} edit={true}>글쓰기</WhiteBtn>
+              <WhiteBtn align="right" href={'/post/write'} edit={true}>글쓰기</WhiteBtn>
             </S.White>
 
             <S.Paging>
