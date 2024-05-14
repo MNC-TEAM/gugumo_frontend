@@ -3,7 +3,7 @@ import * as S from "../../write/style";
 import { Wrap } from "@/styles/global";
 import DownIcon from "@asset/icon/down.svg";
 import CalenderIcon from "@asset/icon/calender.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Calendar from "react-calendar";
 import moment from "moment";
 import Prev from "@/app/components/common/Button/Prev/Prev";
@@ -15,17 +15,14 @@ import { useRouter } from "next/navigation";
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-export default function Edit({param} : {param : {postid : string}}) {
+export default function Wrtie() {
 
   const router = useRouter();
 
-  const edit = useAppSelector(state=>state.edit);
   const user = useAppSelector(state=>state.user);
 
   const {register,handleSubmit,watch} = useForm({
-    defaultValues : {
-      meetingType : edit.
-    }
+    
   });
   const meetingTypeWatch = watch('meetingType','SHORT');
 
@@ -304,7 +301,7 @@ export default function Edit({param} : {param : {postid : string}}) {
 
           </S.DescBox>
           
-          <S.Button type="submit">수정하기</S.Button>
+          <S.Button type="submit">작성하기</S.Button>
         </form>
 
       </Wrap>
