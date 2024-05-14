@@ -14,7 +14,7 @@ export default function Sign() {
 
   const {signup} = useAppSelector((state)=>state.modal);
   const dispatch = useAppDispatch();
-  const {register,handleSubmit} = useForm();
+  const {register,handleSubmit,setValue} = useForm();
   const [nickNameError,setNickNameError] = useState('');
   const [emailError,setEmailError] = useState('');
   const [isError,setIsError] = useState('');
@@ -48,6 +48,7 @@ export default function Sign() {
         alert('회원가입에 성공하였습니다.');
         return dispatch(onClose());
       }else if(status === "fail"){
+        setValue('username','');
         return alert(message);
       }
 

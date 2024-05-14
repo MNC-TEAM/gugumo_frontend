@@ -33,7 +33,7 @@ export default function Header( {postion} : HeaderType ) {
               <img onClick={()=>setUserMenuHidden(!userMenuHidden)} src="/asset/icon/user.svg" alt="유저" width={36} />
               <ul hidden={userMenuHidden}>
                 <li>
-                  <Link href={"/mypage"}>작성글</Link>
+                  <Link href={"/post/list"}>작성글</Link>
                 </li>
                 <li>
                   <Link href={"/mypage"}>회원정보</Link>
