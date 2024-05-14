@@ -1,5 +1,4 @@
 import * as S from "../style";
-import WhiteBtn from "../../../common/Button/WhiteBtn";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useAppSelector } from "@/store/hook";
