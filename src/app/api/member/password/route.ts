@@ -10,8 +10,6 @@ export const PATCH = async (req : NextRequest)=>{
     const token = headersList.get('authorization');
     const body = await req.json();
 
-    console.log(body);
-
     try{
         const response = await axios.patch(`${process.env.API_URL}/api/v1/member/updatePassword`,body,{
             headers : {
