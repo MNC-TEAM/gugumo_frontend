@@ -3,7 +3,7 @@ import { NextApiRequest } from "next";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
-export const GET = async (request : NextApiRequest)=>{
+export const GET = async ()=>{
 
     const headersList = headers();
     const token = headersList.get('authorization');

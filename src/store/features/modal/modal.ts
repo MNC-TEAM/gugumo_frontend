@@ -4,25 +4,29 @@ const modalSlice = createSlice({
     name : "modal",
     initialState : {
         login : false,
-        signup : false
+        signup : false,
+        popup : true,
     },
     reducers : {
         onLogin : ()=>{
             return {
                 login : true,
-                signup : false
+                signup : false,
+                popup : false,
             }
         },
         onSignup : ()=>{
             return {
                 login : false,
-                signup : true
+                signup : true,
+                popup : false,
             }
         },
         onClose : ()=>{
             return {
                 login : false,
-                signup : false
+                signup : false,
+                popup : false,
             }
         }
     }

@@ -9,6 +9,7 @@ import Primary from '../../../common/Button/Primary/Primary'
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
 import { Input } from '@/app/components/common/Input/Input';
+import { BaseModalBackground } from 'styled-react-modal';
 
 export default function Sign() {
 
@@ -61,52 +62,54 @@ export default function Sign() {
 
   return (
     
-    <S.StyledModal
-      isOpen={signup}
-    >
-      <M.CloseStyle
-        onClick={()=>dispatch(onClose())}
+    <BaseModalBackground>
+      <S.StyledModal
+        isOpen={signup}
       >
-        <img src="/asset/icon/close.svg" alt="취소버튼" />
-      </M.CloseStyle>
-      
-      <M.TitleStyle>회원가입</M.TitleStyle>
-
-      <M.Form onSubmit={handleSubmit(onSubmit)}>
-        <M.InputBox>
-          <Input 
-            type="text" 
-            placeholder='닉네임을 입력하세요' 
-            register={register('nickname',{required : false,onChange: ()=>setNickNameError('')})}
-            error={nickNameError}
-          />
-          <Input 
-            type="email" 
-            placeholder='이메일을 입력하세요.' 
-            register={register('username',{required : false,onChange: ()=>setEmailError('')})} 
-            error={emailError}
-          />
-          <Input
-            type="password" 
-            placeholder='비밀번호' 
-            register={register('password',{required : false,onChange: ()=>setIsError('')})}
-          />
-          <Input
-            type="password" 
-            placeholder='비밀번호 확인' 
-            register={register('confirmPassword',{required : false,onChange: ()=>setIsError('')})}
-            error={isError}
-          />
-        </M.InputBox>
-
-        <Primary type="submit">
-          회원가입 하기
-        </Primary>
+        <M.CloseStyle
+          onClick={()=>dispatch(onClose())}
+        >
+          <img src="/asset/icon/close.svg" alt="취소버튼" />
+        </M.CloseStyle>
         
-      </M.Form>
-      
-      <M.SignButton onClick={()=>dispatch(onLogin())}>로그인 하기</M.SignButton>
-    </S.StyledModal>
+        <M.TitleStyle>회원가입</M.TitleStyle>
+
+        <M.Form onSubmit={handleSubmit(onSubmit)}>
+          <M.InputBox>
+            <Input 
+              type="text" 
+              placeholder='닉네임을 입력하세요' 
+              register={register('nickname',{required : false,onChange: ()=>setNickNameError('')})}
+              error={nickNameError}
+            />
+            <Input 
+              type="email" 
+              placeholder='이메일을 입력하세요.' 
+              register={register('username',{required : false,onChange: ()=>setEmailError('')})} 
+              error={emailError}
+            />
+            <Input
+              type="password" 
+              placeholder='비밀번호' 
+              register={register('password',{required : false,onChange: ()=>setIsError('')})}
+            />
+            <Input
+              type="password" 
+              placeholder='비밀번호 확인' 
+              register={register('confirmPassword',{required : false,onChange: ()=>setIsError('')})}
+              error={isError}
+            />
+          </M.InputBox>
+
+          <Primary type="submit">
+            회원가입 하기
+          </Primary>
+          
+        </M.Form>
+        
+        <M.SignButton onClick={()=>dispatch(onLogin())}>로그인 하기</M.SignButton>
+      </S.StyledModal>
+    </BaseModalBackground>
     
   )
 }

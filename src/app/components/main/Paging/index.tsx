@@ -24,7 +24,7 @@ export default function Paging({page,setPage,pageable} : {page : number, setPage
     setStartPage(startPage);
     setEndPage(endPage);
 
-  },[pageable]);
+  },[pageable,page]);
 
   const clickHandler = (page : number)=>{
     setPage(page);

@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   img {
     max-width: 100%;
     height: auto;
+    vertical-align: top;
   }
 
   button {
@@ -24,7 +25,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
 `;
-
 
 export const Wrap = styled.div`
   width: 95%;
