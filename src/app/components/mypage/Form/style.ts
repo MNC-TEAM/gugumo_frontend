@@ -151,3 +151,21 @@ export const InputFlex = styled.div`
     }
 
 `;
+
+
+export const WhiteBtn = styled.button`
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color : #4FAAFF;
+    font-size: ${({theme})=>theme.fontSize.buttonMedium};
+    font-weight: ${({theme})=>theme.fontWeight.medium};
+    border: 1px solid #4FAAFF;
+    background: #FFFFFF;
+    border-radius: 4px;
+    width: ${127/18}em;
+    height: ${52/18}em;
+    justify-content: center;
+    cursor: pointer;
+    margin: 28px auto 0;
+`;

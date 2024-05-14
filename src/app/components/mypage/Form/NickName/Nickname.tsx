@@ -1,5 +1,4 @@
 import * as S from "../style";
-import WhiteBtn from "../../../common/Button/WhiteBtn";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useAppSelector } from "@/store/hook";
@@ -16,7 +15,9 @@ export default function Nickname() {
   const submitHanlder = (event : any)=>{
     const {nickname} = event;
 
-    axios.patch('/api/member/mypage',{
+    console.log(nickname);
+
+    axios.patch('/api/member/nickname',{
       nickname
     },{
       headers : {
@@ -24,12 +25,14 @@ export default function Nickname() {
       }
     })
     .then(res=>{
-      const {} = res.data;
-      console.log(res.data);
+      const {status} = res.data;
+      if(status === "success"){
+        alert('닉네임 변경이 완료되었습니다.');
+      }
     })
     .catch(()=>{
       console.log('서버에러');
-    })
+    });
 
   }
 
@@ -46,7 +49,7 @@ export default function Nickname() {
             </S.InputLayout>
         </S.Layout>
 
-        <WhiteBtn type="submit" align="center">개인정보 수정</WhiteBtn>
+        <S.WhiteBtn type="submit">개인정보 수정</S.WhiteBtn>
     </S.Form>
   )
 }
