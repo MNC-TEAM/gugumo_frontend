@@ -3,8 +3,9 @@ import { useAppDispatch, useAppSelector } from '@/store/hook'
 import * as S from "./style";
 import Link from 'next/link'
 import { onLogin } from '@/store/features/modal/modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { logoutAction } from '@/store/features/auth/user';
+import { usePathname } from 'next/navigation';
 
 interface HeaderType {
   postion? : boolean
@@ -15,6 +16,11 @@ export default function Header( {postion} : HeaderType ) {
   const user = useAppSelector(state=>state.user);
   const [userMenuHidden,setUserMenuHidden] = useState(true);
   const dispatch = useAppDispatch();
+  const pathname = usePathname();
+
+  useEffect(()=>{
+    setUserMenuHidden(true);
+  },[pathname]);
 
   return (
     <S.HeaderStyle $postion={postion}>
