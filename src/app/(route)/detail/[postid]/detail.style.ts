@@ -167,6 +167,70 @@ export const Desc = styled.div`
 `;
 
 
+export const BtnList = styled.div`
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+`;
+
+export const Btn = styled.button<{$type? : string}>`
+    font-size: ${({theme})=>theme.fontSize.buttonSemibold};
+    font-weight: ${({theme})=>theme.fontWeight.semibold};
+    color: ${({theme,$type})=>{
+        let type;
+        switch($type){
+            case "error":
+                type = theme.color.OnError
+                break;
+            case "edit":
+                type = theme.color.OnSurface
+                break;
+            default :
+                type = theme.color.Primary
+                break;
+        }
+        
+        return type;
+        
+    }};
+    border: 1px solid ${({theme,$type})=>{
+        let type;
+        switch($type){
+            case "error":
+                type = theme.color.Error
+                break;
+            case "edit":
+                type = theme.color.Surface
+                break;
+            default :
+                type = theme.color.Primary
+                break;
+        }
+        return type;
+    }};
+    background: ${({theme,$type})=>{
+        let type;
+        switch($type){
+            case "error":
+                type = theme.color.Error
+                break;
+            case "edit":
+                type = theme.color.Surface
+                break;
+            default :
+                type = theme.color.OnPrimary
+                break;
+        }
+        return type;
+    }};
+    padding: 14px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .4s;
+    transition-property: background,color;
+`;
+
+
 /* export const LinkStyle = styled(Link)`
     all: unset;
     font-size: ${({theme})=>theme.fontSize.buttonSemibold};

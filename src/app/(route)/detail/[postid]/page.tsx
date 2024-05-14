@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { GAMETYPE, LOCATION, MEETINGTYPE } from "@/app/constant/meetingQuery";
 import { useDispatch } from "react-redux";
 import { onChange } from "@/store/features/edit/edit";
+import Primary from "@/app/components/common/Button/Primary/Primary";
 
 export default function Detail({ params }: { params: { postid: string } }) {
 
@@ -50,8 +51,7 @@ export default function Detail({ params }: { params: { postid: string } }) {
   }
 
   const editClickHandler = ()=>{
-    dispatch(onChange(meeting));
-    return router.push(`/edit/${params.postid}`);
+    return router.push(`/post/edit/${params.postid}`);
   }
 
   useEffect(()=>{
@@ -163,15 +163,15 @@ export default function Detail({ params }: { params: { postid: string } }) {
                 {meeting?.content}
               </S.Desc>
 
-              <div style={{display : "grid", gridTemplateColumns : "repeat(3,1fr)"}}>
-                {
-                  meeting?.yours && <button onClick={()=>removeHanlder(params.postid)}>삭제</button>
+              <S.BtnList>
+                { 
+                  meeting?.yours && <S.Btn $type={"error"} onClick={()=>removeHanlder(params.postid)}>삭제 하기</S.Btn>
                 }
-                <button onClick={()=>router.push('/')}>목록</button>
+                <S.Btn onClick={()=>router.push('/')}>목록 보기</S.Btn>
                 {
-                  meeting?.yours && <button onClick={editClickHandler}>수정</button>
+                  meeting?.yours && <S.Btn $type={"edit"} onClick={editClickHandler}>수정 하기</S.Btn>
                 }
-              </div>
+              </S.BtnList>
 
             </Wrap>
           </S.DetailStyle>

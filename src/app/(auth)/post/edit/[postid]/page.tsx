@@ -1,9 +1,9 @@
 "use client"
-import * as S from "./style";
+import * as S from "../../style";
 import { Wrap } from "@/styles/global";
 import DownIcon from "@asset/icon/down.svg";
 import CalenderIcon from "@asset/icon/calender.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import moment from "moment";
 import Prev from "@/app/components/common/Button/Prev/Prev";
@@ -15,13 +15,40 @@ import { useRouter } from "next/navigation";
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-export default function Wrtie() {
+export default function Post({params} : {params : {postid : string}}) {
 
   const router = useRouter();
-
+  
   const user = useAppSelector(state=>state.user);
 
-  const {register,handleSubmit,watch} = useForm();
+  const {register,handleSubmit,watch,setValue} = useForm();
+  
+  useEffect(()=>{
+
+    axios.get(`/api/post/detail/${params.postid}`,{
+      headers : {
+        Authorization : user
+      }
+    })
+    .then(res=>{
+
+      const {status,data,message} = res.data;
+
+      if(status === "success"){
+        Object.keys(data).forEach((key) => { // 가져온 데이터의 각 키와 값을 반복하여 setValue로 설정합니다.
+          setValue(key, data[key]);
+        });
+      }else{
+        console.log(message);
+      }
+
+    })
+    .catch(err=>{
+      console.log('서버 에러');
+    });
+
+  },[params.postid]);
+  
   const meetingTypeWatch = watch('meetingType','SHORT');
 
   const [meetingDate, onMeetingDate] = useState<Value>(new Date());
@@ -66,8 +93,10 @@ export default function Wrtie() {
       return alert('구기종목을 선택해주세요.');
     }
 
-    if(meetingTime === ""){
-      return alert('시간대을 선택해주세요.');
+    if(meetingType === "LONG"){
+      if(meetingTime === ""){
+        return alert('시간대을 선택해주세요.');
+      }
     }
 
     if(meetingMemberNum === ""){
@@ -86,7 +115,7 @@ export default function Wrtie() {
       return alert('내용을 입력해주세요.');
     }
 
-    axios.post('/api/post/write',{
+    axios.patch('/api/post/write',{
       meetingType,
       location,
       gameType,
@@ -99,15 +128,19 @@ export default function Wrtie() {
       meetingDeadline : moment(meetingDeadline as Date).format("YYYY-MM-DD"),
       meetingDays : meetingDays.join(';')
     },{
+      params : {
+        postId : params.postid
+      },
       headers : {
         Authorization : user
       }
     })
     .then(res=>{
       const {status} = res.data;
+      console.log(res.data);
       if(status === "success"){
-        alert('작성이 완료 되었습니다.');
-        return router.push('/');
+        alert('수정이 완료 되었습니다.');
+        router.push(`/detail/${params.postid}`);
       }
     })
     .catch(err=>{
@@ -179,39 +212,6 @@ export default function Wrtie() {
             </S.InputStyle>
 
             <S.InputStyle>
-              <label htmlFor="meetingTime">시간대</label>
-              <S.InputBox>
-                <select id="meetingTime" {...register('meetingTime')}>
-                  <option value="">시간대을 선택해주세요.</option>
-                  <option value="1">1시</option>
-                  <option value="2">2시</option>
-                  <option value="3">3시</option>
-                  <option value="4">4시</option>
-                  <option value="5">5시</option>
-                  <option value="6">6시</option>
-                  <option value="7">7시</option>
-                  <option value="8">8시</option>
-                  <option value="9">9시</option>
-                  <option value="10">10시</option>
-                  <option value="11">11시</option>
-                  <option value="12">12시</option>
-                  <option value="13">13시</option>
-                  <option value="14">14시</option>
-                  <option value="15">15시</option>
-                  <option value="16">16시</option>
-                  <option value="17">17시</option>
-                  <option value="18">18시</option>
-                  <option value="19">19시</option>
-                  <option value="20">20시</option>
-                  <option value="21">21시</option>
-                  <option value="22">22시</option>
-                  <option value="23">23시</option>
-                </select>
-                <DownIcon stroke={'#878787'} />
-              </S.InputBox>
-            </S.InputStyle>
-
-            <S.InputStyle>
               <label htmlFor="meetingMemberNum">모집인원</label>
               <S.InputBox>
                 <select id="meetingMemberNum" {...register('meetingMemberNum')}>
@@ -242,20 +242,54 @@ export default function Wrtie() {
                 </S.InputBox>
               </S.InputStyle>
               :
-              <S.InputStyle>
-                <p>모임 요일</p>
-                <S.DaysGrid>
-                  {
-                    ['월','화','수','목','금','토','일'].map((el,index)=>
-                      <S.DaysCheckbox 
-                        onClick={()=>meetingDaysClickHanlder(el)} 
-                        key={index}
-                        $active={meetingDays.includes(el)}
-                      >{el}</S.DaysCheckbox>
-                    )
-                  }
-                </S.DaysGrid>
-              </S.InputStyle>
+              <>
+                <S.InputStyle>
+                  <label htmlFor="meetingTime">시간대</label>
+                  <S.InputBox>
+                    <select id="meetingTime" {...register('meetingTime')}>
+                      <option value="">시간대을 선택해주세요.</option>
+                      <option value="1">1시</option>
+                      <option value="2">2시</option>
+                      <option value="3">3시</option>
+                      <option value="4">4시</option>
+                      <option value="5">5시</option>
+                      <option value="6">6시</option>
+                      <option value="7">7시</option>
+                      <option value="8">8시</option>
+                      <option value="9">9시</option>
+                      <option value="10">10시</option>
+                      <option value="11">11시</option>
+                      <option value="12">12시</option>
+                      <option value="13">13시</option>
+                      <option value="14">14시</option>
+                      <option value="15">15시</option>
+                      <option value="16">16시</option>
+                      <option value="17">17시</option>
+                      <option value="18">18시</option>
+                      <option value="19">19시</option>
+                      <option value="20">20시</option>
+                      <option value="21">21시</option>
+                      <option value="22">22시</option>
+                      <option value="23">23시</option>
+                    </select>
+                    <DownIcon stroke={'#878787'} />
+                  </S.InputBox>
+                </S.InputStyle>
+                <S.InputStyle>
+                  <p>모임 요일</p>
+                  <S.DaysGrid>
+                    {
+                      ['월','화','수','목','금','토','일'].map((el,index)=>
+                        <S.DaysCheckbox 
+                          onClick={()=>meetingDaysClickHanlder(el)} 
+                          key={index}
+                          $active={meetingDays.includes(el)}
+                        >{el}</S.DaysCheckbox>
+                      )
+                    }
+                  </S.DaysGrid>
+                </S.InputStyle>
+              </>
             }
             
             <S.InputStyle>
@@ -299,7 +333,7 @@ export default function Wrtie() {
 
           </S.DescBox>
           
-          <S.Button type="submit">작성하기</S.Button>
+          <S.Button type="submit">수정하기</S.Button>
         </form>
 
       </Wrap>

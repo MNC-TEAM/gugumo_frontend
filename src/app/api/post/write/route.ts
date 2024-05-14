@@ -26,6 +26,33 @@ export const POST = async (req : NextRequest)=>{
 
 }
 
+export const PATCH = async (req : NextRequest)=>{
+
+    const body = await req.json();
+    const searchParams = req.nextUrl.searchParams;
+    const postId = searchParams.get('postId');
+
+    const headerList = headers();
+    const token = headerList.get("authorization");
+
+    if(!process.env.API_URL) throw new Error('env 에러가 발생했습니다.');
+
+    try {
+        const response = await axios.patch(`${process.env.API_URL}/api/v1/meeting/${postId}`,body,{
+            headers : {
+                Authorization : token
+            }
+        });
+        return new NextResponse(JSON.stringify(response.data));
+    }
+    catch(err : any){
+        console.log(err);
+        const {response} = err;
+        return new NextResponse(JSON.stringify(response.data));
+    }
+
+}
+
 
 export const DELETE = async (req : NextRequest)=>{
 

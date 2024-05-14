@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { WhiteButton } from "../../common/Button/WhiteBtn/style";
+import { WriteStyle } from "../../common/Button/WhiteBtn/style";
 
 export const Form = styled.form`
     
@@ -9,7 +9,7 @@ export const Form = styled.form`
         margin-top: 42px;
     }
 
-    ${WhiteButton} {
+    ${WriteStyle} {
         margin-top: 24px;
     }
 
@@ -19,7 +19,7 @@ export const Form = styled.form`
             margin-top: 26px;
         }
 
-        ${WhiteButton} {
+        ${WriteStyle} {
             margin: 20px 0 0 auto;
         }
     }
