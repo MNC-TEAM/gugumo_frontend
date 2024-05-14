@@ -1,13 +1,45 @@
-import { Flex,LinkStyle } from "./style";
+import { pageableType } from "@/app/types/meeting";
+import * as S from "./style";
+import { useEffect, useState } from "react";
 
-export default function Paging() {
+export default function Paging({page,setPage,pageable} : {page : number, setPage : any, pageable : pageableType | null}) {
+
+  const [startPage,setStartPage] = useState(0);
+  const [endPage,setEndPage] = useState(0);
+
+  useEffect(()=>{
+
+    if (!pageable) return;
+
+    const viewPage = 5;
+
+    const {totalPages} = pageable;
+
+    const totalGroups = Math.ceil(totalPages / viewPage);
+    const currentGroups = Math.ceil(page / viewPage);
+  
+    const startPage = (currentGroups -1) * viewPage + 1;
+    const endPage = Math.min(startPage + viewPage - 1, totalPages);
+
+    setStartPage(startPage);
+    setEndPage(endPage);
+
+  },[pageable]);
+
+  const clickHandler = (page : number)=>{
+    setPage(page);
+  }
+
   return (
-    <Flex>
-        <LinkStyle href={"1"} $active={true} >1</LinkStyle>
-        <LinkStyle href={"2"}>2</LinkStyle>
-        <LinkStyle href={"3"}>3</LinkStyle>
-        <LinkStyle href={"4"}>4</LinkStyle>
-        <LinkStyle href={"5"}>5</LinkStyle>
-    </Flex>
+    <S.Flex>
+      {Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index).map((e) => (
+          <S.Btn 
+            type="button"
+            key={e} 
+            onClick={()=>clickHandler(e)} 
+            $active={page === (e) ? true : false} 
+          >{e}</S.Btn>
+        ))}
+    </S.Flex>
   )
 }

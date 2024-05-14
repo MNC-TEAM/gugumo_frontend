@@ -2,7 +2,11 @@ import axios from "axios";
 import { headers } from "next/headers"
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async ()=>{
+export const GET = async (req : NextRequest)=>{
+
+    const searchParams = req.nextUrl.searchParams;
+    const page = searchParams.get('page');
+    const q = searchParams.get('q');
 
     const headerList = headers();
     const token = headerList.get("authorization");
@@ -11,6 +15,10 @@ export const GET = async ()=>{
 
     try {
         const response = await axios.get(`${process.env.API_URL}/api/v1/bookmark`,{
+            params :{
+                page,
+                q
+            },
             headers : {
                 Authorization : token
             }

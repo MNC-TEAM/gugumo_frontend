@@ -6,14 +6,18 @@ import { Wrap } from "@/styles/global";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { meetingType } from "@/app/types/meeting";
+import { meetingType, pageableType } from "@/app/types/meeting";
 import { useAppSelector } from "@/store/hook";
+import Paging from "@/app/components/main/Paging";
 
 export default function Home() {
 
   const user = useAppSelector(state=>state.user);
 
   const {register,handleSubmit} = useForm();
+
+  const [page,setPage] = useState(1);
+  const [pageable,setPageable] = useState<pageableType | null>(null);
 
   const [q,setQ] = useState('');
   const [content,setContent] = useState<meetingType[]>([]);
@@ -27,6 +31,7 @@ export default function Home() {
 
     axios.get('/api/post/bookmark',{
       params : {
+        page,
         q
       },
       headers : {
@@ -40,7 +45,9 @@ export default function Home() {
       if(status === "success"){
         const {content,pageable} = data;
         setContent(content);
-      }else{
+        setPageable(pageable);
+      }else if(status === "fail"){
+        alert(message);
         setContent([]);
       }
 
@@ -49,7 +56,7 @@ export default function Home() {
       console.log('서버 에러');
     });
 
-  },[q])
+  },[q,user,page])
 
   return (
     <S.MainStyle>
@@ -67,26 +74,30 @@ export default function Home() {
 
         <B.BookMakrLayout>
           
-            {
-              content.length > 0 ?
-                <S.Grid>
-                  {content.map((el)=>
-                    <Card
-                      bookmarkStatus={el.bookmarked}
-                      key={el.postId}
-                      postId={el.postId}
-                      status={el.meetingStatus}
-                      gameType={el.gameType}
-                      location={el.location}
-                      title={el.title}
-                      meetingDateTime={el.meetingDateTime}
-                      meetingMemberNum={el.meetingMemberNum}
-                      meetingDeadline={el.meetingDeadline}
-                    />
-                  )}
-                </S.Grid>
-              : <p style={{textAlign : "center"}}>북마크가 존재하지 않습니다.</p>
-            }
+          {
+            content.length > 0 ?
+              <S.Grid>
+                {content.map((el)=>
+                  <Card
+                    bookmarkStatus={el.bookmarked}
+                    key={el.postId}
+                    postId={el.postId}
+                    status={el.meetingStatus}
+                    gameType={el.gameType}
+                    location={el.location}
+                    title={el.title}
+                    meetingDateTime={el.meetingDateTime}
+                    meetingMemberNum={el.meetingMemberNum}
+                    meetingDeadline={el.meetingDeadline}
+                  />
+                )}
+              </S.Grid>
+            : <p style={{textAlign : "center"}}>북마크가 존재하지 않습니다.</p>
+          }
+            
+          <S.Paging>
+            <Paging page={page} setPage={setPage} pageable={pageable}/>
+          </S.Paging>
           
         </B.BookMakrLayout>
 

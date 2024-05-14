@@ -6,19 +6,23 @@ import Tag from "../components/common/Button/Tag";
 import Card from "../components/common/Card/Layout";
 import * as S from "../components/main/style";
 import { Wrap } from "@/styles/global";
-import Link from "next/link";
 import axios from "axios";
 import Header from "../components/common/Header";
 import { useForm } from "react-hook-form";
 import { GAMETYPE, LOCATION, MEETINGSTATUS } from "../constant/meeting";
-import { meetingType } from "../types/meeting";
+import { meetingType, pageableType } from "../types/meeting";
 import { useAppSelector } from "@/store/hook";
+import WhiteBtn from "../components/common/Button/WhiteBtn";
+import Paging from "../components/main/Paging";
 
 export default function Home() {
   
   const user = useAppSelector(state=>state.user);
 
   const {register,handleSubmit} = useForm();
+
+  const [page,setPage] = useState(1);
+  const [pageable,setPageable] = useState<pageableType | null>(null);
 
   const [meetingstatus,setMeetingstatus] = useState('RECRUIT');
   const meetingstatusClickHandler = (event : string)=>{
@@ -44,13 +48,16 @@ export default function Home() {
   }
 
   useEffect(()=>{
-
     axios.get('/api/post/get',{
       params : {
+        page,
         meetingstatus,
-        q
+        q,
         // location,
         // gametype
+      },
+      headers : {
+        Authorization : user
       }
     })
     .then((res)=>{
@@ -59,9 +66,10 @@ export default function Home() {
 
       if(status === "success"){
         const {content,pageable} = data;
-        console.log(content);
         setContent(content);
-      }else{
+        setPageable(pageable);
+      }else if(status === "fail"){
+        alert(message);
         setContent([]);
       }
 
@@ -70,7 +78,7 @@ export default function Home() {
       console.log('서버 에러');
     });
 
-  },[meetingstatus,location,gametype,q,user]);
+  },[meetingstatus,location,gametype,q,user,page]);
 
   return (
     <>
@@ -186,7 +194,13 @@ export default function Home() {
               }
             </S.Grid>
 
-            <Link href={'/write'}>글쓰기</Link>
+            <S.White>
+              <WhiteBtn align="right" href={'/write'} edit={true}>글쓰기</WhiteBtn>
+            </S.White>
+
+            <S.Paging>
+              <Paging page={page} setPage={setPage} pageable={pageable}/>
+            </S.Paging>
             
           </S.Layout>
 

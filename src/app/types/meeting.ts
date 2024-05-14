@@ -9,3 +9,23 @@ export interface meetingType {
     meetingDateTime: string;
     bookmarked: boolean;
 }
+
+
+export interface pageableType {
+    number: number;
+    size: number;
+    sort: Sort;
+    first: boolean;
+    last: boolean;
+    hasNext: boolean;
+    totalPages: number;
+    totalElements: number;
+    numberOfElements: number;
+    empty: boolean;
+  }
+  
+  export interface Sort {
+    sorted: boolean;
+    empty: boolean;
+    unsorted: boolean;
+  }
