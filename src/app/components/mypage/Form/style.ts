@@ -61,7 +61,7 @@ export const Layout = styled.div`
 export const InputLayout = styled.div`
     min-width: 0;
     flex: 1;
-    p {
+    p,label {
         font-size: ${({theme})=>theme.fontSize.buttonMedium};
         font-weight: ${({theme})=>theme.fontWeight.medium};
         color: #000;

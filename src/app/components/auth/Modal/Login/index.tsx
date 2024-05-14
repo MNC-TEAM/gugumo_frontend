@@ -12,11 +12,12 @@ import { loginAction } from '@/store/features/auth/user'
 
 export default function Login() {
 
-  const {login} = useAppSelector((state)=>state.modal);
   const dispatch = useAppDispatch();
+  const {register,handleSubmit} = useForm();
+  const {login} = useAppSelector((state)=>state.modal);
+
   const [isEmailError,setIsEmailError] = useState('');
   const [isPasswordError,setIsPasswordError] = useState('');
-  const {register,handleSubmit} = useForm();
 
   const onSubmit = (event : any)=>{
 
