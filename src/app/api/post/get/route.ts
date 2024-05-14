@@ -1,11 +1,16 @@
 import axios from "axios";
+import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server"
 
 export const GET = async (request : NextRequest)=>{
 
+    const headerList = headers();
+    const token = headerList.get("authorization");
+
     const searchParams = request.nextUrl.searchParams;
     const page = searchParams.get('page');
     const meetingstatus = searchParams.get('meetingstatus');
+    const sort = searchParams.get('sort');
     const location = searchParams.get('location');
     const gametype = searchParams.get('gametype');
     const q = searchParams.get('q');
@@ -16,10 +21,14 @@ export const GET = async (request : NextRequest)=>{
         const response = await axios.get(`${process.env.API_URL}/api/v1/meeting`,{
             params :{
                 page,
-                q,
                 meetingstatus,
+                q,
                 location,
-                gametype
+                gametype,
+                sort
+            },
+            headers : {
+                Authorization : token
             }
         });
         return new NextResponse(JSON.stringify(response.data));

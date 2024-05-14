@@ -32,14 +32,18 @@ export default function Paging({page,setPage,pageable} : {page : number, setPage
 
   return (
     <S.Flex>
-      {Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index).map((e) => (
-          <S.Btn 
-            type="button"
-            key={e} 
-            onClick={()=>clickHandler(e)} 
-            $active={page === (e) ? true : false} 
-          >{e}</S.Btn>
-        ))}
+      {
+        startPage !== 0 ?
+          Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index).map((e) => (
+            <S.Btn 
+              type="button"
+              key={e} 
+              onClick={()=>clickHandler(e)} 
+              $active={page === (e) ? true : false} 
+            >{e}</S.Btn>
+          ))
+        : null
+      }
     </S.Flex>
   )
 }

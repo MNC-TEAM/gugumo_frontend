@@ -92,12 +92,15 @@ export default function Home() {
                   />
                 )}
               </S.Grid>
-            : <p style={{textAlign : "center"}}>북마크가 존재하지 않습니다.</p>
+            : <p style={{textAlign : 'center'}}>북마크가 존재하지 않습니다.</p>
           }
             
-          <S.Paging>
-            <Paging page={page} setPage={setPage} pageable={pageable}/>
-          </S.Paging>
+          {
+            !pageable?.empty &&
+              <S.Paging>
+                <Paging page={page} setPage={setPage} pageable={pageable}/>
+              </S.Paging>
+          }
           
         </B.BookMakrLayout>
 

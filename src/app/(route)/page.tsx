@@ -14,6 +14,7 @@ import { meetingType, pageableType } from "../types/meeting";
 import { useAppSelector } from "@/store/hook";
 import WhiteBtn from "../components/common/Button/WhiteBtn";
 import Paging from "../components/main/Paging";
+import DownIcon from "@asset/icon/down.svg";
 
 export default function Home() {
   
@@ -23,6 +24,9 @@ export default function Home() {
 
   const [page,setPage] = useState(1);
   const [pageable,setPageable] = useState<pageableType | null>(null);
+
+  const [sort,setSort] = useState('NEW');
+  const [sortOpen,setSortOpen] = useState(false);
 
   const [meetingstatus,setMeetingstatus] = useState('RECRUIT');
   const meetingstatusClickHandler = (event : string)=>{
@@ -54,7 +58,8 @@ export default function Home() {
         meetingstatus,
         q,
         location,
-        gametype
+        gametype,
+        sort
       },
       headers : {
         Authorization : user
@@ -66,7 +71,6 @@ export default function Home() {
 
       if(status === "success"){
         const {content,pageable} = data;
-        console.log(content);
         setContent(content);
         setPageable(pageable);
       }else if(status === "fail"){
@@ -79,7 +83,7 @@ export default function Home() {
       console.log('서버 에러');
     });
 
-  },[meetingstatus,location,gametype,q,user,page]);
+  },[meetingstatus,location,gametype,q,user,page,sort]);
 
   return (
     <>
@@ -173,35 +177,55 @@ export default function Home() {
           <S.Layout>
             
             <S.Order>
-              <div>최신순 <img src="/asset/icon/down.svg" alt="순서" /></div>
+              <div>
+                <p onClick={()=>setSortOpen(!sortOpen)}>최신순 <DownIcon stroke="#878787"/></p>
+                {
+                  sortOpen &&
+                  <ul>
+                    <li onClick={()=>{setSort('NEW'); setSortOpen(!sortOpen)}}>최신순</li>
+                    <li onClick={()=>{setSort('LIKE'); setSortOpen(!sortOpen)}}>인기순</li>
+                    <li onClick={()=>{setSort('OLD'); setSortOpen(!sortOpen)}}>오래된순</li>
+                  </ul>
+                }
+              </div>
             </S.Order>
             
-            <S.Grid>
-              {
-                content.map((el)=>
-                  <Card
-                    bookmarkStatus={el.bookmarked}
-                    key={el.postId}
-                    postId={el.postId}
-                    status={el.meetingStatus}
-                    gameType={el.gameType}
-                    location={el.location}
-                    title={el.title}
-                    meetingDateTime={el.meetingDateTime}
-                    meetingMemberNum={el.meetingMemberNum}
-                    meetingDeadline={el.meetingDeadline}
-                  />
-                )
-              }
-            </S.Grid>
+            {
+              content.length > 0 ?
+              <S.Grid>
+                {
+                  content.map(el=>(
+                    <Card
+                      bookmarkStatus={el.bookmarked}
+                      key={el.postId}
+                      postId={el.postId}
+                      status={el.meetingStatus}
+                      gameType={el.gameType}
+                      location={el.location}
+                      title={el.title}
+                      meetingDateTime={el.meetingDateTime}
+                      meetingMemberNum={el.meetingMemberNum}
+                      meetingDeadline={el.meetingDeadline}
+                    />
+                  ))
+                }
+              </S.Grid>
+              : <p style={{marginTop : 28, textAlign : 'center'}}>게시글이 존재하지 않습니다.</p>
+            }
 
             <S.White>
               <WhiteBtn align="right" href={'/post/write'} edit={true}>글쓰기</WhiteBtn>
             </S.White>
 
-            <S.Paging>
-              <Paging page={page} setPage={setPage} pageable={pageable}/>
-            </S.Paging>
+            {
+              pageable?.empty 
+              ?
+                null
+              :
+              <S.Paging>
+                <Paging page={page} setPage={setPage} pageable={pageable}/>
+              </S.Paging>
+            }
             
           </S.Layout>
 
