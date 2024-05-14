@@ -13,14 +13,11 @@ import { useAppSelector } from "@/store/hook";
 import { useRouter } from "next/navigation";
 import { GAMETYPE, LOCATION, MEETINGTYPE } from "@/app/constant/meetingQuery";
 import { useDispatch } from "react-redux";
-import { onChange } from "@/store/features/edit/edit";
-import Primary from "@/app/components/common/Button/Primary/Primary";
 
 export default function Detail({ params }: { params: { postid: string } }) {
 
   const user = useAppSelector(state=>state.user);
   const router = useRouter();
-  const dispatch = useDispatch();
 
   const [meeting,setMeeting] = useState<DetailType | null>(null);
   const [isLoading,setIsLoading] = useState(true);

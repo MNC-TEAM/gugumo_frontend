@@ -1,6 +1,6 @@
-import Header from "../components/common/Header";
-import Footer from "../components/common/Footer";
 import PrivateRoute from "../components/auth/PrivateRoute/PrivateRoute";
+import Footer from "../components/common/Footer";
+import Header from "../components/common/Header";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 
@@ -11,4 +11,5 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <Footer/>
         </PrivateRoute>
     )
+    
 }
