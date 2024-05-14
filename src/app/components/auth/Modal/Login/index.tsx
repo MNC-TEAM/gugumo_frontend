@@ -13,7 +13,7 @@ import { loginAction } from '@/store/features/auth/user'
 export default function Login() {
 
   const dispatch = useAppDispatch();
-  const {register,handleSubmit} = useForm();
+  const {register,handleSubmit,setValue} = useForm();
   const {login} = useAppSelector((state)=>state.modal);
 
   const [isEmailError,setIsEmailError] = useState('');
@@ -37,6 +37,13 @@ export default function Login() {
     })
     .then(({data})=>{
       const {status,token} = data;
+
+      if(token === undefined){
+        setValue('username','');
+        setValue('password','');
+        return alert('로그인에 실패하였습니다.');
+      }
+      
       if(status === "success"){
         dispatch(loginAction(token));
         return dispatch(onClose());

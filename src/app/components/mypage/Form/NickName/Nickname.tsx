@@ -1,22 +1,28 @@
 import * as S from "../style";
-import WhiteBtn from "../../../common/Button/WhiteBtn";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useAppSelector } from "@/store/hook";
+import { Dispatch, SetStateAction } from "react";
+import { MypageType } from "@/app/types/mypage";
 
-export default function Nickname() {
+interface propsType {
+  setMypage: Dispatch<SetStateAction<MypageType | null>>;
+}
+
+export default function Nickname({setMypage} : propsType) {
 
   const user = useAppSelector(state=>state.user);
-  const {register,handleSubmit} = useForm();
+  const {register,handleSubmit,setValue} = useForm();
 
+  // 중복확인버튼
   const confirmHanlder = ()=>{
     alert('준비중 입니다.');
   }
 
+  // 개인정보 수정 버튼
   const submitHanlder = (event : any)=>{
     const {nickname} = event;
-
-    axios.patch('/api/member/mypage',{
+    axios.patch('/api/member/nickname',{
       nickname
     },{
       headers : {
@@ -24,12 +30,26 @@ export default function Nickname() {
       }
     })
     .then(res=>{
-      const {} = res.data;
+      const {status,message} = res.data;
       console.log(res.data);
+      if(status === "success"){
+        alert('닉네임 변경이 완료되었습니다.');
+        setMypage(prev=>{
+          if(prev){
+            return {...prev,nickname : nickname};
+          }else{
+            return prev;
+          }
+        });
+        setValue('nickname','');
+      }else if(status === "fail"){
+        alert(message);
+        setValue('nickname','');
+      }
     })
     .catch(()=>{
       console.log('서버에러');
-    })
+    });
 
   }
 
@@ -46,7 +66,7 @@ export default function Nickname() {
             </S.InputLayout>
         </S.Layout>
 
-        <WhiteBtn type="submit" align="center">개인정보 수정</WhiteBtn>
+        <S.WhiteBtn type="submit">개인정보 수정</S.WhiteBtn>
     </S.Form>
   )
 }
