@@ -22,7 +22,16 @@ export default function Wrtie() {
   const user = useAppSelector(state=>state.user);
 
   const {register,handleSubmit,watch} = useForm({
-    
+    defaultValues : {
+      meetingType : "SHORT",
+      location : "",
+      gameType : "",
+      meetingMemberNum : "",
+      meetingTime : "",
+      openKakao : "",
+      title : "",
+      content : ""
+    }
   });
   const meetingTypeWatch = watch('meetingType','SHORT');
 
@@ -68,8 +77,16 @@ export default function Wrtie() {
       return alert('구기종목을 선택해주세요.');
     }
 
-    if(meetingTime === ""){
-      return alert('시간대을 선택해주세요.');
+    if(meetingType === "LONG"){
+
+      if(meetingTime === ""){
+        return alert('시간대을 선택해주세요.');
+      }
+
+      if(meetingDays.length <= 0){
+        return alert('요일을 선택해주세요.');
+      }
+
     }
 
     if(meetingMemberNum === ""){
@@ -87,6 +104,22 @@ export default function Wrtie() {
     if(content === ""){
       return alert('내용을 입력해주세요.');
     }
+
+    console.log(
+      {
+        meetingType,
+        location,
+        gameType,
+        meetingTime,
+        meetingMemberNum,
+        openKakao,
+        title,
+        content,
+        meetingDate : moment(meetingDate as Date).format("YYYY-MM-DD"),
+        meetingDeadline : moment(meetingDeadline as Date).format("YYYY-MM-DD"),
+        meetingDays : meetingDays.join(';')
+      }
+    )
 
     axios.post('/api/post/write',{
       meetingType,
@@ -106,10 +139,12 @@ export default function Wrtie() {
       }
     })
     .then(res=>{
-      const {status} = res.data;
+      const {status,message} = res.data;
       if(status === "success"){
         alert('작성이 완료 되었습니다.');
         return router.push('/');
+      }else if(status === "fail"){
+        return alert(message);
       }
     })
     .catch(err=>{

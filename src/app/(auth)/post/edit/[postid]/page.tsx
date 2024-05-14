@@ -22,33 +22,7 @@ export default function Post({params} : {params : {postid : string}}) {
   const user = useAppSelector(state=>state.user);
 
   const {register,handleSubmit,watch,setValue} = useForm();
-  
-  useEffect(()=>{
-
-    axios.get(`/api/post/detail/${params.postid}`,{
-      headers : {
-        Authorization : user
-      }
-    })
-    .then(res=>{
-
-      const {status,data,message} = res.data;
-
-      if(status === "success"){
-        Object.keys(data).forEach((key) => { // 가져온 데이터의 각 키와 값을 반복하여 setValue로 설정합니다.
-          setValue(key, data[key]);
-        });
-      }else{
-        console.log(message);
-      }
-
-    })
-    .catch(err=>{
-      console.log('서버 에러');
-    });
-
-  },[params.postid]);
-  
+    
   const meetingTypeWatch = watch('meetingType','SHORT');
 
   const [meetingDate, onMeetingDate] = useState<Value>(new Date());
@@ -81,9 +55,43 @@ export default function Post({params} : {params : {postid : string}}) {
     }
   }
 
+  // 데이터 가져오기
+  useEffect(()=>{
+
+    axios.get(`/api/post/detail/${params.postid}`,{
+      headers : {
+        Authorization : user
+      }
+    })
+    .then(res=>{
+
+      const {status,data,message} = res.data;
+
+      if(status === "success"){
+        Object.keys(data).forEach((key) => { // 가져온 데이터의 각 키와 값을 반복하여 setValue로 설정합니다.
+          if(key === "meetingTime"){
+            setValue(key, data[key].split(":")[0]);
+          }else if(key === "meetingDays"){
+            const array : string[] = data[key].split(';');
+            setMeetingDays([...array]);
+          }else{
+            setValue(key, data[key]);
+          }
+        });
+      }else if(status === "fail"){
+        return alert(message);
+      }
+
+    })
+    .catch(err=>{
+      console.log('서버 에러');
+    });
+
+  },[params.postid]);
+
   const onSubmitHanlder = (event : any)=>{
 
-    const {meetingType,location,gameType,meetingTime,meetingMemberNum,openKakao,title,content} = event;
+    const {meetingStatus,meetingType,location,gameType,meetingTime,meetingMemberNum,openKakao,title,content} = event;
 
     if(location === ""){
       return alert('지역 선택을 해야합니다.');
@@ -94,9 +102,15 @@ export default function Post({params} : {params : {postid : string}}) {
     }
 
     if(meetingType === "LONG"){
+
       if(meetingTime === ""){
         return alert('시간대을 선택해주세요.');
       }
+
+      if(meetingDays.length <= 0){
+        return alert('요일을 선택해주세요.');
+      }
+
     }
 
     if(meetingMemberNum === ""){
@@ -116,6 +130,7 @@ export default function Post({params} : {params : {postid : string}}) {
     }
 
     axios.patch('/api/post/write',{
+      meetingStatus,
       meetingType,
       location,
       gameType,
@@ -136,11 +151,12 @@ export default function Post({params} : {params : {postid : string}}) {
       }
     })
     .then(res=>{
-      const {status} = res.data;
-      console.log(res.data);
+      const {status,message} = res.data;
       if(status === "success"){
         alert('수정이 완료 되었습니다.');
         router.push(`/detail/${params.postid}`);
+      }else if(status === "fail"){
+        return alert(message);
       }
     })
     .catch(err=>{
@@ -162,6 +178,17 @@ export default function Post({params} : {params : {postid : string}}) {
           </S.Flex>
 
           <S.Gird>
+
+            <S.InputStyle>
+              <label htmlFor="meetingStatus">모집 상태</label>
+              <S.InputBox>
+                <select id="meetingStatus" {...register('meetingStatus')}>
+                  <option value="RECRUIT">모집중</option>
+                  <option value="END">모집마감</option>
+                </select>
+                <DownIcon stroke={'#878787'} />
+              </S.InputBox>
+            </S.InputStyle>
 
             <S.InputStyle>
               <label htmlFor="meetingType">모집형식</label>
