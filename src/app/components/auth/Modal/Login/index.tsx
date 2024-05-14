@@ -36,17 +36,15 @@ export default function Login() {
       password
     })
     .then(({data})=>{
-      const {status,token} = data;
-
-      if(token === undefined){
-        setValue('username','');
-        setValue('password','');
-        return alert('로그인에 실패하였습니다.');
-      }
-      
+      const {status,token,message} = data;
       if(status === "success"){
         dispatch(loginAction(token));
         return dispatch(onClose());
+      }else if(status === "fail"){
+        alert(message);
+        setValue('username','');
+        setValue('password','');
+        return;
       }
     })
     .catch(err=>{
