@@ -23,6 +23,12 @@ export const Title = styled.h4`
   line-height: ${21/16};
   margin-top: 11px;
   word-break: keep-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  height: calc(41/16*1em);
 `;
 
 export const Flex = styled.div`

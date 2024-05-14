@@ -213,3 +213,11 @@ export const Order = styled.div`
     cursor: pointer;
   }
 `;
+
+export const White = styled.div`
+  margin-top: 28px;
+`;
+
+export const Paging = styled.div`
+  margin-top: 28px;
+`;

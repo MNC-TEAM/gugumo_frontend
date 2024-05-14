@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server"
 export const GET = async (request : NextRequest)=>{
 
     const searchParams = request.nextUrl.searchParams;
+    const page = searchParams.get('page');
     const meetingstatus = searchParams.get('meetingstatus');
     const location = searchParams.get('location');
     const gametype = searchParams.get('gametype');
@@ -14,6 +15,7 @@ export const GET = async (request : NextRequest)=>{
     try {
         const response = await axios.get(`${process.env.API_URL}/api/v1/meeting`,{
             params :{
+                page,
                 q,
                 meetingstatus,
                 location,

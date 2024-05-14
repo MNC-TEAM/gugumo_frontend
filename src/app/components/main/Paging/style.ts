@@ -1,4 +1,3 @@
-import Link from "next/link";
 import styled from "styled-components";
 
 // 따로 구분하기
@@ -8,8 +7,9 @@ export const Flex = styled.div`
     gap: 20px;
 `;
 
-export const LinkStyle = styled(Link)<{$active? : boolean}>`
+export const Btn = styled.button<{$active? : boolean}>`
     text-decoration: none;
+    cursor: pointer;
     color: ${({$active,theme})=>{
         if($active){
             return theme.color.Primary;
