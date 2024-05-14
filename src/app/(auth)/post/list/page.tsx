@@ -1,7 +1,7 @@
 "use client"
 import Card from "@/app/components/common/Card/Layout";
 import * as S from "@/app/components/main/style";
-import * as B from "./bookmark.style";
+import * as B from "../../bookmark/bookmark.style";
 import { Wrap } from "@/styles/global";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -29,7 +29,7 @@ export default function Home() {
 
   useEffect(()=>{
 
-    axios.get('/api/post/bookmark',{
+    axios.get('/api/post/my',{
       params : {
         page,
         q
@@ -63,7 +63,7 @@ export default function Home() {
       <Wrap>
         
         <S.SearchFlex>
-            <h4>북마크</h4>
+            <h4>작성글</h4>
             <S.Search onSubmit={handleSubmit(searchSubmitHanlder)}>
               <input type="text" {...register("q")} />
               <button type="submit">
@@ -92,7 +92,7 @@ export default function Home() {
                   />
                 )}
               </S.Grid>
-            : <p style={{textAlign : 'center'}}>북마크가 존재하지 않습니다.</p>
+            : <p style={{textAlign : 'center'}}>작성된글이 존재하지 않습니다.</p>
           }
             
           {

@@ -2,19 +2,22 @@ import React, { useState } from 'react'
 import { BookmarkStyle } from './style'
 import BookMarkSvg from "@asset/icon/bookmark.svg";
 import axios from 'axios';
-import { useAppSelector } from '@/store/hook';
+import { useAppDispatch, useAppSelector } from '@/store/hook';
+import { onLogin } from '@/store/features/modal/modal';
 
 export default function Bookmark({postid,status} : {postid : number, status : boolean}) {
 
   const user = useAppSelector(state=>state.user);
+  const dispatch = useAppDispatch();
 
-  const [bStatus,setBStatus] = useState(status);
+  const [bookmarkStatus,setBookmarkStatus] = useState(status);
   
   const bookMarkHandler :React.MouseEventHandler<HTMLButtonElement> = (e)=>{
     e.stopPropagation();
 
     if(!user){
-      return alert('로그인을 하셔야합니다.');
+      alert('로그인을 하셔야합니다.');
+      return dispatch(onLogin());
     }
 
     if(!status){
@@ -29,7 +32,7 @@ export default function Bookmark({postid,status} : {postid : number, status : bo
       .then((res)=>{
         const {status} = res.data;
         if(status === "success"){
-          setBStatus(true);
+          setBookmarkStatus(true);
         }
       })
       .catch(err=>{
@@ -49,7 +52,7 @@ export default function Bookmark({postid,status} : {postid : number, status : bo
       .then((res)=>{
         const {status} = res.data;
         if(status === "success"){
-          setBStatus(false);
+          setBookmarkStatus(false);
         }
       })
       .catch(err=>{
@@ -62,7 +65,7 @@ export default function Bookmark({postid,status} : {postid : number, status : bo
 
   return (
     <BookmarkStyle onClick={bookMarkHandler}>
-      <BookMarkSvg fill={bStatus ? "#4FAAFF" : "#fff"}/>
+      <BookMarkSvg fill={bookmarkStatus ? "#4FAAFF" : "#fff"}/>
     </BookmarkStyle>
   )
   

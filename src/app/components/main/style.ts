@@ -188,6 +188,7 @@ export const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(4,1fr);
   gap: 31.98px;
+  margin-top: 28px;
 
   @media screen and (max-width:1280px) {
     grid-template-columns: repeat(3,1fr);
@@ -206,12 +207,42 @@ export const Grid = styled.div`
 export const Order = styled.div`
   display: flex;
   justify-content: flex-end;
+  position: relative;
+  font-size: 13px;
+  
   div {
-    align-items: center;
-    display: inline-flex;
-    gap: 4px;
-    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    p {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
   }
+
+  ul {
+    position: absolute;
+    top: 100%;
+    background: ${({theme})=>theme.color.Background};
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    text-align: center;
+    padding: 20px 15px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px solid ${({theme})=>theme.color.Surface};
+
+    li {
+      cursor: pointer;
+      + li {
+        margin-top: 0.7em;
+      }
+    }
+
+  }
+
 `;
 
 export const White = styled.div`

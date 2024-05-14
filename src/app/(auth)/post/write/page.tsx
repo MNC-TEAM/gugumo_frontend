@@ -15,7 +15,6 @@ import { useRouter } from "next/navigation";
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-<<<<<<< Updated upstream:src/app/(auth)/edit/[postid]/page.tsx
 export default function Wrtie() {
 
   const router = useRouter();
@@ -25,15 +24,6 @@ export default function Wrtie() {
   const {register,handleSubmit,watch} = useForm({
     
   });
-=======
-export default function Post({params} : {params : {postid : string}}) {
-
-  const router = useRouter();
-  
-  const user = useAppSelector(state=>state.user);
-  
-  const {register,handleSubmit,watch} = useForm();
->>>>>>> Stashed changes:src/app/(auth)/post/write/page.tsx
   const meetingTypeWatch = watch('meetingType','SHORT');
 
   const [meetingDate, onMeetingDate] = useState<Value>(new Date());

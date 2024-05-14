@@ -3,10 +3,24 @@ import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req : NextRequest)=>{
+
+    if(!process.env.API_URL) throw new Error('env 에러가 발생했습니다.');
+
+    const searchParams = req.nextUrl.searchParams;
+    const nickname = searchParams.get('nickname');
     
-    axios.get('/api/v1/member/checkDuplicateNicaname',{
-        
-    })
+    try{
+        const response = await axios.get(`${process.env.API_URL}/api/v1/member/checkDuplicateNickname`,{
+            params : {
+                nickname
+            }
+        });
+        return new NextResponse(JSON.stringify(response.data));
+    }
+    catch(e : any){
+        const {response} = e;
+        return new NextResponse(JSON.stringify(response.data));
+    }
 
 }
 

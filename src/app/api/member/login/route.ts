@@ -15,8 +15,8 @@ export const POST = async (request : NextRequest)=>{
         }));
     }
     catch(err : any){
-        console.log(err);
-        return new NextResponse("서버 에러");
+        const {response} = err;
+        return new NextResponse(JSON.stringify(response.data));
     }
 
 }
