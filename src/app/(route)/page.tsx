@@ -53,8 +53,8 @@ export default function Home() {
         page,
         meetingstatus,
         q,
-        // location,
-        // gametype
+        location,
+        gametype
       },
       headers : {
         Authorization : user
