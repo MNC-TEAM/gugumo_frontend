@@ -21,6 +21,7 @@ export default function Mypage() {
     alert('회원탈퇴 기능은 준비중입니다.');
   }
 
+  // 회원가져오기
   useEffect(()=>{
 
     axios.get('/api/member/mypage',{
@@ -49,7 +50,7 @@ export default function Mypage() {
       {
         !mypage 
         ? 
-          <div style={{top : 0, left : 0, width : "100%", height : "100%", position : "fixed", display : "flex", alignItems : "center", justifyContent : "center", background : "rgba(255,255,255,0.2)", backdropFilter : "blur(10px)"}}>
+          <div style={{top : 0, left : 0, width : "100%", height : "100%", display : "flex", alignItems : "center", justifyContent : "center", background : "rgba(255,255,255,0.2)", backdropFilter : "blur(10px)"}}>
             <MoonLoader color="#574fff"></MoonLoader>
           </div>
         :
@@ -60,7 +61,7 @@ export default function Mypage() {
                   마이페이지
               </S.Title>
               <UserInfo mypage={mypage}/>
-              <Nickname/>
+              <Nickname setMypage={setMypage}/>
               <Password/>
               <S.UserDelete>
                   <button onClick={userDeleteHanlder}>회원탈퇴하기</button>

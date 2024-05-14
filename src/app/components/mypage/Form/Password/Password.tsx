@@ -7,9 +7,10 @@ import { useState } from "react";
 export default function Password() {
 
     const user = useAppSelector(state=>state.user);
-    const {register,handleSubmit} = useForm();
+    const {register,handleSubmit,setValue} = useForm();
     const [isError,setIsError] = useState('');
 
+    // 비밀번호 수정 버튼
     const submithanlder = (event : any)=>{
         const {password,confirmPassword} = event;
 
@@ -29,9 +30,15 @@ export default function Password() {
             }
         })
         .then(res=>{
-            const {status} = res.data;
+            const {status,message} = res.data;
             if(status === "success"){
                 alert('비밀번호 변경에 성공하였습니다.');
+                setValue('password','');
+                setValue('confirmPassword','');
+            }else if(status === "fail"){
+                alert(message);
+                setValue('password','');
+                setValue('confirmPassword','');
             }
         })
         .catch(()=>{
