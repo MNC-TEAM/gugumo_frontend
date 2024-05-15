@@ -41,6 +41,8 @@ const persistConfig = { // 새로고침해도 남는 저장소
 
 const persistedReducer = persistReducer(persistConfig,reducers); // 새로고침해도 남는 저장소
 
+console.log(process.env.NODE_ENV !== "production");
+
 export const makeStore = () => {
   return configureStore({
     reducer: persistedReducer,
@@ -48,6 +50,7 @@ export const makeStore = () => {
       getDefaultMiddleware({
         serializableCheck: false // rtk을 사용할경우 serializableCheck을 false로 해줘야합니다.
       }),
+    devTools : process.env.NODE_ENV !== "production",
   })
 }
 
