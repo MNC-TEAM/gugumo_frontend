@@ -1,7 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import modal from './features/modal/modal'
 import user from './features/auth/user'
-import edit from './features/edit/edit'
 import { persistReducer } from 'redux-persist';
 import createWebStorage from 'redux-persist/es/storage/createWebStorage';
 
@@ -29,14 +28,14 @@ const storage =
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 
 const reducers = combineReducers({
-  modal,user,edit
+  modal,user
 });
 
 const persistConfig = { // 새로고침해도 남는 저장소
   key : "root",
   storage,
   whitelist : ['user'],
-  blacklist : ['modal','edit']
+  blacklist : ['modal']
 }
 
 const persistedReducer = persistReducer(persistConfig,reducers); // 새로고침해도 남는 저장소

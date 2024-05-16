@@ -11,7 +11,11 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useAppSelector } from "@/store/hook";
 import { useRouter } from "next/navigation";
-import { Editor } from '@toast-ui/react-editor';
+import dynamic from "next/dynamic";
+
+const NoSsrEditor = dynamic(()=>import("@/app/components/post/NoSsrEditor"),{
+  ssr : false
+});
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -66,12 +70,12 @@ export default function Wrtie() {
     }
   }
 
-  const editorRef = useRef<Editor>(null);
-
+  // const editorRef = useRef<Editor>(null);
+  const [content,setContent] = useState<any>();
 
   const onSubmitHanlder = (event : any)=>{
 
-    const content = editorRef.current?.getInstance().getHTML();
+    // const content = editorRef.current?.getInstance().getHTML();
 
     const {meetingType,location,gameType,meetingTime,meetingMemberNum,openKakao,title} = event;
 
@@ -336,24 +340,7 @@ export default function Wrtie() {
               <input type="text" id="title" placeholder="제목을 입력해주세요" {...register('title')} />
             </S.DescInputStyle>
 
-            <S.DescInputStyle>
-              <label htmlFor="content">내용</label>
-              <S.Editor>
-                <Editor
-                  toolbarItems={[
-                    ['heading', 'bold', 'italic', 'strike'],
-                    ['hr', 'quote'],
-                    ['ul', 'ol', 'task', 'indent', 'outdent'],
-                    ['table', 'link'],
-                  ]}
-                  initialEditType="wysiwyg"
-                  hideModeSwitch={true}
-                  placeholder="내용을 입력해 주세요."
-                  initialValue={" "}
-                  ref={editorRef}
-                />
-              </S.Editor>
-            </S.DescInputStyle>
+            <NoSsrEditor setContent={setContent}/>
 
           </S.DescBox>
           
