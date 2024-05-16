@@ -9,6 +9,10 @@ export const MainStyle = styled.main`
 
 export const DesktopBanner = styled.div`
   display: block;
+  position: relative;
+  height: 580px;
+  width: 100%;
+  background: url('/asset/image/desktop_banner.png') no-repeat center/cover;
   @media screen and (max-width:820px) {
     display: none;
   }

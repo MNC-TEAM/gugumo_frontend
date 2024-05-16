@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 interface TagProps {
-  color? : "recruit" | "ball" | "region"
+  color? : "recruit" | "ball" | "region",
+  $status? : string
 }
 
 export const CardStyle = styled.div`
@@ -37,24 +38,32 @@ export const Flex = styled.div`
 `;
 
 export const Tag = styled.div<TagProps>`
-  background: ${({color})=>{
+  background: ${({theme,color,$status})=>{
     switch(color){
       case "ball":
         return "#D2FFAE";
       case "recruit":
-        return "#BFE0FF";
+        if($status === "END"){
+          return theme.color.OnSurface;
+        }else{
+          return "#BFE0FF";
+        }
       case "region":
         return "#FDC9AF";
       default :
         return "#BFE0FF"
     }
   }};
-  color: ${({color})=>{
+  color: ${({theme,color,$status})=>{
     switch(color){
       case "ball" :
         return "#54A900";
       case "recruit" :
-        return "#4378FF";
+        if($status === "END"){
+          return theme.color.OnSurface;
+        }else{
+          return "#4378FF";
+        }
       case "region" :
         return "#FF6414";
       default :

@@ -4,6 +4,8 @@ import localFont from "next/font/local";
 import type { Metadata, Viewport } from "next";
 import 'swiper/css';
 import 'react-calendar/dist/Calendar.css';
+import '@toast-ui/editor/toastui-editor.css';
+import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import ThemeClient from "@/lib/ThemeClient";
 import ModalContext from "@/lib/ModalProvider";
 import QueryProvider from "@/lib/QueryProvider";

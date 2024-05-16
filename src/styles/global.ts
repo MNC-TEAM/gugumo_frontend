@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, css } from 'styled-components';
 import reset from 'styled-reset';
 
 export const GlobalStyle = createGlobalStyle`
@@ -23,6 +23,9 @@ export const GlobalStyle = createGlobalStyle`
     font-family: inherit;
     /* all: unset; */
   }
+
+  html::-webkit-scrollbar {width: 8px;}
+  html::-webkit-scrollbar-thumb {background-color: #2f3542; border-radius: 10px;}
 
 `;
 

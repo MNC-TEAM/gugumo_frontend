@@ -3,7 +3,7 @@ import * as S from "../style";
 import { Wrap } from "@/styles/global";
 import DownIcon from "@asset/icon/down.svg";
 import CalenderIcon from "@asset/icon/calender.svg";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Calendar from "react-calendar";
 import moment from "moment";
 import Prev from "@/app/components/common/Button/Prev/Prev";
@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useAppSelector } from "@/store/hook";
 import { useRouter } from "next/navigation";
+import { Editor } from '@toast-ui/react-editor';
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -65,9 +66,14 @@ export default function Wrtie() {
     }
   }
 
+  const editorRef = useRef<Editor>(null);
+
+
   const onSubmitHanlder = (event : any)=>{
 
-    const {meetingType,location,gameType,meetingTime,meetingMemberNum,openKakao,title,content} = event;
+    const content = editorRef.current?.getInstance().getHTML();
+
+    const {meetingType,location,gameType,meetingTime,meetingMemberNum,openKakao,title} = event;
 
     if(location === ""){
       return alert('지역 선택을 해야합니다.');
@@ -332,7 +338,21 @@ export default function Wrtie() {
 
             <S.DescInputStyle>
               <label htmlFor="content">내용</label>
-              <textarea id="content" placeholder="내용을 입력해주세요" {...register('content')}></textarea>
+              <S.Editor>
+                <Editor
+                  toolbarItems={[
+                    ['heading', 'bold', 'italic', 'strike'],
+                    ['hr', 'quote'],
+                    ['ul', 'ol', 'task', 'indent', 'outdent'],
+                    ['table', 'link'],
+                  ]}
+                  initialEditType="wysiwyg"
+                  hideModeSwitch={true}
+                  placeholder="내용을 입력해 주세요."
+                  initialValue={" "}
+                  ref={editorRef}
+                />
+              </S.Editor>
             </S.DescInputStyle>
 
           </S.DescBox>

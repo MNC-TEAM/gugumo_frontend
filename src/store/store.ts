@@ -41,8 +41,6 @@ const persistConfig = { // 새로고침해도 남는 저장소
 
 const persistedReducer = persistReducer(persistConfig,reducers); // 새로고침해도 남는 저장소
 
-console.log(process.env.NODE_ENV !== "production");
-
 export const makeStore = () => {
   return configureStore({
     reducer: persistedReducer,

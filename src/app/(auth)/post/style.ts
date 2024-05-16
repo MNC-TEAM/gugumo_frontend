@@ -173,7 +173,7 @@ export const DescInputStyle = styled.div`
         padding: 0 ${6/18}em;
     }
 
-    input,textarea {
+    input {
         outline: none;
         border: 0;
         padding: 0;
@@ -193,18 +193,31 @@ export const DescInputStyle = styled.div`
         padding: 0 ${14/16}em;
     }
 
-    textarea {
+    /* textarea {
+        outline: none;
+        border: 0;
+        padding: 0;
+        display: block;
+        width: 100%;
+        background: ${({theme})=>theme.color.Surface};
+        border-radius: 8px;
+        margin-top: 12px;
+        font-family: "Pretendard";
+        font-size: ${({theme})=>theme.fontSize.bodyMedium};
+        font-weight: ${({theme})=>theme.fontWeight.medium};
+        box-sizing: border-box;
+
         height: 485px;
         padding: ${14/16}em;
         resize: none;
-    }
+    } */
 
     @media screen and (max-width:820px) {
         label {
             font-size: 14px;
         }
 
-        input,textarea {
+        input{
             font-size: 14px;
         }
 
@@ -212,13 +225,30 @@ export const DescInputStyle = styled.div`
             height: 45.25px;
         }
 
-        textarea {
+        /* textarea {
             height: 194px;
-        }
+        } */
 
     }
 
 `;
+
+
+export const Editor = styled.div`
+
+    height: 485px;
+    margin-top: 12px;
+
+    > div {
+        height: 100% !important;
+    }
+
+    @media screen and (max-width:820px) {
+        height: 300px;
+    }
+
+`;
+
 
 export const Button = styled.button`
     all: unset;
