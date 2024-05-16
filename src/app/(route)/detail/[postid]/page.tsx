@@ -12,7 +12,8 @@ import { MoonLoader } from "react-spinners";
 import { useAppSelector } from "@/store/hook";
 import { useRouter } from "next/navigation";
 import { GAMETYPE, LOCATION, MEETINGTYPE } from "@/app/constant/meetingQuery";
-import { useDispatch } from "react-redux";
+import Header from "@/app/components/common/Header";
+import { Viewer } from "@toast-ui/react-editor";
 
 export default function Detail({ params }: { params: { postid: string } }) {
 
@@ -20,7 +21,7 @@ export default function Detail({ params }: { params: { postid: string } }) {
   const router = useRouter();
 
   const [meeting,setMeeting] = useState<DetailType | null>(null);
-  const [isLoading,setIsLoading] = useState(true);
+  const [bookmarkCount,setBookmarkCount] = useState(0);
 
   const removeHanlder = (postid : string)=>{
     axios.delete('/api/post/write',{
@@ -64,7 +65,7 @@ export default function Detail({ params }: { params: { postid: string } }) {
 
       if(status === "success"){
         setMeeting(data);
-        setIsLoading(false);
+        setBookmarkCount(data.bookmarkCount);
       }else{
         console.log(message);
       }
@@ -78,9 +79,10 @@ export default function Detail({ params }: { params: { postid: string } }) {
 
   return (
     <>
+      <Header/>
       {
-        isLoading ?
-          <div style={{top : 0, left : 0, width : "100%", height : "100%", position : "fixed", display : "flex", alignItems : "center", justifyContent : "center", background : "rgba(255,255,255,0.2)", backdropFilter : "blur(10px)"}}>
+        !meeting ?
+          <div style={{display : "flex", alignItems : "center", justifyContent : "center", background : "rgba(255,255,255,0.2)", backdropFilter : "blur(10px)"}}>
             <MoonLoader color="#574fff"></MoonLoader>
           </div>
         :
@@ -88,13 +90,7 @@ export default function Detail({ params }: { params: { postid: string } }) {
             <Wrap>
               <Prev/>
 
-              <S.Flex>
-                <h1>{meeting?.title}</h1>
-                <S.BookFlex>
-                  <Bookmark postid={Number(params.postid)} status={false} />
-                  <p>{meeting?.bookmarkCount}</p>
-                </S.BookFlex>
-              </S.Flex>
+              <S.Title>{meeting?.title}</S.Title>
 
               <S.Top>
                 <S.TopFlex>
@@ -106,8 +102,8 @@ export default function Detail({ params }: { params: { postid: string } }) {
                   </S.View>
                 </S.TopFlex>
                 <S.BookFlex>
-                  <Bookmark postid={Number(params.postid)} status={false} />
-                  <p>{meeting?.bookmarkCount}</p>
+                  <Bookmark postid={Number(params.postid)} status={meeting?.bookmarked} bookmarkCount={bookmarkCount} setBookmarkCount={setBookmarkCount}/>
+                  <p>{bookmarkCount}</p>
                 </S.BookFlex>
               </S.Top>
 
@@ -151,13 +147,13 @@ export default function Detail({ params }: { params: { postid: string } }) {
                   <h4>모집마감</h4>
                   <p>{meeting?.meetingDeadline}</p>
                 </S.Col>
-                <S.Col>
+                <S.Col $open={true}>
                   <h4>오픈카톡 주소</h4>
                   <a href={meeting?.openKakao} target="_blank">오픈톡 참여 <img src="/asset/icon/link.svg" alt="" /></a>
                 </S.Col>
               </S.Grid>
               <S.Desc>
-                {meeting?.content}
+                <Viewer initialValue={meeting?.content} />
               </S.Desc>
 
               <S.BtnList>

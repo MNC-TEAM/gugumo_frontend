@@ -33,7 +33,7 @@ export const StyledModal = Modal.styled`
   box-sizing : border-box;
   border : 0;
   text-align : center;
-  box-shadow: 0px 0px 20px 10px rgba(000, 000, 000, 0.21);
+  box-shadow: 0px 0px 20px 8px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
 `;
 

@@ -12,7 +12,7 @@ export default function Card({postId,status,gameType,location,title,meetingDateT
     <S.CardStyle onClick={()=>router.push(`/detail/${postId}`)}>
 
       <S.Flex>
-        <S.Tag color="recruit">{STATUS[status]}</S.Tag>
+        <S.Tag color="recruit" $status={status}>{STATUS[status]}</S.Tag>
         <S.Tag color="ball">{GAMETYPE[gameType]}</S.Tag>
         <S.Tag color="region">{LOCATION[location]}</S.Tag>
       </S.Flex>

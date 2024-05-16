@@ -13,6 +13,7 @@ export interface DetailType {
     meetingStatus: string;
     viewCount: number;
     bookmarkCount: number;
+    bookmarked : boolean;
     meetingTime: string;
     meetingDays: string;
     meetingDateTime : string;

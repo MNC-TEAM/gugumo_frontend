@@ -15,6 +15,7 @@ import { useAppSelector } from "@/store/hook";
 import WhiteBtn from "../components/common/Button/WhiteBtn";
 import Paging from "../components/main/Paging";
 import DownIcon from "@asset/icon/down.svg";
+import { SORT } from "../constant/sort";
 
 export default function Home() {
   
@@ -90,9 +91,7 @@ export default function Home() {
       <Header postion={true}/>
       <S.MainStyle>
 
-        <S.DesktopBanner>
-          <img src="/asset/image/desktop_banner.png" alt="배너" />
-        </S.DesktopBanner>
+        <S.DesktopBanner></S.DesktopBanner>
 
         <S.MobBanner>
           <img src="/asset/image/banner.jpg" alt="배너" />
@@ -178,7 +177,7 @@ export default function Home() {
             
             <S.Order>
               <div>
-                <p onClick={()=>setSortOpen(!sortOpen)}>최신순 <DownIcon stroke="#878787"/></p>
+                <p onClick={()=>setSortOpen(!sortOpen)}>{SORT[sort]} <DownIcon stroke="#878787"/></p>
                 {
                   sortOpen &&
                   <ul>

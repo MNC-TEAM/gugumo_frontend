@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { onLogin } from '@/store/features/modal/modal';
 
-export default function Bookmark({postid,status} : {postid : number, status : boolean}) {
+export default function Bookmark({postid,status,bookmarkCount,setBookmarkCount} : {postid : number, status : boolean, bookmarkCount? : number, setBookmarkCount? : any}) {
 
   const user = useAppSelector(state=>state.user);
   const dispatch = useAppDispatch();
@@ -20,7 +20,7 @@ export default function Bookmark({postid,status} : {postid : number, status : bo
       return dispatch(onLogin());
     }
 
-    if(!status){
+    if(!bookmarkStatus){
 
       axios.post('/api/post/bookmark',{
         postId : postid
@@ -33,6 +33,9 @@ export default function Bookmark({postid,status} : {postid : number, status : bo
         const {status} = res.data;
         if(status === "success"){
           setBookmarkStatus(true);
+          if(setBookmarkCount && bookmarkCount !== undefined){
+            setBookmarkCount(bookmarkCount+1);
+          }
         }
       })
       .catch(err=>{
@@ -53,6 +56,9 @@ export default function Bookmark({postid,status} : {postid : number, status : bo
         const {status} = res.data;
         if(status === "success"){
           setBookmarkStatus(false);
+          if(setBookmarkCount && bookmarkCount !== undefined){
+            setBookmarkCount(bookmarkCount-1);
+          }
         }
       })
       .catch(err=>{

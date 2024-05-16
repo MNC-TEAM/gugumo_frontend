@@ -1,65 +1,33 @@
 import styled from "styled-components";
 
 export const DetailStyle = styled.main`
-    padding: 80px 0 160px;
+    padding: 108px 0 160px;
     @media screen and (max-width:820px) {
         padding: 39px 0 191px;
     }
 `;
 
-export const BookFlex = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: ${({theme})=>theme.color.Primary};
-    p {
-        font-size: ${({theme})=>theme.fontSize.titleMedium};
-        font-weight: ${({theme})=>theme.fontWeight.medium};
-    }
+
+export const Title = styled.h1`
+    font-size: 24px;
+    font-weight: ${({theme})=>theme.fontWeight.semibold};
+    margin-top: 33px;
     @media screen and (max-width:820px) {
-        p {
-            font-size: 14px;
-        }
+        font-size: 18px;
+        margin-top: 15px;
     }
-`;
-
-export const Flex = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-    h1 {
-        font-size: ${({theme})=>theme.fontSize.titleSemibold};
-        font-weight: ${({theme})=>theme.fontWeight.semibold};
-    }
-
-    @media screen and (max-width:820px) {
-        h1 {
-            font-size: 18px;
-        }
-        ${BookFlex} {
-            display: none;
-        }
-    }
-
 `;
 
 export const Top = styled.div`
     display: flex;
     align-items: center;
-    margin-top: 25px;
-    font-size: ${({theme})=>theme.fontSize.titleMedium};
+    margin-top: 28px;
+    padding-bottom: 21px;
+    font-size: 18px;
     font-weight: ${({theme})=>theme.fontWeight.medium};
     color: ${({theme})=>theme.color.OnBackgroundGray};
-    padding-bottom: 21px;
     border-bottom: 1px solid ${({theme})=>theme.color.Outline};
-    justify-content: space-between;
-
-    @media screen and (min-width:821px) {
-        ${BookFlex} {
-            display: none;
-        }
-    }
-    
+    justify-content: space-between;    
     @media screen and (max-width:820px) {
         font-size: 14px;
         margin-top: 9px;
@@ -69,7 +37,7 @@ export const Top = styled.div`
 export const TopFlex = styled.div`
     display: flex;
     align-items: center;
-    gap: 21px;
+    gap: 18px;
     @media screen and (max-width:820px) {
         gap: 10.77px;
     }
@@ -80,45 +48,73 @@ export const View = styled.div`
     align-items: center;
     gap: 10px;
     img {
-        width: 36px;
+        width: 18px;
     }
 `;
+
+export const BookFlex = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: ${({theme})=>theme.color.Primary};
+    p {
+        font-size: 22px;
+        font-weight: ${({theme})=>theme.fontWeight.medium};
+    }
+    @media screen and (max-width:820px) {
+        p {
+            font-size: 14px;
+        }
+    }
+`;
+
 
 export const Grid = styled.div`
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    margin-top: 67px;
-    gap: 26px 0px;
+    margin-top: 34px;
+    gap: 20px;
 
     @media screen and (max-width: 820px) {
         margin-top: 17px;
         gap: 16px 0;
     }
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 550px) {
         grid-template-columns: repeat(1,1fr);
     }
 
 `;
 
-export const Col = styled.div`
-    display: flex;
+export const Col = styled.div<{$open? : boolean}>`
+    display: grid;
     align-items: center;
     color: ${({theme})=>theme.color.OnSurface};
-    font-size: ${({theme})=>theme.fontSize.titleMedium};
+    font-size: 18px;
     font-weight: ${({theme})=>theme.fontWeight.medium};
-    gap: ${23/24}em;
+    grid-template-columns: ${({$open})=>{
+        if($open){
+            return "136px 1fr";
+        }else{
+            return "102px 1fr";
+        }
+    }};
+    gap: 12px;
     h4 {
         padding: ${12/24}em ${22/24}em;
         background: ${({theme})=>theme.color.Surface};
-        min-width: ${127/24}em;
         text-align: center;
         box-sizing: border-box;
         white-space: nowrap;
+        width: 100%;
+        height: 41px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
     }
-
     a {
-        width: ${252/24}em;
-        height: ${53/24}em;
+        width: 158px;
+        height: 41px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -127,33 +123,33 @@ export const Col = styled.div`
         text-decoration: none;
         border-radius: 4px;
     }
-
-    @media screen and (max-width: 1280px) {
-        
-        font-size: 20px;
-
-    }
-
     @media screen and (max-width: 820px) {
         
         font-size: 14px;
+
+        grid-template-columns: ${({$open})=>{
+            if($open){
+                return "104px 1fr";
+            }else{
+                return "72px 1fr";
+            }
+        }};
 
         a {
             width: 9em;
         }
 
     }
-
 `;
 
 
 export const Desc = styled.div`
-    margin-top: 82px;
-    min-height: 911px;
+    margin-top: 92px;
+    min-height: 878px;
     width: 100%;
-    padding: 57px;
+    padding: 36px 51px;
     box-sizing: border-box;
-    font-size: ${({theme})=>theme.fontSize.titleMedium};
+    font-size: 18px;
     font-weight: ${({theme})=>theme.fontWeight.medium};
     line-height: ${53/24};
 
@@ -229,27 +225,3 @@ export const Btn = styled.button<{$type? : string}>`
     transition: .4s;
     transition-property: background,color;
 `;
-
-
-/* export const LinkStyle = styled(Link)`
-    all: unset;
-    font-size: ${({theme})=>theme.fontSize.buttonSemibold};
-    font-weight: ${({theme})=>theme.fontWeight.semibold};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 53px auto 0;
-    width: ${95/18}em;
-    height: ${49/18}em;
-    border-radius: ${4/18}em;
-    color: ${({theme})=>theme.color.Primary};
-    border: 1px solid ${({theme})=>theme.color.Primary};
-    cursor: pointer;
-    transition: .4s;
-    transition-property: color,background;
-
-    &:hover {
-        background: ${({theme})=>theme.color.Primary};
-        color: #fff;
-    }
-`; */

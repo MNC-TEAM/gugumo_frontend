@@ -3,7 +3,7 @@ import * as S from "../../style";
 import { Wrap } from "@/styles/global";
 import DownIcon from "@asset/icon/down.svg";
 import CalenderIcon from "@asset/icon/calender.svg";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Calendar from "react-calendar";
 import moment from "moment";
 import Prev from "@/app/components/common/Button/Prev/Prev";
@@ -11,6 +11,8 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useAppSelector } from "@/store/hook";
 import { useRouter } from "next/navigation";
+import { Editor } from "@toast-ui/react-editor";
+import { DetailType } from "@/app/types/detail";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -55,6 +57,8 @@ export default function Post({params} : {params : {postid : string}}) {
     }
   }
 
+  const [meeting,setMeeting] = useState<DetailType | null>(null);
+
   // 데이터 가져오기
   useEffect(()=>{
 
@@ -78,6 +82,7 @@ export default function Post({params} : {params : {postid : string}}) {
             setValue(key, data[key]);
           }
         });
+        setMeeting(data);
       }else if(status === "fail"){
         return alert(message);
       }
@@ -89,9 +94,13 @@ export default function Post({params} : {params : {postid : string}}) {
 
   },[params.postid,setValue,user]);
 
+  const editorRef = useRef<Editor>(null);
+
   const onSubmitHanlder = (event : any)=>{
 
-    const {meetingStatus,meetingType,location,gameType,meetingTime,meetingMemberNum,openKakao,title,content} = event;
+    const content = editorRef.current?.getInstance().getHTML();
+
+    const {meetingStatus,meetingType,location,gameType,meetingTime,meetingMemberNum,openKakao,title} = event;
 
     if(location === ""){
       return alert('지역 선택을 해야합니다.');
@@ -355,7 +364,24 @@ export default function Post({params} : {params : {postid : string}}) {
 
             <S.DescInputStyle>
               <label htmlFor="content">내용</label>
-              <textarea id="content" placeholder="내용을 입력해주세요" {...register('content')}></textarea>
+              <S.Editor>
+                {
+                  meeting &&
+                  <Editor
+                    toolbarItems={[
+                      ['heading', 'bold', 'italic', 'strike'],
+                      ['hr', 'quote'],
+                      ['ul', 'ol', 'task', 'indent', 'outdent'],
+                      ['table', 'link'],
+                    ]}
+                    initialEditType="wysiwyg"
+                    hideModeSwitch={true}
+                    placeholder="내용을 입력해 주세요."
+                    ref={editorRef}
+                    initialValue={meeting?.content}
+                  />
+                }
+              </S.Editor>
             </S.DescInputStyle>
 
           </S.DescBox>
