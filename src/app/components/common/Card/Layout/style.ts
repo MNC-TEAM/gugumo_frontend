@@ -60,7 +60,7 @@ export const Tag = styled.div<TagProps>`
         return "#54A900";
       case "recruit" :
         if($status === "END"){
-          return theme.color.OnSurface;
+          return theme.color.Background;
         }else{
           return "#4378FF";
         }
