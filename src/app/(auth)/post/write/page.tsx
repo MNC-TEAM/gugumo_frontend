@@ -115,22 +115,6 @@ export default function Wrtie() {
       return alert('내용을 입력해주세요.');
     }
 
-    console.log(
-      {
-        meetingType,
-        location,
-        gameType,
-        meetingTime,
-        meetingMemberNum,
-        openKakao,
-        title,
-        content,
-        meetingDate : moment(meetingDate as Date).format("YYYY-MM-DD"),
-        meetingDeadline : moment(meetingDeadline as Date).format("YYYY-MM-DD"),
-        meetingDays : meetingDays.join(';')
-      }
-    )
-
     axios.post('/api/post/write',{
       meetingType,
       location,

@@ -3,6 +3,7 @@ import modal from './features/modal/modal'
 import user from './features/auth/user'
 import { persistReducer } from 'redux-persist';
 import createWebStorage from 'redux-persist/es/storage/createWebStorage';
+import storageSession  from 'redux-persist/lib/storage/session';
 
 /* NextJS에서 redux-persist failed to create sync storage. falling back to noop storage. 에러 제거하는법 */
 
@@ -33,7 +34,7 @@ const reducers = combineReducers({
 
 const persistConfig = { // 새로고침해도 남는 저장소
   key : "root",
-  storage,
+  storage : storageSession,
   whitelist : ['user'],
   blacklist : ['modal']
 }
