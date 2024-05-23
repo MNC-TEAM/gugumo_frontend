@@ -1,5 +1,5 @@
 "use client"
-import Card from "@/app/components/common/Card/Layout";
+import Card from "@/app/components/common/Card";
 import * as S from "@/app/components/main/style";
 import * as B from "../../bookmark/bookmark.style";
 import { Wrap } from "@/styles/global";

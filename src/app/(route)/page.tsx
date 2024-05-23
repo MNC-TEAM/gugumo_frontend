@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import BallTag from "../components/common/Button/BallTag/BallTag";
-import Tag from "../components/common/Button/Tag";
-import Card from "../components/common/Card/Layout";
+import Location from "../components/common/Button/Location";
+import Card from "../components/common/Card";
 import * as S from "../components/main/style";
 import { Wrap } from "@/styles/global";
 import axios from "axios";
@@ -136,14 +136,14 @@ export default function Home() {
           <S.Tag>
             <S.SmallText>지역</S.SmallText>
             <S.Flex>
-              <Tag
+              <Location
                 onClick={()=>locationClickHandler("")} 
                 active={"" === location ? true : false} 
                 label={"전체"}
               />
               {
                 LOCATION.map((e,i)=>
-                <Tag 
+                <Location 
                   onClick={()=>locationClickHandler(e.get)} 
                   key={i} 
                   active={e.get === location ? true : false} 

@@ -1,8 +1,8 @@
+import Location from '@/app/components/common/Button/Location';
 import type { Meta, StoryObj } from '@storybook/react';
-import Tag from '.';
 import { fn } from '@storybook/test';
 
-export interface TagTypes {
+export interface LocationTypes {
   /**
    * 버튼안에 들어갈 텍스트를 적습니다.
    */
@@ -17,16 +17,15 @@ export interface TagTypes {
   active : boolean
 }
 
-const meta : Meta<typeof Tag> = {
-  title: 'Core/Button/Tag',
-  component: Tag,
+const meta : Meta<typeof Location> = {
+  title: 'Core/Button/Location',
+  component: Location,
   parameters : {
     layout : "centered"
   },
   tags : ['autodocs'],
   argTypes : {
     onClick : { control: 'none' },
-    active : { control : "none"}
   },
   args : {
     onClick : fn()
@@ -38,11 +37,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args : {
+    active : false,
     label : "버튼"
   }
 }
 
-export const Hover: Story = {
+export const Active: Story = {
   args : {
     active : true,
     label : "버튼"

@@ -4,8 +4,12 @@ import BookMarkSvg from "@asset/icon/bookmark.svg";
 import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { onLogin } from '@/store/features/modal/modal';
+import { BookmarkType } from '@/app/components/common/Button/Bookmark/Bookmark.stories';
 
-export default function Bookmark({postid,status,bookmarkCount,setBookmarkCount} : {postid : number, status : boolean, bookmarkCount? : number, setBookmarkCount? : any}) {
+export default function Bookmark(
+  {postid,status,bookmarkCount,setBookmarkCount} : 
+  BookmarkType
+) {
 
   const user = useAppSelector(state=>state.user);
   const dispatch = useAppDispatch();
@@ -70,7 +74,9 @@ export default function Bookmark({postid,status,bookmarkCount,setBookmarkCount} 
   }
 
   return (
-    <BookmarkStyle onClick={bookMarkHandler}>
+    <BookmarkStyle 
+      onClick={bookMarkHandler}
+    >
       <BookMarkSvg fill={bookmarkStatus ? "#4FAAFF" : "#fff"}/>
     </BookmarkStyle>
   )

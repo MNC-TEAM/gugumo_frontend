@@ -61,13 +61,40 @@ const meta : Meta<typeof Card> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const RECRUIT: Story = {
+  args : {
+    postId : 1,
+    status : "RECRUIT",
+    gameType : "BADMINTON",
+    location : "INCHEON",
+    title : "배트민턴 같이 치실분 구합니다.",
+    meetingDateTime : "09",
+    meetingMemberNum : 2,
+    meetingDeadline : "2024-05-11",
+    bookmarkStatus : false
+  }
+}
+
+export const END: Story = {
+  args : {
+    postId : 1,
+    status : "END",
+    gameType : "BADMINTON",
+    location : "INCHEON",
+    title : "배트민턴 같이 치실분 구합니다.",
+    meetingDateTime : "09",
+    meetingMemberNum : 2,
+    meetingDeadline : "2024-05-11",
+    bookmarkStatus : false
+  }
+}
+
 export const BookMarkOff: Story = {
   args : {
     postId : 1,
-    status : "모집중",
-    gameType : "배드민턴",
-    location : "인천",
+    status : "RECRUIT",
+    gameType : "BADMINTON",
+    location : "INCHEON",
     title : "배트민턴 같이 치실분 구합니다.",
     meetingDateTime : "09",
     meetingMemberNum : 2,
@@ -79,9 +106,9 @@ export const BookMarkOff: Story = {
 export const BookMarkOn: Story = {
   args : {
     postId : 1,
-    status : "모집중",
-    gameType : "배드민턴",
-    location : "인천",
+    status : "RECRUIT",
+    gameType : "BADMINTON",
+    location : "INCHEON",
     title : "배트민턴 같이 치실분 구합니다.",
     meetingDateTime : "09",
     meetingMemberNum : 2,
