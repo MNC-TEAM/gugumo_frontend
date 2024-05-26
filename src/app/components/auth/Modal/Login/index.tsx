@@ -5,11 +5,11 @@ import * as M from '../Modal.style'
 import { useAppDispatch, useAppSelector } from '@/store/hook'
 import { onClose, onSignup } from '@/store/features/modal/modal'
 import { useForm } from 'react-hook-form'
-import { Input } from '@/app/components/common/Input/Input'
 import axios from 'axios'
 import { loginAction } from '@/store/features/auth/user'
 import { BaseModalBackground } from 'styled-react-modal'
 import Primary from '@/app/components/common/Button/Primary/Primary'
+import Input from '@/app/components/common/Input/Basic/Input/Input'
 
 export default function Login() {
 
@@ -74,18 +74,20 @@ export default function Login() {
 
         <M.Form onSubmit={handleSubmit(onSubmit)}>
           <M.InputBox>
-            <Input
-              type="email"
-              placeholder='이메일을 입력해주세요.'
-              register={register('username',{required : false,onChange:()=>setIsEmailError('')})}
-              error={isEmailError}
-            />
-            <Input
-              type="password" 
-              placeholder='비밀번호를 입력하세요.' 
-              register={register('password',{required : false,onChange:()=>setIsPasswordError('')})}
-              error={isPasswordError}
-            />
+            <Input error={isEmailError}>
+              <input 
+                type="email"
+                placeholder='이메일을 입력해주세요.'
+                {...register('username',{required : false,onChange:()=>setIsEmailError('')})}
+              />
+            </Input>
+            <Input error={isPasswordError}>
+              <input
+                type="password" 
+                placeholder='비밀번호를 입력하세요.' 
+                {...register('password',{required : false,onChange:()=>setIsPasswordError('')})}
+              />
+            </Input>
           </M.InputBox>
 
           <Primary type="submit">

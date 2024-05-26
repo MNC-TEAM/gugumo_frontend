@@ -27,7 +27,11 @@ export const InputBox = styled.div`
 
     margin-top: 23px;
 
-    input {
+    > div + div {
+        margin-top: 7px;
+    }
+
+    /* input {
         outline: 0;
         border: 0;
         width: 100%;
@@ -48,7 +52,7 @@ export const InputBox = styled.div`
             margin-top: 7px;
         }
 
-    }
+    } 
 
     @media screen and (max-width:820px) {
         input {
@@ -56,6 +60,8 @@ export const InputBox = styled.div`
             font-size: 14px;
         }
     }
+
+    */
 
 `;
 

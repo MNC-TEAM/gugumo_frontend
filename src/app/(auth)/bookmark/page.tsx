@@ -1,5 +1,4 @@
 "use client"
-import Card from "@/app/components/common/Card";
 import * as S from "@/app/components/main/style";
 import * as B from "./bookmark.style";
 import { Wrap } from "@/styles/global";
@@ -9,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { meetingType, pageableType } from "@/app/types/meeting";
 import { useAppSelector } from "@/store/hook";
 import Paging from "@/app/components/main/Paging";
+import Card from "@/app/components/common/Card/Main/Card";
 
 export default function Home() {
 

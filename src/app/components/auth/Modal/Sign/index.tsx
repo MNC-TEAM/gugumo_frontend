@@ -8,8 +8,8 @@ import { onClose, onLogin } from '@/store/features/modal/modal'
 import Primary from '../../../common/Button/Primary/Primary'
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
-import { Input } from '@/app/components/common/Input/Input';
 import { BaseModalBackground } from 'styled-react-modal';
+import Input from '@/app/components/common/Input/Basic/Input/Input';
 
 export default function Sign() {
 
@@ -76,29 +76,34 @@ export default function Sign() {
 
         <M.Form onSubmit={handleSubmit(onSubmit)}>
           <M.InputBox>
-            <Input 
-              type="text" 
-              placeholder='닉네임을 입력하세요' 
-              register={register('nickname',{required : false,onChange: ()=>setNickNameError('')})}
-              error={nickNameError}
-            />
-            <Input 
-              type="email" 
-              placeholder='이메일을 입력하세요.' 
-              register={register('username',{required : false,onChange: ()=>setEmailError('')})} 
-              error={emailError}
-            />
-            <Input
-              type="password" 
-              placeholder='비밀번호' 
-              register={register('password',{required : false,onChange: ()=>setIsError('')})}
-            />
-            <Input
-              type="password" 
-              placeholder='비밀번호 확인' 
-              register={register('confirmPassword',{required : false,onChange: ()=>setIsError('')})}
-              error={isError}
-            />
+            <Input error={nickNameError}>
+              <input
+                type="text" 
+                placeholder='닉네임을 입력하세요' 
+                {...register('nickname',{required : false,onChange: ()=>setNickNameError('')})}
+              />
+            </Input>
+            <Input error={emailError}>
+              <input 
+                type="email" 
+                placeholder='이메일을 입력하세요.' 
+                {...register('username',{required : false,onChange: ()=>setEmailError('')})}
+              />
+            </Input>
+            <Input>
+              <input
+                type="password" 
+                placeholder='비밀번호' 
+                {...register('password',{required : false,onChange: ()=>setIsError('')})}
+              />
+            </Input>
+            <Input error={isError}>
+              <input 
+                type="password" 
+                placeholder='비밀번호 확인' 
+                {...register('confirmPassword',{required : false,onChange: ()=>setIsError('')})}
+              />
+            </Input>
           </M.InputBox>
 
           <Primary type="submit">

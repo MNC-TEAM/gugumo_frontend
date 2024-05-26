@@ -1,5 +1,6 @@
 import { Wrap } from "@/styles/global";
 import styled from "styled-components";
+import BookmarkSVG from "@asset/icon/bookmark.svg";
 
 interface HeaderType {
     $postion? : boolean
@@ -69,6 +70,7 @@ export const Flex = styled.div`
     display: flex;
     align-items: center;
     gap: 26px;
+    
     img {
         cursor: pointer;
     }
@@ -86,7 +88,6 @@ export const Flex = styled.div`
     }
 
 `;
-
 
 export const UserMenu = styled.div`
     position: relative;

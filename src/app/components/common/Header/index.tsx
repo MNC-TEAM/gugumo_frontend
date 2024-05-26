@@ -34,7 +34,9 @@ export default function Header( {postion} : HeaderType ) {
           :
           <S.Flex>
             {/* <img src="/asset/icon/bell.svg" alt="알림창" /> */}
-            <Link href={"/bookmark"}><img src="/asset/icon/bookmark.svg" alt="북마크" width={36}/></Link>
+            <Link href={"/bookmark"}>
+              <img src="/asset/image/layout/header/bookmark.png" alt="북마크"/>
+            </Link>
             <S.UserMenu>
               <img onClick={()=>setUserMenuHidden(!userMenuHidden)} src="/asset/icon/user.svg" alt="유저" width={36} />
               <ul hidden={userMenuHidden}>

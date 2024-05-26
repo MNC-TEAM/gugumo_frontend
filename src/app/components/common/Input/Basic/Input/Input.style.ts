@@ -50,6 +50,13 @@ export const Box = styled.div<{$error? : string}>`
         }};
     }
 
+    @media screen and (max-width:820px) {
+        height: 36px;
+        input {
+            font-size: 14px;
+        }
+    }
+
 `;
 
 

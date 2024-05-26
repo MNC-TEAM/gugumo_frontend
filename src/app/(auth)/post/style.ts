@@ -1,4 +1,3 @@
-import {Button as PrevStyle} from "@/app/components/common/Button/Prev/Prev.style";
 import styled, { css } from "styled-components";
 
 const InputCss = css`
@@ -20,11 +19,15 @@ const InputCss = css`
 
 `;
 
+export const Prev = styled.button`
+    cursor: pointer;
+`;
+
 export const WrtieStyle = styled.main`
     padding: 89px 0 144px;
 
     @media screen and (min-width:821px) {
-        ${PrevStyle} {
+        ${Prev} {
             display: none;
         }
     }
