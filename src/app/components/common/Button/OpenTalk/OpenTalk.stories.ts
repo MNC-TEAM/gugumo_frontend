@@ -12,5 +12,8 @@ const meta : Meta<typeof OpenTalk> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-
-export const Default: Story = {}
+export const Default: Story = {
+  args : {
+    children : "오픈톡 참여"
+  }
+}
