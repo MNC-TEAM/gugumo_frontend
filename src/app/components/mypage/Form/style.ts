@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { WriteStyle } from "../../common/Button/WhiteBtn/style";
+import { WriteStyle } from "../../common/Button/White/White.style";
 
 export const Form = styled.form`
     

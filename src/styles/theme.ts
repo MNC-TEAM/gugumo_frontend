@@ -1,7 +1,7 @@
 const color = {
     Primary : "#4FAAFF",
     OnPrimary : "#FFFFFF",
-    Surface : "#F4F5F8",
+    Surface : "#EEF4FC",
     OnSurface : "#878787",
     OnBackgroundGray : "#A5A5A5",
     Background : "#FFFFFF",
@@ -10,8 +10,10 @@ const color = {
     OnError : "#FFFFFF",
     Outline : "#D9D9D9",
     SubColor1 : "#BFE0FF",
+    OnSubColor1 : "#4378FF",
     SubColor2 : "#D2FFAE",
-    SubColor3 : "#FDC9AF"
+    SubColor3 : "#FDC9AF",
+    SubColor4 : "#99CEFF"
 }
 
 const fontSize = {

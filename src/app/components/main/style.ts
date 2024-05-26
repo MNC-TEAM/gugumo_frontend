@@ -251,6 +251,7 @@ export const Order = styled.div`
 
 export const White = styled.div`
   margin-top: 28px;
+  text-align: right;
 `;
 
 export const Paging = styled.div`

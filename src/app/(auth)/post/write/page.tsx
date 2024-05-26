@@ -3,10 +3,9 @@ import * as S from "../style";
 import { Wrap } from "@/styles/global";
 import DownIcon from "@asset/icon/down.svg";
 import CalenderIcon from "@asset/icon/calender.svg";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Calendar from "react-calendar";
 import moment from "moment";
-import Prev from "@/app/components/common/Button/Prev/Prev";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useAppSelector } from "@/store/hook";
@@ -151,7 +150,7 @@ export default function Wrtie() {
     <S.WrtieStyle>
       <Wrap>
         
-        <Prev/>
+        <S.Prev onClick={()=>router.back()}><img src="/asset/icon/prev_arrow.svg" alt="뒤로가기" /></S.Prev>
 
         <form onSubmit={handleSubmit(onSubmitHanlder)}>
           <S.Flex>

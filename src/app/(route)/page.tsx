@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import BallTag from "../components/common/Button/BallTag/BallTag";
-import Tag from "../components/common/Button/Tag";
-import Card from "../components/common/Card/Layout";
+import Location from "../components/common/Button/Location";
+import Card from "../components/common/Card/Main/Card";
 import * as S from "../components/main/style";
 import { Wrap } from "@/styles/global";
 import axios from "axios";
@@ -12,10 +12,10 @@ import { useForm } from "react-hook-form";
 import { GAMETYPE, LOCATION, MEETINGSTATUS } from "../constant/meeting";
 import { meetingType, pageableType } from "../types/meeting";
 import { useAppSelector } from "@/store/hook";
-import WhiteBtn from "../components/common/Button/WhiteBtn";
 import Paging from "../components/main/Paging";
 import DownIcon from "@asset/icon/down.svg";
 import { SORT } from "../constant/sort";
+import Write from "@/app/components/common/Button/Write/Write";
 
 export default function Home() {
   
@@ -136,14 +136,14 @@ export default function Home() {
           <S.Tag>
             <S.SmallText>지역</S.SmallText>
             <S.Flex>
-              <Tag
+              <Location
                 onClick={()=>locationClickHandler("")} 
                 active={"" === location ? true : false} 
                 label={"전체"}
               />
               {
                 LOCATION.map((e,i)=>
-                <Tag 
+                <Location 
                   onClick={()=>locationClickHandler(e.get)} 
                   key={i} 
                   active={e.get === location ? true : false} 
@@ -213,7 +213,7 @@ export default function Home() {
             }
 
             <S.White>
-              <WhiteBtn align="right" href={'/post/write'} edit={true}>글쓰기</WhiteBtn>
+              <Write href={'/post/write'}>글쓰기</Write>
             </S.White>
 
             {
