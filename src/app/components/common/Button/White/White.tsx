@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import * as S from './White.style'
 import { WhiteType } from './White.stories'

@@ -1,3 +1,4 @@
+"use client"
 import { MouseEventHandler } from "react";
 import * as S from "./BallTag.style";
 

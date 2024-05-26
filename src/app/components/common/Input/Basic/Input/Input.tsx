@@ -1,3 +1,5 @@
+"use client"
+
 import * as S from "./Input.style";
 
 export default function Input({children,error} : {children : React.ReactNode,error? : string}) {
