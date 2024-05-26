@@ -3,7 +3,7 @@ import * as S from "../style";
 import { Wrap } from "@/styles/global";
 import DownIcon from "@asset/icon/down.svg";
 import CalenderIcon from "@asset/icon/calender.svg";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Calendar from "react-calendar";
 import moment from "moment";
 import Prev from "@/app/components/common/Button/Prev/Prev";

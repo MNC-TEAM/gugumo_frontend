@@ -12,10 +12,10 @@ import { useForm } from "react-hook-form";
 import { GAMETYPE, LOCATION, MEETINGSTATUS } from "../constant/meeting";
 import { meetingType, pageableType } from "../types/meeting";
 import { useAppSelector } from "@/store/hook";
-import WhiteBtn from "../components/common/Button/WhiteBtn";
 import Paging from "../components/main/Paging";
 import DownIcon from "@asset/icon/down.svg";
 import { SORT } from "../constant/sort";
+import Write from "@/app/components/common/Button/Write/Write";
 
 export default function Home() {
   
@@ -213,7 +213,7 @@ export default function Home() {
             }
 
             <S.White>
-              <WhiteBtn align="right" href={'/post/write'} edit={true}>글쓰기</WhiteBtn>
+              <Write href={'/post/write'}>글쓰기</Write>
             </S.White>
 
             {
