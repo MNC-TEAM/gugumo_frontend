@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import BallTag from "../components/common/Button/BallTag/BallTag";
 import Location from "../components/common/Button/Location";
-import Card from "../components/common/Card";
+import Card from "../components/common/Card/Main/Card";
 import * as S from "../components/main/style";
 import { Wrap } from "@/styles/global";
 import axios from "axios";

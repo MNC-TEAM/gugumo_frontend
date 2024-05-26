@@ -77,7 +77,10 @@ export default function Bookmark(
     <BookmarkStyle 
       onClick={bookMarkHandler}
     >
-      <BookMarkSvg fill={bookmarkStatus ? "#4FAAFF" : "#fff"}/>
+      <BookMarkSvg 
+        stroke="#4FAAFF"
+        fill={bookmarkStatus ? "#4FAAFF" : "none"}
+      />
     </BookmarkStyle>
   )
   

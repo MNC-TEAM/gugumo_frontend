@@ -1,5 +1,6 @@
 import React from 'react'
-import * as S from './style';
+import * as S from './Card.style';
+import * as C from "../Card.style";
 import { useRouter } from 'next/navigation'
 import moment from 'moment'
 import Bookmark from '@/app/components/common/Button/Bookmark';
@@ -28,9 +29,9 @@ CardType
         >{LOCATION[location]}</S.Tag>
       </S.Flex>
       
-      <S.Title>{title}</S.Title>
+      <C.Title>{title}</C.Title>
 
-      <S.Detail>
+      <C.Detail>
         <li>
           <p>시간</p>
           <p>{moment(meetingDateTime).format("YYYY-MM-DD HH")}시</p>
@@ -43,15 +44,15 @@ CardType
           <p>인원</p>
           <p>{meetingMemberNum}명</p>
         </li>
-      </S.Detail>
+      </C.Detail>
 
-      <S.Date>
+      <C.Date>
         <span>모집 마감일 {meetingDeadline}</span>
         <Bookmark 
           postid={postId}
           status={bookmarkStatus}
         />
-      </S.Date>
+      </C.Date>
     </S.CardStyle>
   )
 }

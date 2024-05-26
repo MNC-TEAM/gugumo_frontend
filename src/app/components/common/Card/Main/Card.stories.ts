@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Card from '.';
+import Card from './Card';
 
 export interface CardType {
   /**
@@ -42,7 +42,7 @@ export interface CardType {
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta : Meta<typeof Card> = {
-  title: 'Layout/Card',
+  title: 'Layout/Card/Main',
   component: Card,
   tags : ['autodocs'],
   parameters : {
@@ -61,7 +61,7 @@ const meta : Meta<typeof Card> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const RECRUIT: Story = {
+export const Default: Story = {
   args : {
     postId : 1,
     status : "RECRUIT",
