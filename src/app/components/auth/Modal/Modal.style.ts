@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 
 export const CloseStyle = styled.button`
@@ -66,8 +67,8 @@ export const InputBox = styled.div`
 `;
 
 
-export const SignButton = styled.button`
-    all: unset;
+export const SignButton = styled(Link)`
+    display: inline-block;
     color: ${({theme})=>theme.color.Primary};
     font-family: "Pretendard";
     font-weight: 500;

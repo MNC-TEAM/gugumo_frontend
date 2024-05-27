@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Button = styled.button`
   text-decoration: none;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   color : ${({theme})=>theme.color.Primary};
   font-size: ${({theme})=>theme.fontSize.buttonMedium};

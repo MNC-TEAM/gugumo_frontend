@@ -1,12 +1,34 @@
 import styled from "styled-components";
 
 export const MypageStyle = styled.main`
-    padding: 155px 0 93px;
+    padding: 120px 0 93px;
 
     @media screen and (max-width: 820px) {
-        padding: 23px 0 107px;
+        padding: 38px 0 120px;
     }
 `;
+
+export const Wrap = styled.div`
+    max-width: 1200px;
+    padding: 0 2.5%;
+    margin: 0 auto;
+
+    @media screen and (max-width:820px) {
+        box-sizing: border-box;
+        & + & {
+            border-top: 6px solid ${({theme})=>theme.color.Surface};
+        }
+    }
+
+`;
+
+export const Prev = styled.button`
+    cursor: pointer;
+    @media screen and (min-width:821px) {
+        display: none;
+    }
+`;
+
 
 export const Title = styled.h1`
     color: ${({theme})=>theme.color.OnBackground};
@@ -15,6 +37,8 @@ export const Title = styled.h1`
     display: flex;
     align-items: center;
     gap: 15px;
+    margin-top: 10px;
+
     button {
         display: none;
         cursor: pointer;
@@ -31,7 +55,7 @@ export const Title = styled.h1`
 
 export const UserDelete = styled.div`
     text-align: center;
-    margin-top: 133px;
+    margin-top: 83px;
     button {
         all: unset;
         text-align: center;
@@ -40,11 +64,16 @@ export const UserDelete = styled.div`
         font-size: ${({theme})=>theme.fontSize.buttonMedium};
         font-weight: ${({theme})=>theme.fontWeight.medium};
         border-bottom: 1px solid ${({theme})=>theme.color.OnBackgroundGray};
-        padding: 0 5px 2px;
+        padding: 0 ${5/16}em 2px;
     }
 
     @media screen and (max-width : 820px) {
         margin-top: 88px;
+        button {
+            font-size: 12px;
+        }
     }
 
 `;
+
+

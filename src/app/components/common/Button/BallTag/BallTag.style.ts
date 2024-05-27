@@ -8,10 +8,13 @@ export const Button = styled.button<{$active : boolean}>`
     border-radius: 1000px;
     position: relative;
     cursor: pointer;
+    overflow: hidden;
 
     background: ${({theme,$active})=>{
         if($active){
             return theme.color.Primary;
+        }else{
+            return theme.color.Background;
         }
     }};
 

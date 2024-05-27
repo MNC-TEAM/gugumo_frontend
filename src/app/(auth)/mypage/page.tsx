@@ -1,11 +1,10 @@
 "use client"
-import * as S from "@/app/(auth)/mypage/style";
+import * as S from "@/app/(auth)/mypage/mypage.style";
 import Nickname from "@/app/components/mypage/Form/NickName/Nickname";
 import Password from "@/app/components/mypage/Form/Password/Password";
 import UserInfo from "@/app/components/mypage/UserInfo/UserInfo";
 import { MypageType } from "@/app/types/mypage";
 import { useAppSelector } from "@/store/hook";
-import { Wrap } from "@/styles/global";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -55,18 +54,18 @@ export default function Mypage() {
           </div>
         :
         <S.MypageStyle>
-          <Wrap>
-              <S.Title>
-                  <button onClick={()=>router.back()}><img src="/asset/icon/prev_arrow.svg" alt="뒤로가기" /></button>
-                  마이페이지
-              </S.Title>
-              <UserInfo mypage={mypage}/>
-              <Nickname setMypage={setMypage}/>
-              <Password/>
-              <S.UserDelete>
-                  <button onClick={userDeleteHanlder}>회원탈퇴하기</button>
-              </S.UserDelete>
-          </Wrap>
+          <S.Wrap>
+            <S.Prev onClick={()=>router.back()}><img src="/asset/icon/prev_arrow.svg" alt="뒤로가기" /></S.Prev>
+            <S.Title>마이페이지</S.Title>
+            <UserInfo mypage={mypage}/>
+          </S.Wrap>
+          <S.Wrap>
+            <Nickname setMypage={setMypage}/>
+            <Password/>
+            <S.UserDelete>
+                <button onClick={userDeleteHanlder}>회원탈퇴하기</button>
+            </S.UserDelete>
+          </S.Wrap>
         </S.MypageStyle>
       }
     </>
