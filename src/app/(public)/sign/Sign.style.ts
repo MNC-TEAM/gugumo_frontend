@@ -5,6 +5,11 @@ export const Wrap = styled.div`
     padding: 150px 0;
     width: 95%;
     margin: 0 auto;
+
+    @media screen and (max-width:820px) {
+        padding: 48px 0 90px;
+    }
+
 `;
 
 export const Box = styled.div`
@@ -13,6 +18,10 @@ export const Box = styled.div`
     max-width: 565px;
     margin: 0 auto;
     border-radius: 12px;
+    @media screen and (max-width:820px) {
+        padding: 0;
+        background: none;
+    }
 `;
 
 export const Title = styled.h1`
@@ -21,6 +30,11 @@ export const Title = styled.h1`
     text-align: center;
     color: ${({theme})=>theme.color.Primary};
     margin-bottom: 50px;
+
+    @media screen and (max-width:820px) {
+        font-size: 20px;
+    }
+
 `;
 
 export const Layout = styled.div`
@@ -36,17 +50,32 @@ export const Layout = styled.div`
         margin-bottom: 20px;
     }
 
+    @media screen and (max-width:820px) {
+
+        & + & {
+            margin-top: 46px;
+        }
+
+    }
+
 `;
 
 export const LayoutBox = styled.div`
     display: flex;
     flex-direction: column;
     gap: 19px;
+
+    @media screen and (max-width:820px) {
+        gap: 16px;
+    }
+
 `;
 
 export const GameBox = styled.div`
     display: flex;
     justify-content: space-between;
+    gap: 7px;
+    overflow-x: auto;
 `;
 
 export const Service = styled.div`
@@ -55,11 +84,15 @@ export const Service = styled.div`
 
 export const All = styled.div`
     padding: 19px 25px;
+    @media screen and (max-width:820px) {
+        padding: 17px 20px; 
+    }
 `;
 
 export const Argee = styled.div`
     display: flex;
     justify-content: space-between;
+    gap: 5px;
 `;
 
 export const ArgeeCheck = styled.div`
@@ -72,6 +105,7 @@ export const ArgeeCheck = styled.div`
         border-radius: 4px;
         background: #fff;
         position: relative;
+        flex: 0 0 auto;
         svg {
             position: absolute;
             left: 50%;
@@ -97,6 +131,10 @@ export const ArgeeList = styled.div`
         }
     }
 
+    @media screen and (max-width:820px) {
+        padding: 17px 20px; 
+    }
+
 `;
 
 export const ArgeeLink = styled.div`
@@ -105,10 +143,16 @@ export const ArgeeLink = styled.div`
     text-decoration: underline;
     text-underline-position: under;
     cursor: pointer;
+    white-space: nowrap;
 `;
 
 
 export const ButtonList = styled.div`
     text-align: center;
     margin-top: 56px;
+
+    @media screen and (max-width:820px) {
+        margin-top: 31px;
+    }
+
 `;

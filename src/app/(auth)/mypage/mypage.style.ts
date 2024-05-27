@@ -23,6 +23,7 @@ export const Wrap = styled.div`
 `;
 
 export const Prev = styled.button`
+    cursor: pointer;
     @media screen and (min-width:821px) {
         display: none;
     }

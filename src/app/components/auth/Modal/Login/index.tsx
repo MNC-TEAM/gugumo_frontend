@@ -95,7 +95,8 @@ export default function Login() {
           </Primary>
         </M.Form>
           
-        <M.SignButton onClick={()=>dispatch(onSignup())}>회원가입 하기</M.SignButton>
+        <M.SignButton href={"/sign"} >회원가입 하기</M.SignButton>
+        
       </S.StyledModal>
     </BaseModalBackground>
     

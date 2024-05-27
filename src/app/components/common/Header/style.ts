@@ -1,6 +1,5 @@
 import { Wrap } from "@/styles/global";
 import styled from "styled-components";
-import BookmarkSVG from "@asset/icon/bookmark.svg";
 
 interface HeaderType {
     $postion? : boolean
@@ -20,7 +19,7 @@ export const HeaderStyle = styled.header<HeaderType>`
 
     @media screen and (max-width : 820px) {
         position: relative;
-        margin-top: 47px;
+        margin-top: 32px;
     }
 
 `;
