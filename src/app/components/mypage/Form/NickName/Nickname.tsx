@@ -4,6 +4,9 @@ import axios from "axios";
 import { useAppSelector } from "@/store/hook";
 import { Dispatch, SetStateAction, useState } from "react";
 import { MypageType } from "@/app/types/mypage";
+import Input from "@/app/components/common/Mypage/Input/Input";
+import Change from "@/app/components/common/Mypage/Change/Change";
+import White from "@/app/components/common/Button/White/White";
 
 interface propsType {
   setMypage: Dispatch<SetStateAction<MypageType | null>>;
@@ -96,13 +99,17 @@ export default function Nickname({setMypage} : propsType) {
             <S.InputLayout>
                 <p>닉네임</p>
                 <div>
+                  <Input>
                     <input type="text" placeholder="닉네임을 입력하세요." {...register('nickname')}/>
-                    <button type="button" onClick={confirmHanlder}>중복확인</button>
+                  </Input>
+                  <Change onClick={confirmHanlder}>중복확인</Change>
                 </div>
             </S.InputLayout>
         </S.Layout>
-
-        <S.WhiteBtn type="submit">개인정보 수정</S.WhiteBtn>
+        <S.Btn>
+          <White type={"submit"}>개인정보 수정</White>
+        </S.Btn>
     </S.Form>
   )
+  
 }

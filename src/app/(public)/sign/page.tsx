@@ -3,12 +3,14 @@ import * as S from "./Sign.style";
 import BallTag from "@/app/components/common/Button/BallTag/BallTag";
 import { GAMETYPE } from "@/app/constant/meeting";
 import White from "@/app/components/common/Button/White/White";
+import { IoCheckmarkOutline } from "react-icons/io5";
 
 export default function page() {
   return (
     <S.Wrap>
         
         <S.Box>
+            
             <S.Title>회원가입</S.Title>
 
             <S.Layout>
@@ -51,7 +53,7 @@ export default function page() {
                     <S.All>
                         <S.Argee>
                             <S.ArgeeCheck>
-                                <div></div>
+                                <div><IoCheckmarkOutline/></div>
                                 <p>전체동의</p>
                             </S.ArgeeCheck>
                         </S.Argee>
@@ -59,21 +61,21 @@ export default function page() {
                     <S.ArgeeList>
                         <S.Argee as={"li"}>
                             <S.ArgeeCheck>
-                                <div></div>
+                                <div><IoCheckmarkOutline/></div>
                                 <p>서비스 이용약관 동의 (필수)</p>
                             </S.ArgeeCheck>
                             <S.ArgeeLink>내용보기</S.ArgeeLink>
                         </S.Argee>
                         <S.Argee as={"li"}>
                             <S.ArgeeCheck>
-                                <div></div>
+                                <div><IoCheckmarkOutline/></div>
                                 <p>개인정보 수집 및 이용 동의 (필수)</p>
                             </S.ArgeeCheck>
                             <S.ArgeeLink>내용보기</S.ArgeeLink>
                         </S.Argee>
                         <S.Argee as={"li"}>
                             <S.ArgeeCheck>
-                                <div></div>
+                                <div><IoCheckmarkOutline/></div>
                                 <p>마케팅 수신 동의 (선택)</p>
                             </S.ArgeeCheck>
                             <S.ArgeeLink>내용보기</S.ArgeeLink>
@@ -83,7 +85,7 @@ export default function page() {
             </S.Layout>
 
             <S.ButtonList>
-                <White>회원가입</White>
+                <White type={"submit"}>회원가입</White>
             </S.ButtonList>
 
         </S.Box>

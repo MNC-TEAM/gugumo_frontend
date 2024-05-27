@@ -1,8 +1,11 @@
 import * as S from "../style";
+import * as P from "./Password.style"
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useAppSelector } from "@/store/hook";
 import { useState } from "react";
+import Input from "@/app/components/common/Mypage/Input/Input";
+import White from "@/app/components/common/Button/White/White";
 
 export default function Password() {
 
@@ -49,39 +52,45 @@ export default function Password() {
 
   return (
     <S.Form onSubmit={handleSubmit(submithanlder)}>
-        <S.Layout>
+        <P.Layout>
             <h4>비밀번호 설정</h4>
             <S.InputFlex>
                 <S.InputLayout>
                     <label htmlFor="password">새 비밀번호</label>
                     <div>
-                        <input 
-                            id="password" 
-                            type="password" 
-                            placeholder="비밀번호를 입력해주세요." 
-                            {...register('password',{
-                                onChange : ()=> setIsError('')
-                            })}
-                        />
+                        <Input>
+                            <input 
+                                id="password" 
+                                type="password" 
+                                placeholder="비밀번호를 입력해주세요." 
+                                {...register('password',{
+                                    onChange : ()=> setIsError('')
+                                })}
+                            />
+                        </Input>
                     </div>
                 </S.InputLayout>
                 <S.InputLayout>
                     <label htmlFor="confirmPassword">새 비밀번호 확인</label>
                     <div>
-                        <input 
-                            id="confirmPassword" 
-                            type="password" 
-                            placeholder="입력한 비밀번호를 입력해주세요." 
-                            {...register('confirmPassword',{
-                                onChange : ()=> setIsError('')
-                            })}
-                        />
+                        <Input>
+                            <input 
+                                id="confirmPassword" 
+                                type="password" 
+                                placeholder="입력한 비밀번호를 입력해주세요." 
+                                {...register('confirmPassword',{
+                                    onChange : ()=> setIsError('')
+                                })}
+                            />
+                        </Input>
                     </div>
                     {isError ? isError : ""}
                 </S.InputLayout>
             </S.InputFlex>
-        </S.Layout>
-        <S.WhiteBtn type="submit">비밀번호 수정</S.WhiteBtn>
+        </P.Layout>
+        <S.Btn>
+          <White type={"submit"}>비밀번호 수정</White>
+        </S.Btn>
     </S.Form>
   )
 }

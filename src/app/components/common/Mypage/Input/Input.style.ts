@@ -5,8 +5,9 @@ export const Box = styled.div`
     height: 56px;
     background: ${({theme})=>theme.color.Background};
     position: relative;
-    display: flex;
-    gap: 18px;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
     input {
         position: absolute;
         left: 0;
@@ -19,5 +20,17 @@ export const Box = styled.div`
         font-weight: ${({theme})=>theme.fontWeight.medium};
         padding: 0 ${26/16}em;
         outline: 0;
+        background: none;
+
+        &::placeholder {
+            color: ${({theme})=>theme.color.OnSurface};
+        }
+
     }
+
+    @media screen and (max-width:820px) {
+        height: 50px;
+        background: ${({theme})=>theme.color.Surface};
+    }
+
 `;

@@ -71,6 +71,14 @@ export const ArgeeCheck = styled.div`
         height: 19px;
         border-radius: 4px;
         background: #fff;
+        position: relative;
+        svg {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            width: 12px;
+        }
     }
     p {
         font-size: ${({theme})=>theme.fontSize.buttonMedium};
