@@ -1,7 +1,5 @@
-"use client"
 import React from 'react'
 import * as S from './Footer.style'
-import Link from 'next/link'
 
 export default function Footer() {
   return (
@@ -16,9 +14,9 @@ export default function Footer() {
                     </S.Copy>
                 </S.CopyBox>
                 <S.Service>
-                    <button onClick={()=>alert('준비중 입니다.')}>이용약관</button>
-                    <button onClick={()=>alert('준비중 입니다.')}>개인정보처리방침</button>
-                    <button onClick={()=>alert('준비중 입니다.')}>서비스 소개</button>
+                    <button>이용약관</button>
+                    <button>개인정보처리방침</button>
+                    <button>서비스 소개</button>
                 </S.Service>
             </S.Flex>
         </S.Wrapper>

@@ -1,7 +1,6 @@
 "use client"
 import { Wrap } from "@/styles/global";
 import * as S from "./detail.style";
-import Prev from "@/app/components/common/Button/Prev/Prev";
 import Bookmark from "@/app/components/common/Button/Bookmark";
 import ViewIcon from "@asset/icon/view.svg";
 import { useEffect, useState } from "react";
@@ -88,7 +87,6 @@ export default function Detail({ params }: { params: { postid: string } }) {
         :
           <S.DetailStyle>
             <Wrap>
-              <Prev/>
 
               <S.Title>{meeting?.title}</S.Title>
 

@@ -8,7 +8,8 @@ import { useRouter } from "next/navigation";
 
 export default function Recommend(
   {postId,status,gameType,location,title,meetingDateTime,meetingMemberNum,meetingDeadline,bookmarkStatus}
-  : CardType
+  : 
+  CardType
 ) {
 
   const router = useRouter();
