@@ -1,7 +1,7 @@
 # 구구모
 
 <p align="center">
-  <img src="https://github.com/gugumo-service/gugumo_frontend/assets/96280450/9bfe3ed0-3484-4342-85a0-4ebda0704053">
+  <img src="https://github.com/gugumo-service/gugumo_frontend/assets/96280450/a25dc9db-e28d-4310-b252-21f14b9147b9">
 </p>
 
 > **개발기간** 2024.04 ~ 2024.05
