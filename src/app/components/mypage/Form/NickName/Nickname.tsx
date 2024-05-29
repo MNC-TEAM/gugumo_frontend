@@ -9,12 +9,11 @@ import Change from "@/app/components/common/Mypage/Change/Change";
 import White from "@/app/components/common/Button/White/White";
 
 interface propsType {
-  setMypage: Dispatch<SetStateAction<MypageType | null>>;
+  setNickname: Dispatch<SetStateAction<string>>;
 }
 
-export default function Nickname({setMypage} : propsType) {
+export default function Nickname({setNickname} : propsType) {
 
-  const user = useAppSelector(state=>state.user);
   const {register,handleSubmit,setValue,getValues} = useForm();
   const [ischeck,setIscheck] = useState(true);
 
@@ -63,23 +62,12 @@ export default function Nickname({setMypage} : propsType) {
     const {nickname} = event;
     axios.patch('/api/member/nickname',{
       nickname
-    },{
-      headers : {
-        Authorization : user
-      }
     })
     .then(res=>{
       const {status,message} = res.data;
-      console.log(res.data);
       if(status === "success"){
         alert('닉네임 변경이 완료되었습니다.');
-        setMypage(prev=>{
-          if(prev){
-            return {...prev,nickname : nickname};
-          }else{
-            return prev;
-          }
-        });
+        setNickname(nickname);
         setValue('nickname','');
       }else if(status === "fail"){
         alert(message);

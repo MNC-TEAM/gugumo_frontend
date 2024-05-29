@@ -1,15 +1,17 @@
-import PrivateRoute from "../components/auth/PrivateRoute/PrivateRoute";
+import { cookies } from "next/headers";
 import Footer from "../components/common/Footer";
 import Header from "../components/common/Header";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 
+    const token = cookies().get('user')?.value;
+    
     return (
-        <PrivateRoute>
-            <Header/>
+        <>
+            <Header token={token}/>
                 {children}
             <Footer/>
-        </PrivateRoute>
+        </>
     )
     
 }

@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form'
 import { BaseModalBackground } from 'styled-react-modal'
 import Primary from '@/app/components/common/Button/Primary/Primary'
 import Input from '@/app/components/common/Input/Basic/Input/Input'
+import { loginAction } from '@/store/features/auth/user'
 
 export default function Login() {
 
@@ -43,6 +44,7 @@ export default function Login() {
     if(status === "fail"){
       return alert(message);
     }else{
+      dispatch(loginAction());
       return dispatch(onClose());
     }
 

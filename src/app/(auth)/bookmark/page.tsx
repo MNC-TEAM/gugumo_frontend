@@ -6,13 +6,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { meetingType, pageableType } from "@/app/types/meeting";
-import { useAppSelector } from "@/store/hook";
 import Paging from "@/app/components/main/Paging";
 import Card from "@/app/components/common/Card/Main/Card";
 
 export default function Home() {
-
-  const user = useAppSelector(state=>state.user);
 
   const {register,handleSubmit} = useForm();
 
@@ -33,9 +30,6 @@ export default function Home() {
       params : {
         page,
         q
-      },
-      headers : {
-        Authorization : user
       }
     })
     .then((res)=>{
@@ -56,7 +50,7 @@ export default function Home() {
       console.log('서버 에러');
     });
 
-  },[q,user,page])
+  },[q,page]);
 
   return (
     <S.MainStyle>

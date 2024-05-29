@@ -8,12 +8,12 @@ import { logoutAction } from '@/store/features/auth/user';
 import { usePathname } from 'next/navigation';
 
 interface HeaderType {
+  token? : string,
   postion? : boolean
 }
 
-export default function Header( {postion} : HeaderType ) {
-
-  const user = useAppSelector(state=>state.user);
+export default function Header( {token,postion} : HeaderType ) {
+  
   const [userMenuHidden,setUserMenuHidden] = useState(true);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
@@ -29,7 +29,7 @@ export default function Header( {postion} : HeaderType ) {
           <Link href={'/'}><img src='/asset/logo.svg' alt='로고'/></Link>
         </S.Logo>
         {
-          !user ?
+          !token ?
             <S.LoginStyle onClick={()=>dispatch(onLogin())}>로그인</S.LoginStyle>
           :
           <S.Flex>

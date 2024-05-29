@@ -33,9 +33,6 @@ export default function Home() {
       params : {
         page,
         q
-      },
-      headers : {
-        Authorization : user
       }
     })
     .then((res)=>{
@@ -65,7 +62,10 @@ export default function Home() {
         <S.SearchFlex>
             <h4>작성글</h4>
             <S.Search onSubmit={handleSubmit(searchSubmitHanlder)}>
-              <input type="text" {...register("q")} />
+              <input 
+                placeholder="제목,글 내용을 검색해보세요!"
+                type="text" {...register("q")} 
+              />
               <button type="submit">
                 <img src="/asset/icon/search.svg" alt="검색버튼" />
               </button>

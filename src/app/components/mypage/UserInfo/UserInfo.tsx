@@ -1,7 +1,7 @@
 import { MypageType } from "@/app/types/mypage";
 import * as S from "./style";
 
-export default function UserInfo({mypage} : {mypage : MypageType}) {
+export default function UserInfo({mypage,nickname} : {mypage : MypageType,nickname : string}) {
 
   const imageChangeHanlder = ()=>{
     alert('회원 이미지는 준비중에 있습니다.');
@@ -18,7 +18,7 @@ export default function UserInfo({mypage} : {mypage : MypageType}) {
         </S.User>
         <S.UserName>
             닉네임
-            <p>{mypage.nickname}</p>
+            <p>{nickname}</p>
         </S.UserName>
     </S.UserFlex>
   )

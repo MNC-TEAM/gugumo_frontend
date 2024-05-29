@@ -1,5 +1,5 @@
 import axios from "axios";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req : NextRequest)=>{
@@ -27,9 +27,8 @@ export const GET = async (req : NextRequest)=>{
 export const PATCH = async (req : NextRequest)=>{
 
     if(!process.env.API_URL) throw new Error('env 에러가 발생했습니다.');
-    
-    const headersList = headers();
-    const token = headersList.get('authorization');
+
+    const token = cookies().get('user')?.value;
     const body = await req.json();
 
     try{
