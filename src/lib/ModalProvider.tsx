@@ -23,7 +23,6 @@ export default function ModalContext({
             {children}
             { modalState.login && <Login/> }
             { modalState.signup && <Sign/> }
-            { modalState.popup && <Popup/> }
         </ModalProvider>
     )
 }

@@ -47,6 +47,7 @@ export default function BallTag({onClick,active,gametype} : BallTagType) {
 
     return (
         <S.Button 
+            type="button"
             $active={active}
             onClick={onClick}
         >

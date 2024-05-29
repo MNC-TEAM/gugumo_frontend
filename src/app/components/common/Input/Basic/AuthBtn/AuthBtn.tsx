@@ -1,7 +1,7 @@
 import * as S from "./AuthBtn.style";
 import {AuthBtnType} from "./AuthBtn.stories";
-export default function AuthBtn({active,onClick,children} : AuthBtnType) {
+export default function AuthBtn({type,active,onClick,children} : AuthBtnType) {
   return (
-    <S.Button $active={active} onClick={onClick}>{children}</S.Button>
+    <S.Button type={type} $active={active} onClick={onClick}>{children}</S.Button>
   )
 }

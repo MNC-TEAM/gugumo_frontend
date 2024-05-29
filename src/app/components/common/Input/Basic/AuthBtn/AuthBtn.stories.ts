@@ -3,8 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { MouseEventHandler } from 'react';
 
 export interface AuthBtnType{
+    type?: "button" | "submit" | "reset";
     children : React.ReactNode;
-    onClick : MouseEventHandler<HTMLButtonElement>;
+    onClick? : MouseEventHandler<HTMLButtonElement>;
     active? : boolean
 }
 
