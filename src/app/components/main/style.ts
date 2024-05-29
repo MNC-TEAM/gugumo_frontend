@@ -3,15 +3,8 @@ import * as G from "@/styles/global";
 
 export const Wrap = styled(G.Wrap)`
 
-  width: 100%;
-
   & + & {
     margin-top: 100px;
-  }
-
-  @media screen and (max-width:1280px) {
-    padding: 0 2.5%;
-    box-sizing: border-box;
   }
 
   @media screen and (max-width:820px){
@@ -21,6 +14,7 @@ export const Wrap = styled(G.Wrap)`
       border-top: 6px solid ${({theme})=>theme.color.Surface};
     }
   }
+  
 `;
 export const DesktopIMG = styled.img`
   @media screen and (max-width:820px) {

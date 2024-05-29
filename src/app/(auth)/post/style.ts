@@ -1,23 +1,6 @@
-import styled, { css } from "styled-components";
+import * as I from "@/app/components/common/Input/Write/Input/Input.style";
+import styled from "styled-components";
 
-const InputCss = css`
-    outline: none;
-    border: 0;
-    background: none;
-    width: 100%;
-    height: 100%;
-    font-size: ${({theme})=>theme.fontSize.bodyMedium};
-    font-weight: ${({theme})=>theme.fontWeight.medium};
-    padding: 0 ${14/16}em;
-    font-family: "Pretendard";
-    color: ${({theme})=>theme.color.OnBackground};
-    box-sizing: border-box;
-
-    @media screen and (max-width:820px) {
-        font-size: 14px;
-    }
-
-`;
 
 export const Prev = styled.button`
     cursor: pointer;
@@ -96,6 +79,9 @@ export const Gird = styled.div`
 
 export const InputStyle = styled.div`
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     > label,
     > p {
         font-size: ${({theme})=>theme.fontSize.buttonMedium};
@@ -109,45 +95,9 @@ export const InputStyle = styled.div`
     }
 `;
 
-export const InputBox = styled.div`
-    margin-top: 10px;
-    width: 100%;
-    height: 64px;
-    position: relative;
-    background: ${({theme})=>theme.color.Surface};
-
-    select,input {
-       ${InputCss}
-    }
-
-    select {
-        appearance: none;
-        cursor: pointer;
-    }
-
-    svg,img {
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        pointer-events: none;
-    }
-
-    .react-calendar {
-        position: absolute;
-        top: 100%;
-        z-index: 5;
-    }
-
-    @media screen and (max-width:820px) {
-        height: 45.25px;
-    }
-
-`;
-
 
 export const CalendarBox = styled.div`
-    ${InputCss}
+    ${I.InputCss}
     display: flex;
     align-items: center;
 `;
@@ -196,25 +146,6 @@ export const DescInputStyle = styled.div`
         padding: 0 ${14/16}em;
     }
 
-    /* textarea {
-        outline: none;
-        border: 0;
-        padding: 0;
-        display: block;
-        width: 100%;
-        background: ${({theme})=>theme.color.Surface};
-        border-radius: 8px;
-        margin-top: 12px;
-        font-family: "Pretendard";
-        font-size: ${({theme})=>theme.fontSize.bodyMedium};
-        font-weight: ${({theme})=>theme.fontWeight.medium};
-        box-sizing: border-box;
-
-        height: 485px;
-        padding: ${14/16}em;
-        resize: none;
-    } */
-
     @media screen and (max-width:820px) {
         label {
             font-size: 14px;
@@ -227,11 +158,6 @@ export const DescInputStyle = styled.div`
         input {
             height: 45.25px;
         }
-
-        /* textarea {
-            height: 194px;
-        } */
-
     }
 
 `;
@@ -252,28 +178,9 @@ export const Editor = styled.div`
 
 `;
 
-
-export const Button = styled.button`
-    all: unset;
-    font-size: ${({theme})=>theme.fontSize.buttonSemibold};
-    font-weight: ${({theme})=>theme.fontWeight.semibold};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 53px auto 0;
-    width: ${95/18}em;
-    height: ${49/18}em;
-    border-radius: ${4/18}em;
-    color: ${({theme})=>theme.color.Primary};
-    border: 1px solid ${({theme})=>theme.color.Primary};
-    cursor: pointer;
-    transition: .4s;
-    transition-property: color,background;
-
-    &:hover {
-        background: ${({theme})=>theme.color.Primary};
-        color: #fff;
-    }
+export const BtnList = styled.div`
+    text-align: center;
+    margin-top: 40px;
 `;
 
 

@@ -1,4 +1,4 @@
-import { Wrap } from "@/styles/global";
+import * as G from "@/styles/global";
 import styled from "styled-components";
 
 interface HeaderType {
@@ -33,7 +33,7 @@ export const Logo = styled.div<HeaderType>`
     }
 `;
 
-export const Wrapper = styled(Wrap)`
+export const Wrapper = styled(G.Wrap)`
     display: flex;
     align-items: center;
     justify-content: space-between;

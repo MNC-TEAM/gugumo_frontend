@@ -30,7 +30,15 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 export const Wrap = styled.div`
-  width: 95%;
   max-width: 1200px;
   margin: 0 auto;
+
+  @media screen and (max-width:1280px) {
+    padding: 0px calc((36*2) / 1200 * 100%);
+  }
+
+  @media screen and (max-width:480px) {
+    padding: 0px 15px;
+  }
+
 `;

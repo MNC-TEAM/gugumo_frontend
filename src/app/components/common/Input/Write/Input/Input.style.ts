@@ -1,12 +1,12 @@
 import styled, { css } from "styled-components";
 
-const InputCss = css`
+export const InputCss = css`
     outline: none;
     border: 0;
     background: none;
     width: 100%;
     height: 100%;
-    font-size: ${({theme})=>theme.fontSize.bodyMedium};
+    font-size: ${({theme})=>theme.fontSize.buttonMedium};
     font-weight: ${({theme})=>theme.fontWeight.medium};
     padding: 0 ${14/16}em;
     font-family: "Pretendard";
@@ -22,6 +22,7 @@ const InputCss = css`
 export const Box = styled.div`
     width: 100%;
     height: 64px;
+    border-radius: 8px;
     position: relative;
     background: ${({theme})=>theme.color.Surface};
 
@@ -36,7 +37,7 @@ export const Box = styled.div`
 
     svg,img {
         position: absolute;
-        right: 12px;
+        right: 16px;
         top: 50%;
         transform: translateY(-50%);
         pointer-events: none;
