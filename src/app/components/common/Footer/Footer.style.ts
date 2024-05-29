@@ -1,3 +1,4 @@
+"use client"
 import { Wrap } from "@/styles/global";
 import styled from "styled-components";
 
@@ -7,7 +8,7 @@ export const FooterStyle = styled.footer`
 
     @media screen and (max-width:820px) {
         height: auto;
-        padding: 17px 0 30px;
+        padding: 28px 0 43px;
     }
 
 `;
@@ -42,14 +43,14 @@ export const CopyBox = styled.div`
     flex-direction: column;
 
     @media screen and (max-width:820px) {
-        flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
+        text-align: center;
         width: 100%;
-        margin-top: 14px;
+        margin-top: 19px;
 
         img {
-            width: 62px;
+            width: 99px;
         }
 
     }
@@ -60,7 +61,7 @@ export const Copy = styled.div`
     p {
         color: #4FAAFF;
         font-weight: 500;
-        font-size: 13px;
+        font-size: 11px;
         + p {
             margin-top: 10px;
         }
@@ -69,9 +70,10 @@ export const Copy = styled.div`
     @media screen and (max-width:820px) {
         display: flex;
         flex-direction: column;
-        text-align: right;
+        text-align: center;
+        margin-top: 5px;
         p {
-            margin-top: 3px;
+            margin-top: 5px;
             br {
                 display: none;
             }
@@ -93,6 +95,7 @@ export const Service = styled.div`
 
     button {
         cursor: pointer;
+        color: inherit;
     }
 
     @media screen and (max-width:820px) {
@@ -100,6 +103,7 @@ export const Service = styled.div`
         gap: 0;
         justify-content: space-between;
         width: 100%;
+        font-size: 12px;
     }
    
 `;

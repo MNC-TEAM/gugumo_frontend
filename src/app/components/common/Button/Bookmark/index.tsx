@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from 'react'
 import { BookmarkStyle } from './style'
 import BookMarkSvg from "@asset/icon/bookmark.svg";

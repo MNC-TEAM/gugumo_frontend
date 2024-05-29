@@ -34,6 +34,9 @@ export const ButtonStyle = styled.button<ButtonStyleType>`
 
   @media screen and (max-width:820px) {
     font-size: 14px;
+    padding: 0;
+    height: 33px;
+    padding: 0 22.5px;
   }
 
 `;

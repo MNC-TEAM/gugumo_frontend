@@ -65,7 +65,11 @@ export default function Home() {
         <S.SearchFlex>
             <h4>북마크</h4>
             <S.Search onSubmit={handleSubmit(searchSubmitHanlder)}>
-              <input type="text" {...register("q")} />
+              <input 
+                type="text" 
+                placeholder="제목,글 내용을 검색해보세요!"
+                {...register("q")}
+              />
               <button type="submit">
                 <img src="/asset/icon/search.svg" alt="검색버튼" />
               </button>

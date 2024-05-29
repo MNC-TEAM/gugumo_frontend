@@ -1,7 +1,6 @@
 "use client"
 import { Wrap } from "@/styles/global";
 import * as S from "./detail.style";
-import Prev from "@/app/components/common/Button/Prev/Prev";
 import Bookmark from "@/app/components/common/Button/Bookmark";
 import ViewIcon from "@asset/icon/view.svg";
 import { useEffect, useState } from "react";
@@ -14,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { GAMETYPE, LOCATION, MEETINGTYPE } from "@/app/constant/meetingQuery";
 import Header from "@/app/components/common/Header";
 import { Viewer } from "@toast-ui/react-editor";
+import Comment from "@/app/components/detail/Comment/Comment";
 
 export default function Detail({ params }: { params: { postid: string } }) {
 
@@ -88,7 +88,6 @@ export default function Detail({ params }: { params: { postid: string } }) {
         :
           <S.DetailStyle>
             <Wrap>
-              <Prev/>
 
               <S.Title>{meeting?.title}</S.Title>
 
@@ -165,7 +164,6 @@ export default function Detail({ params }: { params: { postid: string } }) {
                   meeting?.yours && <S.Btn $type={"edit"} onClick={editClickHandler}>수정 하기</S.Btn>
                 }
               </S.BtnList>
-
             </Wrap>
           </S.DetailStyle>
       }

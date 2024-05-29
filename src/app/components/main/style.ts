@@ -1,71 +1,110 @@
 import styled from "styled-components";
+import * as G from "@/styles/global";
 
-export const MainStyle = styled.main`
-  padding: 0 0 85px;
-  @media screen and (max-width:820px) {
-    padding: 28px 0 92px;
+export const Wrap = styled(G.Wrap)`
+
+  & + & {
+    margin-top: 100px;
   }
-`;
 
-export const DesktopBanner = styled.div`
-  display: block;
-  position: relative;
-  height: 580px;
-  width: 100%;
-  background: url('/asset/image/desktop_banner.png') no-repeat center/cover;
+  @media screen and (max-width:820px){
+    & + & {
+      padding-top: 32px;
+      margin-top: 32px;
+      border-top: 6px solid ${({theme})=>theme.color.Surface};
+    }
+  }
+  
+`;
+export const DesktopIMG = styled.img`
   @media screen and (max-width:820px) {
     display: none;
   }
 `;
-export const MobBanner = styled.div`
-  
-  display: none;
-  position: relative;
-  box-sizing: border-box;
-  width: 95%;
-  margin: 0 auto;
+export const MobileIMG = styled.img`
+  @media screen and (min-width:821px) {
+    display: none;
+  }
+`;
 
-  &::after {
-    content: '';
-    display: block;
-    padding-bottom: calc(121/342*100%);
+export const MainStyle = styled.main`
+  padding: 50px 0 170px;
+  @media screen and (max-width:820px) {
+    padding: 23px 0 121px;
+  }
+`;
+
+export const BannerImg = styled.div`
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+`;
+
+export const RecommendLayout = styled.div`
+
+  margin-top: 65px;
+
+  h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: ${({theme})=>theme.color.Primary};
   }
 
-  img {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .flex {
+    margin-top: 43px;
+    display: flex;
+    align-items: center;
+    gap: 43px;
+    > button {
+      width: 39px;
+      height: 39px;
+      border-radius: 1000px;
+      border: 1px solid ${({theme})=>theme.color.Primary};
+      flex: 0 0 auto;
+      cursor: pointer;
+      color: ${({theme})=>theme.color.Primary};
+      font-size: 21px;
+      position: relative;
+      svg {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+      }
+    }
   }
 
   @media screen and (max-width:820px) {
-    display: block;
+    
+    margin-top: 33px;
+
+    h3 {
+      font-size: 18px;
+    }
+
+    .flex {
+      margin-top: 22px;
+      > button {
+        display: none;
+      }
+    }
+
   }
+  
 `;
 
 export const SearchFlex = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 44px;
   gap: 20px;
 
-  h4 {
-    font-size: ${({theme})=>theme.fontSize.titleMedium};
-    font-weight: ${({theme})=>theme.fontWeight.medium};
-    color: ${({theme})=>theme.color.OnBackground};
-  }
-
   @media screen and (max-width:820px) {
+    
     flex-direction: column;
+    justify-content: flex-start;
     align-items: flex-start;
-    margin-top: 25px;
-
-    h4 {
-      font-size: 18px;
-    }
+    gap: 24px;
 
   }
 
@@ -73,14 +112,19 @@ export const SearchFlex = styled.div`
 
 export const RecruitStyle = styled.div`
   display: flex;
-  gap: 21px;
+  gap: 24px;
+
+  @media screen and (max-width:820px) {
+    gap: 21px;
+  }
+
 `;
 
 export const RecruitButton = styled.button<{$active : boolean}>`
   all: unset;
   cursor: pointer;
   white-space: nowrap;
-  font-size: ${({theme})=>theme.fontSize.titleMedium};
+  font-size: 24px;
   font-weight: ${(props)=>{
     const {theme,$active} = props;
     if($active){
@@ -91,13 +135,11 @@ export const RecruitButton = styled.button<{$active : boolean}>`
   }};
   color: ${(props)=>{
     const {theme,$active} = props;
-
     if($active){
-      return theme.color.OnBackground;
+      return theme.color.Primary;
     }else{
       return theme.color.OnSurface;
     }
-
   }};
 
   @media screen and (max-width:820px) {
@@ -106,31 +148,32 @@ export const RecruitButton = styled.button<{$active : boolean}>`
 
 `;
 
-
 export const Search = styled.form`
-  width: 498px;
-  height: 49px;
+  width: 492px;
+  height: 43px;
   position: relative;
   background: ${({theme})=>theme.color.Surface};
-  border-radius: 1000px;
+  border-radius: 8px;
   display: block;
 
   input {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    padding: 0 2em;
+    padding: 0 ${14/19}em;
     border: 0;
     background: none;
     outline: 0;
     font-family: "Pretendard";
+    font-size: ${({theme})=>theme.fontSize.buttonMedium};
+    font-weight: ${({theme})=>theme.fontWeight.medium};
   }
 
   button {
     all: unset;
     cursor: pointer;
     position: absolute;
-    right: 16px;
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
   }
@@ -138,24 +181,32 @@ export const Search = styled.form`
   @media screen and (max-width:820px) {
     width: 100%;
     order: -1;
-    height: 38px;
+    height: 34px;
+
+    input {
+      font-size: 13px;
+    }
+
+    button {
+      width: 20px;
+    }
+
   }
 
 `;
 
 export const Tag = styled.div`
-  margin-top: 51px;
+  margin-top: 36px;
   & + & {margin-top: 18px;}
 
   @media screen and (max-width:820px) {
-    margin-top: 30px;
+    margin-top: 25px;
     & + & {margin-top: 15px;}
   }
-
 `;
 
 export const SmallText = styled.p`
-  font-size: ${({theme})=>theme.fontSize.buttonMedium};
+  font-size: 18px;
   font-family: "Pretendard";
   font-weight: 600;
   color : ${({theme})=>theme.color.OnSurface};
@@ -164,46 +215,28 @@ export const SmallText = styled.p`
 export const Flex = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 14px;
   margin-top: 11px;
 
   @media screen and (max-width : 820px) {
     flex-wrap: nowrap;
     overflow-x: auto;
+    gap: 4px;
   }
 
 `;
 
 export const Layout = styled.div`
   background : #F4F5F8;
-  margin-top: 60px;
-  padding: 40px 50px 50px;
+  margin-top: 53px;
+  padding: 39px 70px 49px;
   border-radius: 12px;
 
   @media screen and (max-width:820px) {
     border-radius: 0;
     padding: 0;
     background: none;
-  }
-
-`;
-
-export const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 31.98px;
-  margin-top: 28px;
-
-  @media screen and (max-width:1280px) {
-    grid-template-columns: repeat(3,1fr);
-  }
-
-  @media screen and (max-width:1024px) {
-    grid-template-columns: repeat(2,1fr);
-  }
-
-  @media screen and (max-width:820px) {
-    grid-template-columns: repeat(1,1fr);
+    margin-top: 38px;
   }
 
 `;
@@ -220,8 +253,12 @@ export const Order = styled.div`
     p {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 5.5px;
       cursor: pointer;
+      svg {
+        font-size: 14px;
+        color: ${({theme})=>theme.color.OnSurface};
+      }
     }
   }
 
@@ -247,13 +284,51 @@ export const Order = styled.div`
 
   }
 
+  @media screen and (max-width:820px) {
+    
+    div {
+      p {
+        color: ${({theme})=>theme.color.OnSurface};
+      }
+    }
+
+  }
+
+`;
+
+export const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 30px;
+  margin-top: 28px;
+
+  @media screen and (max-width:1280px) {
+    grid-template-columns: repeat(3,1fr);
+  }
+
+  @media screen and (max-width:1024px) {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  @media screen and (max-width:820px) {
+    grid-template-columns: repeat(1,1fr);
+    gap: 13px;
+    margin-top: 10px;
+  }
+
 `;
 
 export const White = styled.div`
   margin-top: 28px;
   text-align: right;
+  @media screen and (max-width:820px) {
+    margin-top: 13px;
+  }
 `;
 
 export const Paging = styled.div`
-  margin-top: 28px;
+  margin-top: 42px;
+  @media screen and (max-width:820px) {
+    margin-top: 50px;
+  }
 `;

@@ -1,11 +1,9 @@
 'use client'
-
 import { useEffect, useState } from "react";
 import BallTag from "../components/common/Button/BallTag/BallTag";
 import Location from "../components/common/Button/Location";
 import Card from "../components/common/Card/Main/Card";
 import * as S from "../components/main/style";
-import { Wrap } from "@/styles/global";
 import axios from "axios";
 import Header from "../components/common/Header";
 import { useForm } from "react-hook-form";
@@ -13,9 +11,12 @@ import { GAMETYPE, LOCATION, MEETINGSTATUS } from "../constant/meeting";
 import { meetingType, pageableType } from "../types/meeting";
 import { useAppSelector } from "@/store/hook";
 import Paging from "../components/main/Paging";
-import DownIcon from "@asset/icon/down.svg";
 import { SORT } from "../constant/sort";
 import Write from "@/app/components/common/Button/Write/Write";
+import { Swiper, SwiperSlide } from "swiper/react";
+import Recommend from "@/app/components/common/Card/Recommend/Recommend";
+import { IoChevronBack, IoChevronDown, IoChevronForward } from "react-icons/io5";
+import { Autoplay } from "swiper/modules";
 
 export default function Home() {
   
@@ -88,29 +89,139 @@ export default function Home() {
 
   return (
     <>
-      <Header postion={true}/>
+      <Header/>
+
       <S.MainStyle>
 
-        <S.DesktopBanner></S.DesktopBanner>
+        <Swiper
+          slidesPerView={1.2}
+          modules={[Autoplay]}
+          breakpoints={{
+            "820" : {
+              slidesPerView : 1.6,
+              spaceBetween : 23
+            }
+          }}
+          centeredSlides={true}
+          spaceBetween={13}
+          loop={true}
+          autoplay={{
+            delay : 6000
+          }}
+          speed={600}
+        >
+          <SwiperSlide>
+            <S.BannerImg>
+              <S.DesktopIMG src="/asset/image/banner/banner.jpg" alt="배너" />
+              <S.MobileIMG src="/asset/image/banner/banner_mob.jpg" alt="배너" />
+            </S.BannerImg>
+          </SwiperSlide>
+          <SwiperSlide>
+            <S.BannerImg>
+              <S.DesktopIMG src="/asset/image/banner/banner.jpg" alt="배너" />
+              <S.MobileIMG src="/asset/image/banner/banner_mob.jpg" alt="배너" />
+            </S.BannerImg>
+          </SwiperSlide>
+          <SwiperSlide>
+            <S.BannerImg>
+              <S.DesktopIMG src="/asset/image/banner/banner.jpg" alt="배너" />
+              <S.MobileIMG src="/asset/image/banner/banner_mob.jpg" alt="배너" />
+            </S.BannerImg>
+          </SwiperSlide>
+          <SwiperSlide>
+            <S.BannerImg>
+              <S.DesktopIMG src="/asset/image/banner/banner.jpg" alt="배너" />
+              <S.MobileIMG src="/asset/image/banner/banner_mob.jpg" alt="배너" />
+            </S.BannerImg>
+          </SwiperSlide>
+        </Swiper>
 
-        <S.MobBanner>
-          <img src="/asset/image/banner.jpg" alt="배너" />
-        </S.MobBanner>
+        <S.Wrap>
 
-        <Wrap>
-          {/* <Swiper
-            spaceBetween={10}
-            loop={true}
-            speed={600}
-          >
-            <SwiperSlide>
-              <img src="/asset/image/banner.jpg" alt="배너" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src="/asset/image/banner.jpg" alt="배너" />
-            </SwiperSlide>
-          </Swiper> */}
+          <S.RecommendLayout>
+            <h3>추천 게시물 🎯</h3>
+            <div className="flex">
+              <button><IoChevronBack /></button>
+              <Swiper
+                slidesPerView={1.2}
+                breakpoints={{
+                  "481" : {
+                    slidesPerView : 1.5,
+                  },
+                  "820" : {
+                    slidesPerView : 2,
+                    centeredSlides : true
+                  },
+                  "1025" : {
+                    slidesPerView : 3,
+                    centeredSlides : true
+                  }
+                }}
+                centeredSlides={false}
+                spaceBetween={26}
+                loop={true}
+                speed={600}
+              >
+                <SwiperSlide>
+                  <Recommend
+                    bookmarkStatus={false}
+                    postId={1}
+                    status={""}
+                    gameType={""}
+                    location={""}
+                    title={"테스트"}
+                    meetingDateTime={"2020"}
+                    meetingMemberNum={2020}
+                    meetingDeadline={"2020"}
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Recommend
+                    bookmarkStatus={false}
+                    postId={1}
+                    status={""}
+                    gameType={""}
+                    location={""}
+                    title={"테스트"}
+                    meetingDateTime={"2020"}
+                    meetingMemberNum={2020}
+                    meetingDeadline={"2020"}
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Recommend
+                    bookmarkStatus={false}
+                    postId={1}
+                    status={""}
+                    gameType={""}
+                    location={""}
+                    title={"테스트"}
+                    meetingDateTime={"2020"}
+                    meetingMemberNum={2020}
+                    meetingDeadline={"2020"}
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Recommend
+                    bookmarkStatus={false}
+                    postId={1}
+                    status={""}
+                    gameType={""}
+                    location={""}
+                    title={"테스트"}
+                    meetingDateTime={"2020"}
+                    meetingMemberNum={2020}
+                    meetingDeadline={"2020"}
+                  />
+                </SwiperSlide>
+              </Swiper>
+              <button><IoChevronForward /></button>
+            </div>
+          </S.RecommendLayout>
 
+        </S.Wrap>
+
+        <S.Wrap>
           <S.SearchFlex>
 
             <S.RecruitStyle>
@@ -126,7 +237,7 @@ export default function Home() {
             </S.RecruitStyle>
 
             <S.Search onSubmit={handleSubmit(searchSubmitHanlder)}>
-              <input type="text" {...register("q")} />
+              <input type="text" {...register("q")} placeholder="제목, 글 내용을 검색해보세요!"/>
               <button type="submit">
                 <img src="/asset/icon/search.svg" alt="검색버튼" />
               </button>
@@ -174,10 +285,10 @@ export default function Home() {
           </S.Tag>
 
           <S.Layout>
-            
+
             <S.Order>
               <div>
-                <p onClick={()=>setSortOpen(!sortOpen)}>{SORT[sort]} <DownIcon stroke="#878787"/></p>
+                <p onClick={()=>setSortOpen(!sortOpen)}>{SORT[sort]} <IoChevronDown/> </p>
                 {
                   sortOpen &&
                   <ul>
@@ -188,7 +299,7 @@ export default function Home() {
                 }
               </div>
             </S.Order>
-            
+
             {
               content.length > 0 ?
               <S.Grid>
@@ -213,7 +324,7 @@ export default function Home() {
             }
 
             <S.White>
-              <Write href={'/post/write'}>글쓰기</Write>
+              <Write href={'/post/write'}>새글 작성</Write>
             </S.White>
 
             {
@@ -225,10 +336,10 @@ export default function Home() {
                 <Paging page={page} setPage={setPage} pageable={pageable}/>
               </S.Paging>
             }
-            
-          </S.Layout>
 
-        </Wrap>
+          </S.Layout>
+        </S.Wrap>
+
       </S.MainStyle>
     </>
   );

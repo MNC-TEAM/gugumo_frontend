@@ -11,6 +11,9 @@ import axios from "axios";
 import { useAppSelector } from "@/store/hook";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import Input from "@/app/components/common/Input/Write/Input/Input";
+import White from "@/app/components/common/Button/White/White";
+import Day from "@/app/components/common/Input/Write/Day/Day";
 
 const NoSsrEditor = dynamic(()=>import("@/app/components/post/NoSsrEditor"),{
   ssr : false
@@ -37,6 +40,7 @@ export default function Wrtie() {
       content : ""
     }
   });
+  
   const meetingTypeWatch = watch('meetingType','SHORT');
 
   const [meetingDate, onMeetingDate] = useState<Value>(new Date());
@@ -162,18 +166,18 @@ export default function Wrtie() {
 
             <S.InputStyle>
               <label htmlFor="meetingType">모집형식</label>
-              <S.InputBox>
+              <Input>
                 <select id="meetingType" {...register('meetingType')}>
                   <option value="SHORT">단기모집</option>
                   <option value="LONG">장기모집</option>
                 </select>
                 <DownIcon stroke={'#878787'} />
-              </S.InputBox>
+              </Input>
             </S.InputStyle>
 
             <S.InputStyle>
               <label htmlFor="location">지역 선택</label>
-              <S.InputBox>
+              <Input>
                 <select id="location" {...register('location')}>
                   <option value="">지역 선택을 선택해주세요.</option>
                   <option value="SEOUL">서울</option>
@@ -189,12 +193,12 @@ export default function Wrtie() {
                   <option value="OTHER">그외</option>
                 </select>
                 <DownIcon stroke={'#878787'} />
-              </S.InputBox>
+              </Input>
             </S.InputStyle>
 
             <S.InputStyle>
               <label htmlFor="gameType">구기종목</label>
-              <S.InputBox>
+              <Input>
                 <select id="gameType" {...register('gameType')}>
                   <option value="">구기종목을 선택해주세요.</option>
                   <option value="BADMINTON">배드민턴</option>
@@ -205,12 +209,12 @@ export default function Wrtie() {
                   <option value="BASEBALL">야구</option>
                 </select>
                 <DownIcon stroke={'#878787'} />
-              </S.InputBox>
+              </Input>
             </S.InputStyle>
 
             <S.InputStyle>
               <label htmlFor="meetingMemberNum">모집인원</label>
-              <S.InputBox>
+              <Input>
                 <select id="meetingMemberNum" {...register('meetingMemberNum')}>
                   <option value="">모집인원을 선택해주세요.</option>
                   <option value="1">1명</option>
@@ -220,7 +224,7 @@ export default function Wrtie() {
                   <option value="5">5명 이상</option>
                 </select>
                 <DownIcon stroke={'#878787'} />
-              </S.InputBox>
+              </Input>
             </S.InputStyle>
 
             {
@@ -228,7 +232,7 @@ export default function Wrtie() {
               ?
               <S.InputStyle>
                 <label htmlFor="meetingDate">모임 날짜</label>
-                <S.InputBox>
+                <Input>
                   <S.CalendarBox onClick={meetingDateClickHandler}>
                     {moment(meetingDate as Date).format("YYYY.MM.DD")}
                   </S.CalendarBox>
@@ -236,13 +240,13 @@ export default function Wrtie() {
                     meetingDateOpen && <Calendar onChange={meetingDateChangeHandler} value={meetingDate} />
                   }
                   <CalenderIcon stroke="#878787"/>
-                </S.InputBox>
+                </Input>
               </S.InputStyle>
               :
               <>
                 <S.InputStyle>
                   <label htmlFor="meetingTime">시간대</label>
-                  <S.InputBox>
+                  <Input>
                     <select id="meetingTime" {...register('meetingTime')}>
                       <option value="">시간대을 선택해주세요.</option>
                       <option value="1">1시</option>
@@ -270,18 +274,18 @@ export default function Wrtie() {
                       <option value="23">23시</option>
                     </select>
                     <DownIcon stroke={'#878787'} />
-                  </S.InputBox>
+                  </Input>
                 </S.InputStyle>
                 <S.InputStyle>
                   <p>모임 요일</p>
                   <S.DaysGrid>
                     {
                       ['월','화','수','목','금','토','일'].map((el,index)=>
-                        <S.DaysCheckbox 
+                        <Day 
                           onClick={()=>meetingDaysClickHanlder(el)} 
                           key={index}
                           $active={meetingDays.includes(el)}
-                        >{el}</S.DaysCheckbox>
+                        >{el}</Day>
                       )
                     }
                   </S.DaysGrid>
@@ -291,7 +295,7 @@ export default function Wrtie() {
             
             <S.InputStyle>
               <label htmlFor="meetingDeadline">모집 마감</label>
-              <S.InputBox>
+              <Input>
                 <S.CalendarBox onClick={meetingDeadlineClickHandler}>
                   {moment(meetingDeadline as Date).format("YYYY.MM.DD")}
                 </S.CalendarBox>
@@ -299,14 +303,14 @@ export default function Wrtie() {
                   meetingDeadlineOpen && <Calendar onChange={meetingDeadlineChangeHandler} value={meetingDeadline} />
                 }
                 <CalenderIcon stroke="#878787"/>
-              </S.InputBox>
+              </Input>
             </S.InputStyle>
 
             <S.InputStyle>
               <label htmlFor="openKakao">오픈카톡 주소</label>
-              <S.InputBox>
+              <Input>
                 <input type="text" id="openKakao" placeholder="오픈카톡 주소를 입력해주세요." {...register('openKakao')}/>
-              </S.InputBox>
+              </Input>
             </S.InputStyle>
 
           </S.Gird>
@@ -327,7 +331,9 @@ export default function Wrtie() {
 
           </S.DescBox>
           
-          <S.Button type="submit">작성하기</S.Button>
+          <S.BtnList>
+            <White type="submit">작성하기</White>
+          </S.BtnList>
         </form>
 
       </Wrap>

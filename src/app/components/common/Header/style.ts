@@ -1,4 +1,4 @@
-import { Wrap } from "@/styles/global";
+import * as G from "@/styles/global";
 import styled from "styled-components";
 
 interface HeaderType {
@@ -33,7 +33,7 @@ export const Logo = styled.div<HeaderType>`
     }
 `;
 
-export const Wrapper = styled(Wrap)`
+export const Wrapper = styled(G.Wrap)`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -44,8 +44,8 @@ export const LoginStyle = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 79px;
-    height: 37px;
+    width: 74px;
+    height: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,8 +58,9 @@ export const LoginStyle = styled.button`
     cursor: pointer;
 
     @media screen and (max-width: 820px) {
-        width: 74px;
-        height: 35px;
+        width: 69px;
+        height: 28px;
+        font-size: 14px;
     }
 
 `;
