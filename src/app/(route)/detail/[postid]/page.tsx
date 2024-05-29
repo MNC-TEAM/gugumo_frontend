@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { GAMETYPE, LOCATION, MEETINGTYPE } from "@/app/constant/meetingQuery";
 import Header from "@/app/components/common/Header";
 import { Viewer } from "@toast-ui/react-editor";
+import Comment from "@/app/components/detail/Comment/Comment";
 
 export default function Detail({ params }: { params: { postid: string } }) {
 
@@ -163,7 +164,6 @@ export default function Detail({ params }: { params: { postid: string } }) {
                   meeting?.yours && <S.Btn $type={"edit"} onClick={editClickHandler}>수정 하기</S.Btn>
                 }
               </S.BtnList>
-
             </Wrap>
           </S.DetailStyle>
       }

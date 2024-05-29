@@ -1,5 +1,4 @@
-import axios from "axios";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 export const POST = async (request : NextRequest)=>{
 
@@ -7,16 +6,11 @@ export const POST = async (request : NextRequest)=>{
 
     const body = await request.json();
 
-    try {
-        const response = await axios.post(`${process.env.API_URL}/api/v1/login`,body);
-        return new NextResponse(JSON.stringify({
-            status: "success",
-            token : response.headers.authorization
-        }));
-    }
-    catch(err : any){
-        const {response} = err;
-        return new NextResponse(JSON.stringify(response.data));
-    }
+    const res = await fetch(`${process.env.API_URL}/api/v1/login`,{
+        method : "POST",
+        body
+    });
+    const json = await res.json();
+    return Response.json(json);
 
 }
