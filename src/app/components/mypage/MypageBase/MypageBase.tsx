@@ -10,11 +10,23 @@ import { useState } from "react";
 export default function MypageBase({data} : {data : MypageType}) {
 
   const router = useRouter();
-  const userDeleteHanlder = ()=>{
-    alert('회원탈퇴 기능은 준비중입니다.');
-  }
-
   const [nickname,setNickname] = useState(data.nickname);
+  const userDeleteHanlder = async ()=>{
+
+    const res = await fetch(`/api/member/delete`,{
+      method : "DELETE",
+    });
+
+    const {status,message} = await res.json();
+
+    if(status === "success"){
+      alert('회원 탈퇴가 완료 되었습니다.');
+      router.push('/');
+    }else{
+      alert(message);
+    }
+
+  }
 
   return (
     <S.MypageStyle>
@@ -27,7 +39,7 @@ export default function MypageBase({data} : {data : MypageType}) {
             <Nickname setNickname={setNickname}/>
             <Password/>
             <S.UserDelete>
-                <button onClick={userDeleteHanlder}>회원탈퇴하기</button>
+              <button onClick={userDeleteHanlder}>회원탈퇴하기</button>
             </S.UserDelete>
         </S.Wrap>
     </S.MypageStyle>

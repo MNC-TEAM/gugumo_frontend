@@ -27,10 +27,6 @@ export default function Password() {
 
         axios.patch('/api/member/password',{
             password
-        },{
-            headers : {
-                Authorization : user
-            }
         })
         .then(res=>{
             const {status,message} = res.data;
