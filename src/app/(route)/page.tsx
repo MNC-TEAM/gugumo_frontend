@@ -1,13 +1,11 @@
 "use client"
 import Header from "@components/common/Header";
-import { Suspense, useEffect, useState } from "react";
+import { useState } from "react";
 import * as S from "@components/main/style";
 import { useForm } from "react-hook-form";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { IoChevronBack, IoChevronDown, IoChevronForward } from "react-icons/io5";
+import { IoChevronDown } from "react-icons/io5";
 import { Autoplay } from "swiper/modules";
-import { useAppSelector } from "@store/hook";
-import Recommend from "@components/common/Card/Recommend/Recommend";
 import { GAMETYPE, LOCATION, MEETINGSTATUS } from "@constant/meeting";
 import Location from "@components/common/Button/Location";
 import BallTag from "@components/common/Button/BallTag/BallTag";
@@ -16,14 +14,13 @@ import Card from "@components/common/Card/Main/Card";
 import Write from "@components/common/Button/Write/Write";
 import Paging from "@components/main/Paging";
 import { MeetingDataType } from "@/types/meeting";
-import { HashLoader } from "react-spinners";
 import Recommends from "@components/Recommends/Recommends";
-import { axiosInstace } from "@lib/axiosInstance";
 import useSWR from 'swr'
 import axios from "axios";
-import Login from "@components/auth/Modal/Login";
 
-const fetcher = (url : string) => axios.get(url).then(res => res.data);
+const fetcher = (url : string,page : number, sort : string, meetingstatus : string,location:string,gametype:string,q:string) => {
+    return axios.get(url,{params : {page,sort,meetingstatus,location,gametype,q}}).then(res => res.data)
+};
 
 export default function Home() {
 
@@ -56,7 +53,7 @@ export default function Home() {
         setQ(q);
     }
 
-    const {data : meeting} = useSWR<MeetingDataType>(["/api/meeting"],fetcher,{ suspense: true });
+    const {data : meeting} = useSWR<MeetingDataType>(["/api/meeting",page,sort,meetingstatus,location,gametype,q],([url])=>fetcher(url,page,sort,meetingstatus,location,gametype,q));
 
     return (
         <>
@@ -190,25 +187,31 @@ export default function Home() {
                         </S.Order>
 
                         {
-                            !meeting && <p style={{marginTop : 28, textAlign : 'center'}}>게시글이 존재하지 않습니다.</p>
+                            !meeting && <>로딩중</>
                         }
 
                         <S.Grid>
                             {
-                                meeting?.data.content.map(el=>(
-                                    <Card
-                                        bookmarkStatus={el.bookmarked}
-                                        key={el.postId}
-                                        postId={el.postId}
-                                        status={el.meetingStatus}
-                                        gameType={el.gameType}
-                                        location={el.location}
-                                        title={el.title}
-                                        meetingDateTime={el.meetingDateTime as string}
-                                        meetingMemberNum={el.meetingMemberNum}
-                                        meetingDeadline={el.meetingDeadline}
-                                    />
-                                ))
+                                meeting &&
+                                    (
+                                        meeting.data.content.length <= 0 
+                                        ?
+                                            <>게시글이 존재하지 않습니다.</>
+                                        : meeting.data.content.map(el=>(
+                                            <Card
+                                                bookmarkStatus={el.bookmarked}
+                                                key={el.postId}
+                                                postId={el.postId}
+                                                status={el.meetingStatus}
+                                                gameType={el.gameType}
+                                                location={el.location}
+                                                title={el.title}
+                                                meetingDateTime={el.meetingDateTime as string}
+                                                meetingMemberNum={el.meetingMemberNum}
+                                                meetingDeadline={el.meetingDeadline}
+                                            />
+                                        ))
+                                    )
                             }
                         </S.Grid>
 
