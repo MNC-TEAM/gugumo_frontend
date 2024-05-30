@@ -4,16 +4,18 @@ import * as S from "./style";
 import Link from 'next/link'
 import { onLogin } from '@/store/features/modal/modal';
 import { useEffect, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import axios from 'axios';
 import { logoutAction } from '@/store/features/auth/user';
-import { usePathname } from 'next/navigation';
 
 interface HeaderType {
-  token? : string,
   postion? : boolean
 }
 
-export default function Header( {token,postion} : HeaderType ) {
+export default function Header( {postion} : HeaderType ) {
   
+  const user = useAppSelector(state=>state.user);
+  const router = useRouter();
   const [userMenuHidden,setUserMenuHidden] = useState(true);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
@@ -22,6 +24,19 @@ export default function Header( {token,postion} : HeaderType ) {
     setUserMenuHidden(true);
   },[pathname]);
 
+  const logOut = async ()=>{
+    const {data} = await axios.get("/api/auth/logout");
+    const {status,message} = data;
+    
+    if(status === "success"){
+      dispatch(logoutAction());
+      router.push('/');
+    }else{
+      alert(message);
+    }
+
+  }
+
   return (
     <S.HeaderStyle $postion={postion}>
       <S.Wrapper>
@@ -29,7 +44,7 @@ export default function Header( {token,postion} : HeaderType ) {
           <Link href={'/'}><img src='/asset/logo.svg' alt='로고'/></Link>
         </S.Logo>
         {
-          !token ?
+          !user ?
             <S.LoginStyle onClick={()=>dispatch(onLogin())}>로그인</S.LoginStyle>
           :
           <S.Flex>
@@ -47,7 +62,7 @@ export default function Header( {token,postion} : HeaderType ) {
                   <Link href={"/mypage"}>회원정보</Link>
                 </li>
                 <li>
-                  <button onClick={()=>dispatch(logoutAction())}>로그아웃</button>
+                  <button onClick={logOut}>로그아웃</button>
                 </li>
               </ul>
             </S.UserMenu>

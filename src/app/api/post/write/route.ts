@@ -1,4 +1,4 @@
-import axios from "axios";
+import apiClient from "@/lib/apiClient";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -11,7 +11,7 @@ export const POST = async (req : NextRequest)=>{
     if(!process.env.API_URL) throw new Error('env 에러가 발생했습니다.');
 
     try {
-        const response = await axios.post(`${process.env.API_URL}/api/v1/meeting/new`,body,{
+        const response = await apiClient.post(`/api/v1/meeting/new`,body,{
             headers : {
                 Authorization : token
             }
@@ -38,7 +38,7 @@ export const PATCH = async (req : NextRequest)=>{
     if(!process.env.API_URL) throw new Error('env 에러가 발생했습니다.');
 
     try {
-        const response = await axios.patch(`${process.env.API_URL}/api/v1/meeting/${postId}`,body,{
+        const response = await apiClient.patch(`/api/v1/meeting/${postId}`,body,{
             headers : {
                 Authorization : token
             }
@@ -65,7 +65,7 @@ export const DELETE = async (req : NextRequest)=>{
     if(!process.env.API_URL) throw new Error('env 에러가 발생했습니다.');
 
     try {
-        const response = await axios.delete(`${process.env.API_URL}/api/v1/meeting/${postId}`,{
+        const response = await apiClient.delete(`/api/v1/meeting/${postId}`,{
             headers : {
                 Authorization : token
             }

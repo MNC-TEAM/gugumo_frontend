@@ -1,4 +1,4 @@
-import axios from "axios";
+import apiClient from "@/lib/apiClient";
 import { NextRequest, NextResponse } from "next/server"
 
 export const POST = async(request : NextRequest)=>{
@@ -8,7 +8,7 @@ export const POST = async(request : NextRequest)=>{
     const body = await request.json();
 
     try {
-        const response = await axios.post(`${process.env.API_URL}/api/v1/member`,body)
+        const response = await apiClient.post(`/api/v1/member`,body)
         return new NextResponse(JSON.stringify(response.data));
     }
     catch(err : any){

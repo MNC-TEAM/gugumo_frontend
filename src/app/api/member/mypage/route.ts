@@ -1,21 +1,12 @@
-import axios from "axios";
-import { NextApiRequest } from "next";
-import { headers } from "next/headers";
+import apiClient from "@/lib/apiClient";
 import { NextResponse } from "next/server";
 
 export const GET = async ()=>{
 
-    const headersList = headers();
-    const token = headersList.get('authorization');
-
     if(!process.env.API_URL) throw new Error('env 에러가 발생했습니다.');
 
     try {
-        const response = await axios.get(`${process.env.API_URL}/api/v1/member`,{
-            headers : {
-                Authorization : token
-            }
-        });
+        const response = await apiClient.get(`/api/v1/member`);
         return new NextResponse(JSON.stringify(response.data));
     }
     catch(err : any){
@@ -28,17 +19,10 @@ export const GET = async ()=>{
 
 export const PATCH = async ()=>{
 
-    const headersList = headers();
-    const token = headersList.get('authorization');
-
     if(!process.env.API_URL) throw new Error('env 에러가 발생했습니다.');
 
     try {
-        const response = await axios.get(`${process.env.API_URL}/api/v1/member`,{
-            headers : {
-                Authorization : token
-            }
-        });
+        const response = await apiClient.get(`/api/v1/member`);
         return new NextResponse(JSON.stringify(response.data));
     }
     catch(err : any){

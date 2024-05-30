@@ -28,7 +28,7 @@ export const viewport : Viewport = {
 }
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -38,11 +38,11 @@ export default function RootLayout({
         <QueryProvider>
           <ThemeClient>
             <StyledComponentsRegistry>
-              <StoreProvider>
-                <ModalContext>
-                  {children}
-                </ModalContext>
-              </StoreProvider>
+                <StoreProvider>
+                  <ModalContext>
+                    {children}
+                  </ModalContext>
+                </StoreProvider>
             </StyledComponentsRegistry>
           </ThemeClient>
         </QueryProvider>

@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form'
 import { BaseModalBackground } from 'styled-react-modal'
 import Primary from '@/app/components/common/Button/Primary/Primary'
 import Input from '@/app/components/common/Input/Basic/Input/Input'
+import axios from 'axios'
 import { loginAction } from '@/store/features/auth/user'
 
 export default function Login() {
@@ -31,20 +32,17 @@ export default function Login() {
       return setIsPasswordError('비밀번호을 입력해주세요.');
     }
 
-    const res = await fetch('/api/member/login',{
-      method : "POST",
-      body : JSON.stringify({
-        username,
-        password
-      })
+    const {data} = await axios.post('/api/auth/login',{
+      username,
+      password
     });
 
-    const {message,status} = await res.json();
+    const {status,message,token} = data
 
     if(status === "fail"){
       return alert(message);
     }else{
-      dispatch(loginAction());
+      dispatch(loginAction(token));
       return dispatch(onClose());
     }
 

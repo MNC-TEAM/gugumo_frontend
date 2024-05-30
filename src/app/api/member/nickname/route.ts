@@ -1,5 +1,4 @@
-import axios from "axios";
-import { cookies, headers } from "next/headers";
+import apiClient from "@/lib/apiClient";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req : NextRequest)=>{
@@ -10,7 +9,7 @@ export const GET = async (req : NextRequest)=>{
     const nickname = searchParams.get('nickname');
     
     try{
-        const response = await axios.get(`${process.env.API_URL}/api/v1/member/checkDuplicateNickname`,{
+        const response = await apiClient.get(`/api/v1/member/checkDuplicateNickname`,{
             params : {
                 nickname
             }
@@ -27,16 +26,10 @@ export const GET = async (req : NextRequest)=>{
 export const PATCH = async (req : NextRequest)=>{
 
     if(!process.env.API_URL) throw new Error('env 에러가 발생했습니다.');
-
-    const token = cookies().get('user')?.value;
     const body = await req.json();
 
     try{
-        const response = await axios.patch(`${process.env.API_URL}/api/v1/member/updateNickname`,body,{
-            headers : {
-                Authorization : token
-            }
-        });
+        const response = await apiClient.patch(`/api/v1/member/updateNickname`,body);
         return new NextResponse(JSON.stringify(response.data));
     }
     catch(e : any){

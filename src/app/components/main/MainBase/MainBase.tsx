@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useState } from "react";
 import * as S from "../style";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useAppSelector } from "@/store/hook";
 import Write from "@/app/components/common/Button/Write/Write";
@@ -29,11 +28,8 @@ const getPost = async({meetingstatus,location,gametype,q,page,sort} : any)=>{
     }
 
     const queryString = new URLSearchParams(parmas).toString();
-
     const res = await fetch(`/api/post/get?${queryString}`);
-
     const {message,status,data} = await res.json();
-
     return {message,status,data};
 
 }

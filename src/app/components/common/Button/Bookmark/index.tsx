@@ -29,10 +29,6 @@ export default function Bookmark(
 
       axios.post('/api/post/bookmark',{
         postId : postid
-      },{
-        headers : {
-          Authorization : user
-        }
       })
       .then((res)=>{
         const {status} = res.data;
@@ -52,9 +48,6 @@ export default function Bookmark(
       axios.delete('/api/post/bookmark',{
         params : {
           post_id : postid
-        },
-        headers : {
-          Authorization : user
         }
       })
       .then((res)=>{

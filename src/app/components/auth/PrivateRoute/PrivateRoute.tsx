@@ -10,11 +10,15 @@ export default function PrivateRoute({ children }: { children: React.ReactNode }
   if(!user){
     alert('로그인을 하셔야합니다.');
     router.push('/');
-  } 
+    return <></>
+  }else{
 
-  return (
-    <>
-      {children}
-    </>
-  )
+    return (
+      <>
+        {children}
+      </>
+    )
+
+  }
+
 }
