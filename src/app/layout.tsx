@@ -7,6 +7,7 @@ import localFont from "next/font/local";
 import StoreProvider from "@store/Providers";
 import ThemeClient from '@provider/ThemeClient';
 import StyledComponentsRegistry from '@provider/registry';
+import QueryProvider from '@provider/QueryProvider';
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',
@@ -34,12 +35,12 @@ export default function RootLayout({
     <html lang="ko">
       <body className={pretendard.className}>
         <ThemeClient>
-          <StyledComponentsRegistry>
-              <StoreProvider>
-                {children}
-              </StoreProvider>
-          </StyledComponentsRegistry>
-        </ThemeClient>
+            <StyledComponentsRegistry>
+                <StoreProvider>
+                  {children}
+                </StoreProvider>
+            </StyledComponentsRegistry>
+          </ThemeClient>
       </body>
     </html>
   );

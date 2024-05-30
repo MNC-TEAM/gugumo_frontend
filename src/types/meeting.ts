@@ -1,16 +1,15 @@
-export interface meetingType {
-  postId: number;
-  meetingStatus: string;
-  gameType: string;
-  location: string;
-  title: string;
-  meetingMemberNum: number;
-  meetingDeadline: string;
-  meetingDateTime: string;
-  bookmarked: boolean;
+export interface MeetingDataType {
+  status: string;
+  data: Data;
+  message?: any;
 }
 
-export interface pageableType {
+export interface Data {
+  content: Content[];
+  pageable: Pageable;
+}
+
+export interface Pageable {
   number: number;
   size: number;
   sort: Sort;
@@ -22,9 +21,23 @@ export interface pageableType {
   numberOfElements: number;
   empty: boolean;
 }
-  
+
 export interface Sort {
   sorted: boolean;
   empty: boolean;
   unsorted: boolean;
+}
+
+export interface Content {
+  postId: number;
+  meetingStatus: string;
+  gameType: string;
+  location: string;
+  title: string;
+  meetingMemberNum: number;
+  meetingDeadline: string;
+  meetingTime?: string;
+  meetingDays?: string;
+  bookmarked: boolean;
+  meetingDateTime?: string;
 }
