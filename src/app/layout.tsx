@@ -7,7 +7,7 @@ import localFont from "next/font/local";
 import StoreProvider from "@store/Providers";
 import ThemeClient from '@provider/ThemeClient';
 import StyledComponentsRegistry from '@provider/registry';
-import QueryProvider from '@provider/QueryProvider';
+import Login from '@components/auth/Modal/Login';
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',
@@ -37,6 +37,7 @@ export default function RootLayout({
         <ThemeClient>
             <StyledComponentsRegistry>
                 <StoreProvider>
+                  <Login/>
                   {children}
                 </StoreProvider>
             </StyledComponentsRegistry>

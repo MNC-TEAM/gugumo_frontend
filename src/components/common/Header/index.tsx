@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useAppDispatch, useAppSelector } from "@store/hook";
 import { logoutAction } from "@store/features/auth/user";
-import { onLogin } from "@store/features/modal/modal";
+import { open } from "@store/features/modal/modal";
 
 interface HeaderType {
   postion? : boolean
@@ -37,6 +37,7 @@ export default function Header( {postion} : HeaderType ) {
 
   }
 
+
   return (
     <S.HeaderStyle $postion={postion}>
       <S.Wrapper>
@@ -45,7 +46,7 @@ export default function Header( {postion} : HeaderType ) {
         </S.Logo>
         {
           !user ?
-            <S.LoginStyle onClick={()=>dispatch(onLogin())}>로그인</S.LoginStyle>
+            <S.LoginStyle type="button" onClick={()=>dispatch(open())}>로그인</S.LoginStyle>
           :
           <S.Flex>
             {/* <img src="/asset/icon/bell.svg" alt="알림창" /> */}

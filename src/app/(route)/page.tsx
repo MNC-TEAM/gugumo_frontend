@@ -21,6 +21,7 @@ import Recommends from "@components/Recommends/Recommends";
 import { axiosInstace } from "@lib/axiosInstance";
 import useSWR from 'swr'
 import axios from "axios";
+import Login from "@components/auth/Modal/Login";
 
 const fetcher = (url : string) => axios.get(url).then(res => res.data);
 
@@ -59,9 +60,7 @@ export default function Home() {
 
     return (
         <>
-            
             <Header/>
-
             <S.MainStyle>
 
                 <Swiper
@@ -226,7 +225,6 @@ export default function Home() {
                 </S.Wrap>
 
             </S.MainStyle>
-            
         </>
     );
   
