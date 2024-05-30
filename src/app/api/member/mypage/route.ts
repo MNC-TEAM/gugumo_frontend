@@ -1,5 +1,4 @@
-import apiClient from "@/lib/apiClient";
-import { NextResponse } from "next/server";
+import apiClient from "@lib/apiClient";
 
 export const GET = async ()=>{
 
@@ -7,27 +6,14 @@ export const GET = async ()=>{
 
     try {
         const response = await apiClient.get(`/api/v1/member`);
-        return new NextResponse(JSON.stringify(response.data));
+        return Response.json(response.data);
     }
     catch(err : any){
         console.log(err);
-        return new NextResponse('서버 에러');
-    }
-
-}
-
-
-export const PATCH = async ()=>{
-
-    if(!process.env.API_URL) throw new Error('env 에러가 발생했습니다.');
-
-    try {
-        const response = await apiClient.get(`/api/v1/member`);
-        return new NextResponse(JSON.stringify(response.data));
-    }
-    catch(err : any){
-        console.log(err);
-        return new NextResponse('서버 에러');
+        return Response.json({
+            status : "err",
+            message : "서버 오류가 발생했습니다."
+        });
     }
 
 }

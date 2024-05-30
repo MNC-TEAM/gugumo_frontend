@@ -1,4 +1,4 @@
-import apiClient from "@/lib/apiClient";
+import apiClient from "@lib/apiClient";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 

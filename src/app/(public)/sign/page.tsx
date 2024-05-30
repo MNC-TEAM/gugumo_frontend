@@ -1,14 +1,14 @@
 "use client"
 
-import Input from "@/app/components/common/Input/Basic/Input/Input";
+import Input from "@components/common/Input/Basic/Input/Input";
 import * as S from "./Sign.style";
-import BallTag from "@/app/components/common/Button/BallTag/BallTag";
-import { GAMETYPE } from "@/app/constant/meeting";
-import White from "@/app/components/common/Button/White/White";
+import BallTag from "@components/common/Button/BallTag/BallTag";
+import { GAMETYPE } from "@constant/meeting";
+import White from "@components/common/Button/White/White";
 import { IoCheckmarkOutline } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import AuthBtn from "@/app/components/common/Input/Basic/AuthBtn/AuthBtn";
+import AuthBtn from "@components/common/Input/Basic/AuthBtn/AuthBtn";
 import { useRouter } from "next/navigation";
 
 export default function page() {

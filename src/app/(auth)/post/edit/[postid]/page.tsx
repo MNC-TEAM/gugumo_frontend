@@ -1,19 +1,20 @@
 "use client"
 import * as S from "../../style";
-import { Wrap } from "@/styles/global";
+import { Wrap } from "@styles/global";
 import DownIcon from "@asset/icon/down.svg";
 import CalenderIcon from "@asset/icon/calender.svg";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import moment from "moment";
-import Prev from "@/app/components/common/Button/Prev/Prev";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useAppSelector } from "@/store/hook";
+import { useAppSelector } from "@store/hook";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import Input from "@components/common/Input/Write/Input/Input";
+import White from "@components/common/Button/White/White";
 
-const NoSsrEditor = dynamic(()=>import("@/app/components/post/NoSsrEditor"),{
+const NoSsrEditor = dynamic(()=>import("@components/post/NoSsrEditor"),{
   ssr : false
 });
 
@@ -179,7 +180,7 @@ export default function Post({params} : {params : {postid : string}}) {
     <S.WrtieStyle>
       <Wrap>
         
-        <Prev/>
+        {/* <Prev/> */}
 
         <form onSubmit={handleSubmit(onSubmitHanlder)}>
           <S.Flex>
@@ -191,29 +192,29 @@ export default function Post({params} : {params : {postid : string}}) {
 
             <S.InputStyle>
               <label htmlFor="meetingStatus">모집 상태</label>
-              <S.InputBox>
+              <Input>
                 <select id="meetingStatus" {...register('meetingStatus')}>
                   <option value="RECRUIT">모집중</option>
                   <option value="END">모집마감</option>
                 </select>
                 <DownIcon stroke={'#878787'} />
-              </S.InputBox>
+              </Input>
             </S.InputStyle>
 
             <S.InputStyle>
               <label htmlFor="meetingType">모집형식</label>
-              <S.InputBox>
+              <Input>
                 <select id="meetingType" {...register('meetingType')}>
                   <option value="SHORT">단기모집</option>
                   <option value="LONG">장기모집</option>
                 </select>
                 <DownIcon stroke={'#878787'} />
-              </S.InputBox>
+              </Input>
             </S.InputStyle>
 
             <S.InputStyle>
               <label htmlFor="location">지역 선택</label>
-              <S.InputBox>
+              <Input>
                 <select id="location" {...register('location')}>
                   <option value="">지역 선택을 선택해주세요.</option>
                   <option value="SEOUL">서울</option>
@@ -229,12 +230,12 @@ export default function Post({params} : {params : {postid : string}}) {
                   <option value="OTHER">그외</option>
                 </select>
                 <DownIcon stroke={'#878787'} />
-              </S.InputBox>
+              </Input>
             </S.InputStyle>
 
             <S.InputStyle>
               <label htmlFor="gameType">구기종목</label>
-              <S.InputBox>
+              <Input>
                 <select id="gameType" {...register('gameType')}>
                   <option value="">구기종목을 선택해주세요.</option>
                   <option value="BADMINTON">배드민턴</option>
@@ -245,12 +246,12 @@ export default function Post({params} : {params : {postid : string}}) {
                   <option value="BASEBALL">야구</option>
                 </select>
                 <DownIcon stroke={'#878787'} />
-              </S.InputBox>
+              </Input>
             </S.InputStyle>
 
             <S.InputStyle>
               <label htmlFor="meetingMemberNum">모집인원</label>
-              <S.InputBox>
+              <Input>
                 <select id="meetingMemberNum" {...register('meetingMemberNum')}>
                   <option value="">모집인원을 선택해주세요.</option>
                   <option value="1">1명</option>
@@ -260,7 +261,7 @@ export default function Post({params} : {params : {postid : string}}) {
                   <option value="5">5명 이상</option>
                 </select>
                 <DownIcon stroke={'#878787'} />
-              </S.InputBox>
+              </Input>
             </S.InputStyle>
 
             {
@@ -268,7 +269,7 @@ export default function Post({params} : {params : {postid : string}}) {
               ?
               <S.InputStyle>
                 <label htmlFor="meetingDate">모임 날짜</label>
-                <S.InputBox>
+                <Input>
                   <S.CalendarBox onClick={meetingDateClickHandler}>
                     {moment(meetingDate as Date).format("YYYY.MM.DD")}
                   </S.CalendarBox>
@@ -276,13 +277,13 @@ export default function Post({params} : {params : {postid : string}}) {
                     meetingDateOpen && <Calendar onChange={meetingDateChangeHandler} value={meetingDate} />
                   }
                   <CalenderIcon stroke="#878787"/>
-                </S.InputBox>
+                </Input>
               </S.InputStyle>
               :
               <>
                 <S.InputStyle>
                   <label htmlFor="meetingTime">시간대</label>
-                  <S.InputBox>
+                  <Input>
                     <select id="meetingTime" {...register('meetingTime')}>
                       <option value="">시간대을 선택해주세요.</option>
                       <option value="1">1시</option>
@@ -310,7 +311,7 @@ export default function Post({params} : {params : {postid : string}}) {
                       <option value="23">23시</option>
                     </select>
                     <DownIcon stroke={'#878787'} />
-                  </S.InputBox>
+                  </Input>
                 </S.InputStyle>
                 <S.InputStyle>
                   <p>모임 요일</p>
@@ -331,7 +332,7 @@ export default function Post({params} : {params : {postid : string}}) {
             
             <S.InputStyle>
               <label htmlFor="meetingDeadline">모집 마감</label>
-              <S.InputBox>
+              <Input>
                 <S.CalendarBox onClick={meetingDeadlineClickHandler}>
                   {moment(meetingDeadline as Date).format("YYYY.MM.DD")}
                 </S.CalendarBox>
@@ -339,14 +340,14 @@ export default function Post({params} : {params : {postid : string}}) {
                   meetingDeadlineOpen && <Calendar onChange={meetingDeadlineChangeHandler} value={meetingDeadline} />
                 }
                 <CalenderIcon stroke="#878787"/>
-              </S.InputBox>
+              </Input>
             </S.InputStyle>
 
             <S.InputStyle>
               <label htmlFor="openKakao">오픈카톡 주소</label>
-              <S.InputBox>
+              <Input>
                 <input type="text" id="openKakao" placeholder="오픈카톡 주소를 입력해주세요." {...register('openKakao')}/>
-              </S.InputBox>
+              </Input>
             </S.InputStyle>
 
           </S.Gird>
@@ -369,7 +370,7 @@ export default function Post({params} : {params : {postid : string}}) {
 
           </S.DescBox>
           
-          <S.Button type="submit">수정하기</S.Button>
+          <White type="submit">수정하기</White>
         </form>
 
       </Wrap>

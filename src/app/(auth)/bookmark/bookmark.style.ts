@@ -1,4 +1,4 @@
-import { Layout } from "@/app/components/main/style";
+import { Layout } from "@components/main/style";
 import styled from "styled-components";
 
 export const BookMakrLayout = styled(Layout)`

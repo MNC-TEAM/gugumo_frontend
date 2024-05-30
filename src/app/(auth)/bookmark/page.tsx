@@ -1,13 +1,13 @@
 "use client"
-import * as S from "@/app/components/main/style";
+import * as S from "@components/main/style";
 import * as B from "./bookmark.style";
-import { Wrap } from "@/styles/global";
+import { Wrap } from "@styles/global";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { meetingType, pageableType } from "@/app/types/meeting";
-import Paging from "@/app/components/main/Paging";
-import Card from "@/app/components/common/Card/Main/Card";
+import { meetingType, pageableType } from "@/types/meeting";
+import Paging from "@components/main/Paging";
+import Card from "@components/common/Card/Main/Card";
 
 export default function Home() {
 

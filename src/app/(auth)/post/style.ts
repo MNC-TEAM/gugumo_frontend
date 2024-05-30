@@ -1,4 +1,4 @@
-import * as I from "@/app/components/common/Input/Write/Input/Input.style";
+import * as I from "@components/common/Input/Write/Input/Input.style";
 import styled from "styled-components";
 
 

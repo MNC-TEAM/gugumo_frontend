@@ -1,6 +1,6 @@
 "use client"
 import * as S from "../style";
-import { Wrap } from "@/styles/global";
+import { Wrap } from "@styles/global";
 import DownIcon from "@asset/icon/down.svg";
 import CalenderIcon from "@asset/icon/calender.svg";
 import { useState } from "react";
@@ -8,14 +8,14 @@ import Calendar from "react-calendar";
 import moment from "moment";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useAppSelector } from "@/store/hook";
+import { useAppSelector } from "@store/hook";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
-import Input from "@/app/components/common/Input/Write/Input/Input";
-import White from "@/app/components/common/Button/White/White";
-import Day from "@/app/components/common/Input/Write/Day/Day";
+import Input from "@components/common/Input/Write/Input/Input";
+import White from "@components/common/Button/White/White";
+import Day from "@components/common/Input/Write/Day/Day";
 
-const NoSsrEditor = dynamic(()=>import("@/app/components/post/NoSsrEditor"),{
+const NoSsrEditor = dynamic(()=>import("@components/post/NoSsrEditor"),{
   ssr : false
 });
 

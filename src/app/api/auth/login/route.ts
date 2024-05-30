@@ -1,4 +1,4 @@
-import apiClient from "@/lib/apiClient";
+import apiClient from "@lib/apiClient";
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 
