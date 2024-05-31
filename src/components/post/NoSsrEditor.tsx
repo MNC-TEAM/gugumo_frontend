@@ -1,5 +1,5 @@
 import { Editor } from "@toast-ui/react-editor";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import * as S from "@app/(auth)/post/style";
 
 export default function NoSsrEditor({content,setContent} : {content? : any, setContent : any}) {
@@ -10,6 +10,10 @@ export default function NoSsrEditor({content,setContent} : {content? : any, setC
         const content = editorRef.current?.getInstance().getHTML();
         setContent(content);
     }
+
+    useEffect(()=>{
+        editorRef.current?.getInstance().setMarkdown(content);
+    },[content]);
 
     return (
         <S.DescInputStyle>

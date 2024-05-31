@@ -46,6 +46,7 @@ export function useDetail(postid : string){
         detail,
         isLoading,
         isValidating,
+        mutate
     }
 
 }

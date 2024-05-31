@@ -4,7 +4,7 @@ import '@toast-ui/editor/toastui-editor.css';
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import StoreProvider from "@store/Providers";
+import StoreProvider from "@provider/ReduxProviders";
 import ThemeClient from '@provider/ThemeClient';
 import StyledComponentsRegistry from '@provider/registry';
 import Login from '@components/auth/Modal/Login';

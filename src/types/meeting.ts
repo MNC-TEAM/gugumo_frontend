@@ -54,6 +54,7 @@ export interface DetailDataType {
 }
 
 export interface DetailData {
+  [key : string] : any;
   postId: number;
   author: string;
   meetingType: string;
@@ -75,10 +76,6 @@ export interface DetailData {
   authorExpired: boolean;
   yours: boolean;
 }
-
-
-
-
 
 
 // 댓글
