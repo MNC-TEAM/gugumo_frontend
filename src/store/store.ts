@@ -1,4 +1,4 @@
-import { combineReducers, configureStore, createStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import modal from './features/modal/modal'
 import user from './features/auth/user'
 import { persistReducer } from 'redux-persist';
@@ -23,7 +23,7 @@ const createNoopStorage = () => {
 const storage =
   typeof window === 'undefined'
     ? createNoopStorage()
-    : createWebStorage('local');
+    : createWebStorage('session');
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 
