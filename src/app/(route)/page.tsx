@@ -3,9 +3,7 @@ import Header from "@components/common/Header";
 import { useState } from "react";
 import * as S from "@components/main/style";
 import { useForm } from "react-hook-form";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { IoChevronDown } from "react-icons/io5";
-import { Autoplay } from "swiper/modules";
 import { GAMETYPE, LOCATION, MEETINGSTATUS } from "@constant/meeting";
 import Location from "@components/common/Button/Location";
 import BallTag from "@components/common/Button/BallTag/BallTag";
@@ -13,14 +11,10 @@ import { SORT } from "@constant/sort";
 import Card from "@components/common/Card/Main/Card";
 import Write from "@components/common/Button/Write/Write";
 import Paging from "@components/main/Paging";
-import { MeetingDataType } from "@/types/meeting";
 import Recommends from "@components/Recommends/Recommends";
-import useSWR from 'swr'
-import axios from "axios";
-
-const fetcher = (url : string,page : number, sort : string, meetingstatus : string,location:string,gametype:string,q:string) => {
-    return axios.get(url,{params : {page,sort,meetingstatus,location,gametype,q}}).then(res => res.data)
-};
+import useMeeting from "../../hooks/useMeeting";
+import Banner from "@components/main/Banner/Banner";
+import { HashLoader } from "react-spinners";
 
 export default function Home() {
 
@@ -53,61 +47,21 @@ export default function Home() {
         setQ(q);
     }
 
-    const {data : meeting} = useSWR<MeetingDataType>(["/api/meeting",page,sort,meetingstatus,location,gametype,q],([url])=>fetcher(url,page,sort,meetingstatus,location,gametype,q));
+    const {data : meeting,isLoading} = useMeeting({page,sort,meetingstatus,location,gametype,q});
 
     return (
         <>
             <Header/>
             <S.MainStyle>
 
-                <Swiper
-                    slidesPerView={1.2}
-                    modules={[Autoplay]}
-                    breakpoints={{
-                        "820" : {
-                            slidesPerView : 1.6,
-                            spaceBetween : 23
-                        }
-                    }}
-                    centeredSlides={true}
-                    spaceBetween={13}
-                    loop={true}
-                    autoplay={{
-                        delay : 6000
-                    }}
-                    speed={600}
-                >
-                    <SwiperSlide>
-                    <S.BannerImg>
-                        <S.DesktopIMG src="/asset/image/banner/banner.jpg" alt="배너" />
-                        <S.MobileIMG src="/asset/image/banner/banner_mob.jpg" alt="배너" />
-                    </S.BannerImg>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                    <S.BannerImg>
-                        <S.DesktopIMG src="/asset/image/banner/banner.jpg" alt="배너" />
-                        <S.MobileIMG src="/asset/image/banner/banner_mob.jpg" alt="배너" />
-                    </S.BannerImg>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                    <S.BannerImg>
-                        <S.DesktopIMG src="/asset/image/banner/banner.jpg" alt="배너" />
-                        <S.MobileIMG src="/asset/image/banner/banner_mob.jpg" alt="배너" />
-                    </S.BannerImg>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                    <S.BannerImg>
-                        <S.DesktopIMG src="/asset/image/banner/banner.jpg" alt="배너" />
-                        <S.MobileIMG src="/asset/image/banner/banner_mob.jpg" alt="배너" />
-                    </S.BannerImg>
-                    </SwiperSlide>
-                </Swiper>
+                <Banner/>
 
                 <S.Wrap>
                     <Recommends/>
                 </S.Wrap>
 
                 <S.Wrap>
+                    
                     <S.SearchFlex>
 
                         <S.RecruitStyle>
@@ -187,7 +141,7 @@ export default function Home() {
                         </S.Order>
 
                         {
-                            !meeting && <>로딩중</>
+                            isLoading && <div style={{padding : "150px 0",display : "flex", justifyContent : "center"}}><HashLoader color="#4FAAFF"/></div>
                         }
 
                         <S.Grid>
@@ -196,7 +150,7 @@ export default function Home() {
                                     (
                                         meeting.data.content.length <= 0 
                                         ?
-                                            <>게시글이 존재하지 않습니다.</>
+                                            <p style={{ padding : "150px 0",gridColumn: "1 / 5",textAlign : "center"}}>게시글이 존재하지 않습니다.</p>
                                         : meeting.data.content.map(el=>(
                                             <Card
                                                 bookmarkStatus={el.bookmarked}
@@ -224,6 +178,7 @@ export default function Home() {
                                 <Paging page={page} setPage={setPage} pageable={meeting?.data.pageable}/>
                             }
                         </S.Paging>
+
                     </S.Layout>
                 </S.Wrap>
 

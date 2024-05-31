@@ -16,16 +16,6 @@ export const Wrap = styled(G.Wrap)`
   }
   
 `;
-export const DesktopIMG = styled.img`
-  @media screen and (max-width:820px) {
-    display: none;
-  }
-`;
-export const MobileIMG = styled.img`
-  @media screen and (min-width:821px) {
-    display: none;
-  }
-`;
 
 export const MainStyle = styled.main`
   padding: 50px 0 170px;
@@ -33,13 +23,6 @@ export const MainStyle = styled.main`
     padding: 23px 0 121px;
   }
 `;
-
-export const BannerImg = styled.div`
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-`;
-
 export const SearchFlex = styled.div`
   display: flex;
   justify-content: space-between;
