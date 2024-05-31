@@ -2,7 +2,7 @@ import useSWR from 'swr';
 import { fetcher } from '../fetch/meeting';
 import { DetailDataType, MeetingDataType } from '@/types/meeting';
 
-export function useList(...arg : any){
+export function useList(user : boolean,...arg : any){
 
     const {
         data,
@@ -10,12 +10,10 @@ export function useList(...arg : any){
         isValidating,
         mutate
     } = useSWR<MeetingDataType>(
-        [
-            "/api/meeting",...arg
-        ]
-        ,([url])=>fetcher(url,...arg)
-        ,{
-            revalidateIfStale: false,
+        ["/api/meeting",user,...arg],
+        ([url])=>fetcher(url,...arg),
+        {
+            // revalidateIfStale: false,
             revalidateOnFocus: false, // 화면을 보고있을경우 다시 데이터를 가져옴 false
             revalidateOnReconnect: false 
         }
@@ -67,7 +65,7 @@ export function useBookMark(...arg : any){
         ]
         ,([url])=>fetcher(url,...arg)
         ,{
-            revalidateIfStale: false,
+            // revalidateIfStale: false,
             revalidateOnFocus: false, // 화면을 보고있을경우 다시 데이터를 가져옴 false
             revalidateOnReconnect: false 
         }
@@ -77,6 +75,7 @@ export function useBookMark(...arg : any){
         data,
         isLoading,
         isValidating,
+        mutate
     }
 
 }
@@ -94,7 +93,7 @@ export function useMyList(...arg : any){
         ]
         ,([url])=>fetcher(url,...arg)
         ,{
-            revalidateIfStale: false,
+            // revalidateIfStale: false,
             revalidateOnFocus: false, // 화면을 보고있을경우 다시 데이터를 가져옴 false
             revalidateOnReconnect: false 
         }

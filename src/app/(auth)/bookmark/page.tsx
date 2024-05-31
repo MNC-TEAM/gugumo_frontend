@@ -12,9 +12,7 @@ import HashLoad from "@components/Loading/HashLoad";
 export default function Home() {
 
   const {register,handleSubmit} = useForm();
-
   const [page,setPage] = useState(1);
-
   const [q,setQ] = useState('');
 
   const searchSubmitHanlder = (event : any)=>{

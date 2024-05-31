@@ -1,9 +1,7 @@
 import * as S from "../style";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useAppSelector } from "@store/hook";
 import { Dispatch, SetStateAction, useState } from "react";
-import { MypageType } from "@/types/mypage";
 import Input from "@components/common/Mypage/Input/Input";
 import Change from "@components/common/Mypage/Change/Change";
 import White from "@components/common/Button/White/White";
@@ -45,10 +43,7 @@ export default function Nickname({setNickname} : propsType) {
       }else if(status === "fail"){
         alert(message);
       }
-    })
-    .catch(e=>{
-      console.log('서버 에러');
-    })
+    });
 
   }
 
@@ -73,9 +68,6 @@ export default function Nickname({setNickname} : propsType) {
         alert(message);
         setValue('nickname','');
       }
-    })
-    .catch(()=>{
-      console.log('서버에러');
     });
 
   }

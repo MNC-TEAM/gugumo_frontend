@@ -9,7 +9,6 @@ import White from "@components/common/Button/White/White";
 
 export default function Password() {
 
-    const user = useAppSelector(state=>state.user);
     const {register,handleSubmit,setValue} = useForm();
     const [isError,setIsError] = useState('');
 
@@ -39,9 +38,6 @@ export default function Password() {
                 setValue('password','');
                 setValue('confirmPassword','');
             }
-        })
-        .catch(()=>{
-            console.log('서버에러');
         });
 
     }

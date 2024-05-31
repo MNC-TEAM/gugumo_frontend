@@ -9,3 +9,11 @@ export async function GET(request: NextRequest) {
     return Response.json(data);
 
 }
+
+export async function POST(request: NextRequest) {
+
+    const body = await request.json();
+    const {data} = await axiosInstace.post('/api/v1/meeting/new',body);
+    return Response.json(data);
+
+}

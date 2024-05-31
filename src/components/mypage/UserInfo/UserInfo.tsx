@@ -10,7 +10,7 @@ export default function UserInfo({mypage,nickname} : {mypage : MypageType,nickna
   return (
     <S.UserFlex>
         <S.User>
-            <div style={{backgroundImage : `url(${mypage.profileImagePath})`}}></div>
+            <div/>
             <button type="button" onClick={imageChangeHanlder}>
               <img src="/asset/icon/edit.svg" alt="편집하기" />
               편집하기

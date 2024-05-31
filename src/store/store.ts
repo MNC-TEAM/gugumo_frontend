@@ -28,14 +28,14 @@ const storage =
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 
 const reducers = combineReducers({
-  modal,user
+  modal,
+  user
 });
 
 const persistConfig = { // 새로고침해도 남는 저장소
   key : "root",
   storage : storage,
   whitelist : ['user'],
-  blacklist : ['modal']
 }
 
 const persistedReducer = persistReducer(persistConfig,reducers); // 새로고침해도 남는 저장소

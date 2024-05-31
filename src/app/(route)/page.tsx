@@ -1,6 +1,6 @@
 "use client"
 import Header from "@components/common/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "@components/main/style";
 import { useForm } from "react-hook-form";
 import { IoChevronDown } from "react-icons/io5";
@@ -15,9 +15,11 @@ import Recommends from "@components/Recommends/Recommends";
 import Banner from "@components/main/Banner/Banner";
 import { useList } from "../../hooks/useMeeting";
 import HashLoad from "@components/Loading/HashLoad";
+import { useAppSelector } from "@store/hook";
 
 export default function Home() {
 
+    const user = useAppSelector(state=>state.user);
     const {register,handleSubmit} = useForm();
 
     const [page,setPage] = useState(1);
@@ -47,7 +49,7 @@ export default function Home() {
         setQ(q);
     }
 
-    const {data : meeting,isLoading} = useList({page,sort,meetingstatus,location,gametype,q});
+    const {data : meeting,isLoading} = useList(user,{page,sort,meetingstatus,location,gametype,q});
 
     return (
         <>

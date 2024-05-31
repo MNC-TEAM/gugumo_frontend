@@ -10,6 +10,7 @@ import { createPortal } from 'react-dom'
 import { useAppDispatch, useAppSelector } from '@store/hook'
 import { close } from '@store/features/modal/modal'
 import { usePathname, useRouter } from 'next/navigation'
+import { loginAction } from '@store/features/auth/user'
 
 export default function Login() {
   
@@ -46,6 +47,7 @@ export default function Login() {
     .then(({data})=>{
       const {status,message} = data;
       if(status === "success"){
+        dispatch(loginAction());
         onClose();
         router.push('/');
       }else{

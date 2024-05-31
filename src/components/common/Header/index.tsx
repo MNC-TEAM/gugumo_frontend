@@ -2,11 +2,11 @@
 import * as S from "./style";
 import Link from 'next/link'
 import { useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
-import axios from 'axios';
+import { usePathname } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from "@store/hook";
 import { logoutAction } from "@store/features/auth/user";
 import { open } from "@store/features/modal/modal";
+import axios from "axios";
 
 interface HeaderType {
   postion? : boolean
@@ -15,7 +15,6 @@ interface HeaderType {
 export default function Header( {postion} : HeaderType ) {
   
   const user = useAppSelector(state=>state.user);
-  const router = useRouter();
   const [userMenuHidden,setUserMenuHidden] = useState(true);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
@@ -24,17 +23,20 @@ export default function Header( {postion} : HeaderType ) {
     setUserMenuHidden(true);
   },[pathname]);
 
-  const logOut = async ()=>{
-    const {data} = await axios.get("/api/auth/logout");
-    const {status,message} = data;
-    
-    if(status === "success"){
-      dispatch(logoutAction());
-      router.push('/');
-    }else{
-      alert(message);
-    }
+  useEffect(()=>{
+    setUserMenuHidden(true);
+  },[user]);
 
+  const logOut = ()=>{
+    axios.get('/api/auth/logout')
+    .then(({data})=>{
+      const {status,message} = data;
+      if(status === "success"){
+        dispatch(logoutAction());
+      }else{
+        alert(message);
+      }
+    });
   }
 
 

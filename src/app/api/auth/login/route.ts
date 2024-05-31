@@ -10,10 +10,9 @@ export async function POST(request: Request) {
         cookies().set("token",res.headers.authorization,{
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            maxAge: 60 * 60 * 24 * 1, // One week
+            // maxAge: 60 * 60 * 24 * 7, // One week
             path: '/',
         })
-        console.log(res);
         return Response.json({
             "status": "success",
         });

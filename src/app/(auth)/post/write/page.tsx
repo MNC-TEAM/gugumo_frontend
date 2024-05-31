@@ -118,7 +118,7 @@ export default function Wrtie() {
       return alert('내용을 입력해주세요.');
     }
 
-    axios.post('/api/post/write',{
+    axios.post('/api/meeting',{
       meetingType,
       location,
       gameType,
@@ -130,10 +130,6 @@ export default function Wrtie() {
       meetingDate : moment(meetingDate as Date).format("YYYY-MM-DD"),
       meetingDeadline : moment(meetingDeadline as Date).format("YYYY-MM-DD"),
       meetingDays : meetingDays.join(';')
-    },{
-      headers : {
-        Authorization : user
-      }
     })
     .then(res=>{
       const {status,message} = res.data;
@@ -144,9 +140,6 @@ export default function Wrtie() {
         return alert(message);
       }
     })
-    .catch(err=>{
-      console.log('서버 에러');
-    });
 
   }
 
