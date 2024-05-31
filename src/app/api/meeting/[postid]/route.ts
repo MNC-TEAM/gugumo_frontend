@@ -21,3 +21,14 @@ export async function PATCH(
     return Response.json(data);
 
 }
+
+export async function DELETE(
+    request: NextRequest,
+    { params }: { params: { postid: string }}
+) {
+
+    const postid = params.postid;
+    const {data} = await axiosInstace.delete(`/api/v1/meeting/${postid}`);
+    return Response.json(data);
+
+}

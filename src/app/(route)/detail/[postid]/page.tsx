@@ -22,25 +22,20 @@ export default function Detail({ params }: { params: { postid: string } }) {
   const viewRef = useRef<Viewer>(null);
 
   const removeHanlder = (postid : number)=>{
-    axios.delete('/api/post/write',{
-      params : {
-        post_id : postid
-      }
-    })
-    .then(res=>{
-      const {status,message} = res.data;
+    if(confirm('정말 삭제하시겠습니까?')){
+      axios.delete(`/api/meeting/${postid}`)
+      .then(res=>{
+        const {status,message} = res.data;
 
-      if(status === "success"){
-        alert('삭제가 완료되었습니다.');
-        return router.push('/');
-      } else if(status === "fail"){
-        return alert(message);
-      }
+        if(status === "success"){
+          alert('삭제가 완료되었습니다.');
+          return router.push('/');
+        } else if(status === "fail"){
+          return alert(message);
+        }
 
-    })
-    .catch(()=>{
-      console.error('서버 에러');
-    })
+      });
+    }
   }
 
   const editClickHandler = (postid : number)=>{
