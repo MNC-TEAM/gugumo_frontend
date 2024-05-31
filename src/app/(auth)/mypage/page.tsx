@@ -1,73 +1,74 @@
 "use client"
-import * as S from "@/app/(auth)/mypage/mypage.style";
-import Nickname from "@/app/components/mypage/Form/NickName/Nickname";
-import Password from "@/app/components/mypage/Form/Password/Password";
-import UserInfo from "@/app/components/mypage/UserInfo/UserInfo";
-import { MypageType } from "@/app/types/mypage";
-import { useAppSelector } from "@/store/hook";
-import axios from "axios";
+import * as S from "@app/(auth)/mypage/mypage.style";
+import Nickname from "@components/mypage/Form/NickName/Nickname";
+import Password from "@components/mypage/Form/Password/Password";
+import UserInfo from "@components/mypage/UserInfo/UserInfo";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { MoonLoader } from "react-spinners";
+import axios from "axios";
+import { useAppDispatch } from "@store/hook";
+import { logoutAction } from "@store/features/auth/user";
+import { useMember } from "@hooks/useMember";
+import HashLoad from "@components/Loading/HashLoad";
 
-export default function Mypage() {
+export default function page() {
 
+  const dispatch = useAppDispatch();
   const router = useRouter();
-  const user = useAppSelector(state=>state.user);
-  const [mypage,setMypage] = useState<MypageType | null>(null);
+  const [nickname,setNickname] = useState("");
 
-  const userDeleteHanlder = ()=>{
-    alert('회원탈퇴 기능은 준비중입니다.');
-  }
+  const {data,isLoading} = useMember();
 
-  // 회원가져오기
   useEffect(()=>{
+    if(!data) return;
+    setNickname(data.data.nickname)
+  },[data]);
 
-    axios.get('/api/member/mypage',{
-      headers : {
-        Authorization : user
-      }
-    })
-    .then((res)=>{
-      const {status,message,data} = res.data;
+  const userDeleteHanlder = async ()=>{
 
+    if(confirm("정말 탈퇴하시겠습니까?")){
+
+      const res = await axios.delete(`/api/member/delete`);
+
+      const {status,message} = res.data;
+  
       if(status === "success"){
-        setMypage(data);
+        alert('회원 탈퇴가 완료 되었습니다.');
+        dispatch(logoutAction());
+        return router.push('/');
+      }else if(status === "fail"){
+        return alert(message);
       }else{
-        alert(message);
+        console.error(message);
       }
 
-    })
-    .catch(()=>{
-      console.log('서버 에러');
-    })
+    }
 
-  },[user]);
+  }
 
   return (
     <>
       {
-        !mypage 
-        ? 
-          <div style={{top : 0, left : 0, width : "100%", height : "100%", display : "flex", alignItems : "center", justifyContent : "center", background : "rgba(255,255,255,0.2)", backdropFilter : "blur(10px)"}}>
-            <MoonLoader color="#574fff"></MoonLoader>
-          </div>
-        :
+        isLoading ? <HashLoad/> :
+        data?.data &&
         <S.MypageStyle>
           <S.Wrap>
-            <S.Prev onClick={()=>router.back()}><img src="/asset/icon/prev_arrow.svg" alt="뒤로가기" /></S.Prev>
-            <S.Title>마이페이지</S.Title>
-            <UserInfo mypage={mypage}/>
+              <S.Prev onClick={()=>router.push('/')}>
+                <img src="/asset/icon/prev_arrow.svg" alt="뒤로가기" />
+              </S.Prev>
+              <S.Title>마이페이지</S.Title>
+              <UserInfo mypage={data.data} nickname={nickname}/>
           </S.Wrap>
           <S.Wrap>
-            <Nickname setMypage={setMypage}/>
-            <Password/>
-            <S.UserDelete>
-                <button onClick={userDeleteHanlder}>회원탈퇴하기</button>
-            </S.UserDelete>
+              <Nickname setNickname={setNickname}/>
+              <Password/>
+              <S.UserDelete>
+                <button type="button" onClick={userDeleteHanlder}>회원탈퇴하기</button>
+              </S.UserDelete>
           </S.Wrap>
         </S.MypageStyle>
       }
     </>
   )
+
 }

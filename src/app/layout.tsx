@@ -1,17 +1,16 @@
-import StyledComponentsRegistry from "@/lib/registry";
-import StoreProvider from "@/store/Providers";
-import localFont from "next/font/local";
-import type { Metadata, Viewport } from "next";
 import 'swiper/css';
 import 'react-calendar/dist/Calendar.css';
 import '@toast-ui/editor/toastui-editor.css';
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
-import ThemeClient from "@/lib/ThemeClient";
-import ModalContext from "@/lib/ModalProvider";
-import QueryProvider from "@/lib/QueryProvider";
+import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
+import StoreProvider from "@provider/ReduxProviders";
+import ThemeClient from '@provider/ThemeClient';
+import StyledComponentsRegistry from '@provider/registry';
+import Login from '@components/auth/Modal/Login';
 
 const pretendard = localFont({
-  src: './fonts/PretendardVariable.woff2',
+  src: '../fonts/PretendardVariable.woff2',
   display: 'swap',
   weight: '45 920',
 });
@@ -28,24 +27,21 @@ export const viewport : Viewport = {
 }
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="ko">
       <body className={pretendard.className}>
-        <QueryProvider>
-          <ThemeClient>
+        <ThemeClient>
             <StyledComponentsRegistry>
-              <StoreProvider>
-                <ModalContext>
+                <StoreProvider>
+                  <Login/>
                   {children}
-                </ModalContext>
-              </StoreProvider>
+                </StoreProvider>
             </StyledComponentsRegistry>
           </ThemeClient>
-        </QueryProvider>
       </body>
     </html>
   );

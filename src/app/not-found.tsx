@@ -1,10 +1,14 @@
 "use client"
 
-import { GlobalStyle } from "@/styles/global";
+import { NotFoundStyle } from "@components/notfound/style";
+import { GlobalStyle } from "@styles/global";
+import { theme } from "@styles/theme";
 import { useRouter } from "next/navigation";
-import { NotFoundStyle,Flex } from "./components/notfound/style";
-import { ThemeProvider } from "styled-components";
-import { theme } from "@/styles/theme";
+import styled, { ThemeProvider } from "styled-components";
+
+const Flex = styled.div`
+  display: flex;
+`;
 
 export default function NotFound() {
 
