@@ -77,7 +77,7 @@ export default function Detail({ params }: { params: { postid: string } }) {
             <S.BookFlex>
               <Bookmark
                 postid={detail?.data.postId as number} 
-                status={detail?.data.bookmarked as boolean} 
+                status={detail ? detail.data.bookmarked  : false} 
                 bookmarkCount={bookmarkCount}
                 setBookmarkCount={setBookmarkCount}
               />
@@ -88,15 +88,15 @@ export default function Detail({ params }: { params: { postid: string } }) {
           <S.Grid>
             <S.Col>
               <h4>모집형식</h4>
-              <p>{ detail?.data ? MEETINGTYPE[detail.data.meetingType] : ""}</p>
+              <p>{ detail ? MEETINGTYPE[detail.data.meetingType] : ""}</p>
             </S.Col>
             <S.Col>
               <h4>지역</h4>
-              <p>{ detail?.data ? LOCATION[detail.data.location] : "" }</p>
+              <p>{ detail ? LOCATION[detail.data.location] : "" }</p>
             </S.Col>
             <S.Col>
               <h4>구기종목</h4>
-              <p>{ detail?.data ? GAMETYPE[detail.data.gameType] : "" }</p>
+              <p>{ detail ? GAMETYPE[detail.data.gameType] : "" }</p>
             </S.Col>
             {
               detail?.data?.meetingType === "LONG" 

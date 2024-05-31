@@ -13,8 +13,8 @@ import Write from "@components/common/Button/Write/Write";
 import Paging from "@components/main/Paging";
 import Recommends from "@components/Recommends/Recommends";
 import Banner from "@components/main/Banner/Banner";
-import { HashLoader } from "react-spinners";
 import { useList } from "../../hooks/useMeeting";
+import HashLoad from "@components/Loading/HashLoad";
 
 export default function Home() {
 
@@ -139,7 +139,7 @@ export default function Home() {
                         </S.Order>
 
                         {
-                            isLoading && <div style={{padding : "150px 0",display : "flex", justifyContent : "center"}}><HashLoader color="#4FAAFF"/></div>
+                            isLoading && <HashLoad/>
                         }
 
                         <S.Grid>

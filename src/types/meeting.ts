@@ -39,7 +39,7 @@ export interface Content {
   meetingTime?: string;
   meetingDays?: string;
   bookmarked: boolean;
-  meetingDateTime?: string;
+  meetingDateTime: string;
 }
 
 

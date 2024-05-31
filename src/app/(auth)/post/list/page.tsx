@@ -2,58 +2,25 @@
 import * as S from "@components/main/style";
 import * as B from "../../bookmark/bookmark.style";
 import { Wrap } from "@styles/global";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { meetingType, pageableType } from "@/types/meeting";
-import { useAppSelector } from "@store/hook";
 import Paging from "@components/main/Paging";
 import Card from "@components/common/Card/Main/Card";
+import { useMyList } from "@hooks/useMeeting";
+import HashLoad from "@components/Loading/HashLoad";
 
 export default function Home() {
 
-  const user = useAppSelector(state=>state.user);
-
   const {register,handleSubmit} = useForm();
-
   const [page,setPage] = useState(1);
-  const [pageable,setPageable] = useState<pageableType | null>(null);
-
   const [q,setQ] = useState('');
-  const [content,setContent] = useState<meetingType[]>([]);
 
   const searchSubmitHanlder = (event : any)=>{
     const {q} = event;
     setQ(q);
   }
 
-  useEffect(()=>{
-
-    axios.get('/api/post/my',{
-      params : {
-        page,
-        q
-      }
-    })
-    .then((res)=>{
-      
-      const {status,message,data} = res.data;
-
-      if(status === "success"){
-        const {content,pageable} = data;
-        setContent(content);
-        setPageable(pageable);
-      }else if(status === "fail"){
-        alert(message);
-        setContent([]);
-      }
-
-    })
-    .catch(()=>{
-      console.log('서버 에러');
-    });
-
-  },[q,user,page])
+  const {data : content,isLoading} = useMyList({q,page});
 
   return (
     <S.MainStyle>
@@ -75,32 +42,36 @@ export default function Home() {
         <B.BookMakrLayout>
           
           {
-            content.length > 0 ?
-              <S.Grid>
-                {content.map((el)=>
-                  <Card
-                    bookmarkStatus={el.bookmarked}
-                    key={el.postId}
-                    postId={el.postId}
-                    status={el.meetingStatus}
-                    gameType={el.gameType}
-                    location={el.location}
-                    title={el.title}
-                    meetingDateTime={el.meetingDateTime}
-                    meetingMemberNum={el.meetingMemberNum}
-                    meetingDeadline={el.meetingDeadline}
-                  />
-                )}
-              </S.Grid>
-            : <p style={{textAlign : 'center'}}>작성된글이 존재하지 않습니다.</p>
+          
+            isLoading 
+            ? 
+              <HashLoad/>
+            :
+              (
+                content && content.data.content.length > 0 ?
+                  <S.Grid>
+                    {content.data.content.map((el)=>
+                      <Card
+                        bookmarkStatus={el.bookmarked}
+                        key={el.postId}
+                        postId={el.postId}
+                        status={el.meetingStatus}
+                        gameType={el.gameType}
+                        location={el.location}
+                        title={el.title}
+                        meetingDateTime={el.meetingDateTime}
+                        meetingMemberNum={el.meetingMemberNum}
+                        meetingDeadline={el.meetingDeadline}
+                      />
+                    )}
+                  </S.Grid>
+                : <p style={{ padding : "150px 0",gridColumn: "1 / 5",textAlign : "center"}}>게시글이 존재하지 않습니다.</p>
+              )
           }
             
-          {
-            !pageable?.empty &&
-              <S.Paging>
-                <Paging page={page} setPage={setPage} pageable={pageable}/>
-              </S.Paging>
-          }
+          <S.Paging>
+            <Paging page={page} setPage={setPage} pageable={content?.data.pageable}/>
+          </S.Paging>
           
         </B.BookMakrLayout>
 
