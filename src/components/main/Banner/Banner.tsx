@@ -10,6 +10,14 @@ export default function Banner() {
         modules={[Autoplay]}
         breakpoints={{
             "820" : {
+                slidesPerView : 1.2,
+                spaceBetween : 23
+            },
+            "1024" : {
+                slidesPerView : 1.2,
+                spaceBetween : 23
+            },
+            "1280" : {
                 slidesPerView : 1.6,
                 spaceBetween : 23
             }

@@ -9,8 +9,8 @@ export default function Footer() {
                 <S.CopyBox>
                     <img src="/asset/simbol.svg" alt="로고" width={100}/>
                     <S.Copy>
-                        <p>Contact<br/>@gmail.com</p>
-                        <p>Copyright 구구모. All rights reserved</p>
+                        <a href='mailTo:gugumo024@gmail.com'>gugumo024@gmail.com</a>
+                        <p>Copyright Gugumo. All rights reserved</p>
                     </S.Copy>
                 </S.CopyBox>
                 <S.Service>

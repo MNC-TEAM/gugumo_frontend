@@ -1,3 +1,4 @@
+"use client"
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import * as S from "./Recommends.style";
 import { Swiper, SwiperSlide } from "swiper/react";

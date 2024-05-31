@@ -9,10 +9,11 @@ import Primary from '@components/common/Button/Primary/Primary'
 import { createPortal } from 'react-dom'
 import { useAppDispatch, useAppSelector } from '@store/hook'
 import { close } from '@store/features/modal/modal'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 export default function Login() {
   
+  const router = useRouter();
   const pathname = usePathname();
 
   const modal = useAppSelector(state=>state.modal);
@@ -26,7 +27,7 @@ export default function Login() {
   const [isEmailError,setIsEmailError] = useState('');
   const [isPasswordError,setIsPasswordError] = useState('');
 
-  const onSubmit = async (event : any)=>{
+  const onSubmit = (event : any)=>{
 
     const {username,password} = event;
 
@@ -38,9 +39,18 @@ export default function Login() {
       return setIsPasswordError('비밀번호을 입력해주세요.');
     }
 
-    const {data} = await axios.post('/api/auth/login',{
+    axios.post('/api/auth/login',{
       username,
       password
+    })
+    .then(({data})=>{
+      const {status,message} = data;
+      if(status === "success"){
+        onClose();
+        router.push('/');
+      }else{
+        alert(message);
+      }
     });
 
   }

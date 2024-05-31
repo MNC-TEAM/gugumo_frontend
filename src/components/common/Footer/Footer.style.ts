@@ -58,11 +58,11 @@ export const CopyBox = styled.div`
 `;
 
 export const Copy = styled.div`
-    p {
+    p,a {
         color: #4FAAFF;
         font-weight: 500;
         font-size: 11px;
-        + p {
+        + p,a {
             margin-top: 10px;
         }
     }

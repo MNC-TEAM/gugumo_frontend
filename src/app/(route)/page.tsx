@@ -56,9 +56,7 @@ export default function Home() {
 
                 <Banner/>
 
-                <S.Wrap>
-                    <Recommends/>
-                </S.Wrap>
+                <S.Wrap><Recommends/></S.Wrap>
 
                 <S.Wrap>
                     

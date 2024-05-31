@@ -15,7 +15,9 @@ export function useList(...arg : any){
         ]
         ,([url])=>fetcher(url,...arg)
         ,{
-            revalidateOnFocus : false, // 화면을 보고있을경우 다시 데이터를 가져옴 false
+            revalidateIfStale: false,
+            revalidateOnFocus: false, // 화면을 보고있을경우 다시 데이터를 가져옴 false
+            revalidateOnReconnect: false 
         }
     );
 

@@ -81,3 +81,22 @@ export interface DetailData {
 
 
 
+// 댓글
+
+export interface CommentDataType {
+  status: string;
+  data: Datum[];
+  message?: any;
+}
+
+export interface Datum {
+  commentId: number;
+  author: string;
+  content: string;
+  createdDateTime: string;
+  orderNum: number;
+  authorExpired: boolean;
+  yours: boolean;
+  notRoot: boolean;
+  parentCommentId?: number;
+}

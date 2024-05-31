@@ -1,3 +1,4 @@
+import getCookie from "@lib/cookie";
 import axios from "axios";
 
 export const axiosInstace = axios.create({
@@ -5,6 +6,7 @@ export const axiosInstace = axios.create({
 });
 
 axiosInstace.interceptors.request.use((config)=>{
-    // config.headers.Authorization = "abc"
+    const token = getCookie('token')?.value;
+    config.headers.Authorization = token;
     return config;
 });

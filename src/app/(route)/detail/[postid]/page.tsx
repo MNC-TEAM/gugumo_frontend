@@ -1,6 +1,6 @@
 "use client"
+
 import Header from "@components/common/Header";
-import { useAppSelector } from "@store/hook";
 import { Wrap } from "@styles/global";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -13,6 +13,7 @@ import { GAMETYPE, LOCATION, MEETINGTYPE } from "@constant/meetingQuery";
 import { Viewer } from "@toast-ui/react-editor";
 import Recommends from "@components/Recommends/Recommends";
 import { useDetail } from "../../../../hooks/useMeeting";
+import Comment from "@components/detail/Comment/Comment";
 
 export default function Detail({ params }: { params: { postid: string } }) {
 
@@ -155,6 +156,8 @@ export default function Detail({ params }: { params: { postid: string } }) {
           </S.BtnList>
 
           <Recommends/>
+
+          <Comment postId={params.postid}/>
 
         </Wrap>
       </S.DetailStyle>
