@@ -41,3 +41,43 @@ export interface Content {
   bookmarked: boolean;
   meetingDateTime?: string;
 }
+
+
+
+
+// 상세내용
+
+export interface DetailDataType {
+  status: string;
+  data: DetailData;
+  message?: any;
+}
+
+export interface DetailData {
+  postId: number;
+  author: string;
+  meetingType: string;
+  gameType: string;
+  meetingMemberNum: number;
+  meetingDeadline: string;
+  openKakao: string;
+  location: string;
+  title: string;
+  content: string;
+  createdDateTime: string;
+  meetingStatus: string;
+  viewCount: number;
+  bookmarkCount: number;
+  meetingDateTime: string;
+  meetingTime: string;
+  meetingDays: string;
+  bookmarked: boolean;
+  authorExpired: boolean;
+  yours: boolean;
+}
+
+
+
+
+
+

@@ -12,9 +12,9 @@ import Card from "@components/common/Card/Main/Card";
 import Write from "@components/common/Button/Write/Write";
 import Paging from "@components/main/Paging";
 import Recommends from "@components/Recommends/Recommends";
-import useMeeting from "../../hooks/useMeeting";
 import Banner from "@components/main/Banner/Banner";
 import { HashLoader } from "react-spinners";
+import { useList } from "../../hooks/useMeeting";
 
 export default function Home() {
 
@@ -47,7 +47,7 @@ export default function Home() {
         setQ(q);
     }
 
-    const {data : meeting,isLoading} = useMeeting({page,sort,meetingstatus,location,gametype,q});
+    const {data : meeting,isLoading} = useList({page,sort,meetingstatus,location,gametype,q});
 
     return (
         <>
