@@ -2,34 +2,37 @@
 
 import Primary from "@components/common/Button/Primary/Primary";
 import * as S from "./Comment.style";
-import moment from "moment";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useCommentList } from "@hooks/useComment";
+import { useCallback } from "react";
 
 export default function Comment({postId} : {postId : string}) {
 
     const {register,handleSubmit} = useForm();
 
-    const onCommentHanlder = async (event : any)=>{
+    const onCommentHanlder = useCallback((event : any)=>{
 
         const {content} = event;
 
-        const {data} = await axios.post('/api/post/comment',{
+        const body = {
             postId,
-            content
-        });
-        const {status,message} = data;
-
-        if(status === "fail"){
-            return alert(message);
-        }else{
-            alert('등록이 완료 되었습니다.');
+            content,
         }
 
-    }
+        axios.post('/api/meeting/comment/new',body)
+        .then(({data})=>{
+            const {status,message} = data;
+            if(status === "fail"){
+                return alert(message);
+            }else{
+                alert('등록이 완료 되었습니다.');
+            }
+        });
 
-    const {data : comment,isLoading,isValidating,} = useCommentList(postId);
+    },[postId]);
+
+    const {data : comment} = useCommentList(postId);
 
     return (
         <>
@@ -39,8 +42,8 @@ export default function Comment({postId} : {postId : string}) {
 
             <S.CommentFormBase>
                 <S.UserIcon/>
-                <S.CommentForm onSubmit={handleSubmit(onCommentHanlder)}>
-                    <form>
+                <S.CommentForm>
+                    <form onSubmit={handleSubmit(onCommentHanlder)}>
                         <textarea 
                             placeholder="댓글을 입력해주세요"
                             {...register('content',{maxLength: 1000, minLength : 1})} 

@@ -21,7 +21,6 @@ export function useCommentList(postId : string){
     
     return {
         data,
-
         isLoading,
         isValidating,
     }
