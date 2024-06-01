@@ -21,9 +21,7 @@ export default function Bookmark(
 
     if(!bookmarkStatus){
 
-      axios.post('/api/meeting/bookmark',{
-        postId : postid
-      })
+      axios.post('/api/meeting/bookmark',{postId : postid})
       .then((res)=>{
         const {status} = res.data;
         if(status === "success"){

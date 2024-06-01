@@ -1,7 +1,7 @@
 "use client"
 import * as S from "../style";
 import { Wrap } from "@styles/global";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -98,7 +98,7 @@ export default function Wrtie() {
     })
 
   }
-
+  
   return (
     <S.WrtieStyle>
       <Wrap>

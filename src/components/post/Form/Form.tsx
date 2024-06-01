@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import * as S from "./style";
 import Input from "@components/common/Input/Write/Input/Input";
 import White from "@components/common/Button/White/White";
@@ -242,7 +242,7 @@ export default function Form(
         </S.DescBox>
         
         <S.BtnList>
-        <White type="submit">{edit ? "수정하기" : "작성하기"}</White>
+            <White type="submit">{edit ? "수정하기" : "작성하기"}</White>
         </S.BtnList>
     </form>
 
