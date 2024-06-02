@@ -8,6 +8,7 @@ import StoreProvider from "@provider/ReduxProviders";
 import ThemeClient from '@provider/ThemeClient';
 import StyledComponentsRegistry from '@provider/registry';
 import Login from '@components/auth/Modal/Login';
+import AuthProvider from '@provider/AuthProvider';
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',
@@ -34,14 +35,16 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={pretendard.className}>
-        <ThemeClient>
+        <AuthProvider>
+          <ThemeClient>
             <StyledComponentsRegistry>
-                <StoreProvider>
-                  <Login/>
-                  {children}
-                </StoreProvider>
+              <StoreProvider>
+                <Login/>
+                {children}
+              </StoreProvider>
             </StyledComponentsRegistry>
           </ThemeClient>
+        </AuthProvider>
       </body>
     </html>
   );

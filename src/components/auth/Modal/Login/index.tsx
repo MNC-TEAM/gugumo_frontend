@@ -3,14 +3,13 @@ import React, { useEffect, useState } from 'react'
 import * as S from './style'
 import * as M from '../Modal.style'
 import { useForm } from 'react-hook-form'
-import axios from 'axios'
 import Input from '@components/common/Input/Basic/Input/Input'
 import Primary from '@components/common/Button/Primary/Primary'
 import { createPortal } from 'react-dom'
 import { useAppDispatch, useAppSelector } from '@store/hook'
 import { close } from '@store/features/modal/modal'
 import { usePathname, useRouter } from 'next/navigation'
-import { loginAction } from '@store/features/auth/user'
+import { signIn } from 'next-auth/react'
 
 export default function Login() {
   
@@ -28,7 +27,7 @@ export default function Login() {
   const [isEmailError,setIsEmailError] = useState('');
   const [isPasswordError,setIsPasswordError] = useState('');
 
-  const onSubmit = (event : any)=>{
+  const onSubmit = async (event : any)=>{
 
     const {username,password} = event;
 
@@ -40,20 +39,18 @@ export default function Login() {
       return setIsPasswordError('비밀번호을 입력해주세요.');
     }
 
-    axios.post('/api/auth/login',{
-      username,
-      password
-    })
-    .then(({data})=>{
-      const {status,message} = data;
-      if(status === "success"){
-        dispatch(loginAction());
-        onClose();
-        router.push('/');
-      }else{
-        alert(message);
-      }
+    const res = await signIn('credentials',{
+      username : username,
+      password : password,
+      redirect: false,
     });
+
+    if(res?.ok){
+      router.push('/');
+      onClose();
+    }else{
+      alert('로그인에 실패 하였습니다.');
+    }
 
   }
 

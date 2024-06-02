@@ -28,20 +28,23 @@ export default function page() {
 
     if(confirm("정말 탈퇴하시겠습니까?")){
 
-      const res = await axios.delete(`/api/member/delete`);
+      axios.delete(`/api/member`)
+      .then(({data})=>{
 
-      const {status,message} = res.data;
+        const {status,message} = data;
   
-      if(status === "success"){
-        alert('회원 탈퇴가 완료 되었습니다.');
-        dispatch(logoutAction());
-        return router.push('/');
-      }else if(status === "fail"){
-        return alert(message);
-      }else{
-        console.error(message);
-      }
+        if(status === "success"){
+          alert('회원 탈퇴가 완료 되었습니다.');
+          dispatch(logoutAction());
+          return router.push('/');
+        }else if(status === "fail"){
+          return alert(message);
+        }else{
+          console.error(message);
+        }
 
+      });
+      
     }
 
   }

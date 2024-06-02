@@ -2,7 +2,7 @@ import useSWR from 'swr';
 import { fetcher } from '../fetch/meeting';
 import { DetailDataType, MeetingDataType } from '@/types/meeting';
 
-export function useList(user : boolean,...arg : any){
+export function useList(status : "authenticated" | "loading" | "unauthenticated",...arg : any){
 
     const {
         data,
@@ -10,7 +10,7 @@ export function useList(user : boolean,...arg : any){
         isValidating,
         mutate
     } = useSWR<MeetingDataType>(
-        ["/api/meeting",user,...arg],
+        ["/api/meeting",status,...arg],
         ([url])=>fetcher(url,...arg),
         {
             // revalidateIfStale: false,
