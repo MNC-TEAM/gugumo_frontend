@@ -3,18 +3,18 @@ import * as S from "./style";
 import Link from 'next/link'
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { useAppDispatch, useAppSelector } from "@store/hook";
-import { logoutAction } from "@store/features/auth/user";
+import { useAppDispatch } from "@store/hook";
 import { open } from "@store/features/modal/modal";
-import axios from "axios";
+import { signOut, useSession } from "next-auth/react";
 
 interface HeaderType {
   postion? : boolean
 }
 
 export default function Header( {postion} : HeaderType ) {
-  
-  const user = useAppSelector(state=>state.user);
+
+  const { data: session, status } = useSession()
+
   const [userMenuHidden,setUserMenuHidden] = useState(true);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
@@ -23,23 +23,6 @@ export default function Header( {postion} : HeaderType ) {
     setUserMenuHidden(true);
   },[pathname]);
 
-  useEffect(()=>{
-    setUserMenuHidden(true);
-  },[user]);
-
-  const logOut = ()=>{
-    axios.get('/api/auth/logout')
-    .then(({data})=>{
-      const {status,message} = data;
-      if(status === "success"){
-        dispatch(logoutAction());
-      }else{
-        alert(message);
-      }
-    });
-  }
-
-
   return (
     <S.HeaderStyle $postion={postion}>
       <S.Wrapper>
@@ -47,7 +30,7 @@ export default function Header( {postion} : HeaderType ) {
           <Link href={'/'}><img src='/asset/logo.svg' alt='로고'/></Link>
         </S.Logo>
         {
-          !user ?
+          status !== "authenticated" ?
             <S.LoginStyle type="button" onClick={()=>dispatch(open())}>로그인</S.LoginStyle>
           :
           <S.Flex>
@@ -65,7 +48,7 @@ export default function Header( {postion} : HeaderType ) {
                   <Link href={"/mypage"}>회원정보</Link>
                 </li>
                 <li>
-                  <button onClick={logOut}>로그아웃</button>
+                  <button onClick={()=>signOut({redirect : false})}>로그아웃</button>
                 </li>
               </ul>
             </S.UserMenu>

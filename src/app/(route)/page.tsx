@@ -15,11 +15,12 @@ import Recommends from "@components/Recommends/Recommends";
 import Banner from "@components/main/Banner/Banner";
 import { useList } from "../../hooks/useMeeting";
 import HashLoad from "@components/Loading/HashLoad";
-import { useAppSelector } from "@store/hook";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
 
-    const user = useAppSelector(state=>state.user);
+    const { status } = useSession();
+
     const {register,handleSubmit} = useForm();
 
     const [page,setPage] = useState(1);
@@ -49,7 +50,7 @@ export default function Home() {
         setQ(q);
     }
 
-    const {data : meeting,isLoading} = useList(user,{page,sort,meetingstatus,location,gametype,q});
+    const {data : meeting,isLoading} = useList(status,{page,sort,meetingstatus,location,gametype,q});
 
     return (
         <>
