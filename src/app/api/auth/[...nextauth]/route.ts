@@ -1,8 +1,9 @@
+import { axiosInstace } from "@lib/axiosInstance";
 import axios from "axios";
-import NextAuth from "next-auth"
+import NextAuth, { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
-const handler = NextAuth({
+export const authOptions : NextAuthOptions = {
     providers : [
         CredentialsProvider({
             name : "Credentials",
@@ -23,7 +24,6 @@ const handler = NextAuth({
 
 
                     if (res.headers.authorization) {
-
                         return {token : res.headers.authorization};
                     }
 
@@ -34,7 +34,21 @@ const handler = NextAuth({
 
             }
         })
-    ]
-})
+    ],
+    callbacks : {
+        async jwt({ token, user } : any) {
+            if(user){
+                token.accessToken = user.token;
+            }
+            return token;
+        },
+        async session({ session, token } : any){
+            session.accessToken  = token.accessToken;
+            return session;
+        }
+    }
+}
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST }
