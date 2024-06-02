@@ -35,7 +35,7 @@ const reducers = combineReducers({
 const persistConfig = { // 새로고침해도 남는 저장소
   key : "root",
   storage : storage,
-  whitelist : ['user'],
+  // whitelist : ['user'],
 }
 
 const persistedReducer = persistReducer(persistConfig,reducers); // 새로고침해도 남는 저장소
