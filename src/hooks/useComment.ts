@@ -23,6 +23,7 @@ export function useCommentList(postId : string){
         data,
         isLoading,
         isValidating,
+        mutate
     }
 
 }

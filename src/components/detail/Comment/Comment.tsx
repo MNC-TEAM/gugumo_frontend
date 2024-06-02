@@ -6,10 +6,14 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useCommentList } from "@hooks/useComment";
 import { useCallback } from "react";
+import moment from "moment";
+import "moment/locale/ko";
+moment.locale("ko");
 
 export default function Comment({postId} : {postId : string}) {
 
-    const {register,handleSubmit} = useForm();
+    const {register,handleSubmit,setValue} = useForm();
+    const {data : comment,mutate} = useCommentList(postId);
 
     const onCommentHanlder = useCallback((event : any)=>{
 
@@ -27,12 +31,12 @@ export default function Comment({postId} : {postId : string}) {
                 return alert(message);
             }else{
                 alert('등록이 완료 되었습니다.');
+                setValue('content',"");
+                mutate();
             }
         });
 
     },[postId]);
-
-    const {data : comment} = useCommentList(postId);
 
     return (
         <>
@@ -58,27 +62,58 @@ export default function Comment({postId} : {postId : string}) {
                     {
                         comment && comment.data.map((el)=>(
                             <li>
-                                <S.UserIcon/>
-                                <S.Comment>
-                                    <S.Name>
-                                        <dl>
-                                            <dt>{el.author}</dt>
-                                            <dd>{el.createdDateTime}</dd>
-                                        </dl>
-                                        <S.EditList>
-                                            <button>답글</button>
-                                            {
-                                                true && (
-                                                    <>
-                                                        <button>수정</button>
-                                                        <button>삭제</button>
-                                                    </>
-                                                )
-                                            }
-                                        </S.EditList>
-                                    </S.Name>
-                                    <p>{el.content}</p>
-                                </S.Comment>
+                                <div>
+                                    <S.UserIcon/>
+                                    <S.Comment>
+                                        <S.Name>
+                                            <dl>
+                                                <dt>{el.author}</dt>
+                                                <dd>{moment(el.createdDateTime).startOf('hour').fromNow()}</dd>
+                                            </dl>
+                                            <S.EditList>
+                                                <button>답글</button>
+                                                {
+                                                    true && (
+                                                        <>
+                                                            <button>수정</button>
+                                                            <button>삭제</button>
+                                                        </>
+                                                    )
+                                                }
+                                            </S.EditList>
+                                        </S.Name>
+                                        <p>{el.content}</p>
+                                    </S.Comment>
+                                </div>
+
+                                <S.CommentList>
+                                    <li>
+                                        <div>
+                                            <S.UserIcon/>
+                                            <S.Comment>
+                                                <S.Name>
+                                                    <dl>
+                                                        <dt>123</dt>
+                                                        <dd>123</dd>
+                                                    </dl>
+                                                    <S.EditList>
+                                                        <button>답글</button>
+                                                        {
+                                                            true && (
+                                                                <>
+                                                                    <button>수정</button>
+                                                                    <button>삭제</button>
+                                                                </>
+                                                            )
+                                                        }
+                                                    </S.EditList>
+                                                </S.Name>
+                                                <p>123</p>
+                                            </S.Comment>
+                                        </div>
+                                    </li>
+                                </S.CommentList>
+
                             </li>
                         ))
                     }

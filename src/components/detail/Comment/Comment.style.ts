@@ -59,13 +59,26 @@ export const CommentListBase = styled.div`
 `;
 export const CommentList = styled.ul`
     li {
-        display: flex;
-        gap: 21px;
+        > div {
+            display: flex;
+            gap: 21px;
+        }
+
         + li {
+            margin-top: 50px;
+        }
+
+        /* + li {
             margin-left: 120px;
             margin-top: 20px;
-        }
+        } */
     }
+
+    ul {
+        margin-left: 120px;
+        margin-top: 20px;
+    }
+
 `;
 
 export const Comment = styled.div`
