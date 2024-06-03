@@ -30,7 +30,9 @@ export const CommentFormBase = styled.div`
     display: flex;
     gap: 30px;
     margin-top: 32px;
-    /* margin-top: 52px; */
+    @media screen and (max-width:820px) {
+        gap: 12px;
+    }
 `;
 
 export const CommentForm = styled.div`
@@ -57,17 +59,22 @@ export const CommentForm = styled.div`
     button {
         margin-top: 23px;
     }
-`;
 
-
-
-export const CommentList = styled.div`
-    /* li {
-        + li {
-            margin-top: 50px;
+    @media screen and (max-width:820px) {
+        textarea {
+            height: 64px;
+            font-size: 14px;
         }
-    } */
+        button {
+            margin-top: 8px;
+        }
+    }
+
 `;
+
+
+
+export const CommentList = styled.div``;
 
 export const CommentListBase = styled.div`
     border-top: 6px solid ${({theme})=>theme.color.Surface};
@@ -80,6 +87,16 @@ export const CommentListBase = styled.div`
         }
     }
 
+    @media screen and (max-width:820px) {
+     
+        ${CommentList} {
+            + ${CommentList} {
+                margin-top: 25px;
+            }
+        }
+        
+    }
+
 `;
 
 export const CommentBase = styled.div`
@@ -90,7 +107,7 @@ export const CommentBase = styled.div`
 export const Comment = styled.div`
     flex: 1;
     p {
-        margin-top: 16px;
+        
         font-size: 18px;
         font-weight: 500;
         min-height: 66px;
@@ -105,6 +122,14 @@ export const Comment = styled.div`
     }
 
 `;
+
+export const CommentContent = styled.div`
+    margin-top: 16px;
+    @media screen and (max-width:820px) {
+        margin-top: 14px;
+    }
+`;
+
 
 export const Name = styled.div`
     display: flex;

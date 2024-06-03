@@ -4,10 +4,18 @@ import * as S from "./Recommends.style";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Recommend from "@components/common/Card/Recommend/Recommend";
 import { useRecommend } from "@hooks/useRecommend";
+import { useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 export default function Recommends() {
 
-    const {recommend} = useRecommend();
+    const {status} = useSession();
+
+    const {recommend,mutate} = useRecommend();
+
+    useEffect(()=>{
+        mutate();
+    },[status]);
 
   return (
     

@@ -1,53 +1,23 @@
 "use client"
 
-import Primary from "@components/common/Button/Primary/Primary";
 import * as S from "./Comment.style";
-import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useCommentList } from "@hooks/useComment";
 import { useCallback, useState } from "react";
 import moment from "moment";
 import "moment/locale/ko";
 import { useSession } from "next-auth/react";
+import ReplyComment from "@components/detail/Comment/ReplyComment";
+import CommentForm from "@components/detail/Comment/CommentForm";
+import CommentEdit from "@components/detail/Comment/CommentEdit";
 moment.locale("ko");
 
 export default function Comment({postId} : {postId : string}) {
 
     const {status} = useSession();
-    const {register,handleSubmit,setValue} = useForm();
     const {commentLength,parentComment,replyComment,mutate} = useCommentList(postId);
     const [replyShow,setReplyShow] = useState(0);
-
-    const onCommentHanlder = useCallback((event : any)=>{
-
-        if(status !== "authenticated") {
-            return alert('로그인을 해야합니다.');
-        }
-
-        const {content} = event;
-
-        if(content === ""){
-            return alert('댓글을 입력해주세요.');
-        }
-
-        const body = {
-            postId,
-            content,
-        }
-
-        axios.post('/api/meeting/comment/new',body)
-        .then(({data})=>{
-            const {status,message} = data;
-            if(status === "fail"){
-                return alert(message);
-            }else{
-                alert('등록이 완료 되었습니다.');
-                setValue('content',"");
-                mutate();
-            }
-        });
-
-    },[postId,status]);
+    const [editShow,setEditShow] = useState(0);
 
     const deleteCommentHandler = useCallback((commentId : number)=>{
 
@@ -70,34 +40,9 @@ export default function Comment({postId} : {postId : string}) {
 
         }
 
-    },[status])
+    },[status]);
 
-    const onReplyCommentHandler = (event : any)=>{
-
-        const {reply,parentId} = event;
-
-        const body = {
-            postId,
-            content : reply,
-            parentCommentId : parentId
-        };
-
-        axios.post('/api/meeting/comment/new',body)
-        .then(({data})=>{
-            const {status,message} = data;
-            if(status === "fail"){
-                return alert(message);
-            }else{
-                alert('등록이 완료 되었습니다.');
-                setValue('reply',"");
-                setReplyShow(0);
-                mutate();
-            }
-        });
-
-    };
-
-    const onReplyShowHandler = (commendId : number)=>{
+    const onReplyShowHandler = useCallback((commendId : number)=>{
 
         if(status !== "authenticated") {
             return alert('로그인을 해야합니다.');
@@ -113,7 +58,25 @@ export default function Comment({postId} : {postId : string}) {
             setReplyShow(0);
         }
 
-    }
+    },[replyShow]);
+
+    const onEditShowHandler = useCallback((commendId : number)=>{
+
+        if(status !== "authenticated") {
+            return alert('로그인을 해야합니다.');
+        }
+
+        if(editShow === commendId){
+            return setEditShow(0);
+        }
+
+        if(editShow >= 0){
+            setEditShow(commendId);            
+        }else{
+            setEditShow(0);
+        }
+
+    },[editShow])
 
     return (
         <>
@@ -121,23 +84,17 @@ export default function Comment({postId} : {postId : string}) {
                 댓글<span>{commentLength}</span>
             </S.CommentLength>
 
-            <S.CommentFormBase>
-                <S.UserIcon/>
-                <S.CommentForm>
-                    <form onSubmit={handleSubmit(onCommentHanlder)}>
-                        <textarea 
-                            placeholder="댓글을 입력해주세요"
-                            {...register('content',{maxLength: 1000, minLength : 1})} 
-                        />
-                        <Primary type="submit">댓글 등록하기</Primary>
-                    </form>
-                </S.CommentForm>
-            </S.CommentFormBase>
+            <CommentForm
+                postId={postId}
+                mutate={mutate}
+                status={status}
+            />
 
             <S.CommentListBase>
                 {
                     parentComment.map((el)=>(
                         <S.CommentList>
+
                             <S.CommentBase key={el.commentId}>
                                 <S.UserIcon/>
                                 <S.Comment>
@@ -151,40 +108,45 @@ export default function Comment({postId} : {postId : string}) {
                                             {
                                                 el.yours && (
                                                     <>
-                                                        <button>수정</button>
+                                                        <button onClick={()=>onEditShowHandler(el.commentId)}>수정</button>
                                                         <button onClick={()=>deleteCommentHandler(el.commentId)}>삭제</button>
                                                     </>
                                                 )
                                             }
                                         </S.EditList>
                                     </S.Name>
-                                    {<p>{el.content}</p>}
+                                    <S.CommentContent>
+                                        {
+                                            editShow !== el.commentId 
+                                            ?
+                                                <p>{el.content}</p> 
+                                            :
+                                                <CommentEdit
+                                                    status={status}
+                                                    setEditShow={setEditShow}
+                                                    mutate={mutate}
+                                                    commentId={el.commentId}
+                                                />
+                                        }
+                                    </S.CommentContent>
                                 </S.Comment>
                             </S.CommentBase>
+
                             {
-                                replyShow === el.commentId &&
-                                <S.ReplyBase>
-                                    <S.CommentFormBase>
-                                        <S.UserIcon/>
-                                        <S.CommentForm>
-                                            <form onSubmit={handleSubmit(onReplyCommentHandler)}>
-                                                <input type="hidden" {...register('parentId',{value : el.commentId} )} />
-                                                <textarea 
-                                                    placeholder="댓글을 입력해주세요"
-                                                    {...register('reply',{maxLength: 1000, minLength : 1})} 
-                                                />
-                                                <Primary type="submit">대댓글 등록하기</Primary>
-                                            </form>
-                                        </S.CommentForm>
-                                    </S.CommentFormBase>
-                                </S.ReplyBase>
+                                replyShow === el.commentId && 
+                                <ReplyComment 
+                                    postId={postId} 
+                                    status={status} 
+                                    parentId={el.commentId}
+                                    mutate={mutate}
+                                    setReplyShow={setReplyShow}
+                                />
                             }
 
                             {
                                 <S.ReplyBase>
                                     {
                                         replyComment.map((reply)=>{
-                                            
                                             if(reply.parentCommentId === el.commentId){
                                                 return (
                                                     <S.CommentBase key={reply.commentId}>
@@ -199,23 +161,36 @@ export default function Comment({postId} : {postId : string}) {
                                                                     {
                                                                         reply.yours && (
                                                                             <>
-                                                                                <button>수정</button>
+                                                                                <button onClick={()=>onEditShowHandler(reply.commentId)}>수정</button>
                                                                                 <button onClick={()=>deleteCommentHandler(reply.commentId)}>삭제</button>
                                                                             </>
                                                                         )
                                                                     }
                                                                 </S.EditList>
                                                             </S.Name>
-                                                            <p>{reply.content}</p>
+                                                            <S.CommentContent>
+                                                                {
+                                                                    reply.commentId !== editShow 
+                                                                    ?
+                                                                        <p>{reply.content}</p>
+                                                                    :
+                                                                        <CommentEdit
+                                                                            status={status}
+                                                                            setEditShow={setEditShow}
+                                                                            mutate={mutate}
+                                                                            commentId={reply.commentId}
+                                                                        />
+                                                                }
+                                                            </S.CommentContent>
                                                         </S.Comment>
                                                     </S.CommentBase>
                                                 )
                                             }
-
                                         })
                                     }
                                 </S.ReplyBase>
                             }
+
                         </S.CommentList>
                     ))
                 }
