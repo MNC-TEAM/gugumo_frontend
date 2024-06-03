@@ -1,85 +1,199 @@
 "use client"
 
-import Primary from "@components/common/Button/Primary/Primary";
 import * as S from "./Comment.style";
-import moment from "moment";
-import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useCommentList } from "@hooks/useComment";
+import { useCallback, useState } from "react";
+import moment from "moment";
+import "moment/locale/ko";
+import { useSession } from "next-auth/react";
+import ReplyComment from "@components/detail/Comment/ReplyComment";
+import CommentForm from "@components/detail/Comment/CommentForm";
+import CommentEdit from "@components/detail/Comment/CommentEdit";
+moment.locale("ko");
 
 export default function Comment({postId} : {postId : string}) {
 
-    const {register,handleSubmit} = useForm();
+    const {status} = useSession();
+    const {commentLength,parentComment,replyComment,mutate} = useCommentList(postId);
+    const [replyShow,setReplyShow] = useState(0);
+    const [editShow,setEditShow] = useState(0);
 
-    const onCommentHanlder = async (event : any)=>{
+    const deleteCommentHandler = useCallback((commentId : number)=>{
 
-        const {content} = event;
-
-        const {data} = await axios.post('/api/post/comment',{
-            postId,
-            content
-        });
-        const {status,message} = data;
-
-        if(status === "fail"){
-            return alert(message);
-        }else{
-            alert('등록이 완료 되었습니다.');
+        if(status !== "authenticated") {
+            return alert('로그인을 해야합니다.');
         }
 
-    }
+        if(confirm('정말 삭제하시겠습니까?')){
 
-    const {data : comment,isLoading,isValidating,} = useCommentList(postId);
+            axios.delete(`/api/meeting/comment/reply/${commentId}`)
+            .then(({data})=>{
+                const {status,message} = data;
+                if(status === "fail"){
+                    return alert(message);
+                }else{
+                    alert('삭제가 완료 되었습니다.');
+                    mutate();
+                }
+            });
+
+        }
+
+    },[status]);
+
+    const onReplyShowHandler = useCallback((commendId : number)=>{
+
+        if(status !== "authenticated") {
+            return alert('로그인을 해야합니다.');
+        }
+
+        if(replyShow === commendId){
+            return setReplyShow(0);
+        }
+
+        if(replyShow >= 0){
+            setReplyShow(commendId);            
+        }else{
+            setReplyShow(0);
+        }
+
+    },[replyShow]);
+
+    const onEditShowHandler = useCallback((commendId : number)=>{
+
+        if(status !== "authenticated") {
+            return alert('로그인을 해야합니다.');
+        }
+
+        if(editShow === commendId){
+            return setEditShow(0);
+        }
+
+        if(editShow >= 0){
+            setEditShow(commendId);            
+        }else{
+            setEditShow(0);
+        }
+
+    },[editShow])
 
     return (
         <>
             <S.CommentLength>
-                댓글<span>{comment && comment.data.length >= 0 ? comment.data.length : 0}</span>
+                댓글<span>{commentLength}</span>
             </S.CommentLength>
 
-            <S.CommentFormBase>
-                <S.UserIcon/>
-                <S.CommentForm onSubmit={handleSubmit(onCommentHanlder)}>
-                    <form>
-                        <textarea 
-                            placeholder="댓글을 입력해주세요"
-                            {...register('content',{maxLength: 1000, minLength : 1})} 
-                        />
-                        <Primary type="submit">댓글 등록하기</Primary>
-                    </form>
-                </S.CommentForm>
-            </S.CommentFormBase>
+            <CommentForm
+                postId={postId}
+                mutate={mutate}
+                status={status}
+            />
 
             <S.CommentListBase>
-                <S.CommentList>
-                    {
-                        comment && comment.data.map((el)=>(
-                            <li>
+                {
+                    parentComment.map((el)=>(
+                        <S.CommentList>
+
+                            <S.CommentBase key={el.commentId}>
                                 <S.UserIcon/>
                                 <S.Comment>
                                     <S.Name>
                                         <dl>
                                             <dt>{el.author}</dt>
-                                            <dd>{el.createdDateTime}</dd>
+                                            <dd>{moment(el.createdDateTime).startOf('hour').fromNow()}</dd>
                                         </dl>
                                         <S.EditList>
-                                            <button>답글</button>
+                                            <button onClick={()=>onReplyShowHandler(el.commentId)}>답글</button>
                                             {
-                                                true && (
+                                                el.yours && (
                                                     <>
-                                                        <button>수정</button>
-                                                        <button>삭제</button>
+                                                        <button onClick={()=>onEditShowHandler(el.commentId)}>수정</button>
+                                                        <button onClick={()=>deleteCommentHandler(el.commentId)}>삭제</button>
                                                     </>
                                                 )
                                             }
                                         </S.EditList>
                                     </S.Name>
-                                    <p>{el.content}</p>
+                                    <S.CommentContent>
+                                        {
+                                            editShow !== el.commentId 
+                                            ?
+                                                <p>{el.content}</p> 
+                                            :
+                                                <CommentEdit
+                                                    status={status}
+                                                    setEditShow={setEditShow}
+                                                    mutate={mutate}
+                                                    commentId={el.commentId}
+                                                />
+                                        }
+                                    </S.CommentContent>
                                 </S.Comment>
-                            </li>
-                        ))
-                    }
-                </S.CommentList>
+                            </S.CommentBase>
+
+                            {
+                                replyShow === el.commentId && 
+                                <ReplyComment 
+                                    postId={postId} 
+                                    status={status} 
+                                    parentId={el.commentId}
+                                    mutate={mutate}
+                                    setReplyShow={setReplyShow}
+                                />
+                            }
+
+                            {
+                                <S.ReplyBase>
+                                    {
+                                        replyComment.map((reply)=>{
+                                            if(reply.parentCommentId === el.commentId){
+                                                return (
+                                                    <S.CommentBase key={reply.commentId}>
+                                                        <S.UserIcon/>
+                                                        <S.Comment>
+                                                            <S.Name>
+                                                                <dl>
+                                                                    <dt>{reply.author}</dt>
+                                                                    <dd>{moment(reply.createdDateTime).startOf('hour').fromNow()}</dd>
+                                                                </dl>
+                                                                <S.EditList>
+                                                                    {
+                                                                        reply.yours && (
+                                                                            <>
+                                                                                <button onClick={()=>onEditShowHandler(reply.commentId)}>수정</button>
+                                                                                <button onClick={()=>deleteCommentHandler(reply.commentId)}>삭제</button>
+                                                                            </>
+                                                                        )
+                                                                    }
+                                                                </S.EditList>
+                                                            </S.Name>
+                                                            <S.CommentContent>
+                                                                {
+                                                                    reply.commentId !== editShow 
+                                                                    ?
+                                                                        <p>{reply.content}</p>
+                                                                    :
+                                                                        <CommentEdit
+                                                                            status={status}
+                                                                            setEditShow={setEditShow}
+                                                                            mutate={mutate}
+                                                                            commentId={reply.commentId}
+                                                                        />
+                                                                }
+                                                            </S.CommentContent>
+                                                        </S.Comment>
+                                                    </S.CommentBase>
+                                                )
+                                            }
+                                        })
+                                    }
+                                </S.ReplyBase>
+                            }
+
+                        </S.CommentList>
+                    ))
+                }
             </S.CommentListBase>
         </>
     )

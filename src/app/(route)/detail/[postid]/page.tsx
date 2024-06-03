@@ -14,6 +14,7 @@ import { Viewer } from "@toast-ui/react-editor";
 import Recommends from "@components/Recommends/Recommends";
 import { useDetail } from "../../../../hooks/useMeeting";
 import Comment from "@components/detail/Comment/Comment";
+import White from "@components/common/Button/White/White";
 
 export default function Detail({ params }: { params: { postid: string } }) {
 
@@ -48,6 +49,7 @@ export default function Detail({ params }: { params: { postid: string } }) {
 
     if(!detail) return;
     viewRef.current?.getInstance().setMarkdown(detail.data.content);
+    setBookmarkCount(detail.data.bookmarkCount);
 
   },[detail]);
 
@@ -62,7 +64,7 @@ export default function Detail({ params }: { params: { postid: string } }) {
 
           <S.Top>
             <S.TopFlex>
-              <p>{detail?.data.author}</p>
+              <p>{detail?.data.author !== "" ? detail?.data.author : "탈퇴한 유저"}</p>
               <p>{moment(detail?.data.createdDateTime).format('YYYY-MM-DD')}</p>
               <S.View>
                 <ViewIcon stroke="#A5A5A5"/>
@@ -76,7 +78,7 @@ export default function Detail({ params }: { params: { postid: string } }) {
                 bookmarkCount={bookmarkCount}
                 setBookmarkCount={setBookmarkCount}
               />
-              <p>{detail?.data.bookmarkCount}</p>
+              <p>{bookmarkCount}</p>
             </S.BookFlex>
           </S.Top>
 
@@ -133,14 +135,15 @@ export default function Detail({ params }: { params: { postid: string } }) {
           <S.BtnList>
             { 
               detail?.data.yours && 
-              <S.Btn 
+              <S.Btn
                 $type={"error"} 
                 onClick={()=>removeHanlder(detail.data.postId)}
               >삭제 하기</S.Btn>
             }
-            <S.Btn 
+            <White
+              type="button"
               onClick={()=>router.push('/')}
-            >목록 보기</S.Btn>
+            >목록 보기</White>
             {
               detail?.data.yours && 
                 <S.Btn 

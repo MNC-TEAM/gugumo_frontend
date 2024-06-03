@@ -17,13 +17,22 @@ export const UserIcon = styled.div`
     height: 73px;
     border-radius: 1000px;
     background: ${({theme})=>theme.color.Surface};
+
+    @media screen and (max-width: 820px) {
+        width: 32px;
+        height: 32px;
+    }
+
 `;
 
 
 export const CommentFormBase = styled.div`
     display: flex;
     gap: 30px;
-    margin-top: 52px;
+    margin-top: 32px;
+    @media screen and (max-width:820px) {
+        gap: 12px;
+    }
 `;
 
 export const CommentForm = styled.div`
@@ -50,33 +59,77 @@ export const CommentForm = styled.div`
     button {
         margin-top: 23px;
     }
+
+    @media screen and (max-width:820px) {
+        textarea {
+            height: 64px;
+            font-size: 14px;
+        }
+        button {
+            margin-top: 8px;
+        }
+    }
+
 `;
+
+
+
+export const CommentList = styled.div``;
 
 export const CommentListBase = styled.div`
     border-top: 6px solid ${({theme})=>theme.color.Surface};
     margin-top: 51px;
     padding-top: 60px;
-`;
-export const CommentList = styled.ul`
-    li {
-        display: flex;
-        gap: 21px;
-        + li {
-            margin-left: 120px;
-            margin-top: 20px;
+
+    ${CommentList} {
+        + ${CommentList} {
+            margin-top: 50px;
         }
     }
+
+    @media screen and (max-width:820px) {
+     
+        ${CommentList} {
+            + ${CommentList} {
+                margin-top: 25px;
+            }
+        }
+        
+    }
+
+`;
+
+export const CommentBase = styled.div`
+    display: flex;
+    gap: 21px;
 `;
 
 export const Comment = styled.div`
     flex: 1;
     p {
-        margin-top: 16px;
+        
         font-size: 18px;
         font-weight: 500;
         min-height: 66px;
     }
+
+    @media screen and (max-width:820px) {
+        p {
+            margin-top: 14px;
+            font-size: 14px;
+            min-height: 44px;
+        }
+    }
+
 `;
+
+export const CommentContent = styled.div`
+    margin-top: 16px;
+    @media screen and (max-width:820px) {
+        margin-top: 14px;
+    }
+`;
+
 
 export const Name = styled.div`
     display: flex;
@@ -98,6 +151,23 @@ export const Name = styled.div`
         }
     }
 
+    @media screen and (max-width:820px) {
+        dl {
+            dt {
+                font-size: 14px;
+            }
+            dd {
+                font-size: 13px;
+            }
+        }
+    }
+
+    @media screen and (max-width:480px) {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
 `;
 
 export const EditList = styled.div`
@@ -108,4 +178,27 @@ export const EditList = styled.div`
         color: ${({theme})=>theme.color.OnBackgroundGray};
         cursor: pointer;
     }
+
+    @media screen and (max-width:820px) {
+        gap: 10px;
+        margin-left: auto;
+    }
+
+`;
+
+
+export const ReplyBase = styled.div`
+    margin-left: 120px;
+    margin-top: 20px;
+
+    ${CommentBase}{
+        + ${CommentBase} {
+            margin-top: 25px;
+        }
+    }
+
+    @media screen and (max-width:820px) {
+        margin-left: 15%;
+    }
+
 `;

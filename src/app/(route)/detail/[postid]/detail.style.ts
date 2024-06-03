@@ -1,11 +1,12 @@
 "use client";
 
+import * as White from "@components/common/Button/White/White.style";
 import styled from "styled-components";
 
 export const DetailStyle = styled.main`
     padding: 108px 0 160px;
     @media screen and (max-width:820px) {
-        padding: 39px 0 191px;
+        padding: 39px 0 141px;
     }
 `;
 
@@ -133,7 +134,7 @@ export const Col = styled.div<{$open? : boolean}>`
             if($open){
                 return "104px 1fr";
             }else{
-                return "72px 1fr";
+                return "82px 1fr";
             }
         }};
 
@@ -168,12 +169,16 @@ export const Desc = styled.div`
 export const BtnList = styled.div`
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 20px;
+
+    @media screen and (max-width:820px) {
+        justify-content: flex-end;
+        margin-top: 27px;
+    }
+
 `;
 
-export const Btn = styled.button<{$type? : string}>`
-    font-size: ${({theme})=>theme.fontSize.buttonSemibold};
-    font-weight: ${({theme})=>theme.fontWeight.semibold};
+export const Btn = styled(White.Button)<{$type? : string}>`
     color: ${({theme,$type})=>{
         let type;
         switch($type){
@@ -221,9 +226,4 @@ export const Btn = styled.button<{$type? : string}>`
         }
         return type;
     }};
-    padding: 14px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: .4s;
-    transition-property: background,color;
 `;

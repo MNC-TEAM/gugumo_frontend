@@ -3,8 +3,20 @@ import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import * as S from "./Recommends.style";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Recommend from "@components/common/Card/Recommend/Recommend";
+import { useRecommend } from "@hooks/useRecommend";
+import { useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 export default function Recommends() {
+
+    const {status} = useSession();
+
+    const {recommend,mutate} = useRecommend();
+
+    useEffect(()=>{
+        mutate();
+    },[status]);
+
   return (
     
     <S.RecommendLayout>
@@ -15,15 +27,13 @@ export default function Recommends() {
                 slidesPerView={1.2}
                 breakpoints={{
                     "481" : {
-                    slidesPerView : 1.5,
+                        slidesPerView : 1.5,
                     },
                     "820" : {
-                    slidesPerView : 2,
-                    centeredSlides : true
+                        slidesPerView : 2.5,
                     },
                     "1025" : {
-                    slidesPerView : 3,
-                    centeredSlides : true
+                        slidesPerView : 3,
                     }
                 }}
                 centeredSlides={false}
@@ -31,58 +41,23 @@ export default function Recommends() {
                 loop={true}
                 speed={600}
             >
-                <SwiperSlide>
-                    <Recommend
-                        bookmarkStatus={false}
-                        postId={1}
-                        status={""}
-                        gameType={""}
-                        location={""}
-                        title={"테스트"}
-                        meetingDateTime={"2020"}
-                        meetingMemberNum={2020}
-                        meetingDeadline={"2020"}
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Recommend
-                        bookmarkStatus={false}
-                        postId={1}
-                        status={""}
-                        gameType={""}
-                        location={""}
-                        title={"테스트"}
-                        meetingDateTime={"2020"}
-                        meetingMemberNum={2020}
-                        meetingDeadline={"2020"}
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Recommend
-                        bookmarkStatus={false}
-                        postId={1}
-                        status={""}
-                        gameType={""}
-                        location={""}
-                        title={"테스트"}
-                        meetingDateTime={"2020"}
-                        meetingMemberNum={2020}
-                        meetingDeadline={"2020"}
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Recommend
-                        bookmarkStatus={false}
-                        postId={1}
-                        status={""}
-                        gameType={""}
-                        location={""}
-                        title={"테스트"}
-                        meetingDateTime={"2020"}
-                        meetingMemberNum={2020}
-                        meetingDeadline={"2020"}
-                    />
-                </SwiperSlide>
+                {
+                    recommend.map((el)=>(
+                        <SwiperSlide key={el.postId}>
+                            <Recommend
+                                bookmarkStatus={el.bookmarked}
+                                postId={el.postId}
+                                status={el.meetingStatus}
+                                gameType={el.gameType}
+                                location={el.location}
+                                title={el.title}
+                                meetingDateTime={el.meetingDateTime}
+                                meetingMemberNum={el.meetingMemberNum}
+                                meetingDeadline={el.meetingDeadline}
+                            />
+                        </SwiperSlide>
+                    ))
+                }
             </Swiper>
             <button><IoChevronForward /></button>
         </div>

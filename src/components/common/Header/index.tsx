@@ -2,7 +2,7 @@
 import * as S from "./style";
 import Link from 'next/link'
 import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useAppDispatch } from "@store/hook";
 import { open } from "@store/features/modal/modal";
 import { signOut, useSession } from "next-auth/react";
@@ -13,7 +13,9 @@ interface HeaderType {
 
 export default function Header( {postion} : HeaderType ) {
 
-  const { data: session, status } = useSession()
+  const router = useRouter();
+
+  const { status } = useSession();
 
   const [userMenuHidden,setUserMenuHidden] = useState(true);
   const dispatch = useAppDispatch();
@@ -22,6 +24,13 @@ export default function Header( {postion} : HeaderType ) {
   useEffect(()=>{
     setUserMenuHidden(true);
   },[pathname]);
+
+  const logOutHanlder = ()=>{
+    signOut({
+      redirect : false,
+    });
+    router.push('/');
+  }
 
   return (
     <S.HeaderStyle $postion={postion}>
@@ -48,7 +57,7 @@ export default function Header( {postion} : HeaderType ) {
                   <Link href={"/mypage"}>회원정보</Link>
                 </li>
                 <li>
-                  <button onClick={()=>signOut({redirect : false})}>로그아웃</button>
+                  <button onClick={logOutHanlder}>로그아웃</button>
                 </li>
               </ul>
             </S.UserMenu>
