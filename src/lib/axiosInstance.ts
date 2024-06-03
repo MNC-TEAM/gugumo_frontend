@@ -8,6 +8,8 @@ export const axiosInstace = axios.create({
 
 axiosInstace.interceptors.request.use( async (config)=>{
     const session = await getServerSession(authOptions) as any;
-    config.headers.Authorization = session.accessToken;
+    if(session){
+        config.headers.Authorization = session.accessToken || "";
+    }
     return config;
 });

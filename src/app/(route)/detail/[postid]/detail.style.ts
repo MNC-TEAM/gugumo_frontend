@@ -6,7 +6,7 @@ import styled from "styled-components";
 export const DetailStyle = styled.main`
     padding: 108px 0 160px;
     @media screen and (max-width:820px) {
-        padding: 39px 0 191px;
+        padding: 39px 0 141px;
     }
 `;
 

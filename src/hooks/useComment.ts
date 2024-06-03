@@ -1,8 +1,13 @@
 import useSWR from "swr";
 import { fetcher } from "../fetch/fetcher";
-import { CommentDataType } from "@/types/meeting";
+import { CommentDataType, Datum } from "@/types/meeting";
+import { useEffect, useState } from "react";
 
 export function useCommentList(postId : string){
+
+    const [commentLength,setCommentLength] = useState(0);
+    const [parentComment,setParentComment] = useState<Datum[]>([]);
+    const [replyComment,setReplyComment] = useState<Datum[]>([]);
 
     const {
         data,
@@ -18,9 +23,27 @@ export function useCommentList(postId : string){
             revalidateOnReconnect: false 
         }
     );
+
+    
+    useEffect(()=>{
+
+        if(!data) return;
+
+        const parent = data.data.filter((el)=>!el.parentCommentId);
+        const reply = data.data.filter((el)=>el.parentCommentId);
+
+        setParentComment(parent);
+        setReplyComment(reply);
+
+        setCommentLength(data.data.length);
+
+    },[data]);
+
     
     return {
-        data,
+        commentLength,
+        parentComment,
+        replyComment,
         isLoading,
         isValidating,
         mutate

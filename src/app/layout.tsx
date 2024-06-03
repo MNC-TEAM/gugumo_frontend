@@ -9,6 +9,7 @@ import ThemeClient from '@provider/ThemeClient';
 import StyledComponentsRegistry from '@provider/registry';
 import Login from '@components/auth/Modal/Login';
 import AuthProvider from '@provider/AuthProvider';
+import GlobalStyleProvider from '@provider/GlobalStyleProvider';
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',
@@ -38,10 +39,12 @@ export default function RootLayout({
         <AuthProvider>
           <ThemeClient>
             <StyledComponentsRegistry>
-              <StoreProvider>
-                <Login/>
-                {children}
-              </StoreProvider>
+              <GlobalStyleProvider>
+                <StoreProvider>
+                  <Login/>
+                  {children}
+                </StoreProvider>
+              </GlobalStyleProvider>
             </StyledComponentsRegistry>
           </ThemeClient>
         </AuthProvider>

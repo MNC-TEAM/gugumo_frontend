@@ -6,14 +6,12 @@ import UserInfo from "@components/mypage/UserInfo/UserInfo";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useAppDispatch } from "@store/hook";
-import { logoutAction } from "@store/features/auth/user";
 import { useMember } from "@hooks/useMember";
 import HashLoad from "@components/Loading/HashLoad";
+import { signOut } from "next-auth/react";
 
 export default function page() {
 
-  const dispatch = useAppDispatch();
   const router = useRouter();
   const [nickname,setNickname] = useState("");
 
@@ -23,6 +21,13 @@ export default function page() {
     if(!data) return;
     setNickname(data.data.nickname)
   },[data]);
+
+  const logOutHanlder = ()=>{
+    signOut({
+      redirect : false,
+    });
+    router.push('/');
+  }
 
   const userDeleteHanlder = async ()=>{
 
@@ -35,12 +40,9 @@ export default function page() {
   
         if(status === "success"){
           alert('회원 탈퇴가 완료 되었습니다.');
-          dispatch(logoutAction());
-          return router.push('/');
+          logOutHanlder();
         }else if(status === "fail"){
           return alert(message);
-        }else{
-          console.error(message);
         }
 
       });
