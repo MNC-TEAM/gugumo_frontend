@@ -188,7 +188,9 @@ export default function Home() {
                         </S.White>
 
                         <S.Paging>
-                            <Paging page={page} setPage={setPage} pageable={meeting?.data.pageable}/>
+                            {
+                                meeting && <Paging page={page} setPage={setPage} pageable={meeting.data.pageable}/>
+                            }
                         </S.Paging>
 
                     </S.Layout>

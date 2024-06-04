@@ -1,4 +1,4 @@
-import Location from '@/app/components/common/Button/Location';
+import Location from '@components/common/Button/Location';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
@@ -25,7 +25,7 @@ const meta : Meta<typeof Location> = {
   },
   tags : ['autodocs'],
   argTypes : {
-    onClick : { control: 'none' },
+    onClick : { control: undefined },
   },
   args : {
     onClick : fn()

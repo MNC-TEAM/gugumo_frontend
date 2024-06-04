@@ -15,7 +15,7 @@ export default function Recommends() {
 
     useEffect(()=>{
         mutate();
-    },[status]);
+    },[status,mutate]);
 
   return (
     

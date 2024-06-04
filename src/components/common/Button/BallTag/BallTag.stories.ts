@@ -24,37 +24,37 @@ export const Active: Story = {
     }
 }
 
-export const 배드민턴: Story = {
+export const BADMINTON: Story = {
     args : {
         gametype : "BADMINTON"
     }
 }
 
-export const 농구: Story = {
+export const BASKETBALL: Story = {
     args : {
         gametype : "BASKETBALL"
     }
 }
 
-export const 풋살: Story = {
+export const FUTSAL: Story = {
     args : {
         gametype : "FUTSAL"
     }
 }
 
-export const 테니스: Story = {
+export const TENNIS: Story = {
     args : {
         gametype : "TENNIS"
     }
 }
 
-export const 탁구: Story = {
+export const TABLETENNIS: Story = {
     args : {
         gametype : "TABLETENNIS"
     }
 }
 
-export const 야구: Story = {
+export const BASEBALL: Story = {
     args : {
         gametype : "BASEBALL"
     }

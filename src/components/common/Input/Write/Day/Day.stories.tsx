@@ -1,4 +1,4 @@
-import Day from '@/app/components/common/Input/Write/Day/Day';
+import Day from '@components/common/Input/Write/Day/Day';
 import type { Meta, StoryObj } from '@storybook/react';
 import { MouseEventHandler } from 'react';
 

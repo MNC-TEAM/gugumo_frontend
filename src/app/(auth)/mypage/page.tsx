@@ -10,7 +10,7 @@ import { useMember } from "@hooks/useMember";
 import HashLoad from "@components/Loading/HashLoad";
 import { signOut } from "next-auth/react";
 
-export default function page() {
+export default function Page() {
 
   const router = useRouter();
   const [nickname,setNickname] = useState("");

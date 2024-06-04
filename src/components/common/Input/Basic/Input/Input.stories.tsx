@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Input from "./Input";
-import AuthBtn from '@/app/components/common/Input/Basic/AuthBtn/AuthBtn';
+import AuthBtn from '@components/common/Input/Basic/AuthBtn/AuthBtn';
 
 export interface InputType {
   /**
@@ -30,17 +30,17 @@ function DefaultInput() {
 }
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const 틀: Story = {
+export const Base: Story = {
   args : {}
 }
 
-export const 기본: Story = {
+export const Normal: Story = {
   args : {
     children : <DefaultInput/>
   }
 }
 
-export const 에러메세지: Story = {
+export const Error: Story = {
   args : {
     children : <DefaultInput/>,
     error : "에러 메세지"
@@ -57,13 +57,13 @@ function AuthInput() {
   )
 }
 
-export const 인증: Story = {
+export const Auth: Story = {
   args : {
     children : <AuthInput/>,
   }
 }
 
-function AuthComplete() {
+function AuthCompleteComponent() {
   return (
     <>
       <input type="text" placeholder='내용을 입력해주세요.'/>
@@ -72,13 +72,13 @@ function AuthComplete() {
   )
 }
 
-export const 인증완료: Story = {
+export const AuthComplete: Story = {
   args : {
-    children : <AuthComplete/>,
+    children : <AuthCompleteComponent/>,
   }
 }
 
-export const 인증에러: Story = {
+export const AuthError: Story = {
   args : {
     children : <AuthInput/>,
     error : "에러 메세지"
