@@ -15,7 +15,7 @@ import axios from "axios";
 export default function Page() {
 
     const router = useRouter();
-    const {register,handleSubmit,getValues} = useForm();
+    const {register,handleSubmit,getValues,setFocus} = useForm();
     const [showAuth,setShowAuth] = useState(false);
     const [emailCheck,setEmailCheck] = useState(false);
     const [nickNameError,setNickNameError] = useState('');
@@ -54,6 +54,7 @@ export default function Page() {
             const {status} = data;
             if(status === "success"){
                 setShowAuth(true);
+                setEmailCheck(false);
                 setEmailError('');
             }else{
                 setEmailError('이메일 인증요청에 실패하였습니다.');
@@ -97,18 +98,27 @@ export default function Page() {
         const {nickname,username,password,emailAuth,confirmPassword} = event;
 
         if(nickname === ""){
+            setFocus('nickname');
             return setNickNameError('닉네임을 입력해주세요.');
+        }
+
+        if(nickname.match(/\s/g)){
+            setFocus('nickname');
+            return setNickNameError('닉네임에 공백을 제거해주세요.');
         }
     
         if(username === ""){
+            setFocus('username');
             return setEmailError('이메일을 입력해주세요.');
         }
 
         if(!emailCheck){
+            setFocus('emailCheck');
             return setEmailAuthError('이메일 인증이 완료되지 않았습니다.');
         }
     
         if(password !== confirmPassword){
+            setFocus('password');
             return setIsPasswordError('비밀번호가 서로 다릅니다.');
         }
 
@@ -136,12 +146,13 @@ export default function Page() {
                 alert('회원에 성공 하였습니다.');
                 return router.push('/');
             }else{
-                alert(message);
+                if(message){
+                    return alert(message);
+                }else{
+                    return alert('회원가입에 실패 하였습니다.');
+                }
             }
         })
-        .catch((err)=>{
-            alert('회원가입에 실패 하였습니다.');
-        });
 
     }
 
