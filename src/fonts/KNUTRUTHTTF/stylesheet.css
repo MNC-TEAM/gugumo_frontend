@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'KNUTRUTHTTF';
+    src: url('KNUTRUTHTTF.woff2') format('woff2'),
+        url('KNUTRUTHTTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

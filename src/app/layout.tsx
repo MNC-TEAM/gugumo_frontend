@@ -3,19 +3,13 @@ import 'react-calendar/dist/Calendar.css';
 import '@toast-ui/editor/toastui-editor.css';
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
 import StoreProvider from "@provider/ReduxProviders";
 import ThemeClient from '@provider/ThemeClient';
 import StyledComponentsRegistry from '@provider/registry';
 import Login from '@components/auth/Modal/Login';
 import AuthProvider from '@provider/AuthProvider';
 import GlobalStyleProvider from '@provider/GlobalStyleProvider';
-
-const pretendard = localFont({
-  src: '../fonts/PretendardVariable.woff2',
-  display: 'swap',
-  weight: '45 920',
-});
+import "./font.css";
 
 export const metadata: Metadata = {
   title: "구구모",
@@ -35,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={pretendard.className}>
+      <body style={{fontFamily : "Pretendard"}}>
         <AuthProvider>
           <ThemeClient>
             <StyledComponentsRegistry>
