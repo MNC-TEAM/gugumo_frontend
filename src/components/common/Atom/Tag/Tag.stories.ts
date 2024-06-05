@@ -52,28 +52,28 @@ const meta : Meta<typeof Tag> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const 모집중: Story = {
+export const Recruit: Story = {
   args : {
     color : "recruit",
     status : "RECRUIT"
   }
 }
 
-export const 모집완료: Story = {
+export const End: Story = {
   args : {
     color : "recruit",
     status : "END"
   }
 }
 
-export const 구기종목: Story = {
+export const Gametype: Story = {
   args : {
     color : "ball",
     gameType : "BADMINTON"
   }
 }
 
-export const 지역: Story = {
+export const Region: Story = {
   args : {
     color : "region",
     location : "SEOUL"

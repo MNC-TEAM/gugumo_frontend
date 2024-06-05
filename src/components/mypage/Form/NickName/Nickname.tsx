@@ -77,13 +77,13 @@ export default function Nickname({setNickname} : propsType) {
         <S.Layout>
             <h4>개인정보 변경</h4>
             <S.InputLayout>
-                <p>닉네임</p>
-                <div>
+                <S.Label htmlFor="nickname">닉네임</S.Label>
+                <S.Flex>
                   <Input>
-                    <input type="text" placeholder="닉네임을 입력하세요." {...register('nickname')}/>
+                    <input type="text" id="nickname" placeholder="닉네임을 입력하세요." {...register('nickname')}/>
                   </Input>
                   <Change onClick={confirmHanlder}>중복확인</Change>
-                </div>
+                </S.Flex>
             </S.InputLayout>
         </S.Layout>
         <S.Btn>

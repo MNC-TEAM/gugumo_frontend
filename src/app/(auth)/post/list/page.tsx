@@ -70,7 +70,9 @@ export default function Home() {
           }
             
           <S.Paging>
-            <Paging page={page} setPage={setPage} pageable={content?.data.pageable}/>
+            {
+              content &&  <Paging page={page} setPage={setPage} pageable={content.data.pageable}/>
+            }
           </S.Paging>
           
         </B.BookMakrLayout>

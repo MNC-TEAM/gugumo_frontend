@@ -16,7 +16,10 @@ export const UserIcon = styled.div`
     width: 73px;
     height: 73px;
     border-radius: 1000px;
-    background: ${({theme})=>theme.color.Surface};
+    background-color: ${({theme})=>theme.color.Surface};
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70% 70%;
 
     @media screen and (max-width: 820px) {
         width: 32px;
@@ -88,6 +91,9 @@ export const CommentListBase = styled.div`
     }
 
     @media screen and (max-width:820px) {
+
+        margin-top: 28px;
+        padding-top: 48px;
      
         ${CommentList} {
             + ${CommentList} {

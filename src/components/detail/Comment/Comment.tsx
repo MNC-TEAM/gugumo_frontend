@@ -40,9 +40,9 @@ export default function Comment({postId} : {postId : string}) {
 
         }
 
-    },[status]);
+    },[status,mutate]);
 
-    const onReplyShowHandler = useCallback((commendId : number)=>{
+    const onReplyShowHandler = (commendId : number)=>{
 
         if(status !== "authenticated") {
             return alert('로그인을 해야합니다.');
@@ -58,9 +58,9 @@ export default function Comment({postId} : {postId : string}) {
             setReplyShow(0);
         }
 
-    },[replyShow]);
+    };
 
-    const onEditShowHandler = useCallback((commendId : number)=>{
+    const onEditShowHandler = (commendId : number)=>{
 
         if(status !== "authenticated") {
             return alert('로그인을 해야합니다.');
@@ -76,7 +76,7 @@ export default function Comment({postId} : {postId : string}) {
             setEditShow(0);
         }
 
-    },[editShow])
+    }
 
     return (
         <>
@@ -93,10 +93,10 @@ export default function Comment({postId} : {postId : string}) {
             <S.CommentListBase>
                 {
                     parentComment.map((el)=>(
-                        <S.CommentList>
+                        <S.CommentList key={el.commentId}>
 
-                            <S.CommentBase key={el.commentId}>
-                                <S.UserIcon/>
+                            <S.CommentBase>
+                                <S.UserIcon style={{backgroundImage : 'url(/asset/image/user/user.jpg)'}}/>
                                 <S.Comment>
                                     <S.Name>
                                         <dl>
@@ -150,7 +150,7 @@ export default function Comment({postId} : {postId : string}) {
                                             if(reply.parentCommentId === el.commentId){
                                                 return (
                                                     <S.CommentBase key={reply.commentId}>
-                                                        <S.UserIcon/>
+                                                        <S.UserIcon style={{backgroundImage : 'url(/asset/image/user/user.jpg)'}}/>
                                                         <S.Comment>
                                                             <S.Name>
                                                                 <dl>

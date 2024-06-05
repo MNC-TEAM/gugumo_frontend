@@ -1,5 +1,4 @@
 "use client"
-
 import Input from "@components/common/Input/Basic/Input/Input";
 import * as S from "./Sign.style";
 import BallTag from "@components/common/Button/BallTag/BallTag";
@@ -7,15 +6,15 @@ import { GAMETYPE } from "@constant/meeting";
 import White from "@components/common/Button/White/White";
 import { IoCheckmarkOutline } from "react-icons/io5";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import AuthBtn from "@components/common/Input/Basic/AuthBtn/AuthBtn";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-export default function page() {
+export default function Page() {
 
     const router = useRouter();
-    const {register,handleSubmit,getValues} = useForm();
+    const {register,handleSubmit,getValues,setFocus} = useForm();
     const [showAuth,setShowAuth] = useState(false);
     const [emailCheck,setEmailCheck] = useState(false);
     const [nickNameError,setNickNameError] = useState('');
@@ -23,6 +22,10 @@ export default function page() {
     const [emailAuthError,setEmailAuthError] = useState('');
     const [isPasswordError,setIsPasswordError] = useState('');
     const [ballClick,setBallClick] = useState<string[]>([]);
+    const [allCheck,setAllCheck] = useState(false);
+    const [isAgreeTermsUse,setIsAgreeTermsUse] = useState(false);
+    const [isAgreeCollectingUsingPersonalInformation,setIsAgreeCollectingUsingPersonalInformation] = useState(false);
+    const [isAgreeMarketing,setIsAgreeMarketing] = useState(false);
 
     // 구기종목 선택
     const ballClickHanlder = (get : string)=>{
@@ -50,6 +53,8 @@ export default function page() {
             const {status} = data;
             if(status === "success"){
                 setShowAuth(true);
+                setEmailCheck(false);
+                setEmailError('');
             }else{
                 setEmailError('이메일 인증요청에 실패하였습니다.');
                 setShowAuth(false);
@@ -68,7 +73,7 @@ export default function page() {
 
         axios.post('/api/auth/sign/emailCheck',{
             email : getValues('username'),
-            authNum : getValues('emailAuth')
+            emailAuthNum : getValues('emailAuth')
         })
         .then(({data})=>{
             const {status} = data;
@@ -92,26 +97,47 @@ export default function page() {
         const {nickname,username,password,emailAuth,confirmPassword} = event;
 
         if(nickname === ""){
+            setFocus('nickname');
             return setNickNameError('닉네임을 입력해주세요.');
+        }
+
+        if(nickname.match(/\s/g)){
+            setFocus('nickname');
+            return setNickNameError('닉네임에 공백을 제거해주세요.');
         }
     
         if(username === ""){
+            setFocus('username');
             return setEmailError('이메일을 입력해주세요.');
         }
 
         if(!emailCheck){
+            setFocus('emailCheck');
             return setEmailAuthError('이메일 인증이 완료되지 않았습니다.');
         }
     
         if(password !== confirmPassword){
+            setFocus('password');
             return setIsPasswordError('비밀번호가 서로 다릅니다.');
         }
 
+        if(!isAgreeTermsUse){
+            return alert('서비스 이용약관에 동의 해주세요.');
+        }
+
+        if(!isAgreeCollectingUsingPersonalInformation){
+            return alert('개인정보 수집 및 이용에 동의 해주세요');
+        }
+
         axios.post('/api/auth/sign',{
-            nickname,
             username,
+            nickname,
             password,
-            emailAuth
+            favoriteSports : ballClick.join(','),
+            isAgreeTermsUse,
+            isAgreeCollectingUsingPersonalInformation,
+            isAgreeMarketing,
+            emailAuthNum : emailAuth
         })
         .then(({data})=>{
             const {status,message} = data;
@@ -119,14 +145,35 @@ export default function page() {
                 alert('회원에 성공 하였습니다.');
                 return router.push('/');
             }else{
-                alert(message);
+                if(message){
+                    return alert(message);
+                }else{
+                    return alert('회원가입에 실패 하였습니다.');
+                }
             }
         })
-        .catch((err)=>{
-            alert('회원가입에 실패 하였습니다.');
-        });
 
     }
+
+    // 전체선택
+    const handleAllCheck = ()=>{
+        if(allCheck){
+            setIsAgreeTermsUse(false);
+            setIsAgreeCollectingUsingPersonalInformation(false);
+            setIsAgreeMarketing(false);
+            setAllCheck(false);
+        }else{
+            setIsAgreeTermsUse(true);
+            setIsAgreeCollectingUsingPersonalInformation(true);
+            setIsAgreeMarketing(true);
+            setAllCheck(true);
+        }
+    }
+
+    const usernameOnChangeHandler = useCallback(()=>{
+        setEmailError('');
+        setShowAuth(false);
+    },[]);
 
     return (
         <S.Wrap>
@@ -144,7 +191,7 @@ export default function page() {
                                 <input type="text" {...register("nickname",{onChange: ()=>setNickNameError('')})} placeholder="닉네임"/>
                             </Input>
                             <Input error={emailError}>
-                                <input type="email" {...register("username",{onChange: ()=>setEmailError('')})} placeholder="이메일을 입력하세요."/>
+                                <input type="email" {...register("username",{onChange:usernameOnChangeHandler})} placeholder="이메일을 입력하세요."/>
                                 <AuthBtn active={showAuth} type="button" onClick={onEmailAuth}>인증요청</AuthBtn>
                             </Input>
                             {
@@ -184,7 +231,10 @@ export default function page() {
                         <S.Service>
                             <S.All>
                                 <S.Argee>
-                                    <S.ArgeeCheck>
+                                    <S.ArgeeCheck
+                                        $active={isAgreeTermsUse && isAgreeCollectingUsingPersonalInformation && isAgreeMarketing}
+                                        onClick={handleAllCheck}
+                                    >
                                         <div><IoCheckmarkOutline/></div>
                                         <p>전체동의</p>
                                     </S.ArgeeCheck>
@@ -192,21 +242,30 @@ export default function page() {
                             </S.All>
                             <S.ArgeeList>
                                 <S.Argee as={"li"}>
-                                    <S.ArgeeCheck>
+                                    <S.ArgeeCheck
+                                        $active={isAgreeTermsUse}
+                                        onClick={()=>{setIsAgreeTermsUse(!isAgreeTermsUse)}}
+                                    >
                                         <div><IoCheckmarkOutline/></div>
                                         <p>서비스 이용약관 동의 (필수)</p>
                                     </S.ArgeeCheck>
                                     <S.ArgeeLink>내용보기</S.ArgeeLink>
                                 </S.Argee>
                                 <S.Argee as={"li"}>
-                                    <S.ArgeeCheck>
+                                    <S.ArgeeCheck 
+                                        $active={isAgreeCollectingUsingPersonalInformation}
+                                        onClick={()=>{setIsAgreeCollectingUsingPersonalInformation(!isAgreeCollectingUsingPersonalInformation)}}
+                                    >
                                         <div><IoCheckmarkOutline/></div>
                                         <p>개인정보 수집 및 이용 동의 (필수)</p>
                                     </S.ArgeeCheck>
                                     <S.ArgeeLink>내용보기</S.ArgeeLink>
                                 </S.Argee>
                                 <S.Argee as={"li"}>
-                                    <S.ArgeeCheck>
+                                    <S.ArgeeCheck 
+                                        $active={isAgreeMarketing}
+                                        onClick={()=>{setIsAgreeMarketing(!isAgreeMarketing)}}
+                                    >
                                         <div><IoCheckmarkOutline/></div>
                                         <p>마케팅 수신 동의 (선택)</p>
                                     </S.ArgeeCheck>

@@ -43,7 +43,7 @@ export default function CommentForm({status,postId,mutate} : CommentFormType) {
             }
         });
 
-    },[postId,status]);
+    },[postId,status,mutate,setValue]);
 
   return (
     <S.CommentFormBase>

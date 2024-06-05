@@ -1,16 +1,11 @@
 "use client"
-import { onClose } from "@/store/features/modal/modal";
 import * as S from "./popup.style";
-import { useAppDispatch, useAppSelector } from "@/store/hook";
 
 export default function Popup() {
 
-    const {popup} = useAppSelector((state)=>state.modal);
-    const dispatch = useAppDispatch();
-
     return (
-        <S.StyledModal isOpen={popup}>
-            <S.CloseStyle onClick={()=>dispatch(onClose())}>
+        <S.StyledModal>
+            <S.CloseStyle>
                 <img src="/asset/icon/close.svg" alt="취소버튼" />
             </S.CloseStyle>
             <div>

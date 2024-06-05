@@ -2,7 +2,6 @@ import * as S from "../style";
 import * as P from "./Password.style"
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useAppSelector } from "@store/hook";
 import { useState } from "react";
 import Input from "@components/common/Mypage/Input/Input";
 import White from "@components/common/Button/White/White";
@@ -17,10 +16,12 @@ export default function Password() {
         const {password,confirmPassword} = event;
 
         if(password === "" || confirmPassword === ""){
+            alert('비밀번호를 입력하지 않았습니다.');
             return setIsError('비밀번호를 입력하지 않았습니다.');
         }
 
         if(password !== confirmPassword) {
+            alert('비밀번호가 동일하지 않습니다.');
             return setIsError('비밀번호가 동일하지 않습니다.');
         }
 
@@ -48,7 +49,7 @@ export default function Password() {
             <h4>비밀번호 설정</h4>
             <S.InputFlex>
                 <S.InputLayout>
-                    <label htmlFor="password">새 비밀번호</label>
+                    <S.Label htmlFor="password">새 비밀번호</S.Label>
                     <div>
                         <Input>
                             <input 
@@ -63,9 +64,9 @@ export default function Password() {
                     </div>
                 </S.InputLayout>
                 <S.InputLayout>
-                    <label htmlFor="confirmPassword">새 비밀번호 확인</label>
+                    <S.Label htmlFor="confirmPassword">새 비밀번호 확인</S.Label>
                     <div>
-                        <Input>
+                        <Input error={isError}>
                             <input 
                                 id="confirmPassword" 
                                 type="password" 
@@ -76,7 +77,6 @@ export default function Password() {
                             />
                         </Input>
                     </div>
-                    {isError ? isError : ""}
                 </S.InputLayout>
             </S.InputFlex>
         </P.Layout>

@@ -16,7 +16,6 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 export default function Post({params} : {params : {postid : string}}) {
 
   const router = useRouter();
-  const user = useAppSelector(state=>state.user);
   const {register,handleSubmit,watch,setValue} = useForm();
     
   const [meetingDate, onMeetingDate] = useState<Value>(new Date());
@@ -49,11 +48,11 @@ export default function Post({params} : {params : {postid : string}}) {
       return alert(message);
     }
 
-  },[detail]);
+  },[detail,setValue]);
 
   useEffect(()=>{
     mutate();
-  },[params.postid,setValue,user]);
+  },[params.postid,mutate]);
 
   // 수정
   const onSubmitHanlder = (event : any)=>{

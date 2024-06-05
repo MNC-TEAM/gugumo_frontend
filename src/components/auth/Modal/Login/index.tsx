@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import * as S from './style'
 import * as M from '../Modal.style'
 import { useForm } from 'react-hook-form'
@@ -19,9 +19,9 @@ export default function Login() {
   const modal = useAppSelector(state=>state.modal);
   const dispatch = useAppDispatch();
 
-  const onClose = ()=>{
+  const onClose = useCallback(()=>{
     dispatch(close());
-  }
+  },[dispatch]);
 
   const {register,handleSubmit} = useForm();
   const [isEmailError,setIsEmailError] = useState('');
@@ -56,7 +56,7 @@ export default function Login() {
 
   useEffect(()=>{
     onClose();
-  },[pathname])
+  },[pathname,onClose])
 
   useEffect(()=>{
 

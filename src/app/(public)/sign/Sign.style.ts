@@ -95,10 +95,11 @@ export const Argee = styled.div`
     gap: 5px;
 `;
 
-export const ArgeeCheck = styled.div`
+export const ArgeeCheck = styled.div<{$active? : boolean}>`
     display: flex;
     align-items: center;
     gap: 11px;
+    cursor: pointer;
     div {
         width: 19px;
         height: 19px;
@@ -112,6 +113,9 @@ export const ArgeeCheck = styled.div`
             top: 50%;
             transform: translate(-50%,-50%);
             width: 12px;
+            display: ${({$active})=>{
+                return $active ? "block" : "none";
+            }};
         }
     }
     p {
@@ -119,6 +123,15 @@ export const ArgeeCheck = styled.div`
         font-weight: ${({theme})=>theme.fontWeight.medium};
         color: ${({theme})=>theme.color.OnPrimary};
     }
+
+    @media screen and (max-width:820px) {
+
+        p {
+            font-size: 14px;
+        }
+
+    }
+
 `;
 
 export const ArgeeList = styled.div`
@@ -133,6 +146,8 @@ export const ArgeeList = styled.div`
 
     @media screen and (max-width:820px) {
         padding: 17px 20px; 
+
+        
     }
 
 `;

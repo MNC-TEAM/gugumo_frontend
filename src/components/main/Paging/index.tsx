@@ -1,8 +1,8 @@
-import { pageableType } from "@/types/meeting";
+import { Pageable } from "@/types/meeting";
 import * as S from "./style";
 import { useEffect, useState } from "react";
 
-export default function Paging({page,setPage,pageable} : {page : number, setPage : any, pageable : pageableType | null}) {
+export default function Paging({page,setPage,pageable} : {page : number, setPage : any, pageable : Pageable | null}) {
 
   const [startPage,setStartPage] = useState(0);
   const [endPage,setEndPage] = useState(0);

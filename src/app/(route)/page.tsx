@@ -1,6 +1,6 @@
 "use client"
 import Header from "@components/common/Header";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as S from "@components/main/style";
 import { useForm } from "react-hook-form";
 import { IoChevronDown } from "react-icons/io5";
@@ -188,7 +188,9 @@ export default function Home() {
                         </S.White>
 
                         <S.Paging>
-                            <Paging page={page} setPage={setPage} pageable={meeting?.data.pageable}/>
+                            {
+                                meeting && <Paging page={page} setPage={setPage} pageable={meeting.data.pageable}/>
+                            }
                         </S.Paging>
 
                     </S.Layout>

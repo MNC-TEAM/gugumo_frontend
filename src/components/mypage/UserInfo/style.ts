@@ -18,21 +18,10 @@ export const UserFlex = styled.div`
 
 `;
 
-export const User = styled.div`
+export const UserBox = styled.div`
     text-align: center;
     display: flex;
     flex-direction: column;
-
-    div {
-        border-radius: 1000px;
-        background: ${({theme})=>theme.color.Surface};
-        width: 104px;
-        &::after {
-            content: '';
-            display: block;
-            padding-bottom: 100%;
-        }
-    }
 
     button {
         display: flex;
@@ -46,10 +35,6 @@ export const User = styled.div`
 
     @media screen and (max-width : 820px) {
         
-        div {
-            width: 78px;
-        }
-
         button {
             margin-top: 12px;
             font-size: ${({theme})=>theme.fontSize.captionMedium};

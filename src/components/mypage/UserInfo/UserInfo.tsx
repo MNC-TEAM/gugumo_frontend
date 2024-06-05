@@ -1,7 +1,8 @@
 import { MypageType } from "@/types/mypage";
 import * as S from "./style";
+import User from "@components/common/User/User";
 
-export default function UserInfo({mypage,nickname} : {mypage : MypageType,nickname : string}) {
+export default function UserInfo({nickname} : {mypage : MypageType,nickname : string}) {
 
   const imageChangeHanlder = ()=>{
     alert('회원 이미지는 준비중에 있습니다.');
@@ -9,13 +10,9 @@ export default function UserInfo({mypage,nickname} : {mypage : MypageType,nickna
 
   return (
     <S.UserFlex>
-        <S.User>
-            <div/>
-            <button type="button" onClick={imageChangeHanlder}>
-              <img src="/asset/icon/edit.svg" alt="편집하기" />
-              편집하기
-            </button>
-        </S.User>
+        <S.UserBox>
+          <User/>
+        </S.UserBox>
         <S.UserName>
             닉네임
             <p>{nickname}</p>

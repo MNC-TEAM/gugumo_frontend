@@ -11,18 +11,18 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const 틀: Story = {
+export const Base: Story = {
     args : {}
 }
 
-function Text() {
+function TextComponent() {
     return(
         <input type="text" placeholder='작성중'/>
     )
 }
 
-export const 텍스트 : Story = {
+export const Text : Story = {
     args : {
-        children : <Text/>
+        children : <TextComponent/>
     }
 }

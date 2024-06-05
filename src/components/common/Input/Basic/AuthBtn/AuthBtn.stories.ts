@@ -1,4 +1,4 @@
-import AuthBtn from '@/app/components/common/Input/Basic/AuthBtn/AuthBtn';
+import AuthBtn from '@components/common/Input/Basic/AuthBtn/AuthBtn';
 import type { Meta, StoryObj } from '@storybook/react';
 import { MouseEventHandler } from 'react';
 

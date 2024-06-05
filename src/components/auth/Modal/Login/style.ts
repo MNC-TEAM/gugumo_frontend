@@ -14,8 +14,8 @@ export const BackModal = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    backdrop-filter: blur(10px);
     z-index: 9999;
+    background: rgba(000,000,000,0.6);
 `;
 
 export const StyledModal = styled.div`
