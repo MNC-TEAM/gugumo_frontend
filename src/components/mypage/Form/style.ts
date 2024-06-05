@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const Flex = styled.div`
+    display: flex;
+`;
+
 export const Form = styled.form`
     
     margin-top: 62px;
@@ -49,31 +53,39 @@ export const Layout = styled.div`
 
 `;
 
+export const Label = styled.label`
+    font-size: ${({theme})=>theme.fontSize.buttonMedium};
+    font-weight: ${({theme})=>theme.fontWeight.medium};
+    color: #000;
+
+    @media screen and (max-width:820px) {
+        font-size : 14px;
+    }
+
+`;
 
 export const InputLayout = styled.div`
     min-width: 0;
     flex: 1;
-    p,label {
-        font-size: ${({theme})=>theme.fontSize.buttonMedium};
-        font-weight: ${({theme})=>theme.fontWeight.medium};
-        color: #000;
-    }
-    > div {
+
+    ${Flex}{
         display: flex;
         gap: 18px;
+    }
+
+    > div{
         margin-top: 12px;
         max-width: 630px;
     }
 
+
     @media screen and (max-width:820px) {
 
         margin-top : 24px;
-
-        p,label {
-            font-size : 14px;
+        ${Flex} {
+            gap: 10px;
         }
         > div {
-            gap: 10px;
             max-width: none;
         }
     }

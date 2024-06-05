@@ -3,7 +3,7 @@ import { Datum, RecommendType } from "@/types/recommend";
 import { fetcher } from "../fetch/fetcher";
 import { useEffect, useState } from "react";
 
-export function useRecommend(){
+export function useRecommend(status : "authenticated" | "loading" | "unauthenticated"){
 
     const [recommend,setRecommend] = useState<Datum[]>([]);
 
@@ -13,8 +13,8 @@ export function useRecommend(){
         isValidating,
         mutate
     } = useSWR<RecommendType>(
-        '/api/meeting/recommend',
-        fetcher,
+        ['/api/meeting/recommend',status],
+        ([url])=>fetcher(url),
         {
             revalidateOnFocus : false, // 화면을 보고있을경우 다시 데이터를 가져옴 false
             revalidateOnReconnect: false

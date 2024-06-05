@@ -1,13 +1,13 @@
 "use client"
 import * as S from "@app/(auth)/mypage/mypage.style";
+import axios from "axios";
 import Nickname from "@components/mypage/Form/NickName/Nickname";
 import Password from "@components/mypage/Form/Password/Password";
 import UserInfo from "@components/mypage/UserInfo/UserInfo";
+import HashLoad from "@components/Loading/HashLoad";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useMember } from "@hooks/useMember";
-import HashLoad from "@components/Loading/HashLoad";
 import { signOut } from "next-auth/react";
 
 export default function Page() {

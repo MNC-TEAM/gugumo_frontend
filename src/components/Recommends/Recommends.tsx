@@ -11,11 +11,7 @@ export default function Recommends() {
 
     const {status} = useSession();
 
-    const {recommend,mutate} = useRecommend();
-
-    useEffect(()=>{
-        mutate();
-    },[status,mutate]);
+    const {recommend} = useRecommend(status);
 
   return (
     

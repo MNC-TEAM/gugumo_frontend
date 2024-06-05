@@ -1,6 +1,6 @@
 "use client"
 import Header from "@components/common/Header";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as S from "@components/main/style";
 import { useForm } from "react-hook-form";
 import { IoChevronDown } from "react-icons/io5";

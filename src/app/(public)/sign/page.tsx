@@ -1,5 +1,4 @@
 "use client"
-
 import Input from "@components/common/Input/Basic/Input/Input";
 import * as S from "./Sign.style";
 import BallTag from "@components/common/Button/BallTag/BallTag";
@@ -7,7 +6,7 @@ import { GAMETYPE } from "@constant/meeting";
 import White from "@components/common/Button/White/White";
 import { IoCheckmarkOutline } from "react-icons/io5";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import AuthBtn from "@components/common/Input/Basic/AuthBtn/AuthBtn";
 import { useRouter } from "next/navigation";
 import axios from "axios";
@@ -171,6 +170,11 @@ export default function Page() {
         }
     }
 
+    const usernameOnChangeHandler = useCallback(()=>{
+        setEmailError('');
+        setShowAuth(false);
+    },[]);
+
     return (
         <S.Wrap>
             
@@ -187,7 +191,7 @@ export default function Page() {
                                 <input type="text" {...register("nickname",{onChange: ()=>setNickNameError('')})} placeholder="닉네임"/>
                             </Input>
                             <Input error={emailError}>
-                                <input type="email" {...register("username",{onChange: ()=>setEmailError('')})} placeholder="이메일을 입력하세요."/>
+                                <input type="email" {...register("username",{onChange:usernameOnChangeHandler})} placeholder="이메일을 입력하세요."/>
                                 <AuthBtn active={showAuth} type="button" onClick={onEmailAuth}>인증요청</AuthBtn>
                             </Input>
                             {
