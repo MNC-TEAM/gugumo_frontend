@@ -96,7 +96,7 @@ export default function Comment({postId} : {postId : string}) {
                         <S.CommentList key={el.commentId}>
 
                             <S.CommentBase>
-                                <S.UserIcon style={{backgroundImage : 'url(/asset/image/user/user.jpg)'}}/>
+                                <S.UserIcon style={{backgroundImage : 'url(/asset/image/user/user.png)'}}/>
                                 <S.Comment>
                                     <S.Name>
                                         <dl>
@@ -150,7 +150,7 @@ export default function Comment({postId} : {postId : string}) {
                                             if(reply.parentCommentId === el.commentId){
                                                 return (
                                                     <S.CommentBase key={reply.commentId}>
-                                                        <S.UserIcon style={{backgroundImage : 'url(/asset/image/user/user.jpg)'}}/>
+                                                        <S.UserIcon style={{backgroundImage : 'url(/asset/image/user/user.png)'}}/>
                                                         <S.Comment>
                                                             <S.Name>
                                                                 <dl>
