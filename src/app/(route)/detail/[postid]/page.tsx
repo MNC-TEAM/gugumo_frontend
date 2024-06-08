@@ -12,7 +12,7 @@ import { GAMETYPE, LOCATION, MEETINGTYPE } from "@constant/meetingQuery";
 import { Viewer } from "@toast-ui/react-editor";
 import Recommends from "@components/Recommends/Recommends";
 import { useDetail } from "../../../../hooks/useMeeting";
-import Comment from "@components/detail/Comment/Comment";
+import Comment from "@components/page/detail/Comment/Comment";
 import White from "@components/common/Button/White/White";
 import HashLoad from "@components/Loading/HashLoad";
 

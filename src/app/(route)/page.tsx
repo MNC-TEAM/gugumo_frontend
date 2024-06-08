@@ -1,7 +1,7 @@
 "use client"
 import Header from "@components/common/Header";
 import { useState } from "react";
-import * as S from "@components/main/style";
+import * as S from "@components/page/main/style";
 import { useForm } from "react-hook-form";
 import { IoChevronDown } from "react-icons/io5";
 import { GAMETYPE, LOCATION, MEETINGSTATUS } from "@constant/meeting";
@@ -10,9 +10,9 @@ import BallTag from "@components/common/Button/BallTag/BallTag";
 import { SORT } from "@constant/sort";
 import Card from "@components/common/Card/Main/Card";
 import Write from "@components/common/Button/Write/Write";
-import Paging from "@components/main/Paging";
+import Paging from "@components/page/main/Paging";
 import Recommends from "@components/Recommends/Recommends";
-import Banner from "@components/main/Banner/Banner";
+import Banner from "@components/page/main/Banner/Banner";
 import { useList } from "../../hooks/useMeeting";
 import HashLoad from "@components/Loading/HashLoad";
 import { useSession } from "next-auth/react";
@@ -56,17 +56,10 @@ export default function Home() {
         <>
             <Header/>
             <S.MainStyle>
-
                 <Banner/>
-
+                <S.Wrap> <Recommends/> </S.Wrap>
                 <S.Wrap>
-                    <Recommends/>
-                </S.Wrap>
-
-                <S.Wrap>
-                    
                     <S.SearchFlex>
-
                         <S.RecruitStyle>
                             {
                                 MEETINGSTATUS.map((el,index)=>
@@ -85,13 +78,9 @@ export default function Home() {
                                 <img src="/asset/icon/search.svg" alt="검색버튼" />
                             </button>
                         </S.Search>
-
                     </S.SearchFlex>
-
                     <S.Tag>
-
                         <S.SmallText>지역</S.SmallText>
-
                         <S.Flex>
                             <Location
                                 onClick={()=>locationClickHandler("")} 
@@ -108,13 +97,9 @@ export default function Home() {
                                 />)
                             }
                         </S.Flex>
-
                     </S.Tag>
-
                     <S.Tag>
-
                         <S.SmallText>종목</S.SmallText>
-
                         <S.Flex>
                             <BallTag
                                 onClick={()=>gametypeClickHandler("")}
@@ -131,9 +116,7 @@ export default function Home() {
                                 )
                             }
                         </S.Flex>
-
                     </S.Tag>
-
                     <S.Layout>
 
                         <S.Order>
@@ -149,50 +132,37 @@ export default function Home() {
                                 }
                             </div>
                         </S.Order>
-
                         {
-                            isLoading 
-                                ? 
-                                    <HashLoad/> 
-                                :
-                                    (
-                                        <S.Grid>
-                                            {
-                                                meeting &&
-                                                    (
-                                                        meeting.data.content.length <= 0 
-                                                        ?
-                                                            <p style={{ padding : "150px 0",gridColumn: "1 / 5",textAlign : "center"}}>게시글이 존재하지 않습니다.</p>
-                                                        : meeting.data.content.map(el=>(
-                                                            <Card
-                                                                bookmarkStatus={el.bookmarked}
-                                                                key={el.postId}
-                                                                postId={el.postId}
-                                                                status={el.meetingStatus}
-                                                                gameType={el.gameType}
-                                                                location={el.location}
-                                                                title={el.title}
-                                                                meetingDateTime={el.meetingDateTime as string}
-                                                                meetingMemberNum={el.meetingMemberNum}
-                                                                meetingDeadline={el.meetingDeadline}
-                                                            />
-                                                        ))
-                                                    )
-                                            }
-                                        </S.Grid>
-                                    )
+                            isLoading ? <HashLoad/> :
+                            (
+                                <S.Grid>
+                                    {
+                                        meeting &&
+                                            (
+                                                meeting.data.content.length <= 0 
+                                                ?
+                                                    <p style={{ padding : "150px 0",gridColumn: "1 / 5",textAlign : "center"}}>게시글이 존재하지 않습니다.</p>
+                                                : meeting.data.content.map(el=>(
+                                                    <Card
+                                                        bookmarkStatus={el.bookmarked}
+                                                        key={el.postId}
+                                                        postId={el.postId}
+                                                        status={el.meetingStatus}
+                                                        gameType={el.gameType}
+                                                        location={el.location}
+                                                        title={el.title}
+                                                        meetingDateTime={el.meetingDateTime as string}
+                                                        meetingMemberNum={el.meetingMemberNum}
+                                                        meetingDeadline={el.meetingDeadline}
+                                                    />
+                                                ))
+                                            )
+                                    }
+                                </S.Grid>
+                            )
                         }
-
-                        <S.White>
-                            <Write href={'/post/write'}>새글 작성</Write>
-                        </S.White>
-
-                        <S.Paging>
-                            {
-                                meeting && <Paging page={page} setPage={setPage} pageable={meeting.data.pageable}/>
-                            }
-                        </S.Paging>
-
+                        <S.White> <Write href={'/post/write'}>새글 작성</Write> </S.White>
+                        <S.Paging> {meeting && <Paging page={page} setPage={setPage} pageable={meeting.data.pageable}/>} </S.Paging>
                     </S.Layout>
                     
                 </S.Wrap>
