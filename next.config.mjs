@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    reactStrictMode: true,
     compiler : {
         styledComponents: true, // styledComponent를 컴파일할때 사용
     },

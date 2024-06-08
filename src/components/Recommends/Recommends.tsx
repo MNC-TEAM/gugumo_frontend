@@ -1,22 +1,34 @@
 "use client"
-import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import * as S from "./Recommends.style";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import Recommend from "@components/common/Card/Recommend/Recommend";
 import { useRecommend } from "@hooks/useRecommend";
 import { useSession } from "next-auth/react";
+import { useRef } from "react";
 
 export default function Recommends() {
 
+    const swiperRef = useRef<SwiperRef>(null);
     const {status} = useSession();
     const {recommend} = useRecommend(status);
+
+    const prevHandler = ()=>{
+        swiperRef.current?.swiper.slidePrev();
+    }
+
+    const nextHandler = ()=>{
+        swiperRef.current?.swiper.slideNext();
+    }
 
     return (
         <S.RecommendLayout>
             <h3>추천 게시물 🎯</h3>
             <div className="flex">
-                <button><IoChevronBack /></button>
+                <S.Button onClick={prevHandler}>
+                    <img src="/asset/icon/slide-arrow.png" alt="왼쪽 버튼" />
+                </S.Button>
                 <Swiper
+                    ref={swiperRef}
                     slidesPerView={1.2}
                     breakpoints={{
                         "481" : {
@@ -52,7 +64,9 @@ export default function Recommends() {
                         ))
                     }
                 </Swiper>
-                <button><IoChevronForward /></button>
+                <S.Button $type={"next"} onClick={nextHandler}>
+                    <img src="/asset/icon/slide-arrow.png" alt="오른쪽 버튼" />
+                </S.Button>
             </div>
         </S.RecommendLayout>
     )

@@ -13,10 +13,7 @@ interface HeaderType {
 
 export default function Header( {postion} : HeaderType ) {
 
-  const router = useRouter();
-
-  const { status } = useSession();
-
+  const { data : session } = useSession();
   const [userMenuHidden,setUserMenuHidden] = useState(true);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
@@ -28,8 +25,8 @@ export default function Header( {postion} : HeaderType ) {
   const logOutHanlder = ()=>{
     signOut({
       redirect : false,
+      callbackUrl : "/"
     });
-    router.push('/');
   }
 
   return (
@@ -39,7 +36,7 @@ export default function Header( {postion} : HeaderType ) {
           <Link href={'/'}><img src='/asset/logo.svg' alt='로고'/></Link>
         </S.Logo>
         {
-          status !== "authenticated" ?
+          !session ?
             <S.LoginStyle type="button" onClick={()=>dispatch(open())}>로그인</S.LoginStyle>
           :
           <S.Flex>

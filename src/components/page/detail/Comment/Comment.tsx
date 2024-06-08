@@ -1,15 +1,14 @@
-"use client"
-
+"use client";
 import * as S from "./Comment.style";
 import axios from "axios";
 import { useCommentList } from "@hooks/useComment";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import moment from "moment";
 import "moment/locale/ko";
 import { useSession } from "next-auth/react";
-import ReplyComment from "@components/detail/Comment/ReplyComment";
-import CommentForm from "@components/detail/Comment/CommentForm";
-import CommentEdit from "@components/detail/Comment/CommentEdit";
+import ReplyComment from "@components/page/detail/Comment/ReplyComment";
+import CommentForm from "@components/page/detail/Comment/CommentForm";
+import CommentEdit from "@components/page/detail/Comment/CommentEdit";
 moment.locale("ko");
 
 export default function Comment({postId} : {postId : string}) {
@@ -199,5 +198,5 @@ export default function Comment({postId} : {postId : string}) {
                 }
             </S.CommentListBase>
         </>
-    )
+    );
 }
