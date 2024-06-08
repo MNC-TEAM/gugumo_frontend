@@ -9,9 +9,10 @@ interface CommentFormType {
     setEditShow : any;
     mutate : any;
     commentId : number;
+    content : string;
 }
 
-export default function CommentEdit({commentId,status,setEditShow,mutate} : CommentFormType) {
+export default function CommentEdit({commentId,status,setEditShow,mutate,content} : CommentFormType) {
 
     const {register,handleSubmit,setValue} = useForm();
 
@@ -40,15 +41,16 @@ export default function CommentEdit({commentId,status,setEditShow,mutate} : Comm
 
     }
 
-  return (
-    <S.CommentForm>
-        <form onSubmit={handleSubmit(onEditCommentHandler)}>
-            <textarea 
-                placeholder="댓글을 수정해주세요"
-                {...register('content',{ maxLength: 1000, minLength : 1})} 
-            />
-            <Primary type="submit">댓글 수정하기</Primary>
-        </form>
-    </S.CommentForm>
-  )
+    return (
+        <S.CommentForm>
+            <form onSubmit={handleSubmit(onEditCommentHandler)}>
+                <textarea 
+                    placeholder="댓글을 수정해주세요"
+                    {...register('content',{ maxLength: 1000, minLength : 1, value : content})} 
+                />
+                <Primary type="submit">댓글 수정하기</Primary>
+            </form>
+        </S.CommentForm>
+    );
+
 }

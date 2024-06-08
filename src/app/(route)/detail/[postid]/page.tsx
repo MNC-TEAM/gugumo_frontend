@@ -1,11 +1,10 @@
 "use client"
-
+import * as S from "./detail.style";
 import Header from "@components/common/Header";
 import { Wrap } from "@styles/global";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import * as S from "./detail.style";
 import moment from "moment";
 import ViewIcon from "@asset/icon/view.svg";
 import Bookmark from "@components/common/Button/Bookmark";
