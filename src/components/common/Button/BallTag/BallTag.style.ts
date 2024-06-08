@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const Imgbox = styled.div`
+    width: 35px;
+    height: 35px;
+    text-align: center;
+`;
+
 export const Button = styled.button<{$active : boolean}>`
     width: 77px;
     flex: 0 0 auto;
@@ -9,7 +15,6 @@ export const Button = styled.button<{$active : boolean}>`
     position: relative;
     cursor: pointer;
     overflow: hidden;
-
     background: ${({theme,$active})=>{
         if($active){
             return theme.color.Primary;
@@ -17,6 +22,8 @@ export const Button = styled.button<{$active : boolean}>`
             return theme.color.Background;
         }
     }};
+
+    transition: background .4s;
 
     &::after {
         content: '';
@@ -44,12 +51,16 @@ export const Button = styled.button<{$active : boolean}>`
         }};
         font-size: 14px;
         font-weight: ${({theme})=>theme.fontWeight.medium};
+        transition: color .4s;
+    }
+
+
+    &:hover {
+        background : ${({theme})=>theme.color.Primary};
+        > div {
+            color : ${({theme})=>theme.color.OnPrimary};
+        }
     }
 
 `;
 
-export const Imgbox = styled.div`
-    width: 35px;
-    height: 35px;
-    text-align: center;
-`;

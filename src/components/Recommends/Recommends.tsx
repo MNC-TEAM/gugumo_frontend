@@ -4,7 +4,7 @@ import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import Recommend from "@components/common/Card/Recommend/Recommend";
 import { useRecommend } from "@hooks/useRecommend";
 import { useSession } from "next-auth/react";
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 
 export default function Recommends() {
 
@@ -12,21 +12,19 @@ export default function Recommends() {
     const {status} = useSession();
     const {recommend} = useRecommend(status);
 
-    const prevHandler = ()=>{
+    const prevHandler = useCallback(()=>{
         swiperRef.current?.swiper.slidePrev();
-    }
+    },[]);
 
-    const nextHandler = ()=>{
+    const nextHandler = useCallback(()=>{
         swiperRef.current?.swiper.slideNext();
-    }
+    },[]);
 
     return (
         <S.RecommendLayout>
             <h3>추천 게시물 🎯</h3>
             <div className="flex">
-                <S.Button onClick={prevHandler}>
-                    <img src="/asset/icon/slide-arrow.png" alt="왼쪽 버튼" />
-                </S.Button>
+                <S.Button onClick={prevHandler}><img src="/asset/icon/slide-arrow.png" alt="왼쪽 버튼" /></S.Button>
                 <Swiper
                     ref={swiperRef}
                     slidesPerView={1.2}
@@ -45,6 +43,7 @@ export default function Recommends() {
                     spaceBetween={26}
                     loop={true}
                     speed={600}
+                    slidesPerGroup={1}
                 >
                     {
                         recommend.map((el)=>(
@@ -64,9 +63,7 @@ export default function Recommends() {
                         ))
                     }
                 </Swiper>
-                <S.Button $type={"next"} onClick={nextHandler}>
-                    <img src="/asset/icon/slide-arrow.png" alt="오른쪽 버튼" />
-                </S.Button>
+                <S.Button $type={"next"} onClick={nextHandler}><img src="/asset/icon/slide-arrow.png" alt="오른쪽 버튼" /></S.Button>
             </div>
         </S.RecommendLayout>
     )

@@ -14,9 +14,23 @@ export const Button = styled(Link)`
     gap: 4px;
     cursor: pointer;
     text-decoration: none;
+    transition: .4s;
+    transition-property: color,background;
+
+    svg {
+        transition: filter .4s;
+    }
 
     @media screen and (max-width:820px) {
         font-size: 14px;
+    }
+
+    &:hover {
+        color: ${({theme})=>theme.color.OnPrimary};
+        background: ${({theme})=>theme.color.Primary};
+        svg {
+            filter: brightness(0) invert(1);
+        }
     }
 
 `;
