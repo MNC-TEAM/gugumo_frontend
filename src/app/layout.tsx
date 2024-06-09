@@ -6,10 +6,10 @@ import type { Metadata, Viewport } from "next";
 import StoreProvider from "@provider/ReduxProviders";
 import ThemeClient from '@provider/ThemeClient';
 import StyledComponentsRegistry from '@provider/registry';
-import Login from '@components/auth/Modal/Login';
 import AuthProvider from '@provider/AuthProvider';
 import GlobalStyleProvider from '@provider/GlobalStyleProvider';
 import "./font.css";
+import CustomModal from '@components/modal/custom-modal';
 
 export const metadata: Metadata = {
   title: "구구모",
@@ -35,7 +35,7 @@ export default function RootLayout({
             <StyledComponentsRegistry>
               <GlobalStyleProvider>
                 <StoreProvider>
-                  <Login/>
+                  <CustomModal/>
                   {children}
                 </StoreProvider>
               </GlobalStyleProvider>

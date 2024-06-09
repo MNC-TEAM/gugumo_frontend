@@ -1,12 +1,11 @@
 "use client"
 import * as S from "../style";
 import { Wrap } from "@styles/global";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import moment from "moment";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
 import Form from "@components/post/Form/Form";
 
 type ValuePiece = Date | null;
@@ -15,7 +14,6 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 export default function Wrtie() {
 
   const router = useRouter();
-
   const {register,handleSubmit,watch} = useForm({
     defaultValues : {
       meetingType : "SHORT",
@@ -28,7 +26,6 @@ export default function Wrtie() {
       content : ""
     }
   });
-
   const [meetingDate, onMeetingDate] = useState<Value>(new Date());
   const [meetingDeadline, onMeetingDeadline] = useState<Value>(new Date());
   const [meetingDays,setMeetingDays] = useState<string[]>([]);
@@ -102,9 +99,7 @@ export default function Wrtie() {
   return (
     <S.WrtieStyle>
       <Wrap>
-        
-        <S.Prev onClick={()=>router.back()}><img src="/asset/icon/prev_arrow.svg" alt="뒤로가기" /></S.Prev>
-
+        <S.Prev onClick={()=>router.push('/')}><img src="/asset/icon/prev_arrow.svg" alt="뒤로가기" /></S.Prev>
         <Form 
           onSubmitHanlder={onSubmitHanlder} 
           setContent={setContent} 
@@ -118,7 +113,6 @@ export default function Wrtie() {
           meetingDays={meetingDays}
           setMeetingDays={setMeetingDays}
         />
-
       </Wrap>
     </S.WrtieStyle>
   )

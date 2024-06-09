@@ -1,11 +1,10 @@
 "use client"
-
+import * as S from "./detail.style";
 import Header from "@components/common/Header";
 import { Wrap } from "@styles/global";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import * as S from "./detail.style";
 import moment from "moment";
 import ViewIcon from "@asset/icon/view.svg";
 import Bookmark from "@components/common/Button/Bookmark";
@@ -13,7 +12,7 @@ import { GAMETYPE, LOCATION, MEETINGTYPE } from "@constant/meetingQuery";
 import { Viewer } from "@toast-ui/react-editor";
 import Recommends from "@components/Recommends/Recommends";
 import { useDetail } from "../../../../hooks/useMeeting";
-import Comment from "@components/detail/Comment/Comment";
+import Comment from "@components/page/detail/Comment/Comment";
 import White from "@components/common/Button/White/White";
 import HashLoad from "@components/Loading/HashLoad";
 

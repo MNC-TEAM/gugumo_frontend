@@ -52,10 +52,7 @@ export function useDetail(postid : string){
 
 }
 
-
-
 export function useBookMark(...arg : any){
-
     const {
         data,
         isLoading,
@@ -72,18 +69,15 @@ export function useBookMark(...arg : any){
             revalidateOnReconnect: false 
         }
     );
-
     return {
         data,
         isLoading,
         isValidating,
         mutate
     }
-
 }
 
 export function useMyList(...arg : any){
-
     const {
         data,
         isLoading,
@@ -100,11 +94,9 @@ export function useMyList(...arg : any){
             revalidateOnReconnect: false 
         }
     );
-
     return {
         data,
         isLoading,
         isValidating,
     }
-
 }

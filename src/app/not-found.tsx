@@ -1,6 +1,6 @@
 "use client"
 
-import { NotFoundStyle } from "@components/notfound/style";
+import { NotFoundStyle } from "@components/page/notfound/style";
 import { GlobalStyle } from "@styles/global";
 import { theme } from "@styles/theme";
 import { useRouter } from "next/navigation";

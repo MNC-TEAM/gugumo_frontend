@@ -1,10 +1,10 @@
 "use client"
-import * as S from "@components/main/style";
+import * as S from "@components/page/main/style";
 import * as B from "../../bookmark/bookmark.style";
 import { Wrap } from "@styles/global";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import Paging from "@components/main/Paging";
+import Paging from "@components/page/main/Paging";
 import Card from "@components/common/Card/Main/Card";
 import { useMyList } from "@hooks/useMeeting";
 import HashLoad from "@components/Loading/HashLoad";

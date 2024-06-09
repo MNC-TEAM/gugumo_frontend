@@ -2,10 +2,11 @@
 import * as S from "./style";
 import Link from 'next/link'
 import { useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useAppDispatch } from "@store/hook";
 import { open } from "@store/features/modal/modal";
 import { signOut, useSession } from "next-auth/react";
+import Login from "@components/auth/Modal/Login";
 
 interface HeaderType {
   postion? : boolean
@@ -13,10 +14,7 @@ interface HeaderType {
 
 export default function Header( {postion} : HeaderType ) {
 
-  const router = useRouter();
-
-  const { status } = useSession();
-
+  const { data : session } = useSession();
   const [userMenuHidden,setUserMenuHidden] = useState(true);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
@@ -28,8 +26,8 @@ export default function Header( {postion} : HeaderType ) {
   const logOutHanlder = ()=>{
     signOut({
       redirect : false,
+      callbackUrl : "/"
     });
-    router.push('/');
   }
 
   return (
@@ -39,8 +37,8 @@ export default function Header( {postion} : HeaderType ) {
           <Link href={'/'}><img src='/asset/logo.svg' alt='로고'/></Link>
         </S.Logo>
         {
-          status !== "authenticated" ?
-            <S.LoginStyle type="button" onClick={()=>dispatch(open())}>로그인</S.LoginStyle>
+          !session ?
+            <S.LoginStyle type="button" onClick={()=>dispatch(open(Login))}>로그인</S.LoginStyle>
           :
           <S.Flex>
             {/* <img src="/asset/icon/bell.svg" alt="알림창" /> */}

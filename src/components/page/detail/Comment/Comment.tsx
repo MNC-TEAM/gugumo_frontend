@@ -1,25 +1,26 @@
-"use client"
-
+"use client";
 import * as S from "./Comment.style";
 import axios from "axios";
 import { useCommentList } from "@hooks/useComment";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import moment from "moment";
 import "moment/locale/ko";
 import { useSession } from "next-auth/react";
-import ReplyComment from "@components/detail/Comment/ReplyComment";
-import CommentForm from "@components/detail/Comment/CommentForm";
-import CommentEdit from "@components/detail/Comment/CommentEdit";
+import ReplyComment from "@components/page/detail/Comment/ReplyComment";
+import CommentForm from "@components/page/detail/Comment/CommentForm";
+import CommentEdit from "@components/page/detail/Comment/CommentEdit";
 moment.locale("ko");
 
 export default function Comment({postId} : {postId : string}) {
 
     const {status} = useSession();
     const {commentLength,parentComment,replyComment,mutate} = useCommentList(postId);
-    const [replyShow,setReplyShow] = useState(0);
-    const [editShow,setEditShow] = useState(0);
+    const [commnetShow,setCommnetShow] = useState({
+        commentId : 0,
+        type : "edit"
+    });
 
-    const deleteCommentHandler = useCallback((commentId : number)=>{
+    const deleteCommentHandler = (commentId : number)=>{
 
         if(status !== "authenticated") {
             return alert('로그인을 해야합니다.');
@@ -40,43 +41,46 @@ export default function Comment({postId} : {postId : string}) {
 
         }
 
-    },[status,mutate]);
+    };
 
-    const onReplyShowHandler = (commendId : number)=>{
+    const onReplyShowHandler = (commentId : number)=>{
 
         if(status !== "authenticated") {
             return alert('로그인을 해야합니다.');
         }
 
-        if(replyShow === commendId){
-            return setReplyShow(0);
+        if(commnetShow.commentId === commentId && commnetShow.type === "reply"){
+            return setCommnetShow({
+                commentId : 0,
+                type : "reply"
+            });    
         }
 
-        if(replyShow >= 0){
-            setReplyShow(commendId);            
-        }else{
-            setReplyShow(0);
-        }
+        setCommnetShow({
+            commentId,
+            type : "reply"
+        });
 
     };
 
-    const onEditShowHandler = (commendId : number)=>{
-
+    const onEditShowHandler = (commentId : number)=>{
         if(status !== "authenticated") {
             return alert('로그인을 해야합니다.');
         }
 
-        if(editShow === commendId){
-            return setEditShow(0);
+        if(commnetShow.commentId === commentId && commnetShow.type === "edit"){
+            return setCommnetShow({
+                commentId : 0,
+                type : "edit"
+            });    
         }
 
-        if(editShow >= 0){
-            setEditShow(commendId);            
-        }else{
-            setEditShow(0);
-        }
+        setCommnetShow({
+            commentId,
+            type : "edit"
+        });
 
-    }
+    };
 
     return (
         <>
@@ -117,29 +121,28 @@ export default function Comment({postId} : {postId : string}) {
                                     </S.Name>
                                     <S.CommentContent>
                                         {
-                                            editShow !== el.commentId 
-                                            ?
-                                                <p>{el.content}</p> 
-                                            :
-                                                <CommentEdit
-                                                    status={status}
-                                                    setEditShow={setEditShow}
-                                                    mutate={mutate}
-                                                    commentId={el.commentId}
-                                                />
+                                            (commnetShow.commentId === el.commentId && commnetShow.type === "edit") ?
+                                            <CommentEdit
+                                                status={status}
+                                                setEditShow={setCommnetShow}
+                                                mutate={mutate}
+                                                commentId={el.commentId}
+                                                content={el.content}
+                                            /> :
+                                            <p>{el.content}</p>     
                                         }
                                     </S.CommentContent>
                                 </S.Comment>
                             </S.CommentBase>
 
                             {
-                                replyShow === el.commentId && 
+                                (commnetShow.commentId === el.commentId && commnetShow.type === "reply") &&
                                 <ReplyComment 
                                     postId={postId} 
                                     status={status} 
                                     parentId={el.commentId}
                                     mutate={mutate}
-                                    setReplyShow={setReplyShow}
+                                    setReplyShow={setCommnetShow}
                                 />
                             }
 
@@ -170,16 +173,15 @@ export default function Comment({postId} : {postId : string}) {
                                                             </S.Name>
                                                             <S.CommentContent>
                                                                 {
-                                                                    reply.commentId !== editShow 
-                                                                    ?
-                                                                        <p>{reply.content}</p>
-                                                                    :
-                                                                        <CommentEdit
-                                                                            status={status}
-                                                                            setEditShow={setEditShow}
-                                                                            mutate={mutate}
-                                                                            commentId={reply.commentId}
-                                                                        />
+                                                                    (commnetShow.commentId === reply.commentId && commnetShow.type === "edit") ?
+                                                                    <CommentEdit
+                                                                        status={status}
+                                                                        setEditShow={setCommnetShow}
+                                                                        mutate={mutate}
+                                                                        commentId={reply.commentId}
+                                                                        content={reply.content}
+                                                                    /> :
+                                                                    <p>{reply.content}</p>     
                                                                 }
                                                             </S.CommentContent>
                                                         </S.Comment>
@@ -196,5 +198,5 @@ export default function Comment({postId} : {postId : string}) {
                 }
             </S.CommentListBase>
         </>
-    )
+    );
 }

@@ -1,10 +1,10 @@
 "use client"
-import * as S from "@components/main/style";
+import * as S from "@components/page/main/style";
 import * as B from "./bookmark.style";
 import { Wrap } from "@styles/global";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import Paging from "@components/main/Paging";
+import Paging from "@components/page/main/Paging";
 import Card from "@components/common/Card/Main/Card";
 import { useBookMark } from "@hooks/useMeeting";
 import HashLoad from "@components/Loading/HashLoad";
@@ -14,18 +14,15 @@ export default function Home() {
   const {register,handleSubmit} = useForm();
   const [page,setPage] = useState(1);
   const [q,setQ] = useState('');
-
   const searchSubmitHanlder = (event : any)=>{
     const {q} = event;
     setQ(q);
   }
-
   const {data : content,isLoading} = useBookMark({q,page});
 
   return (
     <S.MainStyle>
       <Wrap>
-        
         <S.SearchFlex>
             <h4>북마크</h4>
             <S.Search onSubmit={handleSubmit(searchSubmitHanlder)}>
@@ -39,14 +36,9 @@ export default function Home() {
               </button>
             </S.Search>
         </S.SearchFlex>
-
         <B.BookMakrLayout>
-
           {
-            isLoading 
-            ? 
-              <HashLoad/>
-            :
+            isLoading ? <HashLoad/> :
               (
                 content && content.data.content.length > 0 ?
                   <S.Grid>
@@ -68,15 +60,8 @@ export default function Home() {
                 : <p style={{ padding : "150px 0",gridColumn: "1 / 5",textAlign : "center"}}>게시글이 존재하지 않습니다.</p>
               )
           }
-            
-          <S.Paging>
-            {
-              content && <Paging page={page} setPage={setPage} pageable={content.data.pageable}/>
-            }
-          </S.Paging>
-          
+          <S.Paging>{content && <Paging page={page} setPage={setPage} pageable={content.data.pageable}/>}</S.Paging>
         </B.BookMakrLayout>
-
       </Wrap>
     </S.MainStyle>
   );

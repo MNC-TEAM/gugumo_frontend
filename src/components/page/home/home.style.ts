@@ -10,6 +10,15 @@ export const HomeVisualTrack = styled.div`
     height: 856px;
     background: url('/asset/image/home/track.jpg') no-repeat center/cover;
     position: relative;
+
+    @media screen and (max-width:1280px) {
+        height: 656px;
+    }
+
+    @media screen and (max-width:820px) {
+        height: 456px;
+    }
+
 `;
 
 export const HomeVisualDiv = styled.div`
@@ -23,6 +32,8 @@ export const HomeVisualDiv = styled.div`
     z-index: 2;
 `;
 
+
+// HomeWave
 
 export const HomeWave = styled.div`
     overflow: hidden;
@@ -44,8 +55,24 @@ export const HomeWave = styled.div`
             transform: translateX(-100%);
         }
     }
+
+    @media screen and (max-width:820px) {
+        
+        padding: 18px 0;
+
+        div {
+            padding: 0 ${25/2}px;
+            img {
+                width: 90px;
+            }
+        }
+
+    }
+
 `;
 
+
+// HomeKeyword
 
 export const HomeKeyword = styled.div`
     padding: 182px 0 243px;
@@ -90,43 +117,82 @@ export const HomeKeywordMegaphoneBase = styled.div<{$right? : Boolean}>`
 `;
 
 export const HomeKeywordMegaphoneText = styled.div`
-    padding: 22.5px 45px;
+    padding: calc(22.5/22*1em) calc(45/22*1em);
     border-radius: 1000px;
     border: 1px solid #4FAAFF;
     font-family: "Pretendard";
     font-size: 22px;
     color: #4FAAFF;
     display: inline-block;
+    word-break: keep-all;
+    line-height: 1.3;
+
     span {
         font-weight: bold;
     }
+
+    @media screen and (max-width:1280px) {
+        font-size: 18px;
+    }
+
+    @media screen and (max-width:820px) {
+        font-size: 16px;
+    }
+
 `;
 
 export const HomeKeywordMegaphone = styled.div<{$right? : Boolean}>`
     position: absolute;
-    
+    img { width: calc(326*100/1920*1vw); }
     ${({$right})=>{
         if($right){
             return  css`
                 right: 0;
                 top: 50%;
-                transform: translate(60%,-50%);
+                transform: translate(55%,-50%);
             `;
         }else{
             return  css`
                 left: 0;
                 top: 50%;
-                transform: translate(-60%,-50%);
+                transform: translate(-55%,-50%);
             `;
         }
     }}
 
+    @media screen and (max-width:820px) {
+        img { width: calc(326*100/1920*1vw); }
+        ${({$right})=>{
+            if($right){
+                return  css`
+                    right: 0;
+                    top: 50%;
+                    transform: translate(30%,-100%);
+                `;
+            }else{
+                return  css`
+                    left: 0;
+                    top: 50%;
+                    transform: translate(-30%,-100%);
+                `;
+            }
+        }}
+
+    }
+
 `;
 
+
+// HomeService
 
 export const HomeService = styled.div`
     padding: 149px 0 230px;
     background: #0F7FFF;
+
+    @media screen and (max-width:820px) {
+        padding: 139px 0 180px;
+    }
+
 `;
 
 export const HomeServiceDot = styled.div`
@@ -139,6 +205,14 @@ export const HomeServiceDot = styled.div`
         background: #fff;
         border-radius: 1000px;
     }
+
+    @media screen and (max-width:820px) {
+        div {
+            width: 8px;
+            height: 8px;
+        }
+    }
+
 `;
 
 export const HomeServiceTitle = styled.h1`
@@ -149,6 +223,21 @@ export const HomeServiceTitle = styled.h1`
     font-family: 'KNUTRUTHTTF';
     font-size: 39px;
     margin-top: 35px;
+
+    @media screen and (max-width:1280px) {
+        font-size: 24px;
+        img {
+            width: 186px;
+        }
+    }
+
+    @media screen and (max-width:820px) {
+        font-size: 18px;
+        img {
+            width: 136px;
+        }
+    }
+
 `;
 
 export const HomeServiceCardBase = styled.div`
@@ -157,12 +246,19 @@ export const HomeServiceCardBase = styled.div`
     grid-template-columns: repeat(2,1fr);
     margin-top: 138px;
     gap: 30px;
-`;
 
+    @media screen and (max-width:820px) {
+        grid-template-columns: repeat(1,1fr);
+        margin-top: 88px;
+        gap: 50px;
+    }    
+
+`;
 
 export const HomeServiceCardNum = styled.div`
     position: relative;
     background: url('/asset/image/home/Ellipse.png') no-repeat center;
+    background-size: 75% 75%;
     width: 128.65px;
     height: 118.53px;
     span {
@@ -174,6 +270,23 @@ export const HomeServiceCardNum = styled.div`
         font-family: 'Black Han Sans';
         color: #fff;
     }
+
+    @media screen and (max-width:1280px) {
+        width: 98.65px;
+        height: 88.53px;
+        span {
+            font-size: 32px;
+        }
+    }
+
+    @media screen and (max-width:820px) {
+        width: 78.65px;
+        height: 68.53px;
+        span {
+            font-size: 24px;
+        }
+    }
+
 `;
 
 export const HomeServiceCard = styled.div`
@@ -233,11 +346,27 @@ export const HomeServiceCard = styled.div`
         }
     }
 
+    @media screen and (max-width:1280px) {
+        p {
+            margin-top: 10px;
+            font-size: 22px;
+            padding-left: 20px;
+        }
+    }
+
+    @media screen and (max-width:820px) {
+        padding: 65px 11px 45px;
+        p {
+            margin-top: 10px;
+            font-size: 18px;
+            padding-left: 15px;
+        }
+
+        margin-top: 0 !important;
+
+    }
+
 `;
-
-
-
-
 
 export const LinkBase = styled.div`
     margin-top: 213px;
@@ -247,6 +376,7 @@ export const LinkBase = styled.div`
             font-size: 39px;
             font-family: 'KNUTRUTHTTF';
             color: #fff;
+            word-break: keep-all;
         }
         dd {
             margin-top: 15px;
@@ -257,12 +387,48 @@ export const LinkBase = styled.div`
         align-items: center;
         justify-content: center;
         background: #fff;
-        width: 324px;
-        height: 102px;
-        border-radius: 22px;
+        margin-top: 50px;
+        width: calc(324/32*1em);
+        height: calc(102/32*1em);
+        border-radius: calc(22/32*1em);
         font-size: 32px;
         font-weight: 900;
         color: #4FAAFF;
-        margin-top: 50px;
     }
+
+    @media screen and (max-width:1280px) {
+        dl {
+            dt {
+                font-size: 28px;
+            }
+            dd {
+                width: 226px;
+                margin: 15px auto 0;
+            }
+        }
+        a {
+            font-size: 24px;
+        }
+    }
+
+    @media screen and (max-width:820px) {
+        
+        margin-top: 151px;
+
+        dl {
+            dt {
+                font-size: 22px;
+            }
+            dd {
+                width: 146px;
+                margin: 15px auto 0;
+            }
+        }
+        a {
+            font-size: 16px;
+            margin-top: 30px;
+        }
+
+    }
+
 `;

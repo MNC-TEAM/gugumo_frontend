@@ -1,31 +1,20 @@
 'use client'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as S from './style'
-import * as M from '../Modal.style'
 import { useForm } from 'react-hook-form'
 import Input from '@components/common/Input/Basic/Input/Input'
 import Primary from '@components/common/Button/Primary/Primary'
-import { createPortal } from 'react-dom'
-import { useAppDispatch, useAppSelector } from '@store/hook'
-import { close } from '@store/features/modal/modal'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 
-export default function Login() {
+export default function Login({isOpen,onClose} : {isOpen : boolean,onClose : any}) {
   
   const router = useRouter();
-  const pathname = usePathname();
-
-  const modal = useAppSelector(state=>state.modal);
-  const dispatch = useAppDispatch();
-
-  const onClose = useCallback(()=>{
-    dispatch(close());
-  },[dispatch]);
 
   const {register,handleSubmit} = useForm();
   const [isEmailError,setIsEmailError] = useState('');
   const [isPasswordError,setIsPasswordError] = useState('');
+  const [active,setActive] = useState(false);
 
   const onSubmit = async (event : any)=>{
 
@@ -55,72 +44,56 @@ export default function Login() {
   }
 
   useEffect(()=>{
-    onClose();
-  },[pathname,onClose])
-
-  useEffect(()=>{
-
     const html = document.querySelector('html');
     if(!html) return;
-
-    if(modal.isOpen){
+    if(isOpen){
       html.style.overflowY = "hidden";
-    }else{
-      html.style.overflowY = "auto";
     }
-    
-  },[modal]);
+    setTimeout(() => {
+      setActive(true);
+    }, 200);
+  },[isOpen]);
 
   return (
-    
     <>
       {
-        modal.isOpen &&
-        createPortal(
-            <S.BackModal onClick={()=>{dispatch(close())}}>
-              <S.StyledModal onClick={(e)=>e.stopPropagation()}>
-
-                <M.CloseStyle type='button' onClick={onClose}>
-                  <img src="/asset/icon/close.svg" alt="취소버튼" />
-                </M.CloseStyle>
-
-                <S.Logo>
-                  <img src="/asset/image/icon.png" alt="아이콘" />
-                </S.Logo>
-
-                <M.TitleStyle>로그인</M.TitleStyle>
-
-                <M.Form onSubmit={handleSubmit(onSubmit)}>
-                  <M.InputBox>
-                    <Input error={isEmailError}>
-                      <input 
-                        type="email"
-                        placeholder='이메일을 입력해주세요.'
-                        {...register('username',{required : false,onChange:()=>setIsEmailError('')})}
-                      />
-                    </Input>
-                    <Input error={isPasswordError}>
-                      <input
-                        type="password" 
-                        placeholder='비밀번호를 입력하세요.' 
-                        {...register('password',{required : false,onChange:()=>setIsPasswordError('')})}
-                      />
-                    </Input>
-                  </M.InputBox>
-
-                  <Primary type="submit">
-                    로그인 하기
-                  </Primary>
-                </M.Form>
-                  
-                <M.SignButton href={"/sign"} >회원가입 하기</M.SignButton>
-                
-              </S.StyledModal>
-            </S.BackModal>,
-          document.body
-        )
+        isOpen &&
+        <S.BackModal>
+          <S.StyledModal className={active ? "active" : ""} onClick={(e)=>e.stopPropagation()}>
+            <S.CloseStyle type='button' onClick={onClose}>
+              <img src="/asset/icon/close.svg" alt="취소버튼" />
+            </S.CloseStyle>
+            <S.Logo>
+              <img src="/asset/image/icon.png" alt="아이콘" />
+            </S.Logo>
+            <S.TitleStyle>로그인</S.TitleStyle>
+            <S.Form onSubmit={handleSubmit(onSubmit)}>
+              <S.InputBox>
+                <Input error={isEmailError}>
+                  <input 
+                    type="email"
+                    placeholder='이메일을 입력해주세요.'
+                    {...register('username',{required : false,onChange:()=>setIsEmailError('')})}
+                  />
+                </Input>
+                <Input error={isPasswordError}>
+                  <input
+                    type="password" 
+                    placeholder='비밀번호를 입력하세요.' 
+                    {...register('password',{required : false,onChange:()=>setIsPasswordError('')})}
+                  />
+                </Input>
+              </S.InputBox>
+              <S.BtnList>
+                <Primary type="submit">
+                  로그인 하기
+                </Primary>
+              </S.BtnList>
+            </S.Form>
+            <S.SignButton href={"/sign"} >회원가입 하기</S.SignButton>
+          </S.StyledModal>
+        </S.BackModal>
       }
     </>
-    
   )
 }
