@@ -2,10 +2,11 @@
 import * as S from "./style";
 import Link from 'next/link'
 import { useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useAppDispatch } from "@store/hook";
 import { open } from "@store/features/modal/modal";
 import { signOut, useSession } from "next-auth/react";
+import Login from "@components/auth/Modal/Login";
 
 interface HeaderType {
   postion? : boolean
@@ -37,7 +38,7 @@ export default function Header( {postion} : HeaderType ) {
         </S.Logo>
         {
           !session ?
-            <S.LoginStyle type="button" onClick={()=>dispatch(open())}>로그인</S.LoginStyle>
+            <S.LoginStyle type="button" onClick={()=>dispatch(open(Login))}>로그인</S.LoginStyle>
           :
           <S.Flex>
             {/* <img src="/asset/icon/bell.svg" alt="알림창" /> */}
