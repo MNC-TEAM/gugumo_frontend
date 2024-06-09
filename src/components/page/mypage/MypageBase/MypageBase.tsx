@@ -1,8 +1,8 @@
 "use client"
 import * as S from "@app/(auth)/mypage/mypage.style";
-import Nickname from "@components/mypage/Form/NickName/Nickname";
-import Password from "@components/mypage/Form/Password/Password";
-import UserInfo from "@components/mypage/UserInfo/UserInfo";
+import Nickname from "@components/page/mypage/Form/NickName/Nickname";
+import Password from "@components/page/mypage/Form/Password/Password";
+import UserInfo from "@components/page/mypage/UserInfo/UserInfo";
 import { MypageType } from "@/types/mypage";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
