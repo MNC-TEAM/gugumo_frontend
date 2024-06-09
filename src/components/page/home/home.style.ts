@@ -12,16 +12,16 @@ export const HomeVisualTrack = styled.div`
     position: relative;
 
     @media screen and (max-width:1280px) {
-        height: 656px;
+        height: 756px;
     }
 
     @media screen and (max-width:820px) {
-        height: 456px;
+        height: 556px;
     }
 
 `;
 
-export const HomeVisualDiv = styled.div`
+export const HomeVisualBack = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
@@ -29,7 +29,49 @@ export const HomeVisualDiv = styled.div`
     background: url('/asset/image/home/visual.png') no-repeat center/cover;
     width: 100%;
     height: 100%;
+    z-index: 3;
+`;
+
+export const HomeVisualDiv = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    /* background: url('/asset/image/home/visual.png') no-repeat center/cover;
+    width: 100%;
+    height: 100%; */
     z-index: 2;
+    text-align: center;
+    width: 80%;
+
+    h4 {
+        font-family: 'KNUTRUTHTTF';
+        font-size: 32px;
+        color: #fff;
+        word-break: keep-all;
+        line-height: 1.4;
+        opacity: 0;
+    }
+
+    svg {
+        margin-top: 25px;
+        vertical-align: top;
+        max-width: 720px;
+        opacity: 0;
+    }
+
+    @media screen and (max-width:820px) {
+        h4 {
+            font-size: 24px;
+        }
+    }
+
+    @media screen and (max-width:820px) {
+        h4 {
+            font-size: 18px;
+        }
+    }
+
 `;
 
 
@@ -78,6 +120,15 @@ export const HomeKeyword = styled.div`
     padding: 182px 0 243px;
     position: relative;
     overflow: hidden;
+
+    ${Wrap}{
+        width: 80%;
+    }
+
+    @media screen and (max-width:820px) {
+        padding: 122px 0 183px;
+    }
+
 `;
 
 export const HomeKeywordImage = styled.div<{$type : "one" | "two" | "three"}>`
@@ -87,33 +138,74 @@ export const HomeKeywordImage = styled.div<{$type : "one" | "two" | "three"}>`
         switch($type){
             case "one" :
                 style = css`
-                    left: 91px;
-                    bottom: 21px;
+                    width: ${163*100/1920}vw;
+                    left: ${91/1920*100}%;
+                    bottom: ${21/634*100}%;
                 `;
                 break;
             case "two" :
                 style = css`
-                    left: 333px;
-                    bottom: 20px;
+                    width: ${114*100/1920}vw;
+                    left: ${333/1920*100}%;
+                    bottom: ${20/634*100}%;
                 `;
                 break;
             case "three" :
                 style = css`
-                    right: 55.46px;
-                    bottom: 19.74px;
+                    width: ${146*100/1920}vw;
+                    right: ${55.46/1920*100}%;
+                    bottom: ${19.74/634*100}%;
                 `;
                 break;
         }
         return style;
     }}
+
+    @media screen and (max-width:820px) {
+        
+        ${({$type})=>{
+            let style;
+            switch($type){
+                case "one" :
+                    style = css`
+                        width: ${163*100/1280}vw;
+                        left: ${91/1280*100}%;
+                    `;
+                    break;
+                case "two" :
+                    style = css`
+                        width: ${114*100/1280}vw;
+                        left: ${420/1280*100}%;
+                    `;
+                    break;
+                case "three" :
+                    style = css`
+                        width: ${146*100/1280}vw;
+                        right: ${55.46/1280*100}%;
+                    `;
+                    break;
+            }
+            return style;
+        }}
+
+    }
+
 `;
 
 export const HomeKeywordMegaphoneBase = styled.div<{$right? : Boolean}>`
     position: relative;
+    opacity: 0;
     & + & {
         margin-top: 85px;
     }
     ${({$right})=> $right ? css` text-align : right; ` : ""}
+
+    @media screen and (max-width:820px) {
+        & + & {
+            margin-top: 65px;
+        }   
+    }
+
 `;
 
 export const HomeKeywordMegaphoneText = styled.div`
@@ -132,48 +224,53 @@ export const HomeKeywordMegaphoneText = styled.div`
     }
 
     @media screen and (max-width:1280px) {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     @media screen and (max-width:820px) {
-        font-size: 16px;
+        font-size: 14px;
     }
 
 `;
 
 export const HomeKeywordMegaphone = styled.div<{$right? : Boolean}>`
     position: absolute;
-    img { width: calc(326*100/1920*1vw); }
+    
+    img { 
+        width: calc(158*100/1920*1vw); 
+        max-width: 158px;
+    }
+
     ${({$right})=>{
         if($right){
             return  css`
                 right: 0;
                 top: 50%;
-                transform: translate(55%,-50%);
+                transform: translate(75%,-50%) scaleX(-1);
             `;
         }else{
             return  css`
                 left: 0;
                 top: 50%;
-                transform: translate(-55%,-50%);
+                transform: translate(-75%,-50%);
             `;
         }
     }}
 
     @media screen and (max-width:820px) {
-        img { width: calc(326*100/1920*1vw); }
+        img { width : 68px; }
         ${({$right})=>{
             if($right){
                 return  css`
                     right: 0;
-                    top: 50%;
-                    transform: translate(30%,-100%);
+                    top: 0;
+                    transform: translate(50%,-50%) scaleX(-1);
                 `;
             }else{
                 return  css`
                     left: 0;
-                    top: 50%;
-                    transform: translate(-30%,-100%);
+                    top: 0;
+                    transform: translate(-50%,-50%);
                 `;
             }
         }}
@@ -223,6 +320,7 @@ export const HomeServiceTitle = styled.h1`
     font-family: 'KNUTRUTHTTF';
     font-size: 39px;
     margin-top: 35px;
+    opacity: 0;
 
     @media screen and (max-width:1280px) {
         font-size: 24px;
