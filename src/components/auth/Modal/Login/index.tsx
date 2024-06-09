@@ -48,8 +48,6 @@ export default function Login({isOpen,onClose} : {isOpen : boolean,onClose : any
     if(!html) return;
     if(isOpen){
       html.style.overflowY = "hidden";
-    }else{
-      html.style.overflowY = "auto";
     }
     setTimeout(() => {
       setActive(true);
