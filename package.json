@@ -13,12 +13,14 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.1",
     "@reduxjs/toolkit": "^2.2.3",
     "@svgr/webpack": "^8.1.0",
     "@toast-ui/react-editor": "^3.2.3",
     "@types/react-modal": "^3.16.3",
     "axios": "^1.6.8",
     "babel-plugin-styled-components": "^2.1.4",
+    "gsap": "^3.12.5",
     "moment": "^2.30.1",
     "next": "14.2.2",
     "next-auth": "^4.24.7",
