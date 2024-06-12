@@ -90,17 +90,34 @@ export const BtnList = styled.div`
     text-align: center;
 `;
 
-export const SignButton = styled(Link)`
-    display: inline-block;
+export const SignFind = styled.div`
+    text-align: center;
     color: ${({theme})=>theme.color.Primary};
     font-family: "Pretendard";
     font-weight: 500;
     font-size: 13px;
     margin-top: ${38/13*1}em;
-    cursor: pointer;
+
+    a {
+        + a {
+            padding-left: 5px;
+            margin-left: 5px;
+            position: relative;
+            &::before {
+                content: '';
+                display: block;
+                width: 1px;
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                background: ${({theme})=>theme.color.Primary};
+            }
+        }
+    }
 
     @media screen and (max-width : 820px) {
         margin-top: 20px;
     }
-`;
 
+`;

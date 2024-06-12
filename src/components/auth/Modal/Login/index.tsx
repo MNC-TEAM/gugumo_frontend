@@ -6,6 +6,7 @@ import Input from '@components/common/Input/Basic/Input/Input'
 import Primary from '@components/common/Button/Primary/Primary'
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
+import Link from 'next/link'
 
 export default function Login({isOpen,onClose} : {isOpen : boolean,onClose : any}) {
   
@@ -89,8 +90,11 @@ export default function Login({isOpen,onClose} : {isOpen : boolean,onClose : any
                   로그인 하기
                 </Primary>
               </S.BtnList>
+              <S.SignFind>
+                <Link href={"/find"}>비밀번호 찾기</Link>
+                <Link href={"/sign"}>회원가입 하기</Link>
+              </S.SignFind>
             </S.Form>
-            <S.SignButton href={"/sign"} >회원가입 하기</S.SignButton>
           </S.StyledModal>
         </S.BackModal>
       }
