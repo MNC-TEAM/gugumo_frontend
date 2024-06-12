@@ -14,8 +14,8 @@ import Paging from "@components/page/main/Paging";
 import Recommends from "@components/Recommends/Recommends";
 import Banner from "@components/page/main/Banner/Banner";
 import { useList } from "../../hooks/useMeeting";
-import HashLoad from "@components/Loading/HashLoad";
 import { useSession } from "next-auth/react";
+import SkeletonCard from "@components/common/Card/Main/SkeletonCard";
 
 export default function Home() {
 
@@ -57,7 +57,9 @@ export default function Home() {
             <Header/>
             <S.MainStyle>
                 <Banner/>
-                <S.Wrap> <Recommends/> </S.Wrap>
+                <S.Wrap> 
+                    <Recommends/>
+                </S.Wrap>
                 <S.Wrap>
                     <S.SearchFlex>
                         <S.RecruitStyle>
@@ -132,35 +134,26 @@ export default function Home() {
                                 }
                             </div>
                         </S.Order>
-                        {
-                            isLoading ? <HashLoad/> :
-                            (
-                                <S.Grid>
-                                    {
-                                        meeting &&
-                                            (
-                                                meeting.data.content.length <= 0 
-                                                ?
-                                                    <p style={{ padding : "150px 0",gridColumn: "1 / 5",textAlign : "center"}}>게시글이 존재하지 않습니다.</p>
-                                                : meeting.data.content.map(el=>(
-                                                    <Card
-                                                        bookmarkStatus={el.bookmarked}
-                                                        key={el.postId}
-                                                        postId={el.postId}
-                                                        status={el.meetingStatus}
-                                                        gameType={el.gameType}
-                                                        location={el.location}
-                                                        title={el.title}
-                                                        meetingDateTime={el.meetingDateTime as string}
-                                                        meetingMemberNum={el.meetingMemberNum}
-                                                        meetingDeadline={el.meetingDeadline}
-                                                    />
-                                                ))
-                                            )
-                                    }
-                                </S.Grid>
-                            )
-                        }
+                        <S.Grid>
+                            {
+                                isLoading?
+                                new Array(12).fill(1).map((_,i)=>(<SkeletonCard key={i}/>))
+                                : meeting?.data.content.map(el=>(
+                                    <Card
+                                        bookmarkStatus={el.bookmarked}
+                                        key={el.postId}
+                                        postId={el.postId}
+                                        status={el.meetingStatus}
+                                        gameType={el.gameType}
+                                        location={el.location}
+                                        title={el.title}
+                                        meetingDateTime={el.meetingDateTime as string}
+                                        meetingMemberNum={el.meetingMemberNum}
+                                        meetingDeadline={el.meetingDeadline}
+                                    />
+                                ))
+                            }
+                        </S.Grid>
                         <S.White> <Write href={'/post/write'}>새글 작성</Write> </S.White>
                         <S.Paging> {meeting && <Paging page={page} setPage={setPage} pageable={meeting.data.pageable}/>} </S.Paging>
                     </S.Layout>

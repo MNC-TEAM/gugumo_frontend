@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import * as C from "../Card.style";
 
 export const Detail = styled(C.Detail)`
@@ -26,7 +26,7 @@ export const Date = styled(C.Date)`
 `;
 
 
-export const CardLayout = styled.div`
+export const CardLayout = styled.div<{$skeleton : boolean}>`
     background: #DBEBFF;
     border: 1px solid ${({theme})=>theme.color.SubColor4};
     padding: 19px 16px;
@@ -68,11 +68,14 @@ export const CardLayout = styled.div`
 
 
     @media screen and (max-width:820px) {
-        
         ${Detail} {
             display: none;
         }
-
     }
+
+
+    ${({$skeleton})=>$skeleton && css`
+        flex: 1;
+    `}
 
 `;

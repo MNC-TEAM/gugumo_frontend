@@ -1,11 +1,12 @@
-import styled from "styled-components";
+import { SKELETONCSS } from "@styles/global";
+import styled, { css } from "styled-components";
 
 export const TopFlex = styled.div`
     display: flex;
     gap: 5px;
 `;
 
-export const Title = styled.h4`
+export const Title = styled.h4<{$skeleton? : boolean}>`
   font-weight: ${({theme})=>theme.fontWeight.medium};
   font-size: ${({theme})=>theme.fontSize.bodyMedium};
   line-height: ${21/16};
@@ -18,9 +19,14 @@ export const Title = styled.h4`
   display: -webkit-box;
   height: calc(41/16*1em);
   transition: color .4s;
+
+  ${({$skeleton})=>$skeleton && css`
+    ${SKELETONCSS}
+  `}
+
 `;
 
-export const Detail = styled.ul`
+export const Detail = styled.ul<{$skeleton? : boolean}>`
   margin-top: 32px;
   font-size: ${({theme})=>theme.fontSize.captionRegular};
   li {
@@ -38,9 +44,20 @@ export const Detail = styled.ul`
       }
     }
   }
+
+  ${({$skeleton})=>$skeleton && css`
+    li {
+      p {
+        width: 50%;
+        height: 22px;
+        ${SKELETONCSS}
+      }
+    }`
+  }
+
 `;
 
-export const Date = styled.div`
+export const Date = styled.div<{$skeleton? : boolean}>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -54,4 +71,19 @@ export const Date = styled.div`
     font-weight: ${({theme})=>theme.fontWeight.medium};
     color: ${({theme})=>theme.color.OnBackgroundGray};
   }
+
+  ${({$skeleton})=>$skeleton && css`
+    span {
+      width: 50%;
+      height: 22px;
+      ${SKELETONCSS}
+    }
+  `}
+
+`;
+
+export const BookMarkSkeleton = styled.div`
+  width: 25px;
+  height: 25px;
+  ${SKELETONCSS}
 `;
