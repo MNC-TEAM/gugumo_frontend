@@ -3,21 +3,42 @@ import Input from "@components/common/Input/Basic/Input/Input";
 import * as S from "./find.style";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import Success from "@components/common/Alert/Success/Success";
+import { open } from "@store/features/modal/modal";
+import { useState } from "react";
+import Error from "@components/common/Alert/Error/Error";
 
 export default function Find() {
 
     const {register,handleSubmit} = useForm();
+    const dispatch = useDispatch();
+    const [isLoading,setIsLoading] = useState(false);
+    const [emailError,setEmailError] = useState("");
 
     const onSubmitHanlder = async (data: any)=>{
 
         const {email} = data;
-        
+        if(isLoading) return;
+        if(email === ""){
+            return setEmailError('이메일을 입력해주세요.');
+        }
+
+        setIsLoading(true);
+
         try {
             const {data} = await axios.post('/api/auth/resetPassword',{email});
-            console.log(data);
+            if(data.status === "success"){
+                return dispatch(open({Component : Success,props : {successMessage : "입력된 이메일로 임시 비밀번호를 보냈습니다."}}));
+            }else{
+                return dispatch(open({Component : Error,props : {errorMessage : "회원이 존재하지 않습니다."}}));
+            }
         }
         catch{
             alert('오류가 발생했습니다.');
+        }
+        finally{
+            setIsLoading(false);
         }
 
     }
@@ -33,10 +54,12 @@ export default function Find() {
                 </dd>
             </dl>
             <form onSubmit={handleSubmit(onSubmitHanlder)}>
-                <Input>
-                    <input type="text" placeholder="가입하신 이메일 주소를 입력하세요." {...register('email')}/>
+                <Input 
+                    error={emailError}
+                >
+                    <input type="text" placeholder="가입하신 이메일 주소를 입력하세요." {...register('email',{onChange : ()=> setEmailError('')})}/>
                 </Input>
-                <button type="submit">전송하기</button>
+                <button type="submit">{isLoading ? "로딩중" : "전송하기"}</button>
             </form>
         </S.FindBox>
     </S.FindMain>

@@ -22,14 +22,14 @@ export default function CustomModal() {
       <>
         {
           modals.map((info,index)=>{
-            const {Component,isOpen} = info;
+            const {Component,isOpen,props} = info;
             const onClose = ()=>{
               const html = document.querySelector('html');
               if(!html) return;
               html.style.overflowY = "auto";
               dispatch(close(Component));
             }
-            return <Component key={index} isOpen={isOpen} onClose={onClose}/>
+            return <Component key={index} isOpen={isOpen} onClose={onClose} {...props}/>
           })
         }
       </>,
