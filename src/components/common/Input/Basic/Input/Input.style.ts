@@ -31,6 +31,9 @@ export const Box = styled.div<{$error? : string}>`
                 return theme.color.Error;
             }
         }};
+        &::placeholder {
+            color: ${({theme})=>theme.color.OnBackgroundGray};
+        }
     }
 
     ${A.Button}{
