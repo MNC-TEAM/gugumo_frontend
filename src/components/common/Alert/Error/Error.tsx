@@ -2,7 +2,7 @@ import * as S from "./Error.style";
 import {ErrorType} from "./Error.stories";
 import { useEffect, useState } from "react";
 
-export default function Error({isOpen,onClose,errorMessage} : ErrorType) {
+export default function Error({onButtonHanlder,isOpen,onClose,errorMessage} : ErrorType) {
 
   const [active,setActive] = useState(false);
 
@@ -27,7 +27,7 @@ export default function Error({isOpen,onClose,errorMessage} : ErrorType) {
               <img src="/asset/image/alert/error.png" alt="에러 아이콘" />
               <h4>{errorMessage}</h4>
           </S.Div>
-          <S.Button type="button" onClick={onClose}>확인</S.Button>
+          <S.Button type="button" onClick={onButtonHanlder ? onButtonHanlder : onClose}>확인</S.Button>
         </S.Modal>
       </S.BackModal>
       }

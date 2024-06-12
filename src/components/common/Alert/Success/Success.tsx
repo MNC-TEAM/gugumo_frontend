@@ -1,7 +1,18 @@
 import { useEffect, useState } from "react";
 import * as S from "./Success.style";
 
-export default function Success({isOpen,onClose,successMessage} : {isOpen : boolean,onClose : any,successMessage : string}) {
+export default function Success(
+  {
+    onButtonHanlder,
+    isOpen,
+    onClose,
+    successMessage
+  } : {
+    onButtonHanlder : any,
+    isOpen : boolean,
+    onClose : any,
+    successMessage : string
+  }) {
 
   const [active,setActive] = useState(false);
 
@@ -26,7 +37,7 @@ export default function Success({isOpen,onClose,successMessage} : {isOpen : bool
             <img src="/asset/image/alert/error.png" alt="성공 아이콘" />
             <h4>{successMessage}</h4>
           </S.Div>
-          <S.Button type="button" onClick={onClose}>확인</S.Button>
+          <S.Button type="button" onClick={onButtonHanlder ? onButtonHanlder : onClose}>확인</S.Button>
         </S.Modal>
       </S.BackModal>
     }

@@ -8,13 +8,19 @@ import Success from "@components/common/Alert/Success/Success";
 import { open } from "@store/features/modal/modal";
 import { useState } from "react";
 import Error from "@components/common/Alert/Error/Error";
+import { useRouter } from "next/navigation";
 
 export default function Find() {
 
+    const router = useRouter();
     const {register,handleSubmit} = useForm();
     const dispatch = useDispatch();
     const [isLoading,setIsLoading] = useState(false);
     const [emailError,setEmailError] = useState("");
+
+    const onButtonHanlder = ()=>{
+        router.push('/');
+    }
 
     const onSubmitHanlder = async (data: any)=>{
 
@@ -29,7 +35,13 @@ export default function Find() {
         try {
             const {data} = await axios.post('/api/auth/resetPassword',{email});
             if(data.status === "success"){
-                return dispatch(open({Component : Success,props : {successMessage : "입력된 이메일로 임시 비밀번호를 보냈습니다."}}));
+                return dispatch(open({
+                    Component : Success,
+                    props : {
+                        successMessage : "입력된 이메일로 임시 비밀번호를 보냈습니다.",
+                        onButtonHanlder
+                    }
+                }));
             }else{
                 return dispatch(open({Component : Error,props : {errorMessage : "회원이 존재하지 않습니다."}}));
             }

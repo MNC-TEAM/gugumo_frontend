@@ -2,6 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import Error from "./Error";
 
 export interface ErrorType{
+    onButtonHanlder : any
     isOpen : boolean,
     onClose : any,
     errorMessage : string
