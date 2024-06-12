@@ -1,8 +1,18 @@
-import * as S from "./Error.style";
-import {ErrorType} from "./Error.stories";
 import { useEffect, useState } from "react";
+import * as S from "./Success.style";
 
-export default function Error({onButtonHanlder,isOpen,onClose,errorMessage} : ErrorType) {
+export default function Success(
+  {
+    onButtonHanlder,
+    isOpen,
+    onClose,
+    successMessage
+  } : {
+    onButtonHanlder : any,
+    isOpen : boolean,
+    onClose : any,
+    successMessage : string
+  }) {
 
   const [active,setActive] = useState(false);
 
@@ -19,18 +29,18 @@ export default function Error({onButtonHanlder,isOpen,onClose,errorMessage} : Er
 
   return (
     <>
-      {
+    {
       isOpen &&
       <S.BackModal>
         <S.Modal className={active ? "active" : ""}>
           <S.Div>
-              <img src="/asset/image/alert/error.png" alt="에러 아이콘" />
-              <h4>{errorMessage}</h4>
+            <img src="/asset/image/alert/error.png" alt="성공 아이콘" />
+            <h4>{successMessage}</h4>
           </S.Div>
           <S.Button type="button" onClick={onButtonHanlder ? onButtonHanlder : onClose}>확인</S.Button>
         </S.Modal>
       </S.BackModal>
-      }
+    }
     </>
   )
 }

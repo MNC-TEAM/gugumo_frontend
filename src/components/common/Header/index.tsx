@@ -38,7 +38,7 @@ export default function Header( {postion} : HeaderType ) {
         </S.Logo>
         {
           !session ?
-            <S.LoginStyle type="button" onClick={()=>dispatch(open(Login))}>로그인</S.LoginStyle>
+            <S.LoginStyle type="button" onClick={()=>dispatch(open({Component : Login}))}>로그인</S.LoginStyle>
           :
           <S.Flex>
             {/* <img src="/asset/icon/bell.svg" alt="알림창" /> */}
