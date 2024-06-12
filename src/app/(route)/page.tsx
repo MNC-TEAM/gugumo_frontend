@@ -138,7 +138,9 @@ export default function Home() {
                             {
                                 isLoading?
                                 new Array(12).fill(1).map((_,i)=>(<SkeletonCard key={i}/>))
-                                : meeting?.data.content.map(el=>(
+                                :
+                                meeting && meeting?.data.content.length > 0 ?
+                                meeting.data.content.map(el=>(
                                     <Card
                                         bookmarkStatus={el.bookmarked}
                                         key={el.postId}
@@ -152,6 +154,7 @@ export default function Home() {
                                         meetingDeadline={el.meetingDeadline}
                                     />
                                 ))
+                                : <p style={{ padding : "150px 0",gridColumn: "1 / 5",textAlign : "center"}}>게시글이 존재하지 않습니다.</p>
                             }
                         </S.Grid>
                         <S.White> <Write href={'/post/write'}>새글 작성</Write> </S.White>

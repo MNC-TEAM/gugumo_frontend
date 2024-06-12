@@ -8,6 +8,7 @@ import Paging from "@components/page/main/Paging";
 import Card from "@components/common/Card/Main/Card";
 import { useMyList } from "@hooks/useMeeting";
 import HashLoad from "@components/Loading/HashLoad";
+import SkeletonCard from "@components/common/Card/Main/SkeletonCard";
 
 export default function Home() {
 
@@ -40,41 +41,30 @@ export default function Home() {
         </S.SearchFlex>
 
         <B.BookMakrLayout>
-          
-          {
-          
-            isLoading 
-            ? 
-              <HashLoad/>
-            :
-              (
-                content && content.data.content.length > 0 ?
-                  <S.Grid>
-                    {content.data.content.map((el)=>
-                      <Card
-                        bookmarkStatus={el.bookmarked}
-                        key={el.postId}
-                        postId={el.postId}
-                        status={el.meetingStatus}
-                        gameType={el.gameType}
-                        location={el.location}
-                        title={el.title}
-                        meetingDateTime={el.meetingDateTime}
-                        meetingMemberNum={el.meetingMemberNum}
-                        meetingDeadline={el.meetingDeadline}
-                      />
-                    )}
-                  </S.Grid>
-                : <p style={{ padding : "150px 0",gridColumn: "1 / 5",textAlign : "center"}}>게시글이 존재하지 않습니다.</p>
-              )
-          }
-            
-          <S.Paging>
+          <S.Grid>
             {
-              content &&  <Paging page={page} setPage={setPage} pageable={content.data.pageable}/>
+              isLoading ?
+              new Array(12).fill(1).map((_,i)=>(<SkeletonCard key={i}/>))
+              :
+              content && content.data.content.length > 0 ?
+              content.data.content.map((el)=>
+                <Card
+                  bookmarkStatus={el.bookmarked}
+                  key={el.postId}
+                  postId={el.postId}
+                  status={el.meetingStatus}
+                  gameType={el.gameType}
+                  location={el.location}
+                  title={el.title}
+                  meetingDateTime={el.meetingDateTime}
+                  meetingMemberNum={el.meetingMemberNum}
+                  meetingDeadline={el.meetingDeadline}
+                />
+              )
+              : <p style={{ padding : "150px 0",gridColumn: "1 / 5",textAlign : "center"}}>게시글이 존재하지 않습니다.</p>
             }
-          </S.Paging>
-          
+          </S.Grid>            
+          <S.Paging>{content &&  <Paging page={page} setPage={setPage} pageable={content.data.pageable}/>}</S.Paging>
         </B.BookMakrLayout>
 
       </Wrap>
