@@ -14,19 +14,20 @@ export const BackModal = styled.div`
 `;
 
 export const Modal = styled.div`
-    border: 1px solid ${({theme})=>theme.color.Error};
+    border: 1px solid ${({theme})=>theme.color.Primary};
     background: ${({theme})=>theme.color.Background};
-    width: 219px;
+    /* width: 219px; */
+    width: 400px;
     min-height: 176px;
     border-radius: 8px;
-    padding: 18px;
+    /* padding: 18px; */
+    padding: 50px 18px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 29px;
-
     transform: translate(0%, 25%);
     opacity: 0;
     transition: .4s;
@@ -54,7 +55,7 @@ export const Div = styled.div`
 `;
 
 export const Button = styled.button`
-    background: ${({theme})=>theme.color.Error};
+    background: ${({theme})=>theme.color.Primary};
     color: ${({theme})=>theme.color.OnError};
     font-size: ${({theme})=>theme.fontSize.buttonSemibold};
     font-weight: ${({theme})=>theme.fontWeight.semibold};

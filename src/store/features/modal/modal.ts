@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface initialStateT {
     Component : any,
-    isOpen : boolean
+    isOpen : boolean,
+    props? : any,
 }
 
 const initialState : initialStateT[] = [];
@@ -15,17 +16,21 @@ const modalSlice = createSlice({
             return [
                 ...state,
                 {
-                    Component : actions.payload,
-                    isOpen : true
+                    Component : actions.payload.Component,
+                    isOpen : true,
+                    props : actions.payload.props
                 }
             ]
         },
         close : (state,actions)=>{
             return state.filter((prev)=>prev.Component !== actions.payload);
+        },
+        allClose : ()=>{
+            return [];
         }
     }
 });
 
-export const {open,close} = modalSlice.actions;
+export const {open,close,allClose} = modalSlice.actions;
 
 export default modalSlice.reducer;
