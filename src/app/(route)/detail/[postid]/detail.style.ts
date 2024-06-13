@@ -1,7 +1,8 @@
 "use client";
 
 import * as White from "@components/common/Button/White/White.style";
-import styled from "styled-components";
+import { SKELETONCSS } from "@styles/global";
+import styled, { css } from "styled-components";
 
 export const DetailStyle = styled.main`
     padding: 108px 0 160px;
@@ -11,7 +12,7 @@ export const DetailStyle = styled.main`
 `;
 
 
-export const Title = styled.h1`
+export const Title = styled.h1<{$skeleton : boolean}>`
     font-size: 24px;
     font-weight: ${({theme})=>theme.fontWeight.semibold};
     margin-top: 33px;
@@ -19,7 +20,12 @@ export const Title = styled.h1`
         font-size: 18px;
         margin-top: 15px;
     }
+    ${({$skeleton})=>$skeleton && css`
+        height: 24px;
+        ${SKELETONCSS}
+    `}
 `;
+
 
 export const Top = styled.div`
     display: flex;
