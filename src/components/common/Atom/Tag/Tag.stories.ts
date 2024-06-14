@@ -7,7 +7,7 @@ export interface TagType {
    * ball 구기종목 
    * region 지역
    */
-  color : "recruit" | "ball" | "region";
+  color? : "recruit" | "ball" | "region";
   /**
    * 모집중 RECRUIT
    * 모집완료 END

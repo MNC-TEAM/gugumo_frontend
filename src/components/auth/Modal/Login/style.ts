@@ -11,8 +11,8 @@ export const BackModal = styled.div`
 `;
 
 export const Logo = styled.div`
-    width: 81px;
-    margin: 0 auto 31px;
+    width: 61px;
+    margin: 0 auto 20px;
     @media screen and (max-width:820px) {
         width: 61px;
         margin: 0 auto 20px;
@@ -119,4 +119,33 @@ export const SignFind = styled.div`
         margin-top: 20px;
     }
 
+`;
+
+
+
+export const SnsBox = styled.div`
+    margin-top: 20px;
+    color: #A5A5A5;
+    text-align: center;
+    p {
+        font-size: 13px;
+        font-weight: 500;
+        font-family: "Pretendard";
+    }
+`;
+
+export const SnsBoxFlex = styled.div`
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+    button {
+        all: unset;
+        width: 30px;
+        height: 30px;
+        border-radius: 100px;
+        background: #acf;
+        cursor: pointer;
+        background: url("/asset/image/auth/kakao.png") no-repeat center/cover;
+    }
 `;

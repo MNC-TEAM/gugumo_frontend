@@ -5,12 +5,14 @@ import { Dispatch, SetStateAction, useState } from "react";
 import Input from "@components/common/Mypage/Input/Input";
 import Change from "@components/common/Mypage/Change/Change";
 import White from "@components/common/Button/White/White";
+import { MypageSkeleton } from "@components/skeleton/skeleton.styled";
 
 interface propsType {
+  isLoading : boolean;
   setNickname: Dispatch<SetStateAction<string>>;
 }
 
-export default function Nickname({setNickname} : propsType) {
+export default function Nickname({isLoading,setNickname} : propsType) {
 
   const {register,handleSubmit,setValue,getValues} = useForm();
   const [ischeck,setIscheck] = useState(true);
@@ -73,23 +75,27 @@ export default function Nickname({setNickname} : propsType) {
   }
 
   return (
-    <S.Form onSubmit={handleSubmit(submitHanlder)}>
-        <S.Layout>
+    <S.NicknameBox>
+      {
+        isLoading ? <MypageSkeleton/>
+        :
+        <form onSubmit={handleSubmit(submitHanlder)}>
+          <S.Layout>
             <h4>개인정보 변경</h4>
             <S.InputLayout>
-                <S.Label htmlFor="nickname">닉네임</S.Label>
-                <S.Flex>
-                  <Input>
-                    <input type="text" id="nickname" placeholder="닉네임을 입력하세요." {...register('nickname')}/>
-                  </Input>
-                  <Change onClick={confirmHanlder}>중복확인</Change>
-                </S.Flex>
+              <S.Label htmlFor="nickname">닉네임</S.Label>
+              <S.Flex>
+                <Input>
+                  <input type="text" id="nickname" placeholder="닉네임을 입력하세요." {...register('nickname')}/>
+                </Input>
+                <Change onClick={confirmHanlder}>중복확인</Change>
+              </S.Flex>
             </S.InputLayout>
-        </S.Layout>
-        <S.Btn>
-          <White type={"submit"}>개인정보 수정</White>
-        </S.Btn>
-    </S.Form>
+          </S.Layout>
+          <S.Btn> <White type={"submit"}>개인정보 수정</White> </S.Btn>
+        </form>
+      }
+    </S.NicknameBox>
   )
-  
+
 }

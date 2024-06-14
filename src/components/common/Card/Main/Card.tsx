@@ -8,7 +8,7 @@ import { GAMETYPE, LOCATION, STATUS } from '@constant/meetingQuery';
 import Bookmark from '@components/common/Button/Bookmark';
 
 export default function Card(
-{postId,status,gameType,location,title,meetingDateTime,meetingMemberNum,meetingDeadline,bookmarkStatus}
+{skeleton,postId,status,gameType,location,title,meetingDateTime,meetingMemberNum,meetingDeadline,bookmarkStatus}
 : 
 CardType
 ) {
@@ -18,7 +18,7 @@ CardType
       onClick={()=>router.push(`/detail/${postId}`)}
     >
       <S.Flex>
-        <S.Tag 
+        <S.Tag
           color="recruit" 
           $status={status}>{STATUS[status]}</S.Tag>
         <S.Tag 
@@ -28,9 +28,7 @@ CardType
           color="region"
         >{LOCATION[location]}</S.Tag>
       </S.Flex>
-      
-      <C.Title>{title}</C.Title>
-
+      <C.Title $skeleton={skeleton}>{title}</C.Title>
       <C.Detail>
         <li>
           <p>시간</p>
@@ -45,7 +43,6 @@ CardType
           <p>{meetingMemberNum}명</p>
         </li>
       </C.Detail>
-
       <C.Date>
         <span>모집 마감일 {meetingDeadline}</span>
         <Bookmark

@@ -1,10 +1,10 @@
 "use client"
+
 import * as S from "@app/(auth)/mypage/mypage.style";
 import axios from "axios";
 import Nickname from "@components/page/mypage/Form/NickName/Nickname";
 import Password from "@components/page/mypage/Form/Password/Password";
 import UserInfo from "@components/page/mypage/UserInfo/UserInfo";
-import HashLoad from "@components/Loading/HashLoad";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useMember } from "@hooks/useMember";
@@ -52,28 +52,25 @@ export default function Page() {
   }
 
   return (
-    <>
-      {
-        isLoading ? <HashLoad/> :
-        data?.data &&
-          <S.MypageStyle>
-            <S.Wrap>
-                <S.Prev onClick={()=>router.push('/')}>
-                  <img src="/asset/icon/prev_arrow.svg" alt="뒤로가기" />
-                </S.Prev>
-                <S.Title>마이페이지</S.Title>
-                <UserInfo mypage={data.data} nickname={nickname}/>
-            </S.Wrap>
-            <S.Wrap>
-                <Nickname setNickname={setNickname}/>
-                <Password/>
-                <S.UserDelete>
-                  <button type="button" onClick={userDeleteHanlder}>회원탈퇴하기</button>
-                </S.UserDelete>
-            </S.Wrap>
-          </S.MypageStyle>
-      }
-    </>
+    <S.MypageStyle>
+      <S.Wrap>
+          <S.Prev onClick={()=>router.push('/')}>
+            <img src="/asset/icon/prev_arrow.svg" alt="뒤로가기" />
+          </S.Prev>
+          <S.Title>마이페이지</S.Title>
+          <UserInfo isLoading={isLoading} nickname={nickname}/>
+      </S.Wrap>
+      <S.Wrap>
+          <Nickname isLoading={isLoading} setNickname={setNickname}/>
+          <Password isLoading={isLoading} />
+          {
+            !isLoading &&
+            <S.UserDelete>
+              <button type="button" onClick={userDeleteHanlder}>회원탈퇴하기</button>
+            </S.UserDelete>
+          }
+      </S.Wrap>
+    </S.MypageStyle>
   )
 
 }

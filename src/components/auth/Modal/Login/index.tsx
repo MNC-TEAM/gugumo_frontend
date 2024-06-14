@@ -65,7 +65,7 @@ export default function Login({isOpen,onClose} : {isOpen : boolean,onClose : any
               <img src="/asset/icon/close.svg" alt="취소버튼" />
             </S.CloseStyle>
             <S.Logo>
-              <img src="/asset/image/icon.png" alt="아이콘" />
+              <img src="/asset/image/icon.png" alt="로고 아이콘" />
             </S.Logo>
             <S.TitleStyle>로그인</S.TitleStyle>
             <S.Form onSubmit={handleSubmit(onSubmit)}>
@@ -90,6 +90,12 @@ export default function Login({isOpen,onClose} : {isOpen : boolean,onClose : any
                   로그인 하기
                 </Primary>
               </S.BtnList>
+              <S.SnsBox>
+                <p>간편 로그인</p>
+                <S.SnsBoxFlex>
+                  <button type="button" onClick={()=>signIn("kakao")}></button>
+                </S.SnsBoxFlex>
+              </S.SnsBox>
               <S.SignFind>
                 <Link href={"/find"}>비밀번호 찾기</Link>
                 <Link href={"/sign"}>회원가입 하기</Link>

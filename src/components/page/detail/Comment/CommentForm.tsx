@@ -47,7 +47,7 @@ export default function CommentForm({status,postId,mutate} : CommentFormType) {
 
   return (
     <S.CommentFormBase>
-        <S.UserIcon/>
+        <S.UserIcon style={{backgroundImage : 'url(/asset/image/user/user.png)'}}/>
         <S.CommentForm>
             <form onSubmit={handleSubmit(onCommentHanlder)}>
                 <textarea 

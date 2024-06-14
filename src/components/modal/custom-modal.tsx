@@ -13,6 +13,9 @@ export default function CustomModal() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(()=>{
+    const html = document.querySelector('html');
+    if(!html) return;
+    html.style.overflowY = "auto";
     dispatch(allClose());
   },[params,dispatch]);
 
