@@ -51,7 +51,7 @@ export const UserName = styled.div`
     gap: 7px;
     font-size: ${({theme})=>theme.fontSize.buttonMedium};
     font-weight: ${({theme})=>theme.fontWeight.medium};
-    transform: translateY(-12px);
+
     p {
         font-size: ${({theme})=>theme.fontSize.captionMedium};
         font-weight: ${({theme})=>theme.fontWeight.medium};
@@ -63,7 +63,6 @@ export const UserName = styled.div`
 
     @media screen and (max-width : 820px) {
         gap: 7px;
-        transform: translateY(0);
     }
 
 `;

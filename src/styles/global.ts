@@ -27,6 +27,18 @@ export const GlobalStyle = createGlobalStyle`
   html::-webkit-scrollbar {width: 8px;}
   html::-webkit-scrollbar-thumb {background-color: #2f3542; border-radius: 10px;}
 
+  @keyframes skeleton {
+    0% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+
 `;
 
 export const Wrap = styled.div`
@@ -42,3 +54,12 @@ export const Wrap = styled.div`
   }
 
 `;
+
+export const SKELETONCSS = `
+  position: relative;
+  background: #fff;
+  overflow: hidden;
+  background: #c7c7c7;
+  opacity: 0.5;
+  animation: skeleton 2s infinite ease-in-out;
+`

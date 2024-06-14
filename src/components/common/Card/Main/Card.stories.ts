@@ -3,6 +3,10 @@ import Card from './Card';
 
 export interface CardType {
   /**
+   *  스켈레톤
+  */
+  skeleton? : boolean
+  /**
    * 게시글 번호를 입력합니다.
   */
   postId : number

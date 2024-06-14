@@ -5,8 +5,9 @@ import axios from "axios";
 import { useState } from "react";
 import Input from "@components/common/Mypage/Input/Input";
 import White from "@components/common/Button/White/White";
+import { PasswordSkeleton } from "@components/skeleton/skeleton.styled";
 
-export default function Password() {
+export default function Password({isLoading} : {isLoading : boolean}) {
 
     const {register,handleSubmit,setValue} = useForm();
     const [isError,setIsError] = useState('');
@@ -44,45 +45,51 @@ export default function Password() {
     }
 
   return (
-    <S.Form onSubmit={handleSubmit(submithanlder)}>
-        <P.Layout>
-            <h4>비밀번호 설정</h4>
-            <S.InputFlex>
-                <S.InputLayout>
-                    <S.Label htmlFor="password">새 비밀번호</S.Label>
-                    <div>
-                        <Input>
-                            <input 
-                                id="password" 
-                                type="password" 
-                                placeholder="비밀번호를 입력해주세요." 
-                                {...register('password',{
-                                    onChange : ()=> setIsError('')
-                                })}
-                            />
-                        </Input>
-                    </div>
-                </S.InputLayout>
-                <S.InputLayout>
-                    <S.Label htmlFor="confirmPassword">새 비밀번호 확인</S.Label>
-                    <div>
-                        <Input error={isError}>
-                            <input 
-                                id="confirmPassword" 
-                                type="password" 
-                                placeholder="입력한 비밀번호를 입력해주세요." 
-                                {...register('confirmPassword',{
-                                    onChange : ()=> setIsError('')
-                                })}
-                            />
-                        </Input>
-                    </div>
-                </S.InputLayout>
-            </S.InputFlex>
-        </P.Layout>
-        <S.Btn>
-          <White type={"submit"}>비밀번호 수정</White>
-        </S.Btn>
-    </S.Form>
+    <S.PasswordBox>
+        {
+            isLoading ? <PasswordSkeleton/> :
+            <form onSubmit={handleSubmit(submithanlder)}>
+                <P.Layout>
+                    <h4>비밀번호 설정</h4>
+                    <S.InputFlex>
+                        <S.InputLayout>
+                            <S.Label htmlFor="password">새 비밀번호</S.Label>
+                            <div>
+                                <Input>
+                                    <input 
+                                        id="password" 
+                                        type="password" 
+                                        placeholder="비밀번호를 입력해주세요." 
+                                        {...register('password',{
+                                            onChange : ()=> setIsError('')
+                                        })}
+                                    />
+                                </Input>
+                            </div>
+                        </S.InputLayout>
+                        <S.InputLayout>
+                            <S.Label htmlFor="confirmPassword">새 비밀번호 확인</S.Label>
+                            <div>
+                                <Input error={isError}>
+                                    <input 
+                                        id="confirmPassword" 
+                                        type="password" 
+                                        placeholder="입력한 비밀번호를 입력해주세요." 
+                                        {...register('confirmPassword',{
+                                            onChange : ()=> setIsError('')
+                                        })}
+                                    />
+                                </Input>
+                            </div>
+                        </S.InputLayout>
+                    </S.InputFlex>
+                </P.Layout>
+                <S.Btn>
+                <White type={"submit"}>비밀번호 수정</White>
+                </S.Btn>
+            </form>
+        }
+        
+    </S.PasswordBox>
   )
 }

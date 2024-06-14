@@ -4,24 +4,18 @@ export const Flex = styled.div`
     display: flex;
 `;
 
-export const Form = styled.form`
-    
-    margin-top: 62px;
-
-    & + & {
-        margin-top: 42px;
-    }
-
+export const NicknameBox = styled.div`
+    margin-top: 42px;
     @media screen and (max-width : 820px) {
-
         margin-top: 43px;
-
-        & + & {
-            margin-top: 26px;
-        }
-
     }
+`;
 
+export const PasswordBox = styled.div`
+    margin-top: 42px;
+    @media screen and (max-width : 820px) {
+        margin-top: 26px;
+    }
 `;
 
 export const Layout = styled.div`
