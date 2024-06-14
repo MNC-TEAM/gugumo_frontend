@@ -1,9 +1,10 @@
 import withPWA from "next-pwa";
 
 const pwa = withPWA({
-    dest : "public",
-    disable : process.env.NODE_ENV === 'production'
-})
+    dest : "public", // 서비스 워커
+    register : true, // 서비스 워커 자동 등록
+    skipWaiting : true, // 새로운 서비스 워커가 즉시 활성화
+});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
