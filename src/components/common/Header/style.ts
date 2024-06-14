@@ -130,6 +130,14 @@ export const AlarmBox = styled.div`
     box-sizing: border-box;
     max-height: 334px;
     overflow-y: auto;
+
+    @media screen and (max-width:820px) {
+        width: 272px;
+        max-height: 264px;
+        right: 0;
+        transform: translateX(25%);
+    }
+
 `;
 
 export const AlarmBoxFlex = styled.div`

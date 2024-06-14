@@ -24,8 +24,8 @@ export const GlobalStyle = createGlobalStyle`
     /* all: unset; */
   }
 
-  html::-webkit-scrollbar {width: 8px;}
-  html::-webkit-scrollbar-thumb {background-color: #2f3542; border-radius: 10px;}
+  *::-webkit-scrollbar {width: 8px;}
+  *::-webkit-scrollbar-thumb {background-color: #4FAAFF; border-radius: 10px;}
 
 `;
 
