@@ -1,3 +1,10 @@
+import withPWA from "next-pwa";
+
+const pwa = withPWA({
+    dest : "public",
+    disable : process.env.NODE_ENV === 'production'
+})
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
@@ -13,4 +20,4 @@ const nextConfig = {
     }
 };
 
-export default nextConfig;
+export default pwa(nextConfig);
