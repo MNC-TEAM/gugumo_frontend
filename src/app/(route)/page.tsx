@@ -16,6 +16,7 @@ import Banner from "@components/page/main/Banner/Banner";
 import { useList } from "../../hooks/useMeeting";
 import { useSession } from "next-auth/react";
 import SkeletonCard from "@components/common/Card/Main/SkeletonCard";
+import Image from "next/image";
 
 export default function Home() {
 
@@ -77,7 +78,7 @@ export default function Home() {
                         <S.Search onSubmit={handleSubmit(searchSubmitHanlder)}>
                             <input type="text" {...register("q")} placeholder="제목, 글 내용을 검색해보세요!"/>
                             <button type="submit">
-                                <img src="/asset/icon/search.svg" alt="검색버튼" />
+                                <Image src="/asset/icon/search.svg" alt="검색버튼" width={24} height={24} />
                             </button>
                         </S.Search>
                     </S.SearchFlex>

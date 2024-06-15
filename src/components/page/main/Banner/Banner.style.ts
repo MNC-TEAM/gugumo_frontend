@@ -1,11 +1,13 @@
+import Image from "next/image";
 import styled from "styled-components";
 
-export const DesktopIMG = styled.img`
+export const DesktopIMG = styled(Image)`
   @media screen and (max-width:820px) {
     display: none;
   }
 `;
-export const MobileIMG = styled.img`
+
+export const MobileIMG = styled(Image)`
   @media screen and (min-width:821px) {
     display: none;
   }

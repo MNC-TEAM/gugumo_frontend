@@ -57,10 +57,7 @@ export default function BallTag({onClick,active,gametype} : BallTagType) {
                     gametype && 
                     <>
                         <S.Imgbox>
-                            <img 
-                                src={active ? activeUrl : imageUrl} 
-                                alt={text} 
-                            />
+                            <img src={active ? activeUrl : imageUrl} alt={`${text} 이미지`} />
                         </S.Imgbox>
                         {text}
                     </>

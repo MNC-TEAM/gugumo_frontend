@@ -7,6 +7,7 @@ import Primary from '@components/common/Button/Primary/Primary'
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Login({isOpen,onClose} : {isOpen : boolean,onClose : any}) {
   
@@ -62,10 +63,10 @@ export default function Login({isOpen,onClose} : {isOpen : boolean,onClose : any
         <S.BackModal>
           <S.StyledModal className={active ? "active" : ""} onClick={(e)=>e.stopPropagation()}>
             <S.CloseStyle type='button' onClick={onClose}>
-              <img src="/asset/icon/close.svg" alt="취소버튼" />
+              <Image src="/asset/icon/close.svg" alt="취소버튼" width={24} height={24} />
             </S.CloseStyle>
             <S.Logo>
-              <img src="/asset/image/icon.png" alt="로고 아이콘" />
+              <Image src="/asset/image/icon.png" alt="로고 아이콘" width={64} height={63}/>
             </S.Logo>
             <S.TitleStyle>로그인</S.TitleStyle>
             <S.Form onSubmit={handleSubmit(onSubmit)}>

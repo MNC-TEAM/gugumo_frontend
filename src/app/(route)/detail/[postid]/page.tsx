@@ -5,8 +5,6 @@ import { Wrap } from "@styles/global";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import moment from "moment";
-import { GAMETYPE, LOCATION, MEETINGTYPE } from "@constant/meetingQuery";
 import { Viewer } from "@toast-ui/react-editor";
 import Recommends from "@components/Recommends/Recommends";
 import { useDetail } from "../../../../hooks/useMeeting";
@@ -14,6 +12,8 @@ import Comment from "@components/page/detail/Comment/Comment";
 import White from "@components/common/Button/White/White";
 import DetailTop from "@components/page/detail/DetailTop";
 import DetailGrid from "@components/page/detail/DetailGrid";
+import { Prev } from "@app/(auth)/mypage/mypage.style";
+import Image from "next/image";
 
 export default function Detail({ params }: { params: { postid: string } }) {
 
@@ -57,25 +57,21 @@ export default function Detail({ params }: { params: { postid: string } }) {
       <Header/>
       <S.DetailStyle>
         <Wrap>
-
+          <Prev onClick={()=>router.push('/')}><Image src="/asset/icon/prev_arrow.svg" alt="뒤로가기" width={20} height={18}/></Prev>
           <S.Title $skeleton={isLoading}>{detail?.data.title}</S.Title>
-          
           <DetailTop 
             isLoading={isLoading} 
             detail={detail} 
             bookmarkCount={bookmarkCount} 
             setBookmarkCount={setBookmarkCount}
           />
-
           <DetailGrid
             isLoading={isLoading}
             detail={detail}
           />
-
           <S.Desc $isLoading={isLoading}>
             <Viewer ref={viewRef} initialValue={detail?.data.content} />
           </S.Desc>
-
           <S.BtnList>
             { 
               detail?.data.yours && 
@@ -96,13 +92,10 @@ export default function Detail({ params }: { params: { postid: string } }) {
                 >수정 하기</S.Btn>
             }
           </S.BtnList>
-
           {/* 추천 매칭 */}
           <Recommends/>
-
           {/* 댓글 */}
           { !isLoading && <Comment postId={params.postid}/> }
-
         </Wrap>
       </S.DetailStyle>
     </>

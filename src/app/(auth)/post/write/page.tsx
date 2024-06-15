@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Form from "@components/post/Form/Form";
+import Image from "next/image";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -99,7 +100,7 @@ export default function Wrtie() {
   return (
     <S.WrtieStyle>
       <Wrap>
-        <S.Prev onClick={()=>router.push('/')}><img src="/asset/icon/prev_arrow.svg" alt="뒤로가기" /></S.Prev>
+        <S.Prev onClick={()=>router.push('/')}><Image src="/asset/icon/prev_arrow.svg" alt="뒤로가기" width={20} height={18}/></S.Prev>
         <Form 
           onSubmitHanlder={onSubmitHanlder} 
           setContent={setContent} 
