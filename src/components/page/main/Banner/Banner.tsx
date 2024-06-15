@@ -32,26 +32,26 @@ export default function Banner() {
     >
         <SwiperSlide>
         <S.BannerImg>
-            <S.DesktopIMG src="/asset/image/banner/banner.jpg" alt="배너" />
-            <S.MobileIMG src="/asset/image/banner/banner_mob.jpg" alt="배너" />
+            <S.DesktopIMG src="/asset/image/banner/banner.jpg" alt="배너1 데스크탑" width={2496} height={785} />
+            <S.MobileIMG src="/asset/image/banner/banner_mob.jpg" alt="배너1 모바일" width={1879} height={851} />
         </S.BannerImg>
         </SwiperSlide>
         <SwiperSlide>
         <S.BannerImg>
-            <S.DesktopIMG src="/asset/image/banner/banner.jpg" alt="배너" />
-            <S.MobileIMG src="/asset/image/banner/banner_mob.jpg" alt="배너" />
+            <S.DesktopIMG src="/asset/image/banner/banner.jpg" alt="배너2 데스크탑" width={2496} height={785} />
+            <S.MobileIMG src="/asset/image/banner/banner_mob.jpg" alt="배너2 모바일" width={1879} height={851} />
         </S.BannerImg>
         </SwiperSlide>
         <SwiperSlide>
         <S.BannerImg>
-            <S.DesktopIMG src="/asset/image/banner/banner.jpg" alt="배너" />
-            <S.MobileIMG src="/asset/image/banner/banner_mob.jpg" alt="배너" />
+            <S.DesktopIMG src="/asset/image/banner/banner.jpg" alt="배너3 데스크탑" width={2496} height={785} />
+            <S.MobileIMG src="/asset/image/banner/banner_mob.jpg" alt="배너3 모바일" width={1879} height={851} />
         </S.BannerImg>
         </SwiperSlide>
         <SwiperSlide>
         <S.BannerImg>
-            <S.DesktopIMG src="/asset/image/banner/banner.jpg" alt="배너" />
-            <S.MobileIMG src="/asset/image/banner/banner_mob.jpg" alt="배너" />
+            <S.DesktopIMG src="/asset/image/banner/banner.jpg" alt="배너4 데스크탑" width={2496} height={785} />
+            <S.MobileIMG src="/asset/image/banner/banner_mob.jpg" alt="배너4 모바일" width={1879} height={851} />
         </S.BannerImg>
         </SwiperSlide>
     </Swiper>
