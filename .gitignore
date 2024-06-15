@@ -38,7 +38,7 @@ next-env.d.ts
 *storybook.log
 
 
-*sw.js
-*sw.js.map
-*workbox*.js
-*workbox*.js.map
+/public/sw.js
+/public/sw.js.map
+/public/workbox*.js
+/public/workbox*.map
