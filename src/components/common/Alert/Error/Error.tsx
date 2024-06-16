@@ -1,6 +1,7 @@
 import * as S from "./Error.style";
 import {ErrorType} from "./Error.stories";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function Error({onButtonHanlder,isOpen,onClose,errorMessage} : ErrorType) {
 
@@ -24,7 +25,7 @@ export default function Error({onButtonHanlder,isOpen,onClose,errorMessage} : Er
       <S.BackModal>
         <S.Modal className={active ? "active" : ""}>
           <S.Div>
-              <img src="/asset/image/alert/error.png" alt="에러 아이콘" />
+              <Image src="/asset/image/alert/error.png" alt="에러 아이콘" width={43} height={43} />
               <h4>{errorMessage}</h4>
           </S.Div>
           <S.Button type="button" onClick={onButtonHanlder ? onButtonHanlder : onClose}>확인</S.Button>

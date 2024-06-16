@@ -6,6 +6,10 @@ import Input from "@components/common/Mypage/Input/Input";
 import Change from "@components/common/Mypage/Change/Change";
 import White from "@components/common/Button/White/White";
 import { MypageSkeleton } from "@components/skeleton/skeleton.styled";
+import { useAppDispatch } from "@store/hook";
+import { open } from "@store/features/modal/modal";
+import Error from "@components/common/Alert/Error/Error";
+import Success from "@components/common/Alert/Success/Success";
 
 interface propsType {
   isLoading : boolean;
@@ -16,6 +20,7 @@ export default function Nickname({isLoading,setNickname} : propsType) {
 
   const {register,handleSubmit,setValue,getValues} = useForm();
   const [ischeck,setIscheck] = useState(true);
+  const dispatch = useAppDispatch();
 
   // 중복확인버튼
   const confirmHanlder = ()=>{
@@ -23,7 +28,7 @@ export default function Nickname({isLoading,setNickname} : propsType) {
     const {nickname} = getValues();
 
     if(nickname === ""){
-      return alert('닉네임을 입력해주세요.');
+      return dispatch(open({Component : Error,props : {errorMessage : '닉네임을 입력해주세요.'}}));
     }
     
     axios.get('/api/member/nickname',{
@@ -35,11 +40,11 @@ export default function Nickname({isLoading,setNickname} : propsType) {
       const {status,message,data} = res.data;
       if(status === "success"){
         if(data){
-          alert('중복된 닉네임이 있습니다.');
+          dispatch(open({Component : Error,props : {errorMessage : "중복된 닉네임이 있습니다."}}));
           setValue('nickname','');
           return setIscheck(true);
         }else{
-          alert('사용하실수 있는 닉네임 입니다.');
+          dispatch(open({Component : Success,props : {successMessage : "사용하실수 있는 닉네임 입니다."}}));
           return setIscheck(false);
         }
       }else if(status === "fail"){
@@ -53,7 +58,7 @@ export default function Nickname({isLoading,setNickname} : propsType) {
   const submitHanlder = (event : any)=>{
 
     if(ischeck){
-      return alert('닉네임 중복 체크를 해주세요.');
+      return dispatch(open({Component : Error,props : {errorMessage : '닉네임 중복 체크를 해주세요.'}}));
     }
 
     const {nickname} = event;
@@ -63,9 +68,10 @@ export default function Nickname({isLoading,setNickname} : propsType) {
     .then(res=>{
       const {status,message} = res.data;
       if(status === "success"){
-        alert('닉네임 변경이 완료되었습니다.');
+        dispatch(open({Component : Success,props : {successMessage : '닉네임 변경이 완료되었습니다.'}}));
         setNickname(nickname);
         setValue('nickname','');
+        setIscheck(true); // 중복확인 초기화
       }else if(status === "fail"){
         alert(message);
         setValue('nickname','');

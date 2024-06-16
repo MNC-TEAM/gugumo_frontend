@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import * as S from "./Success.style";
+import Image from "next/image";
 
 export default function Success(
   {
@@ -34,7 +35,7 @@ export default function Success(
       <S.BackModal>
         <S.Modal className={active ? "active" : ""}>
           <S.Div>
-            <img src="/asset/image/alert/error.png" alt="성공 아이콘" />
+            <Image src="/asset/image/alert/check.png" alt="성공 아이콘" width={43} height={43} />
             <h4>{successMessage}</h4>
           </S.Div>
           <S.Button type="button" onClick={onButtonHanlder ? onButtonHanlder : onClose}>확인</S.Button>

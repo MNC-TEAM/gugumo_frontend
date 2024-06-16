@@ -17,10 +17,12 @@ import { useList } from "../../hooks/useMeeting";
 import { useSession } from "next-auth/react";
 import SkeletonCard from "@components/common/Card/Main/SkeletonCard";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
 
-    const { status } = useSession();
+    const { data : session ,status } = useSession();
+    const router = useRouter();
 
     const {register,handleSubmit} = useForm();
 
@@ -52,6 +54,11 @@ export default function Home() {
     }
 
     const {data : meeting,isLoading} = useList(status,{page,sort,meetingstatus,location,gametype,q});
+
+    const writeClickHandler = ()=>{
+        if(!session) return alert('로그인을 해야합니다.');
+        return router.push('/post/write');
+    }
 
     return (
         <>
@@ -158,7 +165,9 @@ export default function Home() {
                                 : <p style={{ padding : "150px 0",gridColumn: "1 / 5",textAlign : "center"}}>게시글이 존재하지 않습니다.</p>
                             }
                         </S.Grid>
-                        <S.White> <Write href={'/post/write'}>새글 작성</Write> </S.White>
+                        <S.White>
+                            <Write onClick={writeClickHandler}>새글 작성</Write>
+                        </S.White>
                         <S.Paging> {meeting && <Paging page={page} setPage={setPage} pageable={meeting.data.pageable}/>} </S.Paging>
                     </S.Layout>
                     

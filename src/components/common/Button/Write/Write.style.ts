@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styled from "styled-components";
 
-export const Button = styled(Link)`
+export const Button = styled.button`
     display: inline-flex;
     align-items: center;
     padding: ${7/16}em 1em;
