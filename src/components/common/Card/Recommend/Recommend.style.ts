@@ -26,7 +26,7 @@ export const Date = styled(C.Date)`
 `;
 
 
-export const CardLayout = styled.div<{$skeleton : boolean}>`
+export const CardLayout = styled.div<{$skeleton? : boolean}>`
     background: #DBEBFF;
     border: 1px solid ${({theme})=>theme.color.SubColor4};
     padding: 19px 16px;
