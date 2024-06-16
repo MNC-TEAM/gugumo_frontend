@@ -6,6 +6,7 @@ import { useRecommend } from "@hooks/useRecommend";
 import { useSession } from "next-auth/react";
 import { useCallback, useRef } from "react";
 import SkeletonRecommend from "@components/common/Card/Recommend/SkeletonRecommend";
+import { Autoplay } from "swiper/modules";
 
 export default function Recommends() {
 
@@ -36,6 +37,7 @@ export default function Recommends() {
                         <S.Button onClick={prevHandler}><img src="/asset/icon/slide-arrow.png" alt="왼쪽 버튼" /></S.Button>
                         <Swiper
                             ref={swiperRef}
+                            modules={[Autoplay]}
                             slidesPerView={1.2}
                             breakpoints={{
                                 "481" : {
@@ -53,6 +55,9 @@ export default function Recommends() {
                             loop={true}
                             speed={600}
                             slidesPerGroup={1}
+                            autoplay={{
+                                delay : 6000
+                            }}
                         >
                             {
                                 recommend.map((el)=>(
