@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useMember } from "@hooks/useMember";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 
 export default function Page() {
 
@@ -55,7 +56,7 @@ export default function Page() {
     <S.MypageStyle>
       <S.Wrap>
           <S.Prev onClick={()=>router.push('/')}>
-            <img src="/asset/icon/prev_arrow.svg" alt="뒤로가기" />
+            <Image src="/asset/icon/prev_arrow.svg" alt="뒤로가기" width={20} height={18} />
           </S.Prev>
           <S.Title>마이페이지</S.Title>
           <UserInfo isLoading={isLoading} nickname={nickname}/>

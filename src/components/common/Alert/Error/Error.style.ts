@@ -16,10 +16,10 @@ export const BackModal = styled.div`
 export const Modal = styled.div`
     border: 1px solid ${({theme})=>theme.color.Error};
     background: ${({theme})=>theme.color.Background};
-    width: 219px;
+    width: auto;
     min-height: 176px;
     border-radius: 8px;
-    padding: 18px;
+    padding: 18px 25px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

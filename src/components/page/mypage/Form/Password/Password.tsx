@@ -6,23 +6,28 @@ import { useState } from "react";
 import Input from "@components/common/Mypage/Input/Input";
 import White from "@components/common/Button/White/White";
 import { PasswordSkeleton } from "@components/skeleton/skeleton.styled";
+import { useAppDispatch } from "@store/hook";
+import { open } from "@store/features/modal/modal";
+import Error from "@components/common/Alert/Error/Error";
+import Success from "@components/common/Alert/Success/Success";
 
 export default function Password({isLoading} : {isLoading : boolean}) {
 
     const {register,handleSubmit,setValue} = useForm();
     const [isError,setIsError] = useState('');
+    const dispatch = useAppDispatch();
 
     // 비밀번호 수정 버튼
     const submithanlder = (event : any)=>{
         const {password,confirmPassword} = event;
 
         if(password === "" || confirmPassword === ""){
-            alert('비밀번호를 입력하지 않았습니다.');
+            dispatch(open({Component : Error, props : {errorMessage : "비밀번호를 입력하지 않았습니다."}}));
             return setIsError('비밀번호를 입력하지 않았습니다.');
         }
 
         if(password !== confirmPassword) {
-            alert('비밀번호가 동일하지 않습니다.');
+            dispatch(open({Component : Error, props : {errorMessage : "비밀번호가 동일하지 않습니다."}}));
             return setIsError('비밀번호가 동일하지 않습니다.');
         }
 
@@ -32,11 +37,11 @@ export default function Password({isLoading} : {isLoading : boolean}) {
         .then(res=>{
             const {status,message} = res.data;
             if(status === "success"){
-                alert('비밀번호 변경에 성공하였습니다.');
+                dispatch(open({Component : Success, props : {successMessage : '비밀번호 변경에 성공하였습니다.'}}));
                 setValue('password','');
                 setValue('confirmPassword','');
             }else if(status === "fail"){
-                alert(message);
+                dispatch(open({Component : Error, props : {errorMessage : message}}));
                 setValue('password','');
                 setValue('confirmPassword','');
             }
@@ -85,7 +90,7 @@ export default function Password({isLoading} : {isLoading : boolean}) {
                     </S.InputFlex>
                 </P.Layout>
                 <S.Btn>
-                <White type={"submit"}>비밀번호 수정</White>
+                    <White type={"submit"}>비밀번호 수정</White>
                 </S.Btn>
             </form>
         }
